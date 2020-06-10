@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu picking Sales
+	=======================
+	-->
+	 <menuitem  id="custom_menu_picking_sales" name="Notas Salida" parent="sale.menu_sale_root" />
+
+	<!--
+	=======================
+	Custom Picking Sale Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_custom_picking_sale_tree">
+		<field name="name">custom.picking.sale.tree</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="21"/>
+		<field name="arch" type="xml">
+			<tree string="Notas de Entrada">
+					<field name="name" string="Nota Salida" select="1"/>
+					<field name="origin" string="Orden Nro" select="1"/>
+					<field name="date" string="Fecha" />
+					<field name="address_id" string="Empresa"/>
+					<field name="invoice_state" string="Estado Factura"/>
+					<field name="warehouse_id" string="Almacen" />
+					<field name="state" string="Estatus Almacen"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_custom_picking_sale_tree" model="ir.actions.act_window">
+            <field name="name">Notas de Salida</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_custom_picking_sale_tree"/>
+    </record>
+
+	<!--
+	=======================
+	Custom Picking Purchase  Form
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_custom_picking_sale_form">
+		<field name="name">custom.picking.sale.form</field>
+            <field name="model">stock.picking</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Notas de Salida">
+                    <group col="6" colspan="4">                    	
+                        <field name="name" string="Nota Nro." select="1" />
+                        <field name="origin" string="Orden Nro" select="1"/>
+                        <field name="date" string="Fecha" />   
+                        <field name="address_id" string="Empresa" select="2" context="{'context_display':'partner'}"/> 
+			<field name="warehouse_id" string="Almacen" />
+                        <field name="invoice_state" string="Estatus" invisible="True"/>                     
+                     </group> 
+					<notebook colspan="4">
+                        <page string="General Information">
+
+                         	<group col="6" colspan="4">
+                         		<field name="type" readonly="1"/>
+                            	<field name="move_type" readonly="1"/>
+                         		<field name="active" select="2" readonly="1"/>
+                         	</group>
+                         	<separator string="Notas Atencion" colspan="4"/>
+                         	<field colspan="4" name="nota_atencion_ids" nolabel="1"/>
+                         	<newline/>
+                         	<separator string="Observaciones" colspan="4"/>
+                         	<field colspan="4" name="note" nolabel="1"/>
+                         	<newline/>   
+                         	                     
+                        </page>       
+                        <page string="Productos">
+                            <field colspan="4" name="move_lines" nolabel="1" widget="one2many_list" 
+                                   default_get="{'move_line':move_lines, 'address_out_id': address_id}" readonly="1">
+								<tree string="Productos Nota">
+									<field name="product_id" string="Codigo  - Descripcion"/>
+									<field name="product_qty" string="Cantidad"/>
+									<field name="product_uom" string="Unidad"/>
+									<field name="location_dest_id" string="Ubicacion"/>
+									<field name="state" string="Estatus"/>
+			                    </tree>                                   
+                            </field> 
+                            <group col="10" colspan="4">
+                                <field name="state" readonly="1"/>
+				<!--
+                                <button name="draft_force_assign" states="draft" string="Confirm (Do Not Process Now)" type="object"/>
+                                <button name="draft_validate" states="draft" string="Process Now" type="object"/>
+				-->
+				<button name="%(wizard_empaquetado)d" states="assigned" string="Validar" type="action"/>
+                                <button name="action_assign" states="confirmed" string="Check Availability" type="object"/>
+                                <button name="force_assign" states="confirmed" string="Force Availability" type="object"/>                               
+                                <button name="button_cancel" states="assigned,confirmed,draft" string="Cancel"/>
+                            </group>
+                            
+                         	<!-- compos invisibles --> 
+                            	<field name="auto_picking" invisible="True"/>                            
+                            	<field name="date_done"    invisible="True"/>
+                        </page>
+                  </notebook>
+                </form>
+            </field>
+        </record>
+
+	<record id="action_custom_picking_sale_form" model="ir.actions.act_window">
+		<field name="name">Todas Notas de Salida</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.picking</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('type','=','out')]</field>
+		<field name="context">{'contact_display': 'partner'}</field>
+	</record>
+	<record id="action_custom_picking_sale_view1" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_picking_sale_tree"/>
+		<field name="act_window_id" ref="action_custom_picking_sale_form"/>
+	</record>
+	<record id="action_custom_picking_sale_view2" model="ir.actions.act_window.view">
+		<field eval="30" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_picking_sale_form"/>
+		<field name="act_window_id" ref="action_custom_picking_sale_form"/>
+	</record>
+
+	<menuitem name="Todas Notas Salida" action="action_custom_picking_sale_form"	
+			  id="menu_custom_picking_sale" parent="custom_menu_picking_sales"/>
+
+</data>
+</openerp>

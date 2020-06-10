@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<openerp>
+	<data noupdate="1">
+
+<!--
+ Users Groups
+-->
+    <record model="res.groups" id="group_cust_product_manager">
+        <field name="name">custom_product / Manager</field>
+    </record>
+    
+    <record model="res.groups" id="group_cust_product_purchase_user">
+        <field name="name">custom_product / Purchase  User</field>
+    </record>
+    
+    <record model="res.groups" id="group_cust_product_inventory_user">
+        <field name="name">custom_product / Inventory  User</field>
+    </record>
+
+
+	<!-- Set users to group -->
+	<record model="res.groups" id="group_cust_product_manager">
+		<field name="users" eval="[(6,0, [ref('base.user_root')])]"/>
+	</record>
+
+	<record model="res.groups" id="group_cust_product_purchase_user">
+		<field name="users" eval="[(6,0, [ref('base.user_root')])]"/>
+	</record>
+
+	<record model="res.groups" id="group_cust_product_inventory_user">
+		<field name="users" eval="[(6,0, [ref('base.user_root')])]"/>
+	</record>
+
+
+
+	<!-- Set accesses to menu -->
+	<record id="product.menu_main_product" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="product.menu_config_product" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_ul_form_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_pricelist_main" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_pricelist_action2" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_pricelist_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+
+
+
+	<record id="custom_american.cust_menu_main_product" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_config_product" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+	
+	<record id="custom_american.cust_menu_prod_cat_atcliente" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_prod_prod_atcliente" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_product_manager')])]"/>
+	</record>
+
+
+	<!-- Closed accesses to menu -->
+
+	<record id="product.menu_product_category_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_products" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_category_action_form" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.next_id_16" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_uom_form_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_uom_categ_form_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_products" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_price" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_price_type_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="product.menu_product_pricelist_type_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+
+</data>
+</openerp>
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu Wizard Product
+	=======================
+	-->
+	 <menuitem  id="custom_menu_wizard_product" name="Reportes Gestion Productos" parent="product.menu_main_product" /> 
+
+	<!--
+	=======================
+	Custom Product Wizard
+	=======================
+	-->		
+		<wizard 
+			string="Productos por Categoria" 
+			model="product.category" 
+			name="product_by_category" 
+			id="wizard_product_category"/> 
+			
+		<menuitem
+	          action="wizard_product_category"
+	          id="menu_wizard_product_category"
+	          parent="custom_menu_wizard_product" 
+	          type="wizard"/>	
+	
+	
+		
+		<wizard 
+			string="Lista de Precios por Categoria" 
+			model="product.category" 
+			name="product_categ_listprice" 
+			id="wizard_product_category_listprice"/>
+			
+		<menuitem
+	          action="wizard_product_category_listprice" 
+	          id="menu_wizard_product_catg_listprice"
+	          parent="custom_menu_wizard_product" 
+	          type="wizard"/>			
+
+		<wizard 
+			string="Productos por Categoria Comisiones" 
+			model="product.category.salesman" 
+			name="category_commissions" 
+			id="wizard_product_category_commissions"/>
+			
+		<menuitem
+	          action="wizard_product_category_commissions" 
+	          id="menu_wizard_catg_commissions"
+	          parent="custom_menu_wizard_product" 
+	          type="wizard"/>
+</data>
+</openerp>			

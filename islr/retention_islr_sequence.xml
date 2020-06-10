@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp> 
+<data >
+
+	#
+	# Sequences for islr
+	#
+
+	<record model="ir.sequence.type" id="seq_account_islr_tax">
+		<field name="name">Retention ISLR</field>
+		<field name="code">account.islr.tax</field>
+	</record>
+	<record model="ir.sequence" id="seq_account_islr_tax">
+		<field name="name">Retention ISLR</field>
+		<field name="code">account.islr.tax</field>
+		<field name="padding">3</field>
+	</record>
+
+</data> 
+</openerp>

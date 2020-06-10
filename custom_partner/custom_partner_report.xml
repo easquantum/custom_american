@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Reports
+	=======================
+	-->
+		<report id="report_partnerlist_supplier"
+			name="partnerlist_supplier"
+			string="Listado Proveedores"
+			model="res.partner"
+			rml="custom_american/custom_partner/report/partnerlist_supplier.rml"	
+			header="False"	
+			auto="False"/>
+			
+		<report id="report_partnerlist_clients"
+			name="partnerlist_clients"
+			string="Listado Clientes"
+			model="res.partner"
+			rml="custom_american/custom_partner/report/partnerlist_clients.rml"
+			header="False"		
+			auto="False"/> 	
+			
+		<report id="report_partner_by_category" 
+			name="partner_by_category" 
+			string="Empresas por Categoria"
+			model="res.partner"
+			rml="custom_american/custom_partner/report/report_partner_category.rml" 
+			auto="False"
+			menu="False"/>
+
+		<report id="report_parameters_seller" 
+			name="parameters" 
+			string="Cupos Vendedor"
+			model="res.partner"
+			rml="custom_american/custom_partner/report/report_parameters_seller.rml" 
+			auto="False"
+			header="False"/>
+ 
+</data>
+</openerp>

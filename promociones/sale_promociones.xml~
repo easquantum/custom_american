@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	
+	<!--
+	======================================
+	Sales Promociones Tree
+	======================================
+	-->
+	<record model="ir.ui.view" id="view_sale_promociones_tree">
+		<field name="name">sale_promociones.tree</field>
+		<field name="model">sale.promocion</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Promociones">
+				<field name="name" string="Nro. Promocion"/>
+				<field name="date_promocion" string="Fecha"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_sale_promocion_tree" model="ir.actions.act_window">
+            <field name="name">Promociones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.promocion</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_sale_promociones_tree"/>
+    </record>
+
+
+	<!--
+	======================================
+	Sales Promociones Form
+	======================================
+	-->
+	<record model="ir.ui.view" id="view_sale_promociones_form">
+		<field name="name">sale_promociones.form</field>
+		<field name="model">sale.promocion</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Promociones">
+                <group col="8" colspan="4">
+				    <field name="name" string="Nro. Documento"/>
+				    <field name="date_promocion" string="Fecha" attrs="{'readonly':[('state','!=','draft')]}"/>
+                    <field name="type" string="Tipo" readonly="1"/>
+				    <field name="code_zone_id" string="Zona" attrs="{'readonly':[('state','!=','draft')]}"/>	
+				    <field name="partner_id"
+				        domain="[('customer','=', 'True')]" 
+				        on_change="onchange_partner_id(partner_id)" 
+				        string="Cliente" colspan="6" attrs="{'readonly':[('state','!=','draft')]}"/>
+			        <label colspan="2" string=""/>
+				</group> 
+				<newline/>
+				
+				<notebook colspan="4">
+                    <page string="General">
+        				<field name="promocion_line" widget="one2many_list" nolabel="1" colspan="2" attrs="{'readonly':[('state','!=','draft')]}">
+            				<tree string="Detalle Promocion">
+            						<field name="name" string="Descripcion"/>
+            						<field name="quantity" string="Cantidad"/>
+            						<field name="price" string="Precio"/>
+            						<field name="subtotal" string="Subtotal"/>
+            				</tree>
+            				<form string="Detalle Promocion">
+            				        <field name="concepto_id" 
+            				            string="Concepto" colspan="4" 
+            				            on_change="onchange_concept_id(concepto_id)"/>
+            						<field name="name" string="Descripcion" colspan="4"/>
+            						<field name="quantity" string="Cantidad"/>
+                                    <field name="costo_price" string="Costo" invisible="True"/>
+            						<field name="price" string="Precio"/>
+            						<field name="subtotal" string="Subtotal"/>
+            						<newline/>
+            						<field name="note" string="Nota" colspan="4"/>
+            				</form>	
+        				</field>
+        				<field name="promocion_invoice_line" widget="one2many_list" nolabel="1" colspan="2" attrs="{'readonly':[('state','!=','draft')]}">
+            				<tree string="Detalle Facturas Promocion">
+            						<field name="date_invoice" string="Fecha"/>
+            						<field name="invoice_id" string="Factura"/>
+            				</tree>
+            				<form string="Detalle Facturas Promocion">
+            				        <field name="invoice_id" 
+            				               string="Factura" colspan="4" 
+            				               domain="[('type','=', 'out_invoice'),('partner_id','=', parent.partner_id)]" 
+            				               on_change="onchange_invoice_id(invoice_id)"
+            				         />
+            				         <newline/>
+            				         <field name="date_invoice" string="Fecha"/>
+            				</form>	
+        				</field>
+        			</page>
+        			<page string="Observaciones">
+        				<separator colspan="4" string="Observaciones"/>
+        				<field name="notes" nolabel="1" colspan="4"/>        			
+        			</page>
+        		</notebook>
+				<newline/>
+				<field name="total" string="Total"/>
+				<newline/>
+				<field name="state" string="Estatus" />
+				<group colspan="2" col="4">
+					<button name="confirm_promo" states="draft" string="Confirmar"/>
+					<button name="cancel_promo" states="draft" string="Cancelar"/>
+					<button name="done_promo" states="confirmed" string="Procesado"/>
+					<button name="cancel_confirm_promo" states="confirmed" string="Cancelar"/>
+				</group>				
+				
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_sale_promocion_form" model="ir.actions.act_window">
+		<field name="name">Promociones</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.promocion</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('type','=','promocion')]</field>
+        <field name="context">{'type':'promocion'}</field>
+	</record>
+	<record id="act_sale_prom_vtr" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_sale_promociones_tree"/>
+		<field name="act_window_id" ref="action_sale_promocion_form"/>
+	</record>
+	<record id="act_sale_prom_vfr" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_sale_promociones_form"/>
+		<field name="act_window_id" ref="action_sale_promocion_form"/>
+	</record>
+	
+	<menuitem name="Promociones y Regalos" 
+	id="menu_sale_promocion" 
+	parent="sale.menu_sale_root"/>	
+	
+	
+	
+	<menuitem name="Promociones Ventas" 
+	action="action_sale_promocion_form" 
+	id="menu_sale_promociones" 
+	parent="menu_sale_promocion"/>  	
+</data>
+</openerp>	

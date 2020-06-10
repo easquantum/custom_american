@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <menuitem  
+		id="cust_menu_main_product" 
+		name="Productos American" 
+		parent="product.menu_main_product" />
+
+	<!--
+	======================================
+	Product Categories  Salesman Tree
+	======================================
+	-->
+
+	<record model="ir.ui.view" id="view_prod_categ_salesman_tree">
+		<field name="name">product.categ.salesman.tree</field>
+		<field name="model">product.category.salesman</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Categoria Comisiones">
+				<field name="name" string="Nombre Categoria" select="1"/>
+				<field name="description" string="Descripcion"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_prod_categ_salesman_tree" model="ir.actions.act_window">
+            <field name="name">Categoria Comisiones</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.category.salesman</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_prod_categ_salesman_tree"/>
+    </record>
+
+	<!--
+	============================================
+	Product Categories  Salesman Form
+	============================================
+	-->
+	<record model="ir.ui.view" id="view_prod_categ_salesman_form">
+		<field name="name">product.categ.salesman.form</field>
+		<field name="model">product.category.salesman</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Categoria Comisiones">
+				<field name="name" string="Nombre Categoria" select="1"/>
+				<field name="description" string="Descripcion"/>
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_prod_categ_salesman_form" model="ir.actions.act_window">
+		<field name="name">Categoria Comisiones</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.category.salesman</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_categ_salesman_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_prod_categ_salesman_tree"/>
+		<field name="act_window_id" ref="action_prod_categ_salesman_form"/>
+	</record>
+	<record id="action_categ_salesman_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_prod_categ_salesman_form"/>
+		<field name="act_window_id" ref="action_prod_categ_salesman_form"/>
+	</record>
+
+    <menuitem name="Categoria Comisiones"
+             action="action_prod_categ_salesman_form"  
+             parent="product.menu_config_product"  
+             id="menu_prod_categ_salesman"/>
+
+	<!--
+	=======================
+	Categories
+	=======================
+	-->
+
+    <menuitem  
+		id="cust_menu_config_product" 
+		name="Categorias American" 
+		parent="product.menu_config_product" />	
+	
+		
+	<!--
+		*****************************************************
+		Custom Product Categories Tree Atencion Cliente   
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_cat_tree_v_atcliente">
+		<field name="name">cust_prod_cat_tree_v_atcliente</field>
+		<field name="model">product.category</field>
+		<field name="type">tree</field>
+		<field name="field_parent">child_id</field>
+		<field name="arch" type="xml">
+			<tree string="Categoria de Productos">
+				<field name="complete_name"/>
+			</tree>
+		</field>
+	</record>
+
+	<!--
+		*****************************************************
+		Custom Product Categories Form Atencion Cliente   
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_cat_form_v_atcliente">
+		<field name="name">cust_prod_cat_form_v_atcliente</field>
+		<field name="model">product.category</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Categoria de Productos">
+				<field name="name" select="1"/>
+				<field name="code"/>
+				<field name="parent_id" />
+				<newline/>
+				<group col="2" colspan="2">
+					<separator string="Propiedades de Contabilidad" colspan="2"/>
+					<field name="property_account_income_categ"/>
+					<field name="property_account_expense_categ"/>
+					
+				</group>
+				<group col="2" colspan="2">
+					<separator string="Propiedades Contables del Stock" colspan="2"/>
+					<field name="property_stock_account_input_categ"/>
+					<field name="property_stock_account_output_categ"/>
+					<field name="property_stock_journal"/>
+				</group>
+			</form>
+		</field>
+	</record>
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_prod_cat_atcliente">
+		<field name="name">cust_prod_cat_atcliente</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.category</field>
+		<field name="view_type">form</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_cat_tree_v_atcliente">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_cat_tree_v_atcliente"/>
+		<field name="act_window_id" ref="cust_act_win_prod_cat_atcliente"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_cat_form_v_atcliente">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_cat_form_v_atcliente"/>
+		<field name="act_window_id" ref="cust_act_win_prod_cat_atcliente"/>
+	</record>
+
+	<menuitem 
+		id="cust_menu_prod_cat_atcliente"
+		name="Categoria de Productos" 
+		parent="cust_menu_config_product"
+		action="cust_act_win_prod_cat_atcliente" />
+
+
+	<!--
+	=======================
+	Product
+	=======================
+	-->
+
+	<!--
+		*****************************************************
+		Custom Product Tree Atencion Cliente   
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_prod_tree_v_atcliente">
+		<field name="name">cust_prod_prod_tree_v_atcliente</field>
+		<field name="model">product.product</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>		
+		<field name="arch" type="xml">
+			<tree string="Products">
+				<field name="default_code" string="Codigo"/>
+				<field name="name" string="Nombre"/>
+				<field name="variants" string="Referencia"/>
+				<field name="publ_price" string="Precio Publico"/>				
+				<field name="standard_price" string="Precio Prov."/>
+				<field name="cost_price" string="Cost Std. "/>
+				<field name="list_price" string="Precio Fact."/>
+				<field name="state" invisible="True"/>
+			</tree>			
+		</field>
+	</record>	
+
+	<!--
+		*****************************************************
+		Custom Product Form Atencion Cliente   
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_prod_form_v_atcliente">
+		<field name="name">cust_prod_prod_form_v_atcliente</field>
+		<field name="model">product.product</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Producto">
+				<group colspan="4" col="6">
+					<group colspan="4" col="2">
+						<separator string="Descripcion" colspan="4"/>
+						<field name="name" select="1"  string="Nombre"/>
+						<field groups="" name="variants" select="2" string="Referencia"/>
+					</group>
+					<group colspan="1" col="2">
+						<separator string="Codigos" colspan="2"/>
+						<field name="default_code" select="1" string="Codigo"/>
+						<field name="ean13"  string="Cod. Barra"/>						
+					</group>
+				</group>
+
+				<notebook colspan="4">
+					<page string="Informacion">
+						<separator string="Datos Generales" colspan="4"/>
+						<newline/>
+						<group colspan="4" col="6">
+							<field name="categ_id" string="Categoria"/>
+							<field name="uom_id" on_change="onchange_uom(uom_id,uom_po_id)" string="Unidad Medida"/>
+							<field name="uom_po_id" string="U.M. Compra"/>
+							<field name="id_flete" string="Categ. Flete"/>
+							<field name="categ_salesman_id" string="Categ. Comisiones"/>
+							<field name="active" select="2"  string="Activo"/>
+						</group>
+                        <separator string="Empaquetado" colspan="4"/>
+						<group colspan="2" col="6" groups="">
+    						<field name="qty" string="Cantidad por caja"/>
+    						<field name="weight_net" string="Peso Neto"/>
+    						<label string="               "/>
+						</group>
+						<group colspan="4" col="6" groups="">
+							<group colspan="2" col="2" groups="">
+								<separator string="Condiciones" colspan="2"/>
+								<label string="" nolabel="1" colspan="2"/>
+								<field name="supp_disc" string="Desc. Prov."/>
+								<field name="adv_marg" string="Margen Costo"/>
+								<field name="adv_disc" string="Margen Venta"/>
+							</group>
+							<group colspan="2" col="2" groups="">
+								<separator string="Precios" colspan="2"/>
+								<field name="publ_price" string="Precio Publico"/>
+								<field name="standard_price" readonly="1" string="Precio Prov."/>
+								<field name="cost_price" string="Cost Std. "/>
+								<field name="list_price" readonly="1" string="Precio Fact."/>
+								<field name="supp_price" invisible="True"/>
+								<field name="invo_price" invisible="True"/>
+							</group>
+							<group colspan="2" col="2" groups="">
+								<separator string="Existencias" colspan="2"/>							
+								<field name="virtual_available" string="Stock Virtual"/>								
+								<field name="qty_available" string="Stock Real"/>
+								<field name="qty_dispo" string="Stock Disponible"/>
+							</group>
+						</group>
+					</page>
+					<page string="Proveedores">
+						<field colspan="4" name="seller_ids" nolabel="1" widget="one2many_list" mode="form">
+										<form string="Informacion del Proveedor">
+											<field name="name" colspan="4" domain="[('supplier','=',True)]" string="Empresa"/>
+											<newline />
+											<field name="sequence" invisible="True"/>
+											<separator string="Informacion de Producto en el Proveedor" colspan="4"/>
+											<field name="product_name" string="Nombre del Producto del Proveedor"/>
+											<field name="product_code" string="Ref. del Producto del Proveedor"/>
+											<field name="delay" invisible="True"/>
+											<field name="qty" invisible="True"/>
+											<field name="pricelist_ids" widget="one2many_list" colspan="4" nolabel="1" readonly="1">
+												<tree string="Historico de Precios" editable="top">
+													<field name="min_quantity" invisible="True"/>
+													<field name="price" string="Precio Publico"/>
+													<field name="sup_price" string="Precio Prov."/>
+													<field name="cos_price" string="Cost Std. "/>
+													<field name="inv_price" string="Precio Fact."/>
+													<field name="date_ope" string="Fecha de Apertura"/>
+												</tree>
+												<form>
+													<field name="min_quantity" invisible="True"/>
+													<field name="price" string="Precio Publico"/>
+													<field name="sup_price" string="Precio Prov."/>
+													<field name="cos_price" string="Cost Std. "/>
+													<field name="inv_price" string="Precio Fact."/>
+													<field name="date_ope" string="Fecha de Apertura"/>
+												</form>
+											</field>											
+										</form>								
+						</field>
+					</page>
+					<page string="Patentes">
+						<separator string="Patentes" colspan="4" />
+						<field name="pat_id" nolabel="1"/>
+						<newline/>
+						<separator string="Grupos" colspan="4" />
+						<field name="group_id" nolabel="1"/>
+					</page>                       
+					<page string="Miscelaneos" groups="base.group_system">
+						<separator string="Miscelaneos" colspan="4"/>
+						<field name="type" string="Tipo Producto"/>                             
+						<field name="procure_method" string="Metodo de Abastecimiento"/>
+						<field name="supply_method" string="Metodo de Suministro"/>
+						<field name="mes_type" string="Tipo de Medida"/>
+						<field groups="" name="cost_method" string="Metodo de Coste"/>
+						<field name="company_id" string="Empresa"/>
+						<newline/>
+						<separator string="Descripcion" colspan="4"/>
+						<field colspan="4" name="description" nolabel="1"  string="Descripcion"/>
+					</page>
+                    <page string="Contabilidad">
+						<group colspan="2" col="2" groups="">
+							<separator string="Propiedades de Contabilidad" colspan="2"/>
+							<field name="property_account_income" attrs="{'readonly':[('sale_ok','=',0)]}" />
+							<field name="property_account_expense" attrs="{'readonly':[('purchase_ok','=',0)]}" />
+						</group>
+						<group colspan="2" col="2" groups="">
+							<separator string="Propiedades Contables del Stock" colspan="2"/>                        
+							<field name="property_stock_account_input"/>							
+							<field name="property_stock_account_output"/>
+						</group>
+						<field name="account_reserv_id" string="Cuenta. Reserva"/>
+						<newline/>
+						<separator string="Impuestos de Compras" colspan="2"/>
+						<separator string="Impuestos de Ventas" colspan="2"/>
+						<field name="supplier_taxes_id" nolabel="1" colspan="2" attrs="{'readonly':[('purchase_ok','=',0)]}"/>
+						<field name="taxes_id" nolabel="1" colspan="2" attrs="{'readonly':[('sale_ok','=',0)]}"/>
+                    </page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_atcliente">
+		<field name="name">cust_prod_prod_atcliente</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_tree_v_atcliente">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_atcliente"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_atcliente"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_form_v_atcliente">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_atcliente"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_atcliente"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_atcliente"
+		name="Productos Compras"
+        parent="cust_menu_main_product"
+        action="cust_act_win_prod_prod_atcliente" />
+
+
+
+
+</data>
+</openerp>

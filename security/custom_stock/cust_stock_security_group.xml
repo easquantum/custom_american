@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1">
+
+	<!-- Users Groups -->
+    <record model="res.groups" id="group_cust_stock_manager">
+        <field name="name">custom_stock / Manager</field>
+    </record>
+
+    <record model="res.groups" id="group_cust_stock_inventory_user">
+        <field name="name">custom_stock / Inventory  User</field>
+    </record>
+    
+    <record model="res.groups" id="group_cust_stock_purchase_user">
+        <field name="name">custom_stock / Purchase  User</field>
+    </record>
+
+
+    <record model="res.groups" id="group_cust_stock_inventory_user_ccs">
+        <field name="name">custom_stock / Inventory  User / Caracas</field>
+    </record>
+    
+    <record model="res.groups" id="group_cust_stock_inventory_user_tur">
+        <field name="name">custom_stock / Inventory  User / Turmero</field>
+    </record>
+
+    <record model="res.groups" id="group_cust_stock_inventory_user_bar">
+        <field name="name">custom_stock / Inventory  User / Barcelona</field>
+    </record>
+
+    <record model="res.groups" id="group_cust_stock_inventory_user_mbo">
+        <field name="name">custom_stock / Inventory  User / Maracaibo</field>
+    </record>
+
+    <record model="res.groups" id="group_cust_stock_inventory_user_mag">
+        <field name="name">custom_stock / Inventory  User / Margarita</field>
+    </record>
+
+    <record model="res.groups" id="group_cust_stock_inventory_user_all">
+        <field name="name">custom_stock / Inventory  User / Todos</field>
+    </record>
+
+
+	<!-- Set root users to group -->
+	<record model="res.users" id="base.user_root">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_manager'),
+				ref('group_cust_stock_inventory_user'),
+				ref('group_cust_stock_purchase_user'),
+				ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_mag'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+
+
+</data>
+</openerp>
+

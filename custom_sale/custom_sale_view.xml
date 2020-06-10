@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Menu Sales Order
+	=======================
+	-->
+	 <menuitem  id="custom_menu_sale" name="Pedidos" parent="sale.menu_sale_root" />
+
+	
+	<!--
+	=======================
+	Custom Sales Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_custom_sales_tree">
+		<field name="name">custom.sale.order.tree</field>
+		<field name="model">sale.order</field>
+		<field name="type">tree</field>
+		<!-- <field name="priority" eval="10"/> --> 
+		<field name="arch" type="xml">
+			<tree string="Pedidos">
+                    <field name="name" 			string="Pedido Nro." select="1"/>
+                    <field name="date_order" 	string="Fecha" select="2"/>
+                    <field name="partner_id" 	string="Cliente" select="1"/>
+                    <field name="shop_id" 		string="Almacen" 	select="1"/>
+                    <field name="picked_rate" 	string="Despachado"  widget="progressbar"/>
+                    <field name="invoiced_rate" string="Facturado" widget="progressbar"/>
+                    <field name="amount_untaxed" string="Importe" sum="TOTAL PEDIDOS"/>
+                    <field name="code_zone_id" 		string="Zona" select="2"/>				
+                    <field name="state" 		string="Estatus"/>				
+		</tree>
+		</field>
+	</record>
+
+    <record id="action_custom_sales_tree" model="ir.actions.act_window">
+            <field name="name">Pedidos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_custom_sales_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom Sales Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_custom_sales_form">
+		<field name="name">custom.sale.order.form</field>
+		<field name="model">sale.order</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Pedidos">
+                   <group col="6" colspan="4">                   
+	                    <field name="partner_id" 	string="Cliente" on_change="onchange_partner_id(partner_id)" required="1" select="1" />
+    	                <field name="shop_id" 		string="Almacen" on_change="onchange_shop_id(shop_id)"	select="1"/>
+						<field name="name" 			string="Pedido Nro." select="1" attrs="{'readonly':[('state','!=','manual')]}"/>                    	
+                    	<field name="date_order" 	string="Fecha" select="2"/>
+                        <field name="code_zone_id"  string="Zona" attrs="{'readonly':[('state','!=','manual')]}"/>
+                        <field name="payment_term"  string="Plazo Pago" required="1" on_change="payterm_id_change(payment_term)" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        
+                    </group>  
+					<notebook colspan="4">
+                        <page string="Pedido">
+							<group colspan="4" col="6">										
+								<field name="pricelist_id"  string="Lista P." domain="[('type','=','sale')]"/>
+                       			<field name="shipped" 		string="Despachado" select="2"/>                        
+                        		<field name="invoiced" 		string="Facturado" select="2"/>									
+							</group>							
+							<newline/>
+							<separator string="Notas Atencion" colspan="4"/>
+								<field name="nota_atencion" string="Nota Manual" colspan="2"/>
+								<newline/>
+								<field name="nota_atencion_id"  nolabel="1" colspan="4"/>
+							<newline/>
+                            <group col="14" colspan="4">
+                                <field name="state" select="2"/>
+								<button name="order_validated" string="Validar Pedido" states="draft"/>                                
+                                <button name="order_confirm"  string="Confirmar Pedido" icon="gtk-execute" 			states="validated"/>
+                                <button name="invoice_recreate"  string="Recreate Invoice" icon="gtk-execute" 		states="invoice_except"/>
+                                <button name="invoice_corrected" string="Invoice Corrected" icon="gtk-go-forward" 	states="invoice_except"/>
+                                <button name="ship_recreate" string="Recreate Procurement" icon="gtk-execute" 		states="shipping_except"/>
+                                <button name="ship_corrected" string="Procurement Corrected" icon="gtk-go-forward" 	states="shipping_except"/>
+                                <button name="manual_invoice" string="Create Invoice" icon="gtk-execute" 			states="manual"/>
+                                <button name="cancel" string="Cancelar Pedido" icon="gtk-cancel" states="validated"/>
+
+                                <!-- BOTONES DESACTIVADOS: por no aplicar a los procedimientos u operaciones de la Empresa -->
+                                <!-- <button name="ship_cancel" string="Cancel Order" icon="gtk-cancel"	states="shipping_except"/>
+                                <button name="action_cancel_draft" string="Set to Draft" type="object" icon="gtk-convert" states="cancel"/>
+                                <button name="action_cancel" string="Cancel Order" type="object" icon="gtk-cancel" 	states="manual,progress"/> 
+                                <button name="invoice_cancel" string="Cancel Order" icon="gtk-cancel" states="invoice_except"/> -->
+                            </group>								
+						</page>
+						
+						<page string="Productos">
+							<field name="order_line"  mode="tree,form" widget="one2many_list" colspan="4" nolabel="1" >
+                                <form string="Productos">                                        
+                                       <notebook colspan="4">                                        
+					  <page string="Datos Generales">
+                                            <separator colspan="4" string="Descripcion"/>
+                                            <field colspan="4"
+                                                context="partner_id=parent.partner_id,quantity=product_uom_qty,pricelist=parent.pricelist_id,shop=parent.shop_id,uom=product_uom"
+                                                name="product_id" string="Producto" required="1" 
+                                                on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], True, parent.date_order, product_packaging, parent.fiscal_position,parent.payment_term,parent.pricelist_version_id)"
+                                                select="1"/>
+                                            <field
+                                                context="partner_id=parent.partner_id,quantity=product_uom_qty,pricelist=parent.pricelist_id,shop=parent.shop_id,uom=product_uom"
+                                                name="product_uom_qty"  string="Cantidad"
+                                                on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position,parent.payment_term,parent.pricelist_version_id)"
+                                                select="1"/>
+                                            <field 
+                                            	name="pricelist_item_id" string="Lista" 
+                                            	domain="[('price_version_id','=',parent.pricelist_version_id)]"
+                                            	on_change="onchange_listprice(product_id,pricelist_item_id)"/>
+                                            <field name="price_unit" string="Precio Venta"/> 
+                                            <field name="product_uom" string="Unidad"
+                                                   on_change="product_uom_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order)" />
+                                             
+                                            <field colspan="4" name="name" string="Descripcion"/>
+				 	  </page>
+					  <page string="Datos Impuestos">
+                                            <separator colspan="4" string="Impuestos"/>
+                                            <field colspan="4"  string=" " name="tax_id" domain="[('parent_id','=',False),('type_tax_use','&lt;&gt;','purchase')]"/>
+				 	  </page>
+				 	  </notebook>
+                                            
+                                            <!-- CAMPOS Ocultos -->
+                                            <field name="price_standard" string="Precio Factura" invisible="True"/> 
+                                            <field name="discount" string="Descuento" invisible="True"/> 
+                                            <field name="type" invisible="True"/>
+                                            <field name="delay" invisible="True"/>   
+                                            <field
+                                                name="product_packaging"
+                                                context="partner_id=parent.partner_id,quantity=product_uom_qty,pricelist=parent.pricelist_id,shop=parent.shop_id,uom=product_uom"
+                                                on_change="product_id_change(parent.pricelist_id,product_id,product_uom_qty,product_uom,product_uos_qty,product_uos,name,parent.partner_id, 'lang' in context and context['lang'], False, parent.date_order, product_packaging, parent.fiscal_position)"
+                                                domain="[('product_id','=',product_id)]"
+                                                groups="base.group_extended" 
+                                                invisible="True"/> 
+                                            <field  
+                                            	groups="product.group_uos" name="product_uos_qty" 
+		                                        on_change="uos_change(product_uos, product_uos_qty, product_id)"
+                                            	invisible="True"/>
+                                            <field groups="product.group_uos" name="product_uos" invisible="True"/>
+                                            <field name="address_allotment_id" invisible="True"/>                                                   
+								</form>
+                                <tree string="Productos">
+									<field name="product_uom_qty" string="Cantidad"/>                                    
+                                    <field colspan="4" name="name" string="Producto"/>
+                                    <field name="product_uom" string="Unidad"/>
+                                    <field name="tax_id" string="Impuestos"/>
+                                    <field name="discount" string="Dscto"  invisible="True"/>
+				                    <field name="price_standard" string="Precio Factura"  invisible="True"/>                                    
+                                    <field name="price_unit" string="Precio Venta"/>
+                                    <field name="price_subtotal" string="Total"/>
+                                </tree>
+                            </field>    
+                            <newline/>
+                            <group col="11" colspan="6">
+                            <field name="total_qty"  string="Total Cajas" />
+                                <field name="amount_untaxed"  string="Base Imponible" sum="Untaxed amount"/>
+                                <field name="amount_tax" string="IVA"/>
+                                <field name="amount_total" string="Total" sum="Total amount"/>
+                                <button name="button_dummy"  string="Calcular" type="object"/>
+                            </group>
+						</page>
+						
+						<page string="Notas Salida">
+                            <separator colspan="4" string="Observaciones"/>
+                            <field colspan="4" name="note" nolabel="1"/>
+                            <separator colspan="4" string="Notas Salida"/>
+                            <field colspan="4" string="Lista" name="picking_ids" nolabel="1"/>							
+						</page>
+						
+						<page string="Miscelaneos">
+							<group colspan="4" col="6">	
+								
+                            	<field domain="[('partner_id','=',partner_id)]" name="partner_invoice_id" string="Direccion Factura"/>
+                            	<field domain="[('partner_id','=',partner_id)]" name="partner_shipping_id" string="Direccion Envio"/> 
+                            	<field domain="[('partner_id','=',partner_id)]" name="partner_order_id" string="Contacto"/>
+                            	<field name="picking_policy" required="True"/>
+                            	<field name="order_policy" on_change="shipping_policy_change(order_policy)"/>
+                            	<field name="invoice_quantity" attrs="{'readonly':[('order_policy','=','prepaid'),('order_policy','=','picking')]}"/>
+                            	<field name="fiscal_position" groups="base.group_extended"/>
+								<field name="project_id" select="2" context="{'partner_id':partner_id, 'contact_id':partner_order_id, 'pricelist_id':pricelist_id, 'default_name':name}"/>
+								<field name="pricelist_version_id"  string="Version" domain="[('pricelist_id','=',pricelist_id)]"/>
+                            </group>
+                            <field colspan="4" name="invoice_ids" nolabel="1"/>
+                            <!-- CAMPOS Ocultos-->  
+                            <field groups="base.group_extended" name="incoterm" invisible="True" />                           
+						</page>						
+					</notebook>	 
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_custom_sales_form" model="ir.actions.act_window">
+		<field name="name">Todos los Pedidos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_custom_sales_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_custom_sales_form"/>
+	</record>
+	<record id="action_custom_sales_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_custom_sales_form"/>
+	</record>	
+	<menuitem name="Todos los Pedidos" action="action_custom_sales_form" id="menu_custom_sales" parent="custom_menu_sale"/>  
+
+
+
+	<!--
+	==================================
+	DTO. Facturacion
+	==================================
+	-->
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Caracas - Borrador
+	=====================================================
+	-->
+	<record id="action_custom_draft_sales_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Borrador - Caracas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('shop_id','=',1)]</field>
+	</record>
+	<record id="action_custom_draft_sales_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_custom_draft_sales_form"/>
+	</record>
+	<record id="action_custom_draft_sales_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_custom_draft_sales_form"/>
+	</record>
+	<menuitem name="Pedidos Borrador - Caracas" action="action_custom_draft_sales_form" id="menu_custom_draft_sales" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Turmero - Borrador
+	=====================================================
+	-->
+	<record id="action_draft_sales_turmero_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Borrador - Turmero</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('shop_id','=',2)]</field>
+	</record>
+	<record id="action_draft_sales_tur_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_draft_sales_turmero_form"/>
+	</record>
+	<record id="action_draft_sales_tur_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_draft_sales_turmero_form"/>
+	</record>
+	<menuitem name="Pedidos Borrador - Turmero" action="action_draft_sales_turmero_form" id="menu_draft_sales_turmero" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Maracaibo - Borrador
+	=====================================================
+	-->
+	<record id="action_draft_sales_maracaibo_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Borrador - Maracaibo</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('shop_id','=',3)]</field>
+	</record>
+	<record id="action_draft_sales_mar_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_draft_sales_maracaibo_form"/>
+	</record>
+	<record id="action_draft_sales_mar_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_draft_sales_maracaibo_form"/>
+	</record>
+	<menuitem name="Pedidos Borrador - Maracaibo" action="action_draft_sales_maracaibo_form" id="menu_draft_sales_maracaibo" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Barcelona - Borrador
+	=====================================================
+	-->
+	<record id="action_draft_sales_barcelona_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Borrador - Barcelona</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('shop_id','=',4)]</field>
+	</record>
+	<record id="action_draft_sales_bar_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_draft_sales_barcelona_form"/>
+	</record>
+	<record id="action_draft_sales_bar_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_draft_sales_barcelona_form"/>
+	</record>
+	<menuitem name="Pedidos Borrador - Barcelona" action="action_draft_sales_barcelona_form" id="menu_draft_sales_barcelona" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Puerto Ordaz - Borrador
+	=====================================================
+	-->
+    <record  model="ir.actions.act_window" id="act_sale_order_pto_draft"> 
+      <field name="name">Pedidos Borrador - Puerto Ordaz </field> 
+      <field name="res_model">sale.order</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('shop_id','=',5),('state','=','draft')]</field> 
+      <field name="context"> {'state' : 'draft'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_sale_order_pto_draft"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_custom_sales_tree"/> 
+    <field name="act_window_id" ref="act_sale_order_pto_draft"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_sale_order_pto_draft"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_custom_sales_form"/> 
+    <field name="act_window_id" ref="act_sale_order_pto_draft"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_sale_order_pto_draft" 
+    	action="act_sale_order_pto_draft" 
+    	parent="custom_menu_sale"
+        name="Pedidos Borrador - Puerto Ordaz"/>
+
+	<!--
+	====================================
+	Dpto. Credito y Cobranza
+	====================================
+	-->
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Caracas - Validados
+	=====================================================
+	-->
+	<record id="action_custom_validated_sales_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Validados - Caracas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','validated'),('shop_id','=',1)]</field>
+	</record>
+	<record id="action_custom_validated_sales_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_custom_validated_sales_form"/>
+	</record>
+	<record id="action_custom_validated_sales_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_custom_validated_sales_form"/>
+	</record>
+	<menuitem name="Pedidos Validados - Caracas" action="action_custom_validated_sales_form" id="menu_custom_validated_sales" parent="custom_menu_sale"/>  
+		
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Turmero - Validados
+	=====================================================
+	-->
+	<record id="action_validated_sales_turmero_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Validados - Turmero</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','validated'),('shop_id','=',2)]</field>
+	</record>
+	<record id="action_validated_sales_tur_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_validated_sales_turmero_form"/>
+	</record>
+	<record id="action_validated_tur_sales_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_validated_sales_turmero_form"/>
+	</record>
+	<menuitem name="Pedidos Validados - Turmero" action="action_validated_sales_turmero_form" id="menu_validated_sales_turmero" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Maracaibo - Validados
+	=====================================================
+	-->
+	<record id="action_validated_sales_maracaibo_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Validados - Maracaibo</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','validated'),('shop_id','=',3)]</field>
+	</record>
+	<record id="action_validated_sales_mar_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_validated_sales_maracaibo_form"/>
+	</record>
+	<record id="action_validated_mar_sales_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_validated_sales_maracaibo_form"/>
+	</record>
+	<menuitem name="Pedidos Validados - Maracaibo" action="action_validated_sales_maracaibo_form" id="menu_validated_sales_maracaibo" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Barcelona - Validados
+	=====================================================
+	-->
+	<record id="action_validated_sales_barcelona_form" model="ir.actions.act_window">
+		<field name="name">Pedidos Validados - Barcelona</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.order</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','validated'),('shop_id','=',4)]</field>
+	</record>
+	<record id="action_validated_sales_bar_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_sales_tree"/>
+		<field name="act_window_id" ref="action_validated_sales_barcelona_form"/>
+	</record>
+	<record id="action_validated_bar_sales_view2" model="ir.actions.act_window.view">
+		<field eval="21" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_sales_form"/>
+		<field name="act_window_id" ref="action_validated_sales_barcelona_form"/>
+	</record>
+	<menuitem name="Pedidos Validados - Barcelona" action="action_validated_sales_barcelona_form" id="menu_validated_sales_barcelona" parent="custom_menu_sale"/>  
+
+	<!-- 
+	=====================================================
+	Pedidos Filtrados: Puerto Ordaz - Validados
+	=====================================================
+	-->
+    <record  model="ir.actions.act_window" id="act_sale_order_pto_validated"> 
+      <field name="name">Pedidos Validados - Puerto Ordaz </field> 
+      <field name="res_model">sale.order</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('shop_id','=',5),('state','=','validated')]</field> 
+      <field name="context"> {'state' : 'validated'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_sale_order_pto_validated"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_custom_sales_tree"/> 
+    <field name="act_window_id" ref="act_sale_order_pto_validated"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_sale_order_pto_validated"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_custom_sales_form"/> 
+    <field name="act_window_id" ref="act_sale_order_pto_validated"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_sale_order_pto_validated" 
+    	action="act_sale_order_pto_validated" 
+    	parent="custom_menu_sale"
+        name="Pedidos Validados - Puerto Ordaz"/>
+
+	<!--
+	=======================
+	Custom Link Picking
+	=======================
+	-->		
+	<act_window name="Notas Salida"
+		domain="[('sale_id', '=', active_id)]"
+		res_model="stock.picking"
+		src_model="sale.order" 
+		id="act_sale_order_custom_stock_picking"/>		
+		
+</data>
+</openerp>	

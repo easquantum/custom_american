@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+	<!--
+	=======================
+	Product 
+	=======================
+	-->
+
+	<!--
+		*****************************************************
+		Custom Product Tree Fletes   
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_tree_v_fletes">
+		<field name="name">cust_prod_tree_v_fletes</field>
+		<field name="model">product.product</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>		
+		<field name="arch" type="xml">
+			<tree string="Productos Fletes">
+				<field name="default_code" string="Codigo"/>
+				<field name="name" string="Nombre"/>
+				<field name="variants" string="Referencia"/>
+				<field name="state" invisible="True"/>
+			</tree>			
+		</field>
+	</record>	
+
+    <record id="cust_act_win_prod_tree_fletes" model="ir.actions.act_window">
+            <field name="name">cust_prod_tree_fletes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="cust_prod_tree_v_fletes"/> 
+    </record>
+
+	<!--
+		*****************************************************
+		Custom Product Form Fletes 
+        *****************************************************
+	-->
+	<record id="cust_prod_form_v_fletes" model="ir.ui.view">
+		<field name="name">cust_form_v_fletes</field>
+		<field name="model">product.product</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Productos Fletes">
+				<group colspan="4" col="6">
+					<group colspan="4" col="2">
+						<separator string="Descripcion" colspan="4" />
+						<field name="name" select="1"  string="Nombre" readonly="1"/>
+						<field groups="" name="variants" select="2" string="Referencia" readonly="1"/>
+					</group>
+					<group colspan="1" col="2">
+						<separator string="Codigos" colspan="2"/>
+						<field name="default_code" select="1" string="Codigo" readonly="1"/>
+						<field name="active" select="2"  string="Activo" readonly="1"/>	 					
+					</group>
+				</group>
+
+				<notebook colspan="4">
+					<page string="Informacion">
+						<separator string="Datos Generales" colspan="4"/>
+						<newline/>
+						<group colspan="4" col="6">
+							<field name="categ_id" string="Categoria" readonly="1"/>
+							<field name="uom_id" on_change="onchange_uom(uom_id,uom_po_id)" string="Unidad Medida" readonly="1"/>
+							<field name="uom_po_id" string="U.M. Compra" readonly="1"/>
+							<field name="id_flete" string="Categ. Flete"/>
+						</group>
+                        <separator string="Empaquetado" colspan="4"/>
+						<group colspan="2" col="6" groups="">
+    						<field name="qty" string="Cantidad por caja" readonly="1"/>
+    						<field name="weight_net" string="Peso Neto"/>
+    						<label string="               "/>
+						</group>
+						<group colspan="4" col="6" groups="">
+							<group colspan="2" col="2" groups="">
+								<separator string="Condiciones" colspan="2"/>
+								<label string="" nolabel="1" colspan="2" />
+								<field name="supp_disc" string="Desc. Prov." readonly="1"/>
+								<field name="adv_marg" string="Margen ADV" readonly="1"/>
+								<field name="adv_disc" string="Costo Std" readonly="1"/>
+							</group>
+							<group colspan="2" col="2" groups="">
+								<separator string="Precios" colspan="2"/>
+								<field name="publ_price" string="Precio Publico" readonly="1"/>
+								<field name="standard_price" string="Precio Prov." readonly="1"/>
+								<field name="cost_price" string="Cost Std." readonly="1"/>
+								<field name="list_price" string="Precio Fact." readonly="1"/>
+								<field name="supp_price" invisible="True"/>
+								<field name="invo_price" invisible="True"/>
+							</group>
+							<group colspan="2" col="2" groups="">
+								<separator string="Existencias" colspan="2"/>							
+								<field name="virtual_available" string="Stock Virtual"/>								
+								<field name="qty_available" string="Stock Real"/>
+								<field name="qty_dispo" string="Stock Disponible"/>
+							</group>
+						</group>
+					</page>
+					<page string="Proveedores" groups="base.group_extended">
+						<field colspan="4" name="seller_ids" nolabel="1" widget="one2many_list" mode="form" >
+										<form string="Informacion del Proveedor">
+											<field name="name" colspan="4" domain="[('supplier','=',True)]" string="Empresa"/>
+											<newline />
+											<field name="sequence" invisible="True"/>
+											<separator string="Informacion de Producto en el Proveedor" colspan="4"/>
+											<field name="product_name" string="Nombre del Producto del Proveedor"/>
+											<field name="product_code" string="Ref. del Producto del Proveedor"/>
+											<field name="delay" invisible="True"/>
+											<field name="qty" invisible="True"/>
+											<field name="pricelist_ids" widget="one2many_list" colspan="4" nolabel="1" readonly="1">
+												<tree string="Historico de Precios" editable="top">
+													<field name="min_quantity" invisible="True"/>
+													<field name="price" string="Precio Publico"/>
+													<field name="sup_price" string="Precio Prov."/>
+													<field name="cos_price" string="Cost Std. "/>
+													<field name="inv_price" string="Precio Fact."/>
+													<field name="date_ope" string="Fecha de Apertura"/>
+												</tree>
+												<form>
+													<field name="min_quantity" invisible="True"/>
+													<field name="price" string="Precio Publico"/>
+													<field name="sup_price" string="Precio Prov."/>
+													<field name="cos_price" string="Cost Std. "/>
+													<field name="inv_price" string="Precio Fact."/>
+													<field name="date_ope" string="Fecha de Apertura"/>
+												</form>
+											</field>											
+										</form>								
+						</field>
+					</page>
+					<page string="Patentes" groups="base.group_extended">
+						<separator string="Patentes" colspan="4" />
+						<field name="pat_id" nolabel="1" readonly="1"/>
+						<newline/>
+						<separator string="Grupos" colspan="4" />
+						<field name="group_id" nolabel="1" readonly="1"/>
+					</page>                       
+					<page string="Miscelaneos" groups="base.group_system">
+						<separator string="Miscelaneos" colspan="4"/>
+						<field name="type" string="Tipo Producto"/>                             
+						<field name="procure_method" string="Metodo de Abastecimiento"/>
+						<field name="supply_method" string="Metodo de Suministro"/>
+						<field name="mes_type" string="Tipo de Medida"/>
+						<field groups="" name="cost_method" string="Metodo de Coste"/>
+						<field name="company_id" string="Empresa"/>
+						<field groups="" name="ean13" string="Cod. Barras"/>
+						<newline/>
+						<separator string="Descripcion" colspan="4"/>
+						<field colspan="4" name="description" nolabel="1"  string="Descripcion"/>
+					</page>
+                    <page string="Contabilidad" groups="base.group_extended">
+						<group colspan="2" col="2" groups="">
+							<separator string="Propiedades de Contabilidad" colspan="2"/>
+							<field name="property_account_income" attrs="{'readonly':[('sale_ok','=',0)]}" />
+							<field name="property_account_expense" attrs="{'readonly':[('purchase_ok','=',0)]}" />
+						</group>
+						<group colspan="2" col="2" groups="">
+							<separator string="Propiedades Contables del Stock" colspan="2"/>                        
+							<field name="property_stock_account_input"/>							
+							<field name="property_stock_account_output"/>
+						</group>
+						<separator string="Impuestos de Compras" colspan="2"/>
+						<separator string="Impuestos de Ventas" colspan="2"/>
+						<field name="supplier_taxes_id" nolabel="1" colspan="2" attrs="{'readonly':[('purchase_ok','=',0)]}"/>
+						<field name="taxes_id" nolabel="1" colspan="2" attrs="{'readonly':[('sale_ok','=',0)]}"/>
+                    </page>
+				</notebook>
+
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="cust_act_win_prod_fletes">
+		<field name="name">cust_prod_form_fletes</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_tree_fletes">
+		<field name="sequence" eval="12"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_tree_v_fletes"/>
+		<field name="act_window_id" ref="cust_act_win_prod_fletes"/>
+	</record>	
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_form_fletes">
+		<field name="sequence" eval="22"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_form_v_fletes"/>
+		<field name="act_window_id" ref="cust_act_win_prod_fletes"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_fletes"
+		name="Productos Fletes"
+        parent="cust_menu_main_product"
+        action="cust_act_win_prod_fletes"/>
+
+
+
+
+</data>
+</openerp>

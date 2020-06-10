@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="Test" author="Corvus Latinoamerica"  allowSplitting="20">
+	<pageTemplate id="first">
+		<frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+	</pageTemplate>
+</template>
+<stylesheet> 
+	<blockTableStyle id="Standard_Outline">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/></blockTableStyle>
+		<blockTableStyle id="Tableau6"> 
+			<blockAlignment value="LEFT"/>
+			<blockValign value="TOP"/>
+	</blockTableStyle>
+	<blockTableStyle id="Tabla2"> 
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/> 
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+	</blockTableStyle>
+
+	<blockTableStyle id="Tableau2"> 
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+
+	</blockTableStyle>
+
+	<blockTableStyle id="Tableau3">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+	</blockTableStyle>
+
+	<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+	</blockTableStyle>
+
+	<initialize>
+		<paraStyle name="all" alignment="justify"/>
+	</initialize>
+	<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/> 
+	<paraStyle name="P2" fontName="Times-Roman" fontSize="9.0" leading="11"/> 
+	<paraStyle name="P3" fontName="Times-Bold" fontSize="16.0" leading="20" alignment="CENTER"/> 
+	<paraStyle name="P4" fontName="Times-Bold" fontSize="12.0" leading="20" alignment="CENTER"/> 
+	<paraStyle name="P5" fontName="Times-Roman"/>
+	<paraStyle name="P6" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+	<paraStyle name="P7" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+	<paraStyle name="P8" fontName="Times-BoldItalic" fontSize="6.0" leading="8" alignment="LEFT"/> 
+	<paraStyle name="P9" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="LEFT"/>
+	<paraStyle name="P10" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/> 
+	<paraStyle name="P11" fontName="Times-Roman"/>
+	<paraStyle name="P12" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/> 
+	<paraStyle name="Standard" fontName="Times-Roman"/>
+	<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+	<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+	<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/> 
+	<paraStyle name="Table Contents" fontName="Times-Roman"/>
+	<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+	<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+	<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<story>
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+	<para style="P3"><font face="Times-Roman">
+		Listado Precios por Producto
+	</font></para>
+
+	<para style="P5"><font color="white"> </font></para>
+
+	<blockTable colWidths="500.0" style="Tableau3">
+		<tr>
+			<td><para style="P11">Producto: [[ o.name or ''  ]]</para></td>
+		</tr>
+	</blockTable>
+	<blockTable colWidths="500.0" style="Tableau3">
+		<tr>
+			<td>
+			
+				<blockTable colWidths="300.0,70.0,70.0" repeatRows="1" style="Tableau2">
+					<tr>
+						<td><para style="P6">Proveedor</para></td>
+						<td><para style="P6">Precio</para></td>
+						<td><para style="P6">Fecha </para></td>
+					</tr>
+				</blockTable>
+				<blockTable colWidths="300.0,70.0,70.0" repeatRows="1" style="Tableau3">
+					<tr><para style="P8">[[ repeatIn(get_PartnerListPrice(o.id), 'ln') ]]</para>
+						<td><para style="P8">[[ ln['proveedor'] ]] </para></td>
+						<td><para style="P6">[[ ln['precio'] ]] </para></td>
+						<td><para style="P6">[[ ln['fecha'] ]]</para></td>
+					</tr>
+				</blockTable>
+			
+			</td>
+		</tr>
+	</blockTable>
+
+<para style="P11"><font color="white"> </font></para>
+</story>
+</document>

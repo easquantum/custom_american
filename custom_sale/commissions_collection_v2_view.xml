@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	======================================================
+	Custom Menu Commissions Collection version 2 (2015)
+	======================================================
+	-->
+     <menuitem  id="menu_commissions_collection_v2" name="Comisiones" parent="cust_menu_commissions_collection" />
+
+
+	<!--
+	=====================================
+	Custom Commissions Collection Tree
+	=====================================
+	-->
+	<record model="ir.ui.view" id="view_commissions_collection_v2_tree">
+		<field name="name">commissions.collection.v2.tree</field>
+		<field name="model">commissions.collection.seller</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Comisiones Cobranza">
+			    <field name="zone_id" select="1" string="Zona"/>
+				<field name="salesman_id" select="1" string="Vendedor"/>
+				<field name="commission_period_id" string="Periodo"/>
+				<field name="date_start" string="Fecha Inicio"/>
+				<field name="date_stop" string="Fecha Fin"/>
+				<field name="commissions_type" string="Comision Tipo" select="1"/>
+			</tree>
+		</field>
+	</record>
+    <record id="act_commissions_collection_v2_tree" model="ir.actions.act_window">
+            <field name="name">Comisiones Cobranza</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">commissions.collection.seller</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_commissions_collection_v2_tree"/>
+    </record>	
+	
+
+	<!--
+	===========================================
+	Custom Commissions Collection Seller Form
+	===========================================
+	-->
+	<record model="ir.ui.view" id="view_commissions_collection_v2_form">
+		<field name="name">commissions.collection.v2.form</field>
+		<field name="model">commissions.collection.seller</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Comisiones Cobranza">
+                <group col="6" colspan="4">
+    				<field name="salesman_id" select="1" string="Vendedor" readonly="1"/>
+    				<field name="commissions_type" string="Comision Tipo" select="1" readonly="1"/>
+    				<field name="zone_id" select="1" string="Zona" readonly="1"/>
+    				<field name="commission_period_id" string="Periodo" readonly="1"/>
+    				<field name="date_start" string="Fecha Inicio" readonly="1"/>
+    				<field name="date_stop" string="Fecha Fin" readonly="1"/>
+    				<field name="name" string="Descripcion" invisible="True"/>
+    			</group>
+				  <notebook colspan="4">
+				    <page string="Datos Cobranza">
+				       <group col="6" colspan="4">
+                            <separator colspan="2" string="Cobrado"/>
+                            <separator colspan="2" string="Porcentaje Realizado"/>
+                            <separator colspan="2" string="A Pagar"/>
+				            <field name="quota_annual" string="Cuota Anual" readonly="1"/>
+				            <label colspan="2"/>				            
+				            <label colspan="2"/>
+				            <field name="quota_amount" string="Cuota Bs."/>
+				            <label colspan="2"/>				            
+				            <label colspan="2"/>				            
+                            <field name="collection_total" string="Total Vendedor" readonly="1"/>
+                            <field name="collection_percent" string="Porc. Contado" readonly="1"/>
+                            <field name="collection_pay" string="Sub-Total" readonly="1"/>
+                        </group>
+
+                        <separator colspan="4" string=" "/> 
+                         <group col="4" colspan="2">
+                         <field name="number_days" string="Domingos Y Feriado" attrs="{'readonly':[('state','!=','draft')]}"/>
+                         <field name="daily_salary" string="Bs Diario" attrs="{'readonly':[('state','!=','draft')]}"/>
+                         <field name="amount_adjustment" string="Monto Ajuste" attrs="{'readonly':[('state','!=','draft')]}"/>
+                         <button name="compute_commission_v2" string="Calcular" states="draft" type="object"/>
+				         </group>
+				         <group col="4" colspan="2">
+                            <label colspan="2"/>
+                            <field name="amount_holiday" string="Total Feriado" attrs="{'readonly':[('state','!=','draft')]}"/>				            
+                        </group>
+                        <separator colspan="2" string=""/>
+                        <separator colspan="2" string="Totales"/>
+                        <group col="4" colspan="2">
+                             <field name="state" readonly="1" string="Estatus"/>
+                             <button name="button_change_state" string="Pagado" states="draft" type="object" />                         
+				         </group>
+                        <group col="4" colspan="2"> 
+				             <label colspan="2"/> 
+				             <field name="commission_pay" string="Total Pagar" readonly="1"/>                       
+				         </group>
+				        </page>
+                     <page string="Detalles R.O">
+                         <field colspan="4" name="collection_line" nolabel="1" string="Detalle" attrs="{'readonly':[('state','!=','draft')]}">
+                                <form string="Detalles RO">
+                                    <field name="name" string="R.O Nro."/>
+                                    <field name="date_ro" string="Fecha"/>
+                                    <field name="amount_ro" string="Monto"/>	
+                                </form>
+                                <tree string="Detalles RO">
+                                    <field name="name" string="R.O Nro."/>
+                                    <field name="date_ro" string="Fecha"/>
+                                    <field name="amount_ro" string="Monto"/>
+                                </tree>                            
+                            </field>
+                     </page>	
+                        <page string="Notas">
+                            <separator colspan="4" string="Observaciones "/>
+    				        <field name="notes" nolabel="1" string="Notas"/>   
+				        </page>
+				    </notebook>    			
+                </form>
+            </field>
+	</record>                
+	
+	<record id="act_commis_collection_draft_v2_form" model="ir.actions.act_window">
+		<field name="name">Comisiones Cobranza Borrador</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">commissions.collection.seller</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('commissions_type','in',['zone','territory','division'])]</field>
+	</record>
+	<record id="act_commis_collection_draft_v2_vtree" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_commissions_collection_v2_tree"/> 
+		<field name="act_window_id" ref="act_commis_collection_draft_v2_form"/>
+	</record>
+	<record id="act_commis_collection_draft_v2_vform" model="ir.actions.act_window.view">
+		<field eval="32" name="sequence"/>
+		<field name="view_mode">form</field> 
+		<field name="view_id" ref="view_commissions_collection_v2_form"/>
+		<field name="act_window_id" ref="act_commis_collection_draft_v2_form"/>
+	</record>
+	<menuitem name="Comisiones Cobranza Borrador" action="act_commis_collection_draft_v2_form" id="menu_commis_collection_draft_v2" parent="menu_commissions_collection_v2"/>  	
+
+	<record id="act_commis_collection_paid_v2_form" model="ir.actions.act_window">
+		<field name="name">Comisiones Cobranza Pagadas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">commissions.collection.seller</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','paid'),('commissions_type','in',['zone','territory','division'])]</field>
+	</record>
+	<record id="act_commis_collection_paid_v2_vtree" model="ir.actions.act_window.view">
+		<field eval="22" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_commissions_collection_v2_tree"/> 
+		<field name="act_window_id" ref="act_commis_collection_paid_v2_form"/>
+	</record>
+	<record id="act_commis_collection_paid_v2_vform" model="ir.actions.act_window.view">
+		<field eval="32" name="sequence"/>
+		<field name="view_mode">form</field> 
+		<field name="view_id" ref="view_commissions_collection_v2_form"/>
+		<field name="act_window_id" ref="act_commis_collection_paid_v2_form"/>
+	</record>
+	<menuitem name="Comisiones Cobranza Pagadas" action="act_commis_collection_paid_v2_form" id="menu_commis_collection_paid_v2" parent="menu_commissions_collection_v2"/>  	
+
+</data>
+</openerp>	

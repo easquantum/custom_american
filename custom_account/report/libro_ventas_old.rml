@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<document filename="libro_ventas.pdf">
+<template pageSize="(792.0,612.0)" title="Libro Ventas" author="Corvus" allowSplitting="20">
+	<pageTemplate id="first">
+		<frame id="first" x1="57.0" y1="57.0" width="678" height="498"/>
+		<pageGraphics>
+			<setFont name="Helvetica-Bold" size="5"/>
+			<drawString x="14.0cm" y="1cm">Pag. <pageNumber/></drawString>
+		</pageGraphics>
+	</pageTemplate>
+</template>
+<stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau1"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau3">
+		<blockAlignment  start="0,0" stop="-1,-1" value="LEFT"/>
+		<blockRightPadding length="0mm"/>
+		<blockLeftPadding length="0mm"/>
+		<blockValign start="0,0" stop="-1,-1" value="TOP"/>	
+		<lineStyle kind="GRID" colorName="grey"/>			
+</blockTableStyle>
+
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau5">
+	<blockAlignment value="LEFT"/>
+	<blockValign value="TOP"/>
+	<blockLeftPadding length="0mm"/>
+    <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+    <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="12.0" leading="14" alignment="CENTER"/>
+<paraStyle name="P3" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="LEFT"/> 
+<paraStyle name="P5" fontName="Times-Bold" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P7" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="LEFT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="7.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P13" fontName="Times-Roman" fontSize="7.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P16" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="LEFT"/>
+<paraStyle name="P17" fontName="Times-Bold" fontSize="6.0" leading="8" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+ 
+<blockTable colWidths="720.0" repeatRows="1" style="Tableau2">	
+		<tr>
+		<td>
+			<para style="P2"> LIBRO DE VENTAS </para>
+			<para style="P3">Periodo:[[ get_periodo(data['form']['date1'])   ]] </para>
+			<para style="P3">Rango: Fecha desde: [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date1'], '%Y-%m-%d')) ]]   -  Fecha hasta: [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date2'], '%Y-%m-%d')) ]] </para>
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<para style="P4">[[ get_company()[0] ]] </para>
+			<para style="P4">R.I.F. : [[ get_company()[1] ]] </para>
+		</td>
+		</tr>		
+</blockTable> 
+<blockTable colWidths="500.0,220.0" repeatRows="1" style="Tableau5">
+	<tr>
+	<td><para style="P10"> </para>	</td>
+	<td><para style="P10">VENTAS   INTERNAS </para>	</td>
+	</tr>
+</blockTable>
+
+<para style="P1"><font color="white">. </font></para>
+
+<!-- 
+	<tr>
+	<td><para style="P5">Nro. Opr.</para></td> 
+	<td><para style="P5">Fecha.</para></td> 
+	<td><para style="P5">Nro. RIF</para></td> 
+	<td><para style="P5">Nombre o Razon Social</para></td>
+	<td><para style="P5">Nro. Comprobante</para></td>
+	<td><para style="P5">Nro. Factura</para></td> 
+	<td><para style="P5">Nro Nota Debito</para></td> 
+	<td><para style="P5">Nro Nota Credito</para></td> 
+	<td><para style="P5">Tipo Doc.</para></td>
+	<td><para style="P5">Factura Afectada</para></td>
+	<td><para style="P5">Total Ventas incluye iva</para></td>
+	<td><para style="P5">Ventas Internas No Gravadas</para></td>  
+	<td><para style="P5">Base Imponible </para></td>
+	<td><para style="P5">% Alic. </para></td>
+	<td><para style="P5">Impuesto IVA </para></td>
+	<td><para style="P5">IVA Retenido</para></td> 
+	</tr>
+-->
+<blockTable colWidths="15.0,40.0,40.0,160.0,45.0,50.0,30.0,40.0,20.0,40.0,60.0,40.0,45.0,20.0,45.0,45.0" repeatRows="1" style="Tableau3">
+
+		<tr> <para style="P1"> [[ repeatIn(get_libro_ventas(data['form']),'s') ]]</para>
+		<td><para style="P12"> [[ s['cont'] ]] </para></td> 
+		<td><para style="P12"> [[ time.strftime('%d/%m/%Y', time.strptime(s['fecha'], '%Y-%m-%d')) ]]</para></td>
+		<td><para style="P12"> [[ s['rif'] ]] </para></td> 
+		<td><para style="P7">  [[ s['proveedor'] ]] </para></td>
+		<td><para style="P12"> [[ s['nrocomp'] ]] </para></td>
+		<td><para style="P12"> [[ s['nrofac'] ]]</para></td>
+		<td><para style="P12"> </para></td>
+		<td><para style="P12"> [[ s['nronotac'] ]]</para></td> 
+		<td><para style="P12"> [[ s['tipo'] ]]</para></td>
+		<td><para style="P12"> [[ s['afect'] ]]</para></td> 
+		<td><para style="P14"> [[ locale.format('%.2f', s['total'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P14"> [[ locale.format('%.2f', s['exento'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P14"> [[ locale.format('%.2f', s['base'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P12"> [[ locale.format('%.2f', s['alicuota'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P14"> [[ locale.format('%.2f', s['iva'], grouping=True, monetary=True) ]] </para></td> 
+		<td><para style="P14"> [[ locale.format('%.2f', s['ivaret'], grouping=True, monetary=True) ]] </para></td>
+		</tr>
+</blockTable>
+
+<!-- 
+<condPageBreak height="498"/> 
+-->
+<blockTable colWidths="15.0,40.0,40.0,160.0,45.0,50.0,30.0,40.0,20.0,40.0,60.0,40.0,45.0,20.0,45.0,45.0" repeatRows="1" style="Tableau3">
+	<tr>
+	<td><para style="P5">Nro. Opr.</para></td> 
+	<td><para style="P5">Fecha.</para></td>
+	<td><para style="P5">Nro. RIF</para></td>
+	<td><para style="P5">Nombre o Razon Social</para></td>
+	<td><para style="P5">Nro. Comprobante</para></td>
+	<td><para style="P5">Nro. Factura</para></td>
+	<td><para style="P5">Nro Nota Debito</para></td>
+	<td><para style="P5">Nro Nota Credito</para></td>
+	<td><para style="P5">Tipo Doc.</para></td>
+	<td><para style="P5">Factura Afectada</para></td>
+	<td><para style="P5">Total Ventas incluye iva</para></td>
+	<td><para style="P5">Ventas Internas No Gravadas</para></td>
+	<td><para style="P5">Base Imponible </para></td>
+	<td><para style="P5">% Alic. </para></td>
+	<td><para style="P5">Impuesto IVA </para></td>
+	<td><para style="P5">IVA Retenido</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="480.0,60.0,40.0,45.0,20.0,45.0,45.0" repeatRows="1" style="Tableau4">
+		<tr>
+		<td><para style="P16">T O T A L E S =================>  </para></td> 
+		<td><para style="P17"> [[ locale.format('%.2f', get_totalgral_venta(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P17"> [[ locale.format('%.2f', get_totalgral_exento(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P17"> [[ locale.format('%.2f', get_totalgral_base(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P17"> </para></td>
+		<td><para style="P17"> [[ locale.format('%.2f', get_totalgral_iva(), grouping=True, monetary=True) ]] </para></td> 
+		<td><para style="P17"> [[ locale.format('%.2f', get_totalgral_retencion(), grouping=True, monetary=True) ]] </para></td>
+		</tr>
+</blockTable>
+<para style="P1"><font color="white"> . </font></para>
+
+<blockTable colWidths="250.0,100.0,150.0,20.0,150.0" repeatRows="1" style="Tableau2">
+	<tr>
+	<td><para style="P26">Facturacion Sin IVA</para></td>
+	<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_exento() + get_totalgral_exento_nc(), grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+	<tr>
+	<td><para style="P26">Notas Debito Sin IVA</para></td>
+	<td><para style="P25"> 0,00 </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+    <tr>
+	<td><para style="P26">Notas Credito Sin IVA</para></td>
+	<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_exento_nc(), grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+    <tr>
+	<td><para style="P26"></para></td>
+	<td><para style="P25">------------------------ </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+	<tr>
+	<td><para style="P16"> SUB-TOTAL SIN IVA </para></td>
+	<td><para style="P15">[[ locale.format('%.2f', get_totalgral_exento(), grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+    <tr>
+	<td><para style="P1"><font color="white">. </font></para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+    <tr>
+	<td><para style="P1"><font color="white">. </font></para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+</blockTable>
+
+<blockTable colWidths="250.0,100.0,150.0,20.0,150.0" repeatRows="1" style="Tableau2">
+	<tr><para style="P16"> [[ repeatIn(get_datos_tax(),'t') ]] </para> 
+	<td><para style="P26"> BASE IMPONIBLE FACT. [[  t['tax'] ]] %</para></td>
+	<td><para style="P25"> [[ locale.format('%.2f',  t['totalbase'], grouping=True, monetary=True) ]]  </para></td>
+	<td><para style="P25"> [[  locale.format('%.2f', t['totaltax'], grouping=True, monetary=True) ]] <font color="white">...... </font></para></td>
+	<td><para style="P15">  </para></td>
+	<td><para style="P15">  </para></td>
+	</tr>
+</blockTable>
+
+<blockTable colWidths="250.0,100.0,150.0,20.0,150.0" repeatRows="1" style="Tableau2">	
+    <tr>
+	<td><para style="P26"></para></td>
+	<td><para style="P25">------------------------ </para></td>
+	<td><para style="P25">---------------------(A)</para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+	<tr> 
+	<td><para style="P16"> SUB-TOTAL BASE IMPONIBLE FACT.</para></td>
+	<td><para style="P15"> [[ locale.format('%.2f', get_totalgral_base()+ get_totalgral_base_nc(), grouping=True, monetary=True) ]]  </para></td>
+	<td><para style="P15"> [[  locale.format('%.2f', get_totalgral_iva()+ get_totalgral_iva_nc(), grouping=True, monetary=True) ]] <font color="white">...... </font></para></td>
+	<td><para style="P15">  </para></td>
+	<td><para style="P15">  </para></td>
+	</tr>
+    <tr>
+	<td><para style="P1"><font color="white">. </font></para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+</blockTable>
+
+<blockTable colWidths="250.0,100.0,150.0,20.0,150.0" repeatRows="1" style="Tableau2">
+	<tr><para style="P16"> [[ repeatIn(get_datos_tax_nc(),'n') ]] </para> 
+	<td><para style="P26"> BASE IMPONIBLE N/C [[  n['tax'] ]] %</para></td>
+	<td><para style="P25"> [[ locale.format('%.2f',  n['totalbase'], grouping=True, monetary=True) ]]  </para></td>
+	<td><para style="P25"> [[  locale.format('%.2f', n['totaltax'], grouping=True, monetary=True) ]] <font color="white">...... </font></para></td>
+	<td><para style="P15">  </para></td>
+	<td><para style="P15">  </para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="250.0,100.0,150.0,20.0,150.0" repeatRows="1" style="Tableau2">
+    <tr>
+	<td><para style="P26"></para></td>
+	<td><para style="P25">------------------------ </para></td>
+	<td><para style="P25">---------------------(B)</para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+	<tr> 
+	<td><para style="P16">SUB-TOTAL BASE IMPONIBLE N/C %</para></td>
+	<td><para style="P15"> [[ locale.format('%.2f', get_totalgral_base_nc(), grouping=True, monetary=True) ]]  </para></td>
+	<td><para style="P15"> [[  locale.format('%.2f', get_totalgral_iva_nc(), grouping=True, monetary=True) ]] <font color="white">...... </font></para></td>
+	<td><para style="P15">  </para></td>
+	<td><para style="P15">  </para></td>
+	</tr>
+	</blockTable>	
+
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+
+<blockTable colWidths="250.0,100.0,150.0,20.0,150.0" repeatRows="1" style="Tableau2">
+    <tr>
+	<td><para style="P26"></para></td>
+	<td><para style="P25">------------------------</para></td>
+	<td><para style="P25">------------------------<font color="white">...... </font></para></td>
+	<td><para style="P15"> </para></td>
+	<td><para style="P15"> </para></td>
+	</tr>
+	<tr>
+	<td><para style="P16">TOTAL DEBITOS FISCALES (A,B)</para></td>
+	<td><para style="P15"> [[  locale.format('%.2f', get_totalgral_base() , grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P15"> [[  locale.format('%.2f', get_totalgral_iva() , grouping=True, monetary=True) ]]  <font color="white">...... </font></para></td>
+	<td><para style="P15">  </para></td>
+	<td><para style="P15">  </para></td>
+	</tr>							
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+
+</story>
+</document>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="Retencion ISLR" author="Corvus Latinoamerica" allowSplitting="20">
+    <pageTemplate id="first">
+    <frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+    	<pageGraphics>
+			<setFont name="Times-Roman" size="7"/>
+			<fill color="black"/>
+            <stroke color="grey"/>
+            
+            <!-- LINE bottom -->
+			<drawString x="18.0cm" y="1.20cm">Pag. <pageNumber/>  </drawString>
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau10">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau1"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="GRID" colorName="black" thickness="0.3"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<lineStyle kind="LINEBELOW" colorName="grey" start="0,0" stop="0,0"/>
+        <blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="14.0" leading="14"/>
+<paraStyle name="P3" fontName="Times-Bold"     fontSize="10.0" leading="12" alignment="CENTER"/> 
+<paraStyle name="P4" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="CENTER"/> 
+<paraStyle name="P5" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P6" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P7" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Bold" fontSize="8.0" leading="10"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P16" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+
+<blockTable colWidths="315.0,230.0" style="Tableau3"> 
+	<tr>
+	<td> <para style="P2"> Data Archivo XML de retISLRSalariosOtras </para> </td>
+	<td>  
+		<blockTable colWidths="120.0,110" style="Tableau4">  
+			<tr>
+			<td><para style="P4"> RIF Agente :[[ get_company() ]] </para></td>
+			<td><para style="P4">Periodo: [[ get_periodo(data['form']['date1']) ]] </para>	</td>
+			</tr>
+		</blockTable>			
+	</td>			
+	</tr>
+</blockTable>
+<para style="P11"><font color="white"> . </font></para> 
+<!--
+<blockTable colWidths="480.0,5.0,75.0" repeatRows="1" style="Tableau3">
+	<tr>
+	<td><para style="P11"><font color="white"> . </font> </td>
+    <td><para style="P11"><font color="white"> . </font></para> </td>
+    <td>
+        <blockTable colWidths="70.0"  style="Tableau4">
+        <tr>
+        <td><para style="P11">Total General</para></td>
+        </tr>
+        <tr>
+        <td><para style="P11">[[ locale.format('%.2f', get_total_islr(), grouping=True, monetary=True) ]]</para></td>
+        </tr>
+        <tr>
+        <td><para style="P11">Valor U.T.</para></td>
+        </tr>
+        <tr>
+        <td><para style="P11">[[ locale.format('%.2f', get_ut(), grouping=True, monetary=True) ]]</para></td>
+        </tr>
+        </blockTable>    
+    </td>
+    </tr>
+</blockTable>
+-->
+<blockTable colWidths="30.0,60.0,70.0,70.0,60.0,50.0,90.0,50.0" repeatRows="1" style="Tableau4">
+	<tr>
+	<td><para style="P11"> ID Sec. </para> </td>
+	<td><para style="P11"> RIF Retenido </para> </td>
+	<td><para style="P11"> Nro. Factura </para> </td>	
+	<td><para style="P11"> Nro. Comtrol </para> </td>
+	<td><para style="P11"> Fecha Operacion </para> </td>
+	<td><para style="P11"> Concepto </para> </td>
+	<td><para style="P11"> Monto Operacion </para> </td>
+	<td><para style="P11"> Porcentaje Retencion </para> </td>
+	</tr>
+	<tr><para style="P1"> [[ repeatIn(get_lines_islr(data['form']),'d') ]] </para>
+	<td><para style="P6"> [[ d['cont'] ]] </para> </td>
+	<td><para style="P6"> [[ d['rif'] ]] </para> </td>
+	<td><para style="P6"> [[ d['nrofac'] ]] </para> </td>	
+	<td><para style="P6"> [[ d['nrocont'] ]] </para> </td>
+	<td><para style="P6"> [[ d['fecha'] ]] </para> </td>
+	<td><para style="P6"> [[ d['codigo'] ]] </para> </td>
+	<td><para style="P8"> [[ locale.format('%.2f', d['monto'], grouping=True, monetary=True) ]] </para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f',d['ret'], grouping=True, monetary=True) ]] </para> </td>
+	</tr>
+</blockTable>	
+<blockTable colWidths="320.0,100.0,50.0" repeatRows="1" style="Tableau4">
+	<tr>
+	<td><para style="P8"> Total : </para></td> 
+	<td><para style="P8">[[ locale.format('%.2f', get_total_islr(), grouping=True, monetary=True) ]] </para></td> 
+	<td><para style="P7"> </para></td>	
+	</tr>
+</blockTable>
+
+
+</story>
+</document>

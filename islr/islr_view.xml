@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu ISLR
+	=======================
+	-->
+	 <menuitem  id="menu_retention_islr" name="Retenciones ISLR" parent="purchase.menu_purchase_root" />
+
+
+    <!-- 
+	=====================================================
+	islr 
+	=====================================================
+	-->  
+
+
+        <record id="view_islr_tax_tree" model="ir.ui.view">
+            <field name="name">account.islr.tax.tree</field>
+            <field name="model">account.islr.tax</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Retention ISLR">
+                    <field name="name"         string="Islr Nro" select="1"/>
+                    <field name="partner_id"   string="Empresa" select="1"/> 
+                    <field name="document_date" string="Fecha" select="2"/>
+                    <field name="state"        string="Estatus" select="2"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_islr_tax_tree" model="ir.actions.act_window">
+                <field name="name">Retencion ISLR</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.islr.tax</field>
+                <field name="view_type">tree</field>
+                <field name="view_id" ref="view_islr_tax_tree"/>
+        </record>
+
+        <record id="view_islr_tax_form" model="ir.ui.view">
+            <field name="name">account.islr.tax.form</field>
+            <field name="model">account.islr.tax</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Retention ISLR">
+                    <group colspan="4" col="6">
+                        <field name="name" select="1" string="Islr Nro."/>
+                        <field name="journal_id" string="Diario" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>                               
+                        <field name="document_date" string="Fecha" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="partner_id" string="Proveedor" required="1" select="1" domain="[('supplier','=', 1)]" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field domain="[('type','&lt;&gt;','view'), ('company_id', '=', company_id),('journal_id','=',journal_id)]" 
+                               name="account_id" string="Cuenta" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="islr_type_id" string="Impuesto islr" required="1" on_change="change_islr_type_id(islr_type_id)"  
+                                attrs="{'readonly':[('state','!=','draft')]}"/> 
+                    </group>
+                    <notebook colspan="4">
+                        <page string="General">
+                            <group colspan="4" col="6">
+                                <field name="base" string="Base" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="porcentaje" string="Porcentaje" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <field name="amount_islr" string="Total retenido" required="1" attrs="{'readonly':[('state','!=','draft')]}"/>
+                                <label string="" colspan="2"/>
+                                <label string="" colspan="2"/>
+                                <button name="compute_islr" string="Calcular Retencion" states="draft" type="object" attrs="{'invisible':[('draft','!=',1)]}" colspan="2"/> 
+                			</group>
+                            <field colspan="4" name="islr_line" nolabel="1" widget="one2many_list" attrs="{'readonly':[('state','!=','draft')]}">
+	                            <tree string="Facturas Comprobante">
+	                               <field name="name" string="Factura"/>
+	                               <field name="base_amount" string="Monto Base"/>
+	                               <field name="retention_amount" string="Monto Retenido"/> 
+	                            </tree>
+	                            <form string="Retencion line"> 
+	                                <separator colspan="4" string="Informacion General"/>
+	                                <field name="name" string="Factura Nro."/>
+	                                <field name="invoice_id" string="Ref. Factura" 
+	                                   domain="[('type', '=','in_invoice'),('islr', '=',0),('partner_id', '=', parent.partner_id)]"
+	                                   on_change="change_invoice_id_islr(invoice_id,parent.type,parent.porcentaje)"/>  
+	                                <field name="base_amount" string="Monto Base"/>
+	                                <field name="retention_amount" string="Monto Retenido"/> 
+	                                    
+	                            </form> 
+                            </field>
+
+                            <field name="total_tax_ret" string="Total Base"  invisible="True"/>
+                            <field name="total_tax_ret" string="Total Ret."  invisible="True"/>
+
+                            <newline/>
+                            <field name="state" string="estatus"/>
+                            <button name="islr_done" states="draft" string="Realizado"/>
+                            <button name="action_done_cancel" states="done" string="Cancel" type="object" icon="gtk-convert"/>
+                            
+                        </page>
+                        <page string="Miscelaneos">
+                                <field name="company_id" string="Empresa"/> 
+                                <field name="currency_id" string="Moneda"/>
+                                <field name="type"  string="Tipo" readonly="1" />
+                                <separator string="Informacion Movimiento" colspan="4"/>
+                                <field name="move_id" string="Asiento islr"/>
+                                <field name="manual" string="Manual"/>
+                                <separator string="Referencia" colspan="4"/>
+                    		    <field colspan="4" name="notes" nolabel="1"/>
+                    		    <separator string="Informacion estructura anterior" colspan="4"/>
+                            <group col="4" colspan="2">
+                                <field name="invoice_id" select="1" string="Factura"/>
+                                <field name="type_islr" string="Tipo"/>
+                                <field name="descuento" string="Descuento"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+    	<record model="ir.actions.act_window" id="action_account_islr">
+	    	<field name="name">Islr</field>
+	    	<field name="res_model">account.islr.tax</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+    	</record>
+    	<record model="ir.actions.act_window.view" id="act_wv_period_generalyear_tree">
+	    	<field name="sequence" eval="10"/>
+	    	<field name="view_mode">tree</field>
+	    	<field name="view_id" ref="view_islr_tax_tree"/> 
+	    	<field name="act_window_id" ref="action_account_islr"/>
+	    </record>
+	    <record model="ir.actions.act_window.view" id="act_wv_period_generalyear_form">
+	    	<field name="sequence" eval="20"/>
+	    	<field name="view_mode">form</field>
+	    	<field name="view_id" ref="view_islr_tax_form"/>
+	    	<field name="act_window_id" ref="action_account_islr"/>
+	    </record>
+
+	    <menuitem
+	    	id="menu_action_account_islr"  	name="Retencion ISLR" 
+	    	parent="menu_retention_islr"
+	    	action="action_account_islr"/>	
+
+        </data>
+</openerp>
+

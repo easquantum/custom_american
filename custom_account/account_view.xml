@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <menuitem  
+		id="cust_menu_acc_root" 
+		name="Contabilidad American" 
+		parent="account.menu_finance" />
+
+        <!--
+    Accounts
+    -->
+
+
+        <record id="custom_account_tree" model="ir.ui.view">
+            <field name="name">custom_account_tree</field>
+            <field name="model">account.account</field>
+            <field name="type">tree</field>
+            <field name="field_parent">child_id</field>
+            <field name="arch" type="xml">
+                <tree string="Plan contable" toolbar="1" colors="blue:type=='view'">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="debit"/>
+                    <field name="credit"/>
+                    <field name="balance"/>
+                    <field name="company_currency_id"/>
+                    <field name="type" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="custom_account_form" model="ir.ui.view">
+            <field name="name">custom_account_form</field>
+            <field name="model">account.account</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Account">
+                    <group col="6" colspan="4">
+                    <field name="name" select="1"/>
+                    <field name="code" select="1"/>
+                    <field name="type" select="1"/>
+                    <field name="company_id" select="2"/>
+                    <field name="parent_id"/>
+                    <field name="user_type" select="1"/>
+		    <field name="active" select="2"/>
+                    <field name="reconcile" />
+                    </group>
+                  <!--  <notebook colspan="4">
+                        <page string="General Information">
+                            <newline/>-->
+                            <field name="currency_id" select="2" invisible="True"/>
+                            <field name="currency_mode" select="2" invisible="True"/>
+                            
+                            <field name="check_history" invisible="True"/>
+                            <newline/>
+                            <newline/>
+                            <field colspan="4" name="tax_ids" domain="[('parent_id','=',False)]" invisible="True"/>
+                            <field name="child_consol_ids" colspan="4" attrs="{'readonly':[('type','!=','consolidation')]}" invisible="True"/>
+                       <!-- </page>
+                        <page string="Notes">
+                            <field colspan="4" name="note" nolabel="1" invisible="True"/>
+                        </page>
+                    </notebook>-->
+                </form>
+            </field>
+        </record>
+
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_accou_acco_acc">
+		<field name="name">cust_act_win_accou_acco_acc</field>
+		<field name="res_model">account.account</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_accou_acco_tree_v">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="custom_account_tree"/> 
+		<field name="act_window_id" ref="cust_act_win_accou_acco_acc"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_accou_acco_form_v">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="custom_account_form"/>
+		<field name="act_window_id" ref="cust_act_win_accou_acco_acc"/>
+	</record>
+
+
+	<menuitem
+		id="cust_menu_accou_acc"
+		name="Listado de cuentas" 		
+		parent="cust_menu_acc_root"
+		action="cust_act_win_accou_acco_acc"/>
+
+
+
+
+        <record id="cust_act_win_accou_acco_tree" model="ir.actions.act_window">
+            <field name="name">Plan Contable</field>
+            <field name="res_model">account.account</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="custom_account_tree"/>
+            <field name="domain">[('parent_id','=',False)]</field>
+        </record>
+	<menuitem 
+		id="cust_menu_accou_acc_tree"
+		parent="cust_menu_acc_root"
+		action="cust_act_win_accou_acco_tree"/>
+
+
+
+
+        <!--
+    Tax
+    -->
+        <record id="custom_tax_tree" model="ir.ui.view">
+            <field name="name">custom_tax_tree</field>
+            <field name="model">account.tax</field>
+            <field name="type">tree</field>
+            <field name="field_parent">child_ids</field>
+            <field name="arch" type="xml">
+                <tree string="Account Tax">
+                    <field name="name"/>
+                    <field name="price_include"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <record id="custom_tax_form" model="ir.ui.view">
+            <field name="name">custom_tax_form</field>
+            <field name="model">account.tax</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Account Tax">
+                    <group colspan="4" col="6">
+                        <field name="name" select="1"/>
+                        <field name="company_id"/>
+                        <field name="description" select="1"/>
+                        <field name="active" select="2"/>
+                        <field name="tax_group" select="1"/>
+                        <field name="type"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Tax Definition">
+                            <field name="applicable_type"/>
+                            <field name="amount" select="2" attrs="{'readonly':[('type','=','none'),('type','=','code')]}"/>
+                            <field groups="base.group_extended" name="include_base_amount"/>
+                            <field groups="base.group_extended" name="domain"/>
+                            <newline/>
+                            <field name="account_collected_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                            <label colspan="2" nolabel="1" string="Keep empty to use the income account"/>
+                            <field name="account_paid_id" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                            <label colspan="2" nolabel="1" string="Keep empty to use the expense account"/>
+                            <field groups="base.group_extended" name="child_depend"/>
+                            <field groups="base.group_extended" name="sequence"/>
+                            <field groups="base.group_extended" name="price_include"/>
+                            <field name="type_tax_use"/>
+                            <newline/>
+                            <field colspan="4" groups="base.group_extended" name="child_ids"/>
+                        </page>
+                        <page string="Tax Declaration">
+                            <separator colspan="4" string="Invoices"/>
+                            <field name="base_code_id"/>
+                            <field name="base_sign"/>
+                            <field name="tax_code_id"/>
+                            <field name="tax_sign"/>
+
+                            <separator colspan="4" string="Credit Notes"/>
+                            <field name="ref_base_code_id"/>
+                            <field name="ref_base_sign"/>
+                            <field name="ref_tax_code_id"/>
+                            <field name="ref_tax_sign"/>
+                        </page>
+                        <page groups="base.group_extended" string="Special Computation">
+                            <separator colspan="4" string="Compute Code (if type=code)"/>
+                            <field colspan="4" name="python_compute" nolabel="1" attrs="{'readonly':[('type','!=','code')]}"/>
+                            <separator colspan="4" string="Applicable Code (if type=code)"/>
+                            <field colspan="4" name="python_applicable" nolabel="1" attrs="{'readonly':[('applicable_type','=','true')]}"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record>
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_accou_acco_tax">
+		<field name="name">cust_act_win_accou_acco_tax</field>
+		<field name="res_model">account.tax</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_accou_tax_tree_v">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="custom_tax_tree"/> 
+		<field name="act_window_id" ref="cust_act_win_accou_acco_tax"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_accou_tax_form_v">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="custom_tax_form"/>
+		<field name="act_window_id" ref="cust_act_win_accou_acco_tax"/>
+	</record>
+
+
+	<menuitem
+		id="cust_menu_accou_tax"
+		name="Impuestos" 		
+		parent="cust_menu_acc_root"
+		action="cust_act_win_accou_acco_tax"/>
+
+
+
+
+
+    </data>
+</openerp>

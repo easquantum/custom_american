@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report id="report_islr"
+			name="islr"
+			string="Comprobante ISLR"
+			model="account.islr.tax"
+			rml="custom_american/islr/report/report_islr.rml"
+			header="False"
+			auto="False"/>	 
+
+		<report id="report_islr_arcv"
+			name="islr_arcv"
+			string="ISLR-ARCV"
+			model="account.islr.tax"
+			rml="custom_american/islr/report/islr_arcv.rml"
+			header="False"
+			auto="False"
+			menu="False"/>
+
+		<report id="report_islr_resumen"
+			name="islr_resumen"
+			string="ISLR Resumen"
+			model="account.islr.tax"
+			rml="custom_american/islr/report/report_resumen_islr.rml"
+			header="False"
+			auto="False"
+			menu="False"/>
+
+
+	</data>
+</openerp>

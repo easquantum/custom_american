@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- name: parametro con el cual es pasado el wizard en el py del directorio wizard --> 
+
+
+		<wizard 
+			string="Recepcion" 
+			multi="True"
+			model="stock.picking"
+			name="stock.back_order.partial_picking"
+			id="wizard_empaquetado" />
+
+		<wizard 
+			string="Crear Facturas" 
+			model="stock.picking"
+			name="stock.create_invoices_customers"
+			id="wizard_create_invoices_customers" />
+
+		<wizard 
+			string="Procesar Notas Salida" 
+			model="stock.picking"
+			name="partial_picking_out"
+			id="wizard_partial_picking_out" 
+			menu="False"/>
+	</data>
+</openerp>

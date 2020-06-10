@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu Wizard Stock
+	=======================
+	-->
+	
+	<!-- <menuitem  id="custom_menu_report_wizard" name="Reportes de Gestion" parent="stock.menu_stock_root" /> -->   
+	
+	<!--
+	=======================
+	Custom Wizard Stock 
+	=======================
+	-->
+
+		<wizard 
+			string="Rutas y Tarifas" 
+			model="guide.ruta" 
+			name="ruta_tarifas" 
+			id="wizard_ruta_tarifas"/> 
+			
+	
+	<!--
+	=======================
+	Custom Facturas
+	=======================
+	-->
+		<wizard 
+			string="Imprimir Guia" 
+			model="delivery.guide" 
+			name="guide_invoice_print"  
+			id="guide_invoice_print_wizard"/>
+
+		<wizard 
+			string="Imprimir G. Traspaso" 
+			model="delivery.guide" 
+			name="guide_picking_print"  
+			id="guide_picking_print_wizard"/>
+
+	
+	</data>
+</openerp> 

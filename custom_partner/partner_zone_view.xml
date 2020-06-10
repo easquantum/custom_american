@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	
+	<!--
+	=======================
+	Custom Partner Zone Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_partner_zone_tree">
+		<field name="name">partner.zone.tree</field>
+		<field name="model">res.partner.zone</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Zonas Clientes">
+				<field name="name" string="Zona" select="1"/>
+				<field name="code_zone" string="Codigo" select="1"/>
+				<field name="warehouse_id" string="Almacen"/>
+				<field name="type" string="Tipo"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_partner_zone_tree" model="ir.actions.act_window">
+            <field name="name">Zonas Clientes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.zone</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_partner_zone_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom Partner Zone Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_partner_zone_form">
+		<field name="name">partner.zone.form</field>
+		<field name="model">res.partner.zone</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Zonas Clientes">
+				<field name="name" string="Zona" select="1"/>
+				<field name="code_zone" string="Codigo" select="1"/>
+				<field name="parent_id" string="Zona Padre" select="1"/>
+				<field name="warehouse_id" string="Almacen"/> 
+				<field name="type" string="Tipo"/>
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_partner_zone_form" model="ir.actions.act_window">
+		<field name="name">Zonas Clientes</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">res.partner.zone</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_partner_zone_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_partner_zone_tree"/>
+		<field name="act_window_id" ref="action_partner_zone_form"/>
+	</record>
+	<record id="action_partner_zone_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_partner_zone_form"/>
+		<field name="act_window_id" ref="action_partner_zone_form"/>
+	</record>
+	
+	<menuitem name="Zonas Clientes" action="action_partner_zone_form" id="menu_partner_zone" parent="base.menu_localisation"/> 	
+</data>
+</openerp>	

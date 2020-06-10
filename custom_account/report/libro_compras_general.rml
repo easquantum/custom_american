@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(792.0,612.0)" title="Libro Compras" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+	<frame id="first" x1="57.0" y1="57.0" width="678" height="498"/>
+		<pageGraphics>
+			<setFont name="Helvetica-Bold" size="5"/>
+			<drawString x="14.0cm" y="1cm">Pag. <pageNumber/></drawString>
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau1"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>
+		<blockBackground colorName="#e6e6e6" start="6,0" stop="6,0"/>
+		<blockBackground colorName="#e6e6e6" start="7,0" stop="7,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau6">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+<paraStyle name="P2" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/>
+<paraStyle name="P3" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="14.0" leading="18" alignment="CENTER"/>
+<paraStyle name="P5" fontName="Times-Bold" fontSize="7.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P7" fontName="Times-Roman" fontSize="5.0" leading="8" alignment="LEFT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="16.0" leading="20"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="7.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Roman" fontSize="7.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P13" fontName="Times-Roman" fontSize="7.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="7.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P16" fontName="Times-Bold" fontSize="14.0" leading="18" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="P22" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P23" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P24" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="7.0" leading="9" alignment="RIGHT"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P27" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P28" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+<para style="P4"> LIBRO GENERAL DE COMPRAS   </para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+
+<para style="P2">[[ get_company()[0] ]] </para>
+<para style="P2">R.I.F. : [[ get_company()[1] ]] <font color="white"> .......... </font> NIT : [[ get_company()[2] ]]</para>
+<blockTable colWidths="200.0,200.0,280.0" style="Tableau3">
+	<tr>
+	<td> <para style="P2">Fecha Inicio:[[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date1'], '%Y-%m-%d')) ]] </para>	</td>
+	<td> <para style="P2">Fecha Fin:  [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date2'], '%Y-%m-%d')) ]] </para></td>
+	<td> <para style="P3"> Fecha Impresion: [[ get_today() ]]</para>  </td>
+	</tr>
+</blockTable>
+
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+
+<blockTable colWidths="20.0,45.0,50.0,165.0,30.0,45.0,45.0,45.0,65.0,40.0,50.0,20.0,50.0,50.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P5">Nro.</para></td>
+	<td><para style="P5">Fecha.</para></td>
+	<td><para style="P5">Nro. RIF</para></td>
+	<td><para style="P5">Nombre Proveedor</para></td>
+	<td><para style="P5">Tipo Doc.</para></td>	
+	<td><para style="P5">Nro. Fact N/C N/D</para></td>
+	<td><para style="P5">Factura Afectada</para></td>
+	<td><para style="P5">Nro Control</para></td>
+	<td><para style="P5">Total Compra incluye iva</para></td>
+	<td><para style="P5">Compra sin Derecho Credito iva</para></td>
+	<td><para style="P5">Base Imponible </para></td>
+	<td><para style="P5">% Alic. </para></td>
+	<td><para style="P5">Impuesto I.V.A </para></td>
+	<td><para style="P5">I.V.A Retenido</para></td>
+	</tr>
+	<tr><para style="P1">[[ repeatIn(get_libro_compras(data['form']),'s') ]]</para>
+	<td><para style="P12"> [[ s['cont'] ]] </para></td> 
+	<td><para style="P12">  [[ time.strftime('%d/%m/%Y', time.strptime(s['fecha'], '%Y-%m-%d')) ]]</para></td>
+	<td><para style="P12"> [[ s['rif'] ]] </para></td>
+	<td><para style="P7"> [[ s['proveedor'] ]] </para></td>
+	<td><para style="P12"> [[ s['tipo'] ]]</para></td>		
+	<td><para style="P12"> [[ s['nrodoc'] ]]</para></td>
+	<td><para style="P12"> [[ s['afect'] ]]</para></td>
+	<td><para style="P12"> [[ s['nrocont'] ]]</para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', s['total'], grouping=True) ]] </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', s['exento'], grouping=True) ]] </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', s['base'], grouping=True) ]] </para></td>
+	<td><para style="P12"> [[  locale.format('%.2f', s['alicuota'], grouping=True) ]] </para></td>
+	<td><para style="P14"> [[  locale.format('%.2f', s['iva'], grouping=True) ]] </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f',  s['ivaret'], grouping=True) ]] </para></td>
+	</tr>	
+</blockTable>
+
+<condPageBreak height="498"/>
+<blockTable colWidths="20.0,45.0,50.0,165.0,30.0,45.0,45.0,45.0,65.0,40.0,50.0,20.0,50.0,50.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P5">Nro.</para></td>
+	<td><para style="P5">Fecha.</para></td>
+	<td><para style="P5">Nro. RIF</para></td>
+	<td><para style="P5">Nombre Proveedor</para></td>
+	<td><para style="P5">Tipo Doc.</para></td>	
+	<td><para style="P5">Nro. Fact N/C N/D</para></td>
+	<td><para style="P5">Factura Afectada</para></td>
+	<td><para style="P5">Nro Control</para></td>
+	<td><para style="P5">Total Compra incluye iva</para></td>
+	<td><para style="P5">Compra sin Derecho Credito iva</para></td>
+	<td><para style="P5">Base Imponible </para></td>
+	<td><para style="P5">% Alic. </para></td>
+	<td><para style="P5">Impuesto I.V.A </para></td>
+	<td><para style="P5">I.V.A Retenido</para></td>
+	</tr>
+</blockTable> 
+<blockTable colWidths="445.0,65.0,40.0,50.0,20.0,50.0,50.0" repeatRows="1" style="Tableau7">	
+		<tr>
+		<td><para style="P15"> Totales : </para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_compra(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_exento(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_base(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P12">  </para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_iva(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P25"> [[ locale.format('%.2f',  get_totalgral_ivaret(), grouping=True, monetary=True) ]] </para></td>
+		</tr>
+</blockTable> 
+
+
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para> 
+
+<blockTable colWidths="220.0,100.0,20.0,100.0,20.0,100.0" repeatRows="1" style="Tableau7">
+		<tr>
+		<td><para style="P22"> </para></td>
+		<td><para style="P21"> Base Imponible</para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P21"> Credito Fiscal</para></td>				
+		<td><para style="P22"> </para></td>
+		<td><para style="P21"> IVA Retenido (a terceros)</para></td>
+		</tr>	
+	</blockTable>
+
+	<blockTable colWidths="220.0,100.0,20.0,100.0,20.0,100.0" repeatRows="1" style="Tableau7">
+		<tr> <para style="P22"> [[ repeatIn(get_datos_tax(),'t') ]]  </para>
+		<td><para style="P22"> Sumatoria Compra Alicuota General  [[  t['tax'] ]]  %</para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', t['totalbase'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P25"> [[  locale.format('%.2f', t['totaltax'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15">  </para></td>
+		<td><para style="P25"> [[  locale.format('%.2f', t['totalret'], grouping=True, monetary=True) ]] </para></td>
+		</tr>							
+	</blockTable>
+
+	<blockTable colWidths="220.0,100.0,20.0,100.0,20.0,100.0" repeatRows="1" style="Tableau7">
+		<tr> <para style="P22"> [[ repeatIn(get_datos_nctax(),'t') ]] </para>
+		<td><para style="P22"> Sumatoria Notas Credito Alicuota  [[  t['tax'] ]] %</para></td> 
+		<td><para style="P25">  [[ locale.format('%.2f', t['totalbase'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P25">  [[  locale.format('%.2f', t['totaltax'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15">  </para></td>
+		<td><para style="P25">  [[  locale.format('%.2f', t['totalret'], grouping=True, monetary=True) ]] </para></td>
+		</tr>							
+	</blockTable>	
+	
+	<blockTable colWidths="220.0,100.0,20.0,100.0,20.0,100.0" repeatRows="1" style="Tableau7">
+		<tr>
+		<td><para style="P21">Total Creditos Fiscales del Periodo</para></td>
+		<td><para style="P28"> [[ locale.format('%.2f', get_totalgral_base(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P28"> [[ locale.format('%.2f', get_totalgral_iva(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P28"> [[ locale.format('%.2f', get_totalgral_ivaret(), grouping=True, monetary=True) ]]</para></td>
+		</tr>							
+	</blockTable>
+
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<blockTable colWidths="220.0,100.0,20.0,100.0,20.0,100.0" repeatRows="1" style="Tableau7">
+		<tr>
+		<td><para style="P22">Sumatoria Compra Exentas y/o  sin Derecho Credito Fiscal</para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', get_totalgral_exento() + get_totalgralnc_exento(), grouping=True, monetary=True) ]]  </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		</tr>
+		<tr>
+		<td><para style="P22">Sumatoria Notas Credito Exentas y/o  sin Derecho Credito Fiscal</para></td>
+		<td><para style="P25"> [[ locale.format('%.2f', get_totalgralnc_exento(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		</tr>
+		<tr>
+		<td><para style="P21">Total Compra Exentas y/o  sin Derecho Credito Fiscal</para></td>
+		<td><para style="P28"> [[ locale.format('%.2f', get_totalgral_exento(), grouping=True, monetary=True) ]]  </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P22"> </para></td>
+		</tr>
+	</blockTable>
+	
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<blockTable colWidths="220.0,100.0,20.0,100.0,20.0,100.0" repeatRows="1" style="Tableau7">
+		<tr>
+		<td><para style="P21">Total Compras y Creditos Fiscales del Periodo</para></td>
+		<td><para style="P28"> [[ locale.format('%.2f', get_totalgral_base() + get_totalgral_exento(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P28"> </para></td>
+		<td><para style="P22"> </para></td>
+		<td><para style="P28"> </para></td>
+		</tr>
+</blockTable>
+
+</story>
+</document>

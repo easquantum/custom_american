@@ -1,0 +1,19 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_cust_product_uom_categ_manager","custom_product.uom.categ manager","product.model_product_uom_categ","group_cust_product_manager",1,1,1,1
+"access_cust_product_uom_manager","custom_product.uom manager","product.model_product_uom","group_cust_product_manager",1,1,1,1
+"access_cust_product_ul_manager","custom_product.ul manager","product.model_product_ul","group_cust_product_manager",1,1,1,1
+"access_cust_product_category_manager","custom_product.category manager","product.model_product_category","group_cust_product_manager",1,1,1,1
+"access_cust_product_template_manager","custom_product.template manager","product.model_product_template","group_cust_product_manager",1,1,1,1
+"access_cust_product_product_manager","custom_product.product manager","product.model_product_product","group_cust_product_manager",1,1,1,1
+"access_cust_product_packaging_manager","custom_product.packaging manager","product.model_product_packaging","group_cust_product_manager",1,1,1,1
+"access_cust_product_supplierinfo_manager","custom_product.supplierinfo manager","product.model_product_supplierinfo","group_cust_product_manager",1,1,1,1
+"access_cust_pricelist_partnerinfo_manager","cust_pricelist.partnerinfo manager","product.model_pricelist_partnerinfo","group_cust_product_manager",1,1,1,1
+"access_cust_product_price_type_manager","custom_product.price.type manager","product.model_product_price_type","group_cust_product_manager",1,1,1,1
+"access_cust_product_pricelist_type_manager","custom_product.pricelist.type manager","product.model_product_pricelist_type","group_cust_product_manager",1,1,1,1
+"access_cust_product_pricelist_manager","custom_product.pricelist manager","product.model_product_pricelist","group_cust_product_manager",1,1,1,1
+"access_cust_product_pricelist_version_manager","custom_product.pricelist.version manager","product.model_product_pricelist_version","group_cust_product_manager",1,1,1,1
+"access_cust_product_pricelist_item_manager","custom_product.pricelist.item manager","product.model_product_pricelist_item","group_cust_product_manager",1,1,1,1
+"access_ir_property_group_cust_product_manager","ir_property group_cust_product_manager","base.model_ir_property","group_cust_product_manager",1,1,1,1
+"access_cust_account_account_product_manager","custom_product.account product manager","account.model_account_account","group_cust_product_manager",1,0,0,0
+"access_cust_account_journal_product_manager","custom_product.journal product manager","account.model_account_journal","group_cust_product_manager",1,0,0,0
+"access_cust_stock_location_product_manager","custom_product.location product manager","stock.model_stock_location","group_cust_product_manager",1,0,0,0

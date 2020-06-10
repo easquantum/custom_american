@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Menu Credit Collection
+	=======================
+	-->
+	<menuitem icon="terp-purchase" id="menu_credit_collection_root" name="Credito Cobranza" />
+	<menuitem  id="custom_menu_fletes" name="Fletes" parent="menu_credit_collection_root" />
+
+	<!--
+	=======================
+	Custom Fletes Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_liquidation_tree">
+		<field name="name">liquidation.tree</field>
+		<field name="model">liquidation.shipping</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Liquidacion Fletes">
+				<field name="name" string="Flete Nro." select="1"/>
+				<field name="guide_id" string="Guia Nro" select="1"/>
+				<field name="date_liquidation" string="Fecha" select="2"/>
+				<field name="carrier_company_id" string="Transportista" select="1"/>
+				<field name="state" string="Estatus"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_liquidation_tree" model="ir.actions.act_window">
+            <field name="name">Liquidacion Fletes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">liquidation.shipping</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_liquidation_tree"/> 
+    </record>
+    
+
+	<!--
+	=======================
+	Custom Fletes Form
+	=======================
+	-->
+	
+	
+	<record model="ir.ui.view" id="view_liquidation_form">
+		<field name="name">liquidation.form</field>
+		<field name="model">liquidation.shipping</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Liquidacion Fletes">
+				<field name="name" select="1" string="Flete Nro."/>	
+				<group colspan="2" col="4">										
+					<field name="liquidation_esp" string="Liquidacion Especial" />
+					<field name="liquidation_manual" string="Liquidacion Manual"/>
+				</group>
+				<field name="date_liquidation" string="Fecha"/>				
+				<field name="guide_id" select="1" on_change="guide_change(guide_id)" string="Guia Nro." domain="[('state','=','done'),('paid','=',0),('warehouse_id','=',warehouse_id)]"/>
+				<field name="number" string="Factura Nro."/> 
+				<notebook colspan="4">
+					<page string="Informacion">
+						<field name="carrier_company_id" string="Transportista" attrs="{'readonly':[('state','!=','except')]}"/>
+						<field name="driver_id" domain="[('parent_id','=',carrier_company_id)]" string="Chofer" attrs="{'readonly':[('state','!=','except')]}"/>		
+						<field name="warehouse_id" string="Almacen" attrs="{'readonly':[('state','!=','except')]}"/>
+						<field name="vehiculo_id" string="Vehiculo" attrs="{'readonly':[('state','!=','except')]}"/>
+						<field name="ruta_id" string="Ruta" attrs="{'readonly':[('state','!=','except')]}"/>
+						<field name="base_amount" string="Total Flete"/>
+						<field name="extra_amount" string="Monto Reconocido"/>
+						<field name="manual_amount" string="Monto Manual"/>
+						<label colspan="2"/>	
+						<group colspan="2" col="4">
+							<label colspan="2"/>	
+							<button name="button_compute_shipping" string="Calcular Flete de Facturas" states="draft,denied" type="object" />
+							<button name="button_compute_shipping_tras" string="Calcular Flete de Traspaso" states="draft,denied" type="object" />
+						</group>
+						<field name="liquidation_line"  nolabel="1" colspan="4">
+							<tree string="Notas de Credito">
+								<field name="name" string="Factura Nro."/>
+								<field name="sale_order" string="Pedido Nro."/>
+								<field name="invoice_id" domain="[('type','=','out_refund')]" string="Notas de Credito Nro."/>
+								<field name="liquidation_esp" string="Devolucion Reconocida"/>		 				
+							</tree>
+							<form string="Notas de Credito">
+								<field name="name" string="Factura Nro."/>
+								<field name="sale_order" string="Pedido Nro."/>
+								<field name="invoice_id" string="Notas de Credito Nro." on_change="liquidation_id_change(invoice_id)"  domain="[('type','=','out_refund')]"/>
+								<field name="liquidation_esp" string="Devolucion Reconocida"/>	
+							</form>						
+						</field>						
+						<field name="state" string="Estats"/>
+												
+						<group colspan="2" col="5">
+							<button name="liquidation_confirm" states="draft" string="Confirmar"/>
+							<button name="liquidation_denied" states="confirmed" string="Rechazar"	/>
+							<button name="liquidation_approved" states="confirmed" string="Aprobar"	/>
+							<button name="liquidation_cancel" states="confirmed" string="Cancelar"/>
+							<button name="liquidation_reconfirmed" states="denied" string="Confirmar"/>
+							<button name="liquidation_done" states="approved" string="Pagar"/>
+						</group>
+					</page>
+					<page string="Fletes">
+						<field name="liquidation_fletes"  nolabel="1" colspan="4">
+							<tree string="Tarifas">
+								<field name="id_flete" string="Categoria"/>
+								<field name="quantity" string="Cantidad"/>
+								<field name="price" string="Tarifa"/>		 				
+							</tree>
+							<form string="Tarifas">
+								<field name="name" string="Descripcion"/>
+								<field name="id_flete" string="Categoria"/>
+								<field name="quantity" string="Cantidad"/>
+								<field name="price" string="Tarifa"/>		 				
+							</form>
+						</field>						
+					</page>
+					<page string="Observaciones">
+						<separator string="Notas" colspan="4"/>	
+						<field name="notes"  nolabel="1" colspan="4"/>
+						<separator string="Notas de Rechazo" colspan="4"/>
+						<field name="comment"  nolabel="1" colspan="4"/>
+						<separator string="Descripcion " colspan="4"/>
+						<field name="comment_manual"  nolabel="1" colspan="4"/>						
+					</page>					
+				</notebook>		
+			</form>
+		</field>
+	</record>
+	
+	<record id="action_liquidation_form" model="ir.actions.act_window">
+		<field name="name">Todos los Fletes</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_liquidation_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_form"/> 
+	</record>
+	<record id="action_liquidation_view2" model="ir.actions.act_window.view"> 
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_form"/> 
+	</record>
+	
+	<menuitem name="Todos los Fletes" action="action_liquidation_form" id="menu_liquidation_all" parent="custom_menu_fletes"/>  	
+
+	<!-- 
+	=====================================================
+	Fletes  - Caracas
+	=====================================================
+	-->
+    <menuitem id="cust_menu_liquidation_car" name="Caracas" parent="custom_menu_fletes"/>
+
+	<record id="action_liquidation_draf_car_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pendientes (C)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('warehouse_id','=',1)]</field>
+	</record>
+	<record id="action_liquidation_draf_car_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_draf_car_form"/> 
+	</record>
+	<record id="action_liquidation_draf_car_view2" model="ir.actions.act_window.view">  
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_draf_car_form"/> 
+	</record>
+	
+	<menuitem name="Fletes Pendientes (C)" action="action_liquidation_draf_car_form" id="menu_liquidation_draft" parent="cust_menu_liquidation_car"/>  	
+
+	<record id="action_liquidation_confir_car_form" model="ir.actions.act_window">
+		<field name="name">Fletes Confirmados (C)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','confirmed'),('warehouse_id','=',1)]</field>
+	</record>
+	<record id="action_liquidation_confir_car_view1" model="ir.actions.act_window.view">
+		<field eval="12" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_confir_car_form"/> 
+	</record>
+	<record id="action_liquidation_confir_car_view2" model="ir.actions.act_window.view"> 
+		<field eval="22" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_confir_car_form"/> 
+	</record>
+	
+	<menuitem name="Fletes Confirmados (C)" action="action_liquidation_confir_car_form" id="menu_liquidation_confirmed" parent="cust_menu_liquidation_car"/>  	
+
+	<record id="action_liquidation_denied_car_form" model="ir.actions.act_window">
+		<field name="name">Fletes Rechazado (C)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','denied'),('warehouse_id','=',1)]</field>
+	</record>
+	<record id="action_liquidation_denied_car_view1" model="ir.actions.act_window.view">
+		<field eval="13" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_denied_car_form"/> 
+	</record>
+	<record id="action_liquidation_denied_car_view2" model="ir.actions.act_window.view"> 
+		<field eval="23" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_denied_car_form"/> 
+	</record>
+	<menuitem name="Fletes Rechazado (C)" action="action_liquidation_denied_car_form" id="menu_liquidation_denied" parent="cust_menu_liquidation_car"/>  	
+
+
+
+	<record id="action_liquidation_approved_car_form" model="ir.actions.act_window">
+		<field name="name">Fletes Aprobados (C)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','approved'),('warehouse_id','=',1)]</field>
+	</record>
+	<record id="action_liquidation_approved_car_view1" model="ir.actions.act_window.view">
+		<field eval="14" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_approved_car_form"/> 
+	</record>
+	<record id="action_liquidation_approved_car_view2" model="ir.actions.act_window.view"> 
+		<field eval="24" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_approved_car_form"/> 
+	</record>
+	<menuitem name="Fletes Aprobados (C)" action="action_liquidation_approved_car_form" id="menu_liquidation_approved" parent="cust_menu_liquidation_car"/>  	
+
+
+	<record id="action_liquidation_done_car_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pagados (C)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','done'),('warehouse_id','=',1)]</field>
+	</record>
+	<record id="action_liquidation_done_car_view1" model="ir.actions.act_window.view">
+		<field eval="14" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_done_car_form"/> 
+	</record>
+	<record id="action_liquidation_done_car_view2" model="ir.actions.act_window.view"> 
+		<field eval="24" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_done_car_form"/> 
+	</record>
+	<menuitem name="Fletes Pagados (C)" action="action_liquidation_done_car_form" id="menu_liquidation_done" parent="cust_menu_liquidation_car"/>  	
+
+	<!-- 
+	=======================================================================================
+	Fletes  - Maracaibo
+	=======================================================================================
+	-->
+    <menuitem id="cust_menu_liquidation_mar" name="Maracaibo" parent="custom_menu_fletes"/> 
+
+	<record id="action_liquidation_draf_mar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pendientes (O)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('warehouse_id','=',3)]</field>
+	</record>
+	<record id="action_liquidation_draf_mar_view1" model="ir.actions.act_window.view">
+		<field eval="15" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_draf_mar_form"/> 
+	</record>
+	<record id="action_liquidation_draf_mar_view2" model="ir.actions.act_window.view">  
+		<field eval="25" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_draf_mar_form"/> 
+	</record>
+	<menuitem name="Fletes Pendientes (O)" action="action_liquidation_draf_mar_form" id="menu_liquidation_draft_mar" parent="cust_menu_liquidation_mar"/>  	
+
+	<record id="action_liquidation_confir_mar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Confirmados (O)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','confirmed'),('warehouse_id','=',3)]</field>
+	</record>
+	<record id="action_liquidation_confir_mar_view1" model="ir.actions.act_window.view">
+		<field eval="16" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_confir_mar_form"/> 
+	</record>
+	<record id="action_liquidation_confir_mar_view2" model="ir.actions.act_window.view"> 
+		<field eval="26" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_confir_mar_form"/> 
+	</record>
+	<menuitem name="Fletes Confirmados (O)" action="action_liquidation_confir_mar_form" id="menu_liquidation_confirmed_mar" parent="cust_menu_liquidation_mar"/>  	
+
+	<record id="action_liquidation_denied_mar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Rechazado (O)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','denied'),('warehouse_id','=',3)]</field>
+	</record>
+	<record id="action_liquidation_denied_mar_view1" model="ir.actions.act_window.view">
+		<field eval="17" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_denied_mar_form"/> 
+	</record>
+	<record id="action_liquidation_denied_mar_view2" model="ir.actions.act_window.view"> 
+		<field eval="27" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_denied_mar_form"/> 
+	</record>
+	<menuitem name="Fletes Rechazado (O)" action="action_liquidation_denied_mar_form" id="menu_liquidation_denied_mar" parent="cust_menu_liquidation_mar"/>  	
+
+	<record id="action_liquidation_approved_mar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Aprobados (O)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','approved'),('warehouse_id','=',3)]</field>
+	</record>
+	<record id="action_liquidation_approved_mar_view1" model="ir.actions.act_window.view">
+		<field eval="18" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_approved_mar_form"/> 
+	</record>
+	<record id="action_liquidation_approved_mar_view2" model="ir.actions.act_window.view"> 
+		<field eval="28" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_approved_mar_form"/> 
+	</record>
+	<menuitem name="Fletes Aprobados (O)" action="action_liquidation_approved_mar_form" id="menu_liquidation_approved_mar" parent="cust_menu_liquidation_mar"/>  	
+
+	<record id="action_liquidation_done_mar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pagados (O)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','done'),('warehouse_id','=',3)]</field>
+	</record>
+	<record id="action_liquidation_done_mar_view1" model="ir.actions.act_window.view">
+		<field eval="18" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_done_mar_form"/> 
+	</record>
+	<record id="action_liquidation_done_mar_view2" model="ir.actions.act_window.view"> 
+		<field eval="28" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_done_mar_form"/> 
+	</record>
+	<menuitem name="Fletes Pagados (O)" action="action_liquidation_done_mar_form" id="menu_liquidation_done_mar" parent="cust_menu_liquidation_mar"/>  	
+
+
+	<!-- 
+	=======================================================================================
+	Fletes  - Turmero
+	=======================================================================================
+	-->
+    <menuitem id="cust_menu_liquidation_tur" name="Turmero" parent="custom_menu_fletes"/>
+
+	<record id="action_liquidation_draf_tur_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pendientes (T)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('warehouse_id','=',2)]</field>
+	</record>
+	<record id="action_liquidation_draf_tur_view1" model="ir.actions.act_window.view">
+		<field eval="19" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_draf_tur_form"/> 
+	</record>
+	<record id="action_liquidation_draf_tur_view2" model="ir.actions.act_window.view">  
+		<field eval="29" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_draf_tur_form"/> 
+	</record>
+	<menuitem name="Fletes Pendientes (T)" action="action_liquidation_draf_tur_form" id="menu_liquidation_draft_tur" parent="cust_menu_liquidation_tur"/>  	
+
+	<record id="action_liquidation_confir_tur_form" model="ir.actions.act_window">
+		<field name="name">Fletes Confirmados (T)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','confirmed'),('warehouse_id','=',2)]</field>
+	</record>
+	<record id="action_liquidation_confir_tur_view1" model="ir.actions.act_window.view">
+		<field eval="30" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_confir_tur_form"/> 
+	</record>
+	<record id="action_liquidation_confir_tur_view2" model="ir.actions.act_window.view"> 
+		<field eval="31" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_confir_tur_form"/> 
+	</record>
+	<menuitem name="Fletes Confirmados (T)" action="action_liquidation_confir_tur_form" id="menu_liquidation_confirmed_tur" parent="cust_menu_liquidation_tur"/>  	
+
+	<record id="action_liquidation_denied_tur_form" model="ir.actions.act_window">
+		<field name="name">Fletes Rechazado (T)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','denied'),('warehouse_id','=',2)]</field>
+	</record>
+	<record id="action_liquidation_denied_tur_view1" model="ir.actions.act_window.view">
+		<field eval="32" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_denied_tur_form"/> 
+	</record>
+	<record id="action_liquidation_denied_tur_view2" model="ir.actions.act_window.view"> 
+		<field eval="33" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_denied_tur_form"/> 
+	</record>
+	<menuitem name="Fletes Rechazado (T)" action="action_liquidation_denied_tur_form" id="menu_liquidation_denied_tur" parent="cust_menu_liquidation_tur"/>  	
+
+	<record id="action_liquidation_approved_tur_form" model="ir.actions.act_window">
+		<field name="name">Fletes Aprobados (T)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','approved'),('warehouse_id','=',2)]</field>
+	</record>
+	<record id="action_liquidation_approved_tur_view1" model="ir.actions.act_window.view">
+		<field eval="34" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_approved_tur_form"/> 
+	</record>
+	<record id="action_liquidation_approved_tur_view2" model="ir.actions.act_window.view"> 
+		<field eval="35" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_approved_tur_form"/> 
+	</record>
+	<menuitem name="Fletes Aprobados (T)" action="action_liquidation_approved_tur_form" id="menu_liquidation_approved_tur" parent="cust_menu_liquidation_tur"/>  	
+
+	<record id="action_liquidation_done_tur_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pagados (T)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','done'),('warehouse_id','=',2)]</field>
+	</record>
+	<record id="action_liquidation_done_tur_view1" model="ir.actions.act_window.view">
+		<field eval="34" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_done_tur_form"/> 
+	</record>
+	<record id="action_liquidation_done_tur_view2" model="ir.actions.act_window.view"> 
+		<field eval="35" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_done_tur_form"/> 
+	</record>
+	<menuitem name="Fletes Pagados (T)" action="action_liquidation_done_tur_form" id="menu_liquidation_done_tur" parent="cust_menu_liquidation_tur"/>  	
+
+	<!-- 
+	=======================================================================================
+	Fletes  - Barcelona
+	=======================================================================================
+	-->
+    <menuitem id="cust_menu_liquidation_bar" name="Barcelona" parent="custom_menu_fletes"/>
+    
+	<record id="action_liquidation_draf_bar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pendientes (B)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('warehouse_id','=',4)]</field>
+	</record>
+	<record id="action_liquidation_draf_bar_view1" model="ir.actions.act_window.view">
+		<field eval="36" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_draf_bar_form"/> 
+	</record>
+	<record id="action_liquidation_draf_bar_view2" model="ir.actions.act_window.view">  
+		<field eval="37" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_draf_bar_form"/> 
+	</record>
+	<menuitem name="Fletes Pendientes (B)" action="action_liquidation_draf_bar_form" id="menu_liquidation_draft_bar" parent="cust_menu_liquidation_bar"/>  	
+
+	<record id="action_liquidation_confir_bar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Confirmados (B)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','confirmed'),('warehouse_id','=',4)]</field>
+	</record>
+	<record id="action_liquidation_confir_bar_view1" model="ir.actions.act_window.view">
+		<field eval="38" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_confir_bar_form"/> 
+	</record>
+	<record id="action_liquidation_confir_bar_view2" model="ir.actions.act_window.view"> 
+		<field eval="39" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_confir_bar_form"/> 
+	</record>
+	<menuitem name="Fletes Confirmados (B)" action="action_liquidation_confir_bar_form" id="menu_liquidation_confirmed_bar" parent="cust_menu_liquidation_bar"/>  	
+
+	<record id="action_liquidation_denied_bar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Rechazado (B)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','denied'),('warehouse_id','=',4)]</field>
+	</record>
+	<record id="action_liquidation_denied_bar_view1" model="ir.actions.act_window.view">
+		<field eval="40" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_denied_bar_form"/> 
+	</record>
+	<record id="action_liquidation_denied_bar_view2" model="ir.actions.act_window.view"> 
+		<field eval="41" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_denied_bar_form"/> 
+	</record>
+	<menuitem name="Fletes Rechazado (B)" action="action_liquidation_denied_bar_form" id="menu_liquidation_denied_bar" parent="cust_menu_liquidation_bar"/>  	
+
+	<record id="action_liquidation_approved_bar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Aprobados (B)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','approved'),('warehouse_id','=',4)]</field>
+	</record>
+	<record id="action_liquidation_approved_bar_view1" model="ir.actions.act_window.view">
+		<field eval="18" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_approved_bar_form"/> 
+	</record>
+	<record id="action_liquidation_approved_bar_view2" model="ir.actions.act_window.view"> 
+		<field eval="28" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_approved_bar_form"/> 
+	</record>
+	<menuitem name="Fletes Aprobados (B)" action="action_liquidation_approved_bar_form" id="menu_liquidation_approved_bar" parent="cust_menu_liquidation_bar"/>  	
+
+	<record id="action_liquidation_done_bar_form" model="ir.actions.act_window">
+		<field name="name">Fletes Pagados (B)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">liquidation.shipping</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','done'),('warehouse_id','=',4)]</field>
+	</record>
+	<record id="action_liquidation_done_bar_view1" model="ir.actions.act_window.view">
+		<field eval="18" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_liquidation_tree"/>
+		<field name="act_window_id" ref="action_liquidation_done_bar_form"/> 
+	</record>
+	<record id="action_liquidation_done_bar_view2" model="ir.actions.act_window.view"> 
+		<field eval="28" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_liquidation_form"/>
+		<field name="act_window_id" ref="action_liquidation_done_bar_form"/> 
+	</record>
+	<menuitem name="Fletes Pagados (B)" action="action_liquidation_done_bar_form" id="menu_liquidation_done_bar" parent="cust_menu_liquidation_bar"/>  	
+
+	<!-- 
+	=======================================================================================
+	Fletes  - Puerto Ordaz
+	=======================================================================================
+	-->
+    <menuitem id="menu_liquidation_shipping_pto" name="Puerto Ordaz" parent="custom_menu_fletes"/>
+
+
+    <record  model="ir.actions.act_window" id="act_liquidation_shipping_pto_draft"> 
+      <field name="name"> Fletes Pendientes (P) </field> 
+      <field name="res_model">liquidation.shipping</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('state','=','draft')]</field> 
+      <field name="context"> {'state' : 'draft'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_liquidation_shipping_pto_draft"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_liquidation_tree"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_draft"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_liquidation_shipping_pto_draft"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_liquidation_form"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_draft"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_liquidation_shipping_pto_draft" 
+    	action="act_liquidation_shipping_pto_draft" 
+    	parent="menu_liquidation_shipping_pto"
+        name="Fletes Pendientes (P)"/>
+        
+
+    <record  model="ir.actions.act_window" id="act_liquidation_shipping_pto_confirmed"> 
+      <field name="name"> Fletes Confirmados (P) </field> 
+      <field name="res_model">liquidation.shipping</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('state','=','confirmed')]</field> 
+      <field name="context"> {'state' : 'confirmed'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_liquidation_shipping_pto_confirmed"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_liquidation_tree"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_confirmed"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_liquidation_shipping_pto_confirmed"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_liquidation_form"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_confirmed"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_liquidation_shipping_pto_confirmed" 
+    	action="act_liquidation_shipping_pto_confirmed" 
+    	parent="menu_liquidation_shipping_pto"
+        name="Fletes Confirmados (P)"/>
+
+
+    <record  model="ir.actions.act_window" id="act_liquidation_shipping_pto_denied"> 
+      <field name="name"> Fletes Rechazados (P) </field> 
+      <field name="res_model">liquidation.shipping</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('state','=','denied')]</field> 
+      <field name="context"> {'state' : 'denied'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_liquidation_shipping_pto_denied"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_liquidation_tree"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_denied"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_liquidation_shipping_pto_denied"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_liquidation_form"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_denied"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_liquidation_shipping_pto_denied" 
+    	action="act_liquidation_shipping_pto_denied" 
+    	parent="menu_liquidation_shipping_pto"
+        name="Fletes Rechazados (P)"/>
+
+
+    <record  model="ir.actions.act_window" id="act_liquidation_shipping_pto_approved"> 
+      <field name="name"> Fletes Aprobados (P) </field> 
+      <field name="res_model">liquidation.shipping</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('state','=','approved')]</field> 
+      <field name="context"> {'state' : 'approved'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_liquidation_shipping_pto_approved"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_liquidation_tree"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_approved"/> 
+    </record> 
+    
+    <record model="ir.actions.act_window.view" id="act_vform_liquidation_shipping_pto_approved"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_liquidation_form"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_approved"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_liquidation_shipping_pto_approved" 
+    	action="act_liquidation_shipping_pto_approved" 
+    	parent="menu_liquidation_shipping_pto"
+        name="Fletes Aprobados (P)"/>
+
+    <record  model="ir.actions.act_window" id="act_liquidation_shipping_pto_done"> 
+      <field name="name"> Fletes Pagados (P) </field> 
+      <field name="res_model">liquidation.shipping</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('state','=','done')]</field> 
+      <field name="context"> {'state' : 'done'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_liquidation_shipping_pto_done"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_liquidation_tree"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_done"/> 
+    </record> 
+    
+    <record model="ir.actions.act_window.view" id="act_vform_liquidation_shipping_pto_done"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_liquidation_form"/> 
+    <field name="act_window_id" ref="act_liquidation_shipping_pto_done"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_liquidation_shipping_pto_done" 
+    	action="act_liquidation_shipping_pto_done" 
+    	parent="menu_liquidation_shipping_pto"
+        name="Fletes Pagados (P)"/>
+
+</data>
+</openerp>

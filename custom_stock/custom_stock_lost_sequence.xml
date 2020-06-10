@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data >
+	<!--
+	Sequences for packing Lost noupdate="1"
+	-->
+
+	<record model="ir.sequence.type" id="seq_type_picking_internal_lost">
+		<field name="name">Perdidas Inventario</field>
+		<field name="code">stock.picking.internal_lost</field>
+	</record>
+
+	<record model="ir.sequence" id="seq_picking_internal_lost">
+		<field name="name">Perdidas Inventario</field>
+		<field name="code">stock.picking.internal_lost</field>
+		<field name="prefix">PERD:</field>
+		<field name="padding">4</field>
+	</record>
+
+</data>
+</openerp>
+

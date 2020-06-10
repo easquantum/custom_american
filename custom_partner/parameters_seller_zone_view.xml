@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	
+	<!--
+	====================================
+	Custom Parameters Seller Zone Tree
+	====================================
+	-->
+	<record model="ir.ui.view" id="view_parameters_seller_zone_tree">
+		<field name="name">parameters.seller.zone.tree</field>
+		<field name="model">parameters.seller.zone</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Parametros Zona del Vendedor">
+			    <field name="zone_id" string="Zona" select="1"/>
+			    <field name="seller_id" string="Vendedor" select="1"/>
+				<field name="name" string="Descripcion" select="1"/>
+				<field name="year_id" string="Periodo Comisiones" select="1"/>
+				<field name="active" string="Activo" select="2"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_parameters_seller_zone_tree" model="ir.actions.act_window">
+            <field name="name">Parametros Zona del Vendedor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">parameters.seller.zone</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_parameters_seller_zone_tree"/>
+    </record>
+
+
+	<!--
+	====================================
+	Custom Parameters Seller Zone Form
+	====================================
+	-->
+	<record model="ir.ui.view" id="view_parameters_seller_zone_form">
+		<field name="name">parameters.seller.zone.form</field>
+		<field name="model">parameters.seller.zone</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Parametros Zona del Vendedor">
+                    <group colspan="4" col="6">
+                    <field name="zone_id" string="Zona" select="1"/>
+                    <field name="seller_id" string="Vendedor" select="1"/>
+                    <field name="active" string="Activo" select="2"/>
+                    <field name="year_id" string="Periodo Comisiones" select="1" domain="[('state','=','draft')]"/>
+                    <field name="name" string="Descripcion" select="1"/>
+                    <newline/>
+                    </group>
+                    <group col="6" colspan="4">
+                    <separator string="Montos" colspan="2"/>
+                    <separator string="Valores" colspan="2"/>
+                    <separator string="Porcentaje" colspan="2"/>
+                    <field name="amount_cash"  string="Contado"/>
+                    <field name="value_cash"  string="Valor Contado"/>
+                    <field name="percent_min"  string="Porcentaje Min."/>
+                    <field name="amount_total"  string="Despachado"/>
+                    <field name="value_total"  string="Valor Total"/>
+                    <field name="percent_max"  string="Porcentaje Max."/>
+                    </group>
+                    <newline/>
+                    <field colspan="4" name="parameters_line" nolabel="1" string="Lineas de Parametros" >
+                        <form string="Parametros Configuracion">
+                            <field name="name"  string="Descripcion"/>
+                            <field name="categ_salesman_id"  string="Grupo"/> 
+                            <field name="quota_qty" string="Cantidad Cajas"/>
+                            <field name="quota_amount" string="Monto"/>
+                            <field name="min"  string="Minimo"/>
+                            <field name="max"  string="Maximo"/>	                                                                        
+                        </form>
+                        <tree string="Parametros Configuracion" editable="bottom">
+                            <field name="categ_salesman_id"  string="Grupo"/>
+                            <field name="name"  string="Descripcion"/>
+                            <field name="quota_qty" string="Cantidad Cajas"/>
+                            <field name="quota_amount" string="Monto"/>
+                            <field name="min"  string="Minimo"/>
+                            <field name="max"  string="Maximo"/>
+                            
+                        </tree>                            
+                    </field>
+                    <newline/>
+                    <group col="4" colspan="4"> 
+                    <label colspan="3" string=" "/>                 
+                    <button colspan="1" name="button_assigned_groups" string="Asignar Grupos" type="object"/>
+                    </group>
+                </form>
+            </field>
+	</record>                
+	
+	<record id="act_parameters_seller_zone_form" model="ir.actions.act_window">
+		<field name="name">Parametros Zona del Vendedor</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">parameters.seller.zone</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="act_parameters_seller_zone_vwtr" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_parameters_seller_zone_tree"/>
+		<field name="act_window_id" ref="act_parameters_seller_zone_form"/>
+	</record>
+	<record id="act_parameters_seller_zone_vwfr" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_parameters_seller_zone_form"/>
+		<field name="act_window_id" ref="act_parameters_seller_zone_form"/>
+	</record>
+	
+	<menuitem name="Parametros Zona del Vendedor" action="act_parameters_seller_zone_form" id="menu_parameters_seller_zone" parent="base.menu_base_config"/>  	
+</data>
+</openerp>	

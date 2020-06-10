@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	==============================================
+	Custom Invoice Customer refund Debito Adjusment Tree:
+	==============================================
+	-->
+	<record model="ir.ui.view" id="view_refund_credit_in_ajus_tree">
+		<field name="name">customer.refund.credit.in.aj.tree</field>
+		<field name="model">account.invoice</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="69"/>
+		<field name="arch" type="xml">
+			<tree string="Notas Debito Ajustes">					
+					<field name="name"		string="Nota Nro." select="1"/>
+					<field name="reference"		string="Factura Nro" select="2" />
+					<field name="partner_id" 	string="Proveedor" select="1"/>
+					<field name="date_invoice"	string="Fecha" select="2"/>					
+					<field name="amount_total"	string="Total" sum="TOTAL"/>	
+					<field name="residual"		string="Pendiente" sum="TOTAL PENDIENTE"/>					
+					<field name="state"		string="Estatus" select="2"/>								
+			</tree>
+		</field>
+	</record>
+
+    <record id="act_refund_credit_in_aj_tree" model="ir.actions.act_window">
+            <field name="name">Notas Debito Ajustes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_refund_credit_in_ajus_tree"/>
+    </record>
+    
+	<!--
+	==================================================
+	Custom Invoice Customer refund Credit Adjusment Form
+	==================================================
+	-->
+
+	<record model="ir.ui.view" id="view_refund_credit_in_ajus_form">
+		<field name="name">customer.refund.credit.in.aj.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Notas Debito Ajustes"> 
+					<group  colspan="4" col="6">
+                         	<field name="name"       string="Nota Nro." select="1" attrs="{'readonly':[('state','!=','proforma2')]}"/>
+                         	<field name="parent_id" required="1" string="Factura Nro." on_change="parent_id_change(parent_id)" domain="[('type','=','out_invoice')]"/> 
+                         	<field name="warehouse_id" string="Almacen" select="2" />  
+                         	<newline/>
+                         	<field name="partner_id"  string="Cliente" 
+                         	on_change="onchange_partner_id(type,partner_id,date_invoice,payment_term)" 
+                         	domain="[('customer','=', 'True')]" 
+                         	colspan="4" select="1"/>
+                         	<field name="adjustment" string="Nota de Ajuste"/>
+                         	<field name="reference"  string="Referencia Nro." invisible="True"/>
+                    </group>
+					<notebook colspan="4">
+						<page string="General">
+							<field name="date_invoice"  string="Fecha" on_change="onchange_payment_term_date_invoice(payment_term, date_invoice)" select="1"/>
+                            <field name="address_invoice_id" string="Direccion Cliente" domain="[('partner_id','=',partner_id)]"/> 
+                         	<field name="nota_atencion" string="Nota"/>
+                         	<field name="date_due"	   string="Vencimiento" invisible="True"/>
+                         	<separator string="Datos Contables" colspan="4"/>  
+                            <group  colspan="4" col="6">
+                        				<field name="journal_id" select="2"/> 
+                        				<field domain="[('type','&lt;&gt;','view'), ('company_id', '=', company_id),('journal_id','=',journal_id)]" name="account_id"/>
+                            			<field name="payment_term" string="Condicion Pago" 
+                            			on_change="onchange_payment_term_date_invoice(payment_term, date_invoice)"/>
+                            </group>
+							<field colspan="4" default_get="{'check_total': check_total, 'invoice_line': invoice_line, 'address_invoice_id': address_invoice_id, 'partner_id': partner_id, 'price_type': 'price_type' in dir() and price_type or False}" 
+							    name="invoice_line" nolabel="1">
+								<tree string="Detalle Nota Credito Interna">
+									<field name="name" string="Descripcion"/>
+									<field name="price_unit" string="Monto"/>
+									
+									<!-- Campos Invisibles -->
+									<field name="quantity" string="Cantidad" invisible="True"/>
+									<field name="price_subtotal" string="Total" invisible="True"/>
+                                    <field	name="account_id" 
+                                    		domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]"  
+                                    		on_change="account_id_change(account_id)"
+                                    		invisible="True"/>
+                                    <field	name="account_analytic_id"  
+                                    		domain="[('type','&lt;&gt;','view'), ('company_id', '=', parent.company_id)]" 
+                                    		invisible="True"/>
+                               		<field  name="uos_id" invisible="True"/>
+                                    <field name="discount" string="Descuento" invisible="True"/>
+                                    <field	name="invoice_line_tax_id" 
+                                    		context="{'type':parent.type}" 
+                                    		domain="[('parent_id','=',False)]"
+                                    		nolabel="1" colspan="4" invisible="True"/>
+			                    </tree>
+			                    <form string="Detalle Nota Credito Interna">
+			                                 		<separator string="Datos Generales" colspan="4"/>
+			                                			<field colspan="4" name="product_id" string="Producto" invisible="True"/>
+			                                			<field colspan="4" name="concept_id" string="Concepto" select="1" on_change="concept_id_change(concept_id)"/>
+			                                			<newline/>
+			                                			<field colspan="4" name="name" string="Descripcion"/>
+			                                			<newline/>                           						
+                            							<field name="quantity" string="Cantidad" invisible="True"/>
+                            							<field name="price_unit" string="Monto"/>
+                            							<field name="discount" string="Descuento" invisible="True"/>
+                            							<field name="uos_id" string="Unidad"/>
+                            							
+                            						<separator string="Datos Contables" colspan="4"/>                            						
+                            							<field name="account_id" string="Cuenta Ventas"
+                            							    domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]"  
+                            							    on_change="account_id_change(account_id)"/>
+                            							<field name="account_res_id"  string="Cuenta resrva"/>
+                            								
+                            							<newline/>
+                            						<separator string="Impuestos y/o Descuentos" colspan="4"/>
+                            							<field nolabel="1" colspan="4" name="invoice_line_tax_id" context="{'type':parent.type}" domain="[('parent_id','=',False)]"/>
+                            						<!-- Campos ocultos -->
+                            							<field name="price_subtotal"  invisible="True" />
+                            							<field  name="origin" invisible="True"/>
+                            							<field domain="[('type','&lt;&gt;','view'), ('company_id', '=', parent.company_id)]" name="account_analytic_id" invisible="True"/> 
+			                                </form>
+			                            </field>
+		                        		<group col="1" colspan="2">
+		                                	<field name="tax_line" nolabel="1">
+		                                    	<tree  string="Impuestos">
+		                                        	<field string="Descripcion" name="name"/>
+		                                        	<field string="Base" name="base" on_change="base_change(base)" readonly="1"/>
+		                                        	<field string="Importe" name="amount" on_change="amount_change(amount)"/>
+		 											<!-- compos invisibles --> 
+		                                        		<field invisible="True" name="base_amount"/>
+		                                        		<field invisible="True" name="tax_amount"/>
+		                                    	</tree>
+		                                	</field>
+		                            </group>
+		                            <group col="4" colspan="2">
+		                                <label colspan="2"/>
+		                                <field name="amount_untaxed"/>
+		                                <label string="" colspan="2"/>
+		                                <field name="amount_tax"/>
+		                                <button colspan="2" name="button_compute" states="draft" string="Compute" type="object"/>
+		                                <field name="check_total" required="2"/>
+		                                <label string="" colspan="2"/>
+		                                <field name="residual"/>
+		                                <field name="amount_total" invisible="True"/>
+		                            </group>
+		                            <newline/>
+                            	        <group  colspan="4" col="6">	
+                        		     <field name="state" string="Estatus"/> 
+                        		     <button name="invoice_open" states="draft,proforma2" string="Validar" icon="gtk-execute"/>  
+                        		     <button name="invoice_cancel" states="draft,proforma2,sale,open" string="Cancel" icon="gtk-cancel"/>
+                        		     <button name="action_cancel_draft" states="cancel" string="Cambiar Borrador" type="object" icon="gtk-convert"/>
+                        		     <button name='%(account.wizard_paid_open)d' type='action' string='Re-Open' states='paid' icon="gtk-convert"/>
+                         	        </group>
+                        		</page>                   		
+                         	<page string="Miscelaneos">
+								<separator string="Miscelaneos" colspan="4"/>
+                        			<group  colspan="4" col="6">
+                        				<field name="type" readonly="1" select="2"/>
+                        			    <field name="company_id"/> 
+                            			<field name="currency_id" on_change="onchange_currency_id(currency_id)" select="2"/>
+                        			</group>                         	
+                        		<separator string="Otros Datos Contables" colspan="4"/>
+                            		<group colspan="4" col="6">                        				
+                        				<field name="reconciled"/>
+                            			<field name="move_id"/>  
+                            			<field name="period_id"/>
+                            			<label align="0.0" colspan="2"/>
+                            			<field domain="[('partner_id', '=', partner_id)]" name="partner_bank" on_change="onchange_partner_bank(partner_bank)" select="2"/>
+                            			<field name="fiscal_position" groups="base.group_extended" invisible="True"/>
+                            			<field name="reference_type" nolabel="1" size="0" invisible="True"/>                      	  
+                            		</group>                        		
+                        		</page>
+                        		<page string="Observaciones">
+                        	        <field  name="comment" colspan="4" nolabel="1"/> 
+                        	    </page>
+                         	<page string="Pagos">
+                            		<field name="payment_ids" colspan="4" nolabel="1">
+                                	<tree string="Pagos">
+                                    	<field name="date" string="Fecha"/>
+                                    	<field name="ref" string="Refencia"/>
+                                    	<field name="name" string="Descripcion"/>
+                                    	<field name="debit" string="Debe"/>
+                                    	<field name="credit" string="Haber"/>
+                                	</tree>
+                            </field>
+                        </page>
+                     </notebook>                    	
+                </form>
+            </field>
+        </record>
+
+	<record id="act_refund_credit_in_aj_form" model="ir.actions.act_window">  
+		<field name="name">Todas Notas Debito Ajustes</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.invoice</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('type','=','in_refund'),('adjustment','=',1)]</field>
+        <field name="context">{'type':'in_refund','adjustment':1}</field>
+	</record>
+	<record id="act_refund_credit_in_aj_view1" model="ir.actions.act_window.view"> 
+		<field eval="46" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_refund_credit_in_ajus_tree"/> 
+		<field name="act_window_id" ref="act_refund_credit_in_aj_form"/>
+	</record>
+	<record id="act_refund_credit_in_aj_view2" model="ir.actions.act_window.view"> 
+		<field eval="56" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_refund_credit_in_ajus_form"/>   
+		<field name="act_window_id" ref="act_refund_credit_in_aj_form"/>  
+	</record>
+	<menuitem name="Todas Notas Debito Ajustes" action="act_refund_credit_in_aj_form" id="customer_refund_credit_in_aj" parent="cust_menu_credit_refund_in"/>  
+
+</data>
+</openerp>

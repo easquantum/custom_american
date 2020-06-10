@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+	<!--
+	=======================
+	Custom Menu Guide
+	=======================
+	-->
+	 <menuitem  id="custom_menu_guide" name="Guias" parent="stock.menu_stock_root" />
+	 
+	<!--
+	=======================
+	Custom  Guide Tree
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_delivery_guide_tree">
+		<field name="name">delivery.guide.tree</field>
+		<field name="model">delivery.guide</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Guia Despacho">
+				<field name="name" string="Nro. Guia" select="1"/>
+				<field name="carrier_company_id" string="Empresa Transportista" select="1"/>
+				<field name="warehouse_id" string="Almacen" select="2"/>
+				<field name="date_guide" string="Fecha" select="1"/>	
+				<field name="state" string="Estatus" select="2"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_delivery_guide_tree" model="ir.actions.act_window">
+            <field name="name">Guia Despacho</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">delivery.guide</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_delivery_guide_tree"/>  
+    </record>
+
+	
+	
+	<!--
+	=======================
+	Custom  Guide Form
+	=======================
+	-->	
+			
+	<record model="ir.ui.view" id="view_delivery_guide_form">
+		<field name="name">delivery.guide.form</field>
+		<field name="model">delivery.guide</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Guia Despacho">
+				<field name="name" select="1" string="Guia Nro."/>	
+				<field name="date_guide" string="Fecha" select="1"/>	
+				<field name="carrier_company_id" string="Transportista" domain="[('carrier','=',1)]"/>
+				<field name="driver_id" domain="[('parent_id','=',carrier_company_id)]" string="Chofer"/>		
+				<field name="warehouse_id" string="Almacen"/>
+				<field name="vehiculo_id" string="Vehiculo" on_change="vehiculo_id_change(vehiculo_id)" domain="[('driver_id','=',driver_id)]"/>
+				<field name="ruta_id" string="Ruta"  domain="[('warehouse_id','=',warehouse_id),('active','=',1)]"/>	
+                		<field name="weight_vehiculo" string="Peso Vehiculo" readonly="1"/>
+                		<group col="3" colspan="2">
+				<field name="weight" string="Peso Bruto" readonly="1"/> 
+				<button name="button_compute_weight" string="Calcular Peso" states="draft" type="object"/>
+				</group>
+                		<group col="6" colspan="2">
+                		<field name="traspaso" string="Trasferencia"/>
+                		<field name="printed"  string="Impresa" groups="base.group_extended"/> 
+                		<field name="paid"     string="Pagada" groups="base.group_system"/>
+				</group>
+				<notebook colspan="4">
+                  		<page string="Facturas de Guia"> 
+				     <field name="guide_line" colspan="4" nolabel="1" string="Facturas de Guia">
+							<tree string="Guide line">
+										<field name="name" string="Pedido"/>	
+										<field name="invoice_id" string="Factura"/>
+							</tree>	
+							<form string="Guide Line">
+										<field name="name" string="Pedido"/>
+										<field name="invoice_id" string="Factura" on_change="guide_id_change(invoice_id,parent.traspaso)" domain="[('type','=','out_invoice'),('printed','=',0),('warehouse_id','=',parent.warehouse_id)]"/>										
+							</form>				
+				    </field>
+				  </page> 
+				  <page string="Traspasos">
+				      <field name="guide_picking" colspan="4" nolabel="1" string="Traspasos">
+							<tree string="Guide line">
+										<field name="name" string="Descripcion"/>																
+										<field name="picking_id" string="Traspaso"/>							
+							</tree>							
+							<form string="Guide Line">
+										<field name="name" string="Descripcion" />
+										<field name="picking_id" string="Traspaso" 
+										on_change="picking_id_change(picking_id,parent.traspaso)" 
+										domain="[('type','=','internal'),('type2','=','tras'),('warehouse_id','=',parent.warehouse_id),('state','!=','draft')]"/>										
+							</form> 
+					</field>
+				  </page>
+				</notebook>
+				<field name="state" string="Estatus"/>								
+				<group colspan="2" col="2">						
+							<button name="guide_done" states="draft" string="Aprobar"/>
+							<button name="guide_cancel" states="draft" string="Cancelar"/>						
+						</group>								
+			</form>
+		</field>
+	</record>
+
+	<!-- 
+	=====================================================
+	Guias de Despacho: Todas
+	=====================================================
+	-->  
+	<record id="action_delivery_guide_form" model="ir.actions.act_window">
+		<field name="name">Todas las Guias</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">delivery.guide</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_delivery_guide_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_delivery_guide_tree"/>
+		<field name="act_window_id" ref="action_delivery_guide_form"/> 
+	</record>
+	<record id="action_delivery_guide_view2" model="ir.actions.act_window.view"> 
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_delivery_guide_form"/>
+		<field name="act_window_id" ref="action_delivery_guide_form"/> 
+	</record>
+	<menuitem name="Todas Guias" action="action_delivery_guide_form" id="menu_guide_rutas" parent="custom_menu_guide"/>
+
+	<!-- 
+	=====================================================
+	Guias de Despacho: Caracas
+	=====================================================
+	--> 
+	<record  id="action_delivery_guide_caracas_form" model="ir.actions.act_window">
+		<field name="name">Guia Despacho Caracas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">delivery.guide</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record  id="action_caracas_guide_form_view1" model="ir.actions.act_window.view">
+		<field name="sequence" eval="11"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_delivery_guide_tree"/> 
+		<field name="act_window_id" ref="action_delivery_guide_caracas_form"/>
+	</record>
+	<record  id="action_caracas_guide_form_view2" model="ir.actions.act_window.view">
+		<field name="sequence" eval="21"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_delivery_guide_form"/>
+		<field name="act_window_id" ref="action_delivery_guide_caracas_form"/>
+	</record>
+	<menuitem name="Guias Caracas" action="action_delivery_guide_caracas_form" id="menu_guide_rutas_caracas" parent="custom_menu_guide"/>
+
+	<!-- 
+	=====================================================
+	Guias de Despacho: Turmero
+	=====================================================
+	--> 
+	<record  id="action_delivery_guide_turmero_form" model="ir.actions.act_window">
+		<field name="name">Guia Despacho Turmero</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">delivery.guide</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record  id="action_turmero_guide_form_view1" model="ir.actions.act_window.view">
+		<field name="sequence" eval="12"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_delivery_guide_tree"/> 
+		<field name="act_window_id" ref="action_delivery_guide_turmero_form"/>
+	</record>
+	<record  id="action_turmero_guide_form_view2" model="ir.actions.act_window.view">
+		<field name="sequence" eval="22"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_delivery_guide_form"/>
+		<field name="act_window_id" ref="action_delivery_guide_turmero_form"/>
+	</record>
+	<menuitem name="Guias Turmero" action="action_delivery_guide_turmero_form" id="menu_guide_rutas_turmero" parent="custom_menu_guide"/>
+
+	<!-- 
+	=====================================================
+	Guias de Despacho: Maracaibo
+	=====================================================
+	--> 
+	<record  id="action_delivery_guide_maracaibo_form" model="ir.actions.act_window">
+		<field name="name">Guia Despacho Maracaibo</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">delivery.guide</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record  id="action_maracaibo_guide_form_view1" model="ir.actions.act_window.view">
+		<field name="sequence" eval="12"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_delivery_guide_tree"/> 
+		<field name="act_window_id" ref="action_delivery_guide_maracaibo_form"/>
+	</record>
+	<record  id="action_maracaibo_guide_form_view2" model="ir.actions.act_window.view">
+		<field name="sequence" eval="22"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_delivery_guide_form"/>
+		<field name="act_window_id" ref="action_delivery_guide_maracaibo_form"/>
+	</record>
+	<menuitem name="Guias Maracaibo" action="action_delivery_guide_maracaibo_form" id="menu_guide_rutas_maracaibo" parent="custom_menu_guide"/>
+
+	<!-- 
+	=====================================================
+	Guias de Despacho: Barcelona
+	=====================================================
+	--> 
+	<record  id="action_delivery_guide_barcelona_form" model="ir.actions.act_window">
+		<field name="name">Guia Despacho Barcelona</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">delivery.guide</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record  id="action_barcelona_guide_form_view1" model="ir.actions.act_window.view">
+		<field name="sequence" eval="12"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_delivery_guide_tree"/> 
+		<field name="act_window_id" ref="action_delivery_guide_barcelona_form"/>
+	</record>
+	<record  id="action_barcelona_guide_form_view2" model="ir.actions.act_window.view">
+		<field name="sequence" eval="22"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_delivery_guide_form"/>
+		<field name="act_window_id" ref="action_delivery_guide_barcelona_form"/>
+	</record>
+	<menuitem name="Guias Barcelona" action="action_delivery_guide_barcelona_form" id="menu_guide_rutas_barcelona" parent="custom_menu_guide"/>
+	
+	<!-- 
+	=====================================================
+	Guias de Despacho: Puerto Ordaz
+	=====================================================
+	--> 
+    <record  id="act_delivery_guide_pto_all"  model="ir.actions.act_window"> 
+    	<field name="name">Guias Despacho Puerto Ordaz</field> 
+    	<field name="type">ir.actions.act_window</field> 
+    	<field name="res_model">delivery.guide</field> 
+    	<field name="domain">[('warehouse_id','ilike','Puerto Ordaz')] </field> 
+    	<field name="view_type">form</field> 
+    </record> 
+    <record model="ir.actions.act_window.view" id="act_vtree_delivery_guide_pto_all" > 
+    	<field name="sequence" eval="12"/> 
+    	<field name="view_mode">tree</field> 
+    	<field name="view_id" ref="view_delivery_guide_tree"/> 
+    	<field name="act_window_id" ref="act_delivery_guide_pto_all"/> 
+	</record> 
+	<record model="ir.actions.act_window.view" id="act_vform_delivery_guide_pto_all" > 
+    	<field name="sequence" eval="22"/> 
+    	<field name="view_mode">form</field> 
+    	<field name="view_id" ref="view_delivery_guide_form"/> 
+    	<field name="act_window_id" ref="act_delivery_guide_pto_all"/> 
+	</record> 
+	<menuitem name="Guias Puerto Ordaz" action="act_delivery_guide_pto_all" id="menu_delivery_guide_pto_all"  parent="custom_menu_guide"/>
+
+
+</data>
+</openerp>

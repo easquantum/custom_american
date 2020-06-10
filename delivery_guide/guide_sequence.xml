@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="1" >
+
+	#
+	# Sequences for delivery.guide
+	#
+
+	<record model="ir.sequence.type" id="seq_type_delivey_guide">
+		<field name="name">Delivery Guide</field>
+		<field name="code">delivery.guide</field>
+	</record>
+	<record model="ir.sequence" id="seq_delivey_guide">
+		<field name="name">Delivery Guide</field>
+		<field name="code">delivery.guide</field>
+		<field name="padding">3</field>
+	</record>
+
+</data>
+</openerp>

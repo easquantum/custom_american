@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	============================================================
+	Account: Custom update view Account
+	============================================================
+	-->  
+			
+	<record model="ir.ui.view" id="view_update_account_tax_form"> 
+		<field name="name">update.account.tax.view.form</field>
+		<field name="model">account.tax</field>	
+		<field name="inherit_id" ref="account.view_tax_form"/>
+		<field name="type">form</field>	
+		<field name="arch" type="xml">
+				<field name="type" position="after">
+					<field name="type_mode" string="Modalidad"/>
+				</field>
+		</field>
+	</record>
+	
+</data>
+</openerp>

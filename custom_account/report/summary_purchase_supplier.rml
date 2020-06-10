@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(792.0,612.0)" title="registro" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="57.0" y1="40.0" width="678" height="498"/>
+		<pageGraphics>
+		    <setFont name="Times-Bold" size="14"/>
+		    <drawString x="10.0cm" y="19.9cm">REGISTRO DE COMPRAS </drawString>
+		    <setFont name="Times-Roman" size="8"/>
+		    <drawString x="1.0cm" y="19.5cm"> AMERICAN DISTRIBUTION DE VENEZUELA, C.A  </drawString>		    
+		    <drawString x="10.cm" y="19.5cm">Fecha Inicial :  [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date1'], '%Y-%m-%d')) ]]  Fecha Final :  [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date2'], '%Y-%m-%d')) ]] </drawString>
+		    <drawString x="23.5cm" y="19.5cm"> Almacen : [[ get_warehouse(data['form']['warehouseid']) ]] </drawString>
+		    <drawString x="1.0cm" y="19.1cm">Proveedor :[[ get_partner(data['form']['supplierid']) ]] [[ get_periodo(data['form']['date1'])   ]] </drawString>
+			<setFont name="Times-Roman" size="5"/>
+			<drawString x="14.0cm" y="1cm">Pag. <pageNumber/></drawString>
+		</pageGraphics>
+
+</pageTemplate>
+</template>
+<stylesheet>
+
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockTopPadding length="0.5mm"/>
+<blockBottomPadding length="0.5mm"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<blockBottomPadding length="0mm"/>
+		<lineStyle kind="GRID" colorName="black" thickness="0.3"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+<paraStyle name="P2" fontName="Times-Roman"  fontSize="8.0" leading="10"/>
+<paraStyle name="P3" fontName="Times-Roman"  fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="14.0" leading="13"/>
+<paraStyle name="P5" fontName="Times-Bold" fontSize="12.0" leading="13"  alignment="RIGHT"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="13" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="4.0" leading="5" alignment="CENTER"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="14.0" leading="18" alignment="CENTER"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P16" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="P22" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P23" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P24" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P27" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<para style="P11"><font color="white"> .</font></para>
+<blockTable colWidths="55.0,60.0,110.0,90.0,35.0,110.0,100.0,100.0,100.0" repeatRows="1" style="Tableau7">
+	<tr>
+		<td><para style="P11"><font color="white"> </font></para>	  </td>
+		<td><para style="P11"><font color="white"> </font></para>	  </td>
+		<td><para style="P12">Compras Cta. 410 - 100 </para></td>
+		<td><para style="P12">IVA - Compras </para></td>
+		<td><para style="P11"><font color="white"> </font></para>	  </td>
+		<td><para style="P12"> Cuenta. x Pagar</para></td>
+		<td><para style="P12"> Provisiones</para></td>
+		<td><para style="P12"> Pronto Pago</para></td>
+		<td><para style="P12"> Varios</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="55.0,60.0,55.0,55.0,45.0,45.0,35.0,55.0,55.0,50.0,50.0,50.0,50.0,50.0,50.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P11">Compra</para></td>
+	<td><para style="P11">Factura</para></td>
+	<td><para style="P11">Debe</para></td>
+	<td><para style="P11">Haber</para></td>
+	<td><para style="P11">Debe</para></td>
+	<td><para style="P11">Haber</para></td>
+	<td><para style="P11">C x C</para></td>
+	<td><para style="P11">Debe </para></td>
+	<td><para style="P11">Haber </para></td>
+	<td><para style="P11">Debe </para></td>
+	<td><para style="P11">Haber </para></td>
+	<td><para style="P11">Debe</para></td>
+	<td><para style="P11">Haber </para></td>
+	<td><para style="P11">Cta. Nro. </para></td>
+	<td><para style="P11">Monto </para></td>
+	</tr>
+</blockTable>
+<section>
+<para style="P1">	[[ repeatIn(get_purchase(data['form']),'p') ]]	</para>
+<blockTable colWidths="55.0,60.0,55.0,55.0,45.0,45.0,35.0,55.0,55.0,50.0,50.0,50.0,50.0,50.0,50.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P12"> [[ p['compra'] ]]</para></td>
+	<td><para style="P12"> [[ p['factura'] ]]</para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['totalcompra'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12"> </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['totaliva'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12"> </para></td>
+	<td><para style="P12"> [[ locale.format('%.2f', p['cxc'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['totalcxp'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12"> </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['reserva'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', p['totalpp'], grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P9">  [[  p['cta'] ]]</para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', p['totalcta'], grouping=True, monetary=True) ]] </para></td>
+	</tr>
+</blockTable>
+</section>
+
+<para style="P21"><font color="white"> </font></para>
+<blockTable colWidths="55.0,60.0,55.0,55.0,45.0,45.0,35.0,55.0,55.0,50.0,50.0,50.0,50.0,50.0,50.0" repeatRows="1" style="Tableau3">
+	<tr>
+	<td><para style="P12">  </para></td>
+	<td><para style="P12">  Totales : </para></td>
+	<td><para style="P14">   [[ locale.format('%.2f', get_totalgral_compra(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', get_totalgral_iva(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P12">  [[ locale.format('%.2f', get_totalgral_cxc(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">   [[ locale.format('%.2f', get_totalgral_cxp(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', get_totalgral_reserva(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">   [[ locale.format('%.2f', get_totalgral_prontop(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', get_totalgral_cta(), grouping=True, monetary=True) ]]</para></td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white"> </font></para>
+</story>
+</document>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	
+	<!--
+	======================================
+	Sales Conceptos Promociones Tree
+	======================================
+	-->
+	<record model="ir.ui.view" id="view_conceptos_promociones_tree">
+		<field name="name">conceptos_promociones.tree</field>
+		<field name="model">sale.concepto.promocion</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Concepto Promocion">
+			    <field name="code" string="Codigo" select="1"/>
+				<field name="name" string="Descripcion" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_concepto_prom_tree" model="ir.actions.act_window">
+            <field name="name">Concepto Promocion</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.concepto.promocion</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_conceptos_promociones_tree"/>
+    </record>
+
+
+	<!--
+	======================================
+	Sales Conceptos Promociones Form
+	======================================
+	-->
+	<record model="ir.ui.view" id="view_conceptos_promociones_form">
+		<field name="name">conceptos_promociones.form</field>
+		<field name="model">sale.concepto.promocion</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Concepto Promocion">
+				<field name="code" string="Codigo" select="1"/>
+				<field name="name" string="Descripcion" select="1"/>
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_concepto_prom_form" model="ir.actions.act_window">
+		<field name="name">Concepto Promocion</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.concepto.promocion</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="act_concepto_prom_vtr" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_conceptos_promociones_tree"/>
+		<field name="act_window_id" ref="view_conceptos_promociones_form"/>
+	</record>
+	<record id="act_concepto_prom_vfr" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_conceptos_promociones_form"/>
+		<field name="act_window_id" ref="view_conceptos_promociones_form"/>
+	</record>
+	
+	<menuitem name="Conceptos Promocion" 
+	action="action_concepto_prom_form" 
+	id="menu_concepto_prom" 
+	parent="sale.menu_shop_configuration"/>  	
+</data>
+</openerp>	

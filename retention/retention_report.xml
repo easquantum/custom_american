@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report id="report_retenciones_proveedor_ret" 
+            name="retenciones_por_proveedor_ret"
+            string="Retenciones Proveedor"
+            model="account.retention" 
+            rml="custom_american/retention/report/retenciones_por_proveedor_ret.rml"
+            menu="True"
+            header="False"   
+            auto="False"/>   
+
+
+        <report id="report_retenciones_cliente" 
+            name="retenciones_cli"
+            string="Retenciones Cliente"
+            model="account.retention" 
+            rml="custom_american/retention/report/report_retenciones_cliente.rml"
+            menu="True"
+            header="False"   
+            auto="False"/>
+       </data>
+</openerp>

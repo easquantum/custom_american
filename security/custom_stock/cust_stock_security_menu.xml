@@ -1,0 +1,1039 @@
+<?xml version="1.0"?>
+<openerp>
+<data noupdate="0">
+
+
+	<!-- Set accesses to menu -->
+	<record id="stock.menu_stock_root" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_manager'),
+				ref('group_cust_stock_inventory_user')
+			])]"
+		/>
+	</record>
+	
+	<!--
+	<record id="stock.menu_stock_configuration" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_manager')])]"/>
+	</record>
+	-->
+
+	<!--
+	<record id="stock.menu_config_stock" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_stock_ul_form_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_stock_pricelist_main" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_stock_pricelist_action2" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_stock_pricelist_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_manager')])]"/>
+	</record>
+	-->
+
+	<!-- General -->
+	<record id="custom_american.cust_menu_stock_root_inv" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stock_root_nota" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_ent" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_dev" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_tras" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_tp_in" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_tp_out" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_tran" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_tf_in" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_tf_out" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+	<record id="custom_american.cust_menu_stoc_nota_mues" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('group_cust_stock_inventory_user')])]"/>
+	</record>
+
+
+	<!-- Nacional -->
+	<record id="custom_american.cust_menu_prod_prod_almacen" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_back_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [	ref('group_cust_stock_inventory_user_all')])]"/>
+	</record>
+
+
+	<!-- Por Almacen: Inventario Caracas -->
+	<record id="custom_american.cust_menu_prod_prod_almacen_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Inventario Maracaibo -->
+	<record id="custom_american.cust_menu_prod_prod_almacen_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Inventario Turmero -->
+	<record id="custom_american.cust_menu_prod_prod_almacen_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Inventario Barcelona -->
+	<record id="custom_american.cust_menu_prod_prod_almacen_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Caracas NE -->
+	<record id="custom_american.cust_menu_stoc_nota_ent_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<!-- Por Almacen: Caracas DCli -->
+	<record id="custom_american.cust_menu_stoc_nota_dev_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Caracas TP Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Caracas TP Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Caracas TF Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Caracas TF Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Caracas Mues -->
+	<record id="custom_american.cust_menu_stoc_nota_mues_cara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_cara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_cara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_cara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_ccs'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+
+	<!-- Por Almacen: Maracaibo NE -->
+	<record id="custom_american.cust_menu_stoc_nota_ent_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<!-- Por Almacen: Maracaibo DCli -->
+	<record id="custom_american.cust_menu_stoc_nota_dev_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Maracaibo TP Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Maracaibo TP Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Maracaibo TF Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Maracaibo TF Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Maracaibo Mues -->
+	<record id="custom_american.cust_menu_stoc_nota_mues_mara" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_mara_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_mara_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_mara_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_mbo'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+
+	<!-- Por Almacen: Turmero NE -->
+	<record id="custom_american.cust_menu_stoc_nota_ent_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<!-- Por Almacen: Turmero DCli -->
+	<record id="custom_american.cust_menu_stoc_nota_dev_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Turmero TP Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Turmero TP Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Turmero TF Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Turmero TF Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Turmero Mues -->
+	<record id="custom_american.cust_menu_stoc_nota_mues_turm" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_turm_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_turm_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_turm_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_tur'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Barcelona NE -->
+	<record id="custom_american.cust_menu_stoc_nota_ent_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_ent_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<!-- Por Almacen: Barcelona DCli -->
+	<record id="custom_american.cust_menu_stoc_nota_dev_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_dev_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Barcelona TP Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_in_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Barcelona TP Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tp_out_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Barcelona TF Ent -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_in_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Barcelona TF Sal -->
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_tf_out_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+	<!-- Por Almacen: Barcelona Mues -->
+	<record id="custom_american.cust_menu_stoc_nota_mues_barc" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_barc_all" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_barc_asi" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+	<record id="custom_american.cust_menu_stoc_nota_mues_barc_don" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, 
+			[	ref('group_cust_stock_inventory_user_bar'),
+				ref('group_cust_stock_inventory_user_all')
+			])]"
+		/>
+	</record>
+
+
+
+	<!-- Closed accesses to menu -->
+
+	<record id="stock.menu_action_location_tree" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.next_id_61" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_action_inventory_form" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_traceability" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_action_picking_tree" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_action_picking_tree4" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_action_picking_tree6" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+	<!--
+	<record id="stock.menu_price" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_stock_price_type_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+
+	<record id="stock.menu_stock_pricelist_type_action" model="ir.ui.menu">
+		<field name="groups_id" eval="[(6,0, [ref('base.group_system'), ref('base.group_erp_manager')])]"/>
+	</record>
+-->
+
+</data>
+</openerp>
+

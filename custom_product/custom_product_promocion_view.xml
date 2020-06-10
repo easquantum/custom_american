@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+	<!--
+	=======================
+	Product Promociones
+	=======================
+	-->
+
+	<!--
+		*****************************************************
+		Product Promocion Tree   
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="view_product_promocion_tree">
+		<field name="name">product_promocion.tree</field>
+		<field name="model">product.product</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="20"/>		
+		<field name="arch" type="xml">
+			<tree string="Productos Regalo">
+				<field name="default_code" string="Codigo"/>
+				<field name="name" string="Nombre"/>
+				<field name="variants" string="Referencia"/>
+				<field name="price_extra" string="Costo"/>
+				<field name="publ_price" string="Precio"/>
+				<field name="state" invisible="True"/>
+			</tree>			
+		</field>
+	</record>	
+
+    <record id="action_product_promocion_tree" model="ir.actions.act_window">
+            <field name="name">Productos Regalo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.product</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_product_promocion_tree"/>
+    </record>
+
+	<!--
+		*****************************************************
+		Product Promocion Form  
+        *****************************************************
+	-->
+	<record model="ir.ui.view" id="view_product_promocion_form">
+		<field name="name">product_promocion.form</field>
+		<field name="model">product.product</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Producto Regalo">
+				<group colspan="4" col="6">
+					<group colspan="4" col="2">
+						<separator string="Descripcion" colspan="4"/>
+						<field name="name" select="1"  string="Nombre"/>
+						<field groups="" name="variants" select="2" string="Referencia"/>
+					</group>
+					<group colspan="1" col="2">
+						<separator string="Codigos" colspan="2"/>
+						<field name="default_code" select="1" string="Codigo"/>
+						<field name="ean13"  string="Cod. Barra"/>						
+					</group>
+				</group>
+
+				<notebook colspan="4">
+					<page string="Informacion">
+						<separator string="Datos Generales" colspan="4"/>
+						<newline/>
+						<group colspan="4" col="6">
+							<field name="categ_id" string="Categoria"/>
+                            <field name="promocion" select="2" string="Promocion"/>
+                            <field name="active" select="2"  string="Activo"/>
+                            <field name="purchase_ok" select="2" string="Para Compra"/>
+                            <field name="sale_ok" select="2" string="Para Venta"/>								
+						</group>						
+						<group colspan="4" col="4" groups="">
+							<group colspan="2" col="2" groups="">
+								<separator string="Precios" colspan="2"/>
+								<field name="price_extra" string="Costo"/>
+								<field name="publ_price"  string="Precio"/>								
+								<field name="supp_price" invisible="True"/>
+								<field name="invo_price" invisible="True"/>
+								<field name="cost_price" string="Cost Std." invisible="True"/>
+							</group>
+							<group colspan="2" col="2" groups="">
+								<separator string="Existencias" colspan="2"/>							
+								<field name="virtual_available" string="Stock Virtual"/>								
+								<field name="qty_available" string="Stock Real"/>
+							</group>
+						</group>
+						<newline/>
+						<field colspan="4" name="seller_ids" nolabel="1" widget="one2many_list" mode="form">
+							<form string="Informacion del Proveedor">
+								<field name="name" colspan="4" domain="[('supplier','=',True)]" string="Empresa"/>
+								<newline />
+								<field name="product_name" invisible="True"/>
+								<field name="product_code" invisible="True"/>
+								<field name="delay" invisible="True"/>
+								<field name="qty" invisible="True"/>
+								<field name="pricelist_ids" invisible="True"/>
+								<field name="sequence" invisible="True"/>
+							</form>								
+						</field>
+					</page>
+                       
+					<page string="Miscelaneos" groups="base.group_system">
+						<separator string="Miscelaneos" colspan="4"/>
+						<field name="type" string="Tipo Producto"/>                             
+						<field name="procure_method" string="Metodo de Abastecimiento"/>
+						<field name="supply_method" string="Metodo de Suministro"/>
+						<field name="mes_type" string="Tipo de Medida"/>
+						<field groups="" name="cost_method" string="Metodo de Coste"/>
+						<field name="uom_id" on_change="onchange_uom(uom_id,uom_po_id)" string="Unidad Medida"/>
+						<field name="company_id" string="Empresa"/>
+						<newline/>
+						<separator string="Descripcion" colspan="4"/>
+						<field colspan="4" name="description" nolabel="1"  string="Descripcion"/>
+						<!-- Campos invisibles -->
+						<field name="pat_id" invisible="True"/>
+						<field name="group_id" invisible="True"/>
+						<field name="property_account_income" invisible="True"/>
+						<field name="property_account_expense" invisible="True"/>
+						<field name="property_stock_account_input" invisible="True"/>							
+						<field name="property_stock_account_output" invisible="True"/>
+						<field name="supplier_taxes_id" invisible="True"/>
+						<field name="taxes_id" invisible="True"/>
+   						<field name="qty" invisible="True"/>
+   						<field name="weight_net" invisible="True"/>
+						<field name="uom_po_id" invisible="True"/>
+						<field name="id_flete" invisible="True"/>
+						<field name="categ_salesman_id" invisible="True"/>
+						<field name="supp_disc" string="Desc. Prov." invisible="True"/>
+						<field name="adv_marg" string="Margen ADV" invisible="True"/>
+						<field name="adv_disc" string="Costo Std" invisible="True"/>
+						<field name="qty_dispo" invisible="True"/>
+                    </page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="action_product_promocion_form">
+		<field name="name">Productos Regalo</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('promocion','=',1)]</field>
+        <field name="context">{'promocion':1}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_product_regalo_vtr">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_product_promocion_tree"/>
+		<field name="act_window_id" ref="action_product_promocion_form"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_product_regalo_vfr">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_product_promocion_form"/>
+		<field name="act_window_id" ref="action_product_promocion_form"/>
+	</record>
+
+	<menuitem
+        id="menu_product_promocion"
+		name="Productos Regalo"
+        parent="cust_menu_main_product"
+        action="action_product_promocion_form" />
+
+
+
+
+</data>
+</openerp>

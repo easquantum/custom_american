@@ -1,0 +1,64 @@
+<?xml version="1.0" ?>
+<document filename="test.pdf">
+	<template allowSplitting="20" author="Corvus Latinoamerica" pageSize="(595.0,842.0)" title="Test">
+		<pageTemplate id="first">
+			<frame height="728" id="first" width="481" x1="57.0" y1="57.0"/>
+			<pageGraphics>
+				<setFont name="Helvetica-Bold" size="7"/>
+				<drawString x="12.0cm" y="1cm">Pag. <pageNumber/></drawString>
+			</pageGraphics>			
+		</pageTemplate>
+	</template>
+	<stylesheet>
+		<blockTableStyle id="Standard_Outline">
+			<blockAlignment value="LEFT"/>
+			<blockValign value="TOP"/>
+		</blockTableStyle>
+		<blockTableStyle id="Tabla1">
+			<blockAlignment value="LEFT"/>
+			<blockValign value="TOP"/>
+			<lineStyle kind="GRID" colorName="black"/>
+			<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+			<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+			<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		</blockTableStyle>
+		<blockTableStyle id="Tabla2">
+			<blockAlignment value="LEFT"/>
+			<blockValign value="TOP"/>
+		</blockTableStyle>
+		<initialize>
+			<paraStyle alignment="justify" name="all"/>
+		</initialize>
+		<paraStyle fontName="Times-Roman" name="P1"/>
+		<paraStyle fontName="Times-Roman" fontSize="2.0" leading="3" name="P2"/>
+		<paraStyle fontName="Times-Roman" name="Standard"/>
+		<paraStyle name="P4" fontName="Times-Bold" fontSize="14.0" leading="20" alignment="CENTER"/> 
+		<paraStyle fontName="Times-Roman" name="Text body" spaceAfter="6.0" spaceBefore="0.0"/>
+		<paraStyle fontName="Helvetica" fontSize="14.0" leading="17" name="Heading" spaceAfter="6.0" spaceBefore="12.0"/>
+		<paraStyle fontName="Times-Roman" name="List" spaceAfter="6.0" spaceBefore="0.0"/>
+		<paraStyle fontName="Times-Roman" name="Table Contents"/>
+		<paraStyle alignment="CENTER" fontName="Times-Roman" name="Table Heading"/>
+		<paraStyle fontName="Times-Roman" fontSize="12.0" leading="15" name="Caption" spaceAfter="6.0" spaceBefore="6.0"/>
+		<paraStyle fontName="Times-Roman" name="Index"/>
+	</stylesheet>
+	<images/>
+        <story>
+                <para style="P1"> </para>
+                <para style="P4"><font face="Times-Roman">Listado Plan de Cuentas</font></para>
+                <para style="P1"><font color="white"> . </font> </para>
+                <blockTable colWidths="100.0,150.0,280.0" repeatRows="1" style="Tabla1">
+                        <tr>
+                        <td><para style="Table Contents">   Tipo Cta.       </para> </td>
+                        <td><para style="Table Contents">   Codigo</para></td>
+                        <td><para style="Table Contents">   Cuenta</para></td>
+                        </tr>
+                        <tr><para style="P1">[[ repeatIn(get_plan_cuentas(data['form']['type_id'],data['form']['todo'] ), 'plan') ]]</para>
+                        <td><para style="Table Contents">   [[ plan['catg'] ]]   </para></td>
+                        <td><para style="Table Contents">   [[ plan['ref'] ]]   </para></td>
+                        <td><para style="Table Contents">   [[ plan['nomb'] ]]    </para></td>
+                        </tr>
+                </blockTable>
+                <para style="P1"><font color="white"> </font> </para>
+        </story>
+</document>
+

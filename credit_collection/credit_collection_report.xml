@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report id="report_liquidation_shipping"
+			name="liquidation_shipping"
+			string="Liquidacion Normal"
+			model="liquidation.shipping"
+			rml="custom_american/credit_collection/report/report_liquidation.rml"
+			header="False"
+			auto="False"/>
+	 		
+		<report id="report_liquidation_detail" 
+			name="liquidation_detail"
+			string="Liquidacion Detalle"
+			model="liquidation.shipping"
+			rml="custom_american/credit_collection/report/report_liquidation_det.rml"
+			header="False" 
+			auto="False"/>	 
+			
+		<report id="report_liquidation_especial"
+			name="liquidation_especial"
+			string="Liquidacion Especial"
+			model="liquidation.shipping"
+			rml="custom_american/credit_collection/report/report_liquidation_especial.rml"
+			header="False"
+			auto="False"/> 
+		
+		<report id="report_liquidation_manual"
+			name="liquidation_manual"
+			string="Liquidacion Manual"
+			model="liquidation.shipping"
+			rml="custom_american/credit_collection/report/report_liquidation_manual.rml"
+			header="False"
+			auto="False"/>
+
+		<report id="report_liquidation_shipping_trasp"
+			name="liquidation_shipping_trasp"
+			string="Liquidacion Traspaso"
+			model="liquidation.shipping"
+			rml="custom_american/credit_collection/report/report_liquidation_trasp.rml"
+			header="False"
+			auto="False"/>
+
+	</data>
+</openerp>

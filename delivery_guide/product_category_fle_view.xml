@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Menu Guide
+	=======================
+	-->
+	 <menuitem  id="custom_menu_category_fletes" name="Categoria Fletes" parent="stock.menu_stock_configuration" />
+	 	
+	<!--
+	=======================
+	Custom Categoria Flete Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_category_fle_tree">
+		<field name="name">category.fle.tree</field>
+		<field name="model">product.category.fle</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Categoria Fletes">
+				<field name="name" string="Categoria" select="1"/>
+				<field name="code" string="Codigo" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_category_fle_tree" model="ir.actions.act_window">
+            <field name="name">Categoria Fletes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.category.fle</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_category_fle_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom  Categoria Flete  Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_category_fle_form">
+		<field name="name">category.fle.form</field>
+		<field name="model">product.category.fle</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Categoria Fletes">
+				<field name="name" string="Categoria" select="1"/>
+				<field name="code" string="Codigo" select="1"/> 
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_category_fle_form" model="ir.actions.act_window">
+		<field name="name">Categorias Fletes</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.category.fle</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_category_fle_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_category_fle_tree"/>
+		<field name="act_window_id" ref="action_category_fle_form"/>
+	</record>
+	<record id="action_category_fle_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_category_fle_form"/>
+		<field name="act_window_id" ref="action_category_fle_form"/>
+	</record>
+	
+	<menuitem name="Categorias Fletes" action="action_category_fle_form" id="menu_category_fle" parent="custom_menu_category_fletes"/>  	
+	
+		
+</data>
+</openerp>	

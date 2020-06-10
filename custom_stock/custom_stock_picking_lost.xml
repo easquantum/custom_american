@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+	<!-- 
+	=====================================================
+	Notas de Perdidas de Inventario
+	=====================================================
+	-->  
+	<menuitem
+		id="cust_menu_stock_picking_lost"
+		name="Perdidas Inventario" 		
+		parent="cust_menu_purchase_root_nota"/>
+
+
+	<!-- 
+	=====================================================
+	Notas de Perdidas de Inventario Tree
+	=====================================================
+	--> 
+	<record model="ir.ui.view" id="view_stock_picking_lost_tree">
+		<field name="name">cust_stock_picking_lost_tree</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Perdidas de Inventario">
+				<field name="name"  colspan="4" string="Ajuste Salida"  select="1"/>	
+				<field name="date" string="Fecha" select="1"/>
+				<field name="origin" string="Origen" select="1"/>
+				<field name="warehouse_id" string="Almacen" />
+				<field name="address_id" string="Proveedor" select="2"/>
+				<field name="backorder_id" readonly="1" string="Nota Devuelta" invisible="True"/>
+				<field name="state" string="Estatus Ajuste" readonly="1"/>
+				<field name="type2" invisible="True"/>
+			</tree>
+		</field>
+	</record>
+    <record id="action_stock_picking_lost" model="ir.actions.act_window">
+            <field name="name">Perdidas de Inventario</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_stock_picking_lost_tree"/> 
+    </record>
+
+	<!-- 
+	=====================================================
+	Notas de Perdidas de Inventario Form
+	=====================================================
+	-->    
+	<record model="ir.ui.view" id="view_stock_picking_lost_form">
+		<field name="name">cust_stock_picking_lost_form</field>
+		<field name="model">stock.picking</field>
+		<field name="type">form</field>
+		<field name="priority" eval="28"/>
+		<field name="arch" type="xml">
+			<form string="Perdidas de Inventario">
+				<group colspan="4" col="6">
+					<field name="name" string="Ajuste Perdidas" />
+					<field name="date" string="Fecha Ajuste" />
+					<field name="address_id" string="Proveedor" required='True' />
+					<field name="warehouse_id" string="Almacen Origen" on_change="onchange_warehouse_location(warehouse_id,'ORIG')"/>
+                    <field name="warehouse_dest_id" string="Almacen Destino"  on_change="onchange_warehouse_location(warehouse_dest_id,'DEST')"/>
+					<field name="origin" string="origen" invisible="True"/> 
+					<field name="backorder_id" string="Nota Devuelta" invisible="True"/>
+				</group>
+				<notebook colspan="4">
+					<page string="General">
+						<field name="location_id"      string="Ubicacion Origen" domain="[('warehouse_id','=',parent.warehouse_id)]"/>
+    					<field name="location_dest_id" string="Ubicacion destino" domain="[('warehouse_id','=',parent.warehouse_dest_id)]"/>
+
+					<!-- *******   Campos Invisibles  *************************  -->
+						<field name="type" invisible="True"/>
+						<field name="type2" invisible="True"/>
+						<field name="move_type" invisible="True"/> 	
+					<!-- ******************************************************   -->
+ 						<newline/>
+						<field name="move_lines" widget="one2many_list" colspan="4" nolabel="1" mode="tree" >
+							<tree string="Linea de Productos">
+								<field name="product_id" string="Producto"/>								
+								<field name="product_qty" string="Cantidad"/>
+							   	<field name="product_uom" string="U. Medida" />
+								<field name="location_id" string="Ubicacion origen" domain="[('usage','in',['internal','inventory'])]"/>
+							  	<field name="location_dest_id" string="Ubicacion destino" domain="[('usage','in',['internal','inventory'])]"/>
+							  	<field name="price_unit" string="Precio"/>
+								<field name="state" string="Estatus"/>
+							</tree>						
+							<form string="Productos">
+								<separator string="Informacion Detallada " colspan="4"/>
+								<field name="product_id" colspan="4" select="1" on_change="onchange_product_id(product_id, parent.location_id, parent.location_dest_id)" context="location=parent.location_id" string="Producto"/>
+								<field name="product_qty" string="Cantidad"/>
+								<field name="product_uom" string="U. Medida"/>
+								<field name="date_planned" string="Fecha Prevista"/>
+								<newline/>
+								<field name="location_id" string="Ubicacion origen" domain="[('usage','in',['internal','inventory'])]"/>
+								<field name="location_dest_id" string="Ubicacion destino" domain="[('usage','in',['internal','inventory'])]"/>
+								<field name="price_unit" string="Precio"/>
+								<field name="state" string="Estatus"/>
+							<!-- *******   Campos Invisibles  *************************  -->  
+								<field name="product_uos" invisible="True"/>
+								<field name="product_uos_qty" invisible="True"/>
+								<field name="name" colspan="4" invisible="True"/>
+								<field name="priority" invisible="True"/>							
+								<field name="address_id" invisible="True"/> 
+								<field name="product_packaging" invisible="True"/>
+								<field name="prodlot_id" context="product_id=product_id" invisible="True"/>
+								<field name="tracking_id" invisible="True"/>
+							<!-- ******************************************************   -->
+							</form>
+						</field>
+						<group colspan="4" col="8">
+							<field name="state" readonly="1"/>
+							<button name="button_confirm" string="Confirmar" states="draft"/>
+							<button name="force_assign" string="Forzar Asignacion" states="confirmed" type="object"/>
+							<button name="cancel_assign" string="Cancelar Asignacion" states="assigned" type="object"/>
+							<button type="action" name="%(wizard_empaquetado)d" string="Validar" states="assigned"/>
+							<button name="button_cancel" string="Anular" states="assigned,confirmed,draft"/>
+						</group>
+					</page>
+					<page string="Notas">
+						<field name="note" nolabel="1" colspan="4" required='True'/>
+					</page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+
+
+	<!-- 
+	=====================================================
+	Notas de Perdidas de Inventario 
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="act_stock_picking_lost_form">
+		<field name="name">Perdidas de Inventario</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('type','=','internal'),('type2','=','tras'),('origin','ilike','LOST')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'internal', 'type2' : 'tras', 'origin' : 'LOST'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_stock_pick_lost_all_vtree">
+		<field name="sequence" eval="19"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_stock_picking_lost_tree"/> 
+		<field name="act_window_id" ref="act_stock_picking_lost_form"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_stock_pick_lost_all_vform">
+		<field name="sequence" eval="29"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_stock_picking_lost_form"/>
+		<field name="act_window_id" ref="act_stock_picking_lost_form"/>
+	</record>
+	<menuitem
+		id="cust_menu_stock_picking_lost_all"
+		name="Perdidas de Inventario" 		
+		parent="cust_menu_stock_picking_lost"
+		action="act_stock_picking_lost_form"/>
+
+
+</data>
+</openerp>

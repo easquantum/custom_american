@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+	<!-- 
+	=====================================================
+	Notas de ajutes de Entrada
+	=====================================================
+	-->  
+	<menuitem
+		id="cust_menu_stock_nota_aju_in"
+		name="Entrada" 		
+		parent="cust_menu_stoc_nota_aju"/>
+
+	<!-- 
+	=====================================================
+	Notas Ajutes de Entrada 
+	=====================================================
+	--> 
+
+	<record model="ir.ui.view" id="vcust_picking_tree_alm_aju_in">
+		<field name="name">cust_picking_tree_alm_aju_in</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Ajuste de Entrada">
+				<field name="name"  colspan="4" string="Ajuste Entrada" select="1"/>	
+				<field name="date" string="Fecha" select="1"/>
+				<field name="origin" string="Orden Compra" invisible="True" select="1"/>
+				<field name="warehouse_id" string="Almacen" />
+				<field name="address_id" string="Proveedor" select="2"/>
+				<field name="backorder_id" readonly="1" string="Nota Devuelta" invisible="True"/>
+				<field name="state" string="Estatus Ajuste" readonly="1"/>
+				<field name="type2" invisible="True"/>
+			</tree>
+		</field>
+	</record>
+    <record id="act_custom_picking_tree_alm_aju_in" model="ir.actions.act_window">
+            <field name="name">Ajuste de Entrada</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="vcust_picking_tree_alm_aju_in"/>  
+    </record>
+    	
+	<record model="ir.ui.view" id="vcust_picking_form_alm_aju_in">
+		<field name="name">cust_picking_form_alm_aju_in</field>
+		<field name="model">stock.picking</field>
+		<field name="type">form</field>
+		<field name="priority" eval="21"/>
+		<field name="arch" type="xml">
+			<form string="Ajuste de Entrada">
+				<group colspan="4" col="6">
+					<field name="name" string="Ajuste Entrada" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="date" string="Fecha Ajuste" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="origin" string="Orden Compra" invisible="True" />
+					<field name="address_id" string="Proveedor" required='True'/>						
+					<field name="warehouse_id" string="Almacen" on_change="onchange_warehouse_dest_id(warehouse_id,type,type2)" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="backorder_id" string="Nota Devuelta" invisible="True"/>
+				</group>
+				<notebook colspan="4">
+					<page string="General">
+					<!-- *******   Campos Invisibles  *************************  -->
+						<field name="type" invisible="True"/>
+						<field name="type2" invisible="True"/>
+						<field name="move_type" invisible="True"/> 					
+ 						<newline/>
+						<field name="location_id" string="Ubicacion Origen" domain="[('usage','=','supplier')]" attrs="{'readonly':[('state','=','done')]}"/>
+						<field name="location_dest_id" string="Ubicacion destino" domain="[('usage','=','internal')]"  attrs="{'readonly':[('state','=','done')]}"/>
+					<!-- ******************************************************   -->
+						<field name="move_lines" widget="one2many_list" colspan="4" nolabel="1" mode="tree" attrs="{'readonly':[('state','=','done')]}">
+							<tree string="Linea de Productos">
+								<field name="product_id" string="Producto"/>								
+								<field name="product_qty" string="Cantidad"/>
+							   	<field name="product_uom" string="U. Medida" />
+								<field name="location_id" string="Ubicacion origen"/>
+							  	<field name="location_dest_id" string="Ubicacion destino" />
+								<field name="state" string="Estatus"/>
+							</tree>						
+							<form string="Productos">
+								<separator string="Informacion Detallada " colspan="4"/>
+								<field name="product_id" colspan="4" select="1" on_change="onchange_product_id(product_id, parent.location_id, parent.location_dest_id)" context="location=parent.location_id" string="Producto"/>
+								<field name="product_qty" string="Cantidad"/>
+								<field name="product_uom" string="U. Medida"/>
+								<field name="date_planned" string="Fecha Prevista"/>
+								<newline/>
+								<field name="location_id" string="Ubicacion origen" domain="[('usage','=','supplier')]"/>
+								<field name="location_dest_id" string="Ubicacion DestinoS" domain="[('id','=',parent.location_dest_id)]"/>
+								<field name="state" string="Estatus"/>
+							<!-- *******   Campos Invisibles  *************************  -->  
+								<field name="product_uos" invisible="True"/>
+								<field name="product_uos_qty" invisible="True"/>
+								<field name="name" colspan="4" invisible="True"/>
+								<field name="priority" invisible="True"/>							
+								<field name="address_id" invisible="True"/> 
+								<field name="product_packaging" invisible="True"/>
+								<field name="prodlot_id" context="product_id=product_id" invisible="True"/>
+								<field name="tracking_id" invisible="True"/>
+							<!-- ******************************************************   -->
+							</form>
+						</field>
+						<group colspan="4" col="8">
+							<field name="state" readonly="1"/>
+							<button name="button_confirm" string="Confirmar" states="draft"/>
+							<button name="action_assign" string="Asignar" states="confirmed" type="object"/>
+							<button name="force_assign" string="Forzar Asignacion" states="confirmed" type="object"/>
+							<button name="cancel_assign" string="Cancelar Asignacion" states="assigned" type="object"/>
+							<button type="action" name="%(wizard_empaquetado)d" string="Validar" states="assigned"/>
+							<button name="button_cancel" string="Anular" states="assigned,confirmed,draft"/>
+						</group>
+					</page>
+					<page string="Notas">
+						<field name="note" nolabel="1" colspan="4" required='True'/>
+					</page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+
+	<!-- 
+	=====================================================
+	Notas de ajustes Filtradas 
+	=====================================================
+	-->  
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_inall">
+		<field name="name">Ajuste de Entrada</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('type','=','in'),('type2','=','aju')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="vcust_actw_picking_tree_alm_aju_inall">
+		<field name="sequence" eval="50"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_inall"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="vcust_actw_picking_form_alm_aju_inall">
+		<field name="sequence" eval="80"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_inall"/>
+	</record>
+	<menuitem
+		id="cust_menu_stock_nota_aju_inall"
+		name="Todos" 		
+		parent="cust_menu_stock_nota_aju_in" 
+		action="cust_actw_picking_alm_aju_inall"/> 
+
+
+	<!-- 
+	=====================================================
+	Notas de ajustes Filtradas: Caracas 
+	=====================================================
+	-->  
+
+	<menuitem
+		id="cust_menu_stock_nota_aju_in_car"
+		name="Caracas" 		
+		parent="cust_menu_stock_nota_aju_in"/>
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_car_inall">
+		<field name="name">Todos Ajustes Entrada (C) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','in'),('type2','=','aju')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inall_car">
+		<field name="sequence" eval="51"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_car_inall"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inall_car">
+		<field name="sequence" eval="81"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_car_inall"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_car_all"
+		name="Todos (C)" 		
+		parent="cust_menu_stock_nota_aju_in_car"
+		action="cust_actw_picking_alm_aju_car_inall"/>
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_car_inassig">
+		<field name="name">Ajustes Entrada Pendiente (C) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','in'),('type2','=','aju'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inassig_car">
+		<field name="sequence" eval="52"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_car_inassig"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inassig_car">
+		<field name="sequence" eval="82"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_car_inassig"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_car_assig"
+		name="Ajustes Entrada Pendiente (C)" 		
+		parent="cust_menu_stock_nota_aju_in_car"
+		action="cust_actw_picking_alm_aju_car_inassig"/>
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_car_indone"> 
+		<field name="name">Ajustes Entrada Procesados (C) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','in'),('type2','=','aju'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_indone_car"> 
+		<field name="sequence" eval="53"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/>  
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_car_indone"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_indone_car"> 
+		<field name="sequence" eval="83"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_car_indone"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_car_done"
+		name="Ajustes Entrada Procesados (C)" 		
+		parent="cust_menu_stock_nota_aju_in_car"
+		action="cust_actw_picking_alm_aju_car_indone"/> 
+
+	<!-- 
+	=====================================================
+	Notas de ajustes Filtradas: Maracaibo 
+	=====================================================
+	-->  
+
+	<menuitem
+		id="cust_menu_stock_nota_aju_in_mar"
+		name="Maracaibo" 		
+		parent="cust_menu_stock_nota_aju_in"/>
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_mar_inall">
+		<field name="name">Todos Ajustes Entrada (O) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','in'),('type2','=','aju')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inall_mar">
+		<field name="sequence" eval="54"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_mar_inall"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inall_mar">
+		<field name="sequence" eval="84"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_mar_inall"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_mar_all"
+		name="Todos (O)" 		
+		parent="cust_menu_stock_nota_aju_in_mar"
+		action="cust_actw_picking_alm_aju_mar_inall"/>
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_mar_inassig">
+		<field name="name">Ajustes Entrada Pendiente (O) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','in'),('type2','=','aju'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inassig_mar">
+		<field name="sequence" eval="55"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_mar_inassig"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inassig_mar">
+		<field name="sequence" eval="85"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_mar_inassig"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_mar_assig"
+		name="Ajustes Entrada Pendiente (O)" 		
+		parent="cust_menu_stock_nota_aju_in_mar"
+		action="cust_actw_picking_alm_aju_mar_inassig"/>
+		
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_mar_indone">
+		<field name="name">Ajustes Entrada Procesados (O) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','in'),('type2','=','aju'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_indone_mar">
+		<field name="sequence" eval="56"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_mar_indone"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_indone_mar">
+		<field name="sequence" eval="86"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_mar_indone"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_mar_done"
+		name="Ajustes Entrada Procesados (O)" 		
+		parent="cust_menu_stock_nota_aju_in_mar"
+		action="cust_actw_picking_alm_aju_mar_indone"/>
+
+	<!-- 
+	=====================================================
+	Notas de ajustes Filtradas: Turmero 
+	=====================================================
+	-->  
+
+	<menuitem
+		id="cust_menu_stock_nota_aju_in_tur"
+		name="Turmero" 		
+		parent="cust_menu_stock_nota_aju_in"/>
+		
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_tur_inall">
+		<field name="name">Todos Ajustes Entrada (T) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','in'),('type2','=','aju')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inall_tur">
+		<field name="sequence" eval="57"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_tur_inall"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inall_tur">
+		<field name="sequence" eval="87"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_tur_inall"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_tur_all"
+		name="Todos (T)" 		
+		parent="cust_menu_stock_nota_aju_in_tur"
+		action="cust_actw_picking_alm_aju_tur_inall"/>		
+		
+		
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_tur_inassig">
+		<field name="name">Ajustes Entrada Pendiente (T) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','in'),('type2','=','aju'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inassig_tur">
+		<field name="sequence" eval="58"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_tur_inassig"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inassig_tur">
+		<field name="sequence" eval="88"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_tur_inassig"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_tur_assig"
+		name="Ajustes Entrada Pendiente (T)" 		
+		parent="cust_menu_stock_nota_aju_in_tur"
+		action="cust_actw_picking_alm_aju_tur_inassig"/>		
+		
+		
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_tur_indone">
+		<field name="name">Ajustes Entrada Procesados (T) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','in'),('type2','=','aju'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_indone_tur">
+		<field name="sequence" eval="59"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_tur_indone"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_indone_tur">
+		<field name="sequence" eval="89"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_tur_indone"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_tur_done"
+		name="Ajustes Entrada Procesados (T)" 		
+		parent="cust_menu_stock_nota_aju_in_tur"
+		action="cust_actw_picking_alm_aju_tur_indone"/>
+		
+		
+	<!-- 
+	=====================================================
+	Notas de ajustes Filtradas: Barcelona
+	=====================================================
+	-->  
+
+	<menuitem
+		id="cust_menu_stock_nota_aju_in_bar"
+		name="Barcelona" 		
+		parent="cust_menu_stock_nota_aju_in"/>
+		
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_bar_inall">
+		<field name="name">Todos Ajustes Entrada (B) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','in'),('type2','=','aju')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inall_bar">
+		<field name="sequence" eval="60"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_bar_inall"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inall_bar">
+		<field name="sequence" eval="90"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_bar_inall"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_bar_all"
+		name="Todos (B)" 		
+		parent="cust_menu_stock_nota_aju_in_bar"
+		action="cust_actw_picking_alm_aju_bar_inall"/>
+
+
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_bar_inassig">
+		<field name="name">Ajustes Entrada Pendiente (B) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','in'),('type2','=','aju'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_inassig_bar">
+		<field name="sequence" eval="61"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_bar_inassig"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_inassig_bar">
+		<field name="sequence" eval="91"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_bar_inassig"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_bar_assig"
+		name="Ajustes Entrada Pendiente (B)" 		
+		parent="cust_menu_stock_nota_aju_in_bar"
+		action="cust_actw_picking_alm_aju_bar_inassig"/>
+	
+	<record model="ir.actions.act_window" id="cust_actw_picking_alm_aju_bar_indone">
+		<field name="name">Ajustes Entrada Procesados (B) </field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','in'),('type2','=','aju'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_tree_alm_aju_indone_bar">
+		<field name="sequence" eval="62"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_bar_indone"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="awv_picking_form_alm_aju_indone_bar">
+		<field name="sequence" eval="92"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="vcust_picking_form_alm_aju_in"/>
+		<field name="act_window_id" ref="cust_actw_picking_alm_aju_bar_indone"/> 
+	</record>
+	<menuitem
+		id="cust_menu_pinking_aju_in_bar_done"
+		name="Ajustes Entrada Procesados (B)" 		
+		parent="cust_menu_stock_nota_aju_in_bar"
+		action="cust_actw_picking_alm_aju_bar_indone"/>
+
+	<!-- 
+	=====================================================
+	Notas de ajustes Filtradas: Puerto Ordaz
+	=====================================================
+	-->  
+
+    <menuitem 
+    id="menu_stock_nota_aj_in_pto" 
+    name="Puerto Ordaz"
+    parent="cust_menu_stock_nota_aju_in"/>
+
+
+    <record  model="ir.actions.act_window"  id="act_stock_nota_aj_in_pto_all"> 
+      <field name="name">Todos (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','in'),('type2','=','aju')]</field> 
+      <field name="context"> {'contact_display': 'partner','type' : 'in','type2' : 'aju'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_nota_aj_in_pto_all"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+    <field name="act_window_id" ref="act_stock_nota_aj_in_pto_all"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_stock_nota_aj_in_pto_all"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="vcust_picking_form_alm_aju_in"/> 
+    <field name="act_window_id" ref="act_stock_nota_aj_in_pto_all"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_nota_aj_in_pto_all" 
+    	action="act_stock_nota_aj_in_pto_all" 
+    	parent="menu_stock_nota_aj_in_pto"
+        name="Todos (P)"/>
+
+
+
+    <record  model="ir.actions.act_window"  id="act_stock_nota_aj_in_pto_assigned"> 
+      <field name="name">Ajustes Entrada Pendiente (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','in'),('state','=','assigned'),('type2','=','aju')]</field> 
+      <field name="context"> {'contact_display': 'partner','type' : 'in', 'type2' : 'aju'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_nota_aj_in_pto_assigned"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+    <field name="act_window_id" ref="act_stock_nota_aj_in_pto_assigned"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_stock_nota_aj_in_pto_assigned"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="vcust_picking_form_alm_aju_in"/> 
+    <field name="act_window_id" ref="act_stock_nota_aj_in_pto_assigned"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_nota_aj_in_pto_assigned" 
+    	action="act_stock_nota_aj_in_pto_assigned" 
+    	parent="menu_stock_nota_aj_in_pto"
+        name="Ajustes Entrada Pendiente (P)"/>
+
+
+    <record  model="ir.actions.act_window"   id="act_stock_nota_aj_in_pto_done"> 
+      <field name="name">Ajustes Entrada Procesados (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','in'),('state','=','done'),('type2','=','aju')]</field> 
+      <field name="context"> {'contact_display': 'partner','type' : 'in', 'type2' : 'aju'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_nota_aj_in_pto_done"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="vcust_picking_tree_alm_aju_in"/> 
+    <field name="act_window_id" ref="act_stock_nota_aj_in_pto_done"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_stock_nota_aj_in_pto_done"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="vcust_picking_form_alm_aju_in"/> 
+    <field name="act_window_id" ref="act_stock_nota_aj_in_pto_done"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_nota_aj_in_pto_done" 
+    	action="act_stock_nota_aj_in_pto_done" 
+    	parent="menu_stock_nota_aj_in_pto"
+        name="Ajustes Entrada Procesados (P)"/>
+
+</data>
+</openerp>

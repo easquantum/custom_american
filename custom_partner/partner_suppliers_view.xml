@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <menuitem  id="custom_menu_base_partner" name="Empresas American" parent="base.menu_base_partner" sequence="3"/>
+
+	<!--
+	=======================
+	Custom Suppliers Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_partner_suppliers_tree">
+		<field name="name">partner.suppliers.tree</field>
+		<field name="model">res.partner</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="12"/>
+		<field name="arch" type="xml">
+			<tree string="Proveedores">
+				<field name="ref" string="Código" select="1"/>
+				<field name="name" string="Proveedores" select="1"/>
+				<field name="vat" string="Cédula/Rif" select="1"/> 
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_partner_suppliers_tree" model="ir.actions.act_window">
+            <field name="name">Proveedores American</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_partner_suppliers_tree"/>
+    </record>
+	<!--
+	=======================
+	Custom Suppliers Form
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_partner_suppliers_form">
+		<field name="name">partner.suppliers.form</field>
+		<field name="model">res.partner</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Proveedores">
+                    <group colspan="4" col="6">
+                        <field name="name" string="Proveedor"  select="1"/>
+                  		<field name="ref"  string="Código"  select="1"/>
+					<field name="vat" string="Cédula/Rif"  select="1"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="General">
+                        		<group colspan="4" col="6">
+             						<field name="date"  string="Fecha" />
+             						<field name="customer" string="Cliente"/>
+             						<group colspan="2" col="4">
+                 						<field name="supplier" string="Proveedor" />
+                 						<field name="salesman" string="Vendedor" />
+                 					</group>
+                 					<field name="parent_id" select="2" string="Empresa Principal"/>
+                 					<field name="carrier" string="Transportista" /> 
+                 					<group colspan="2" col="4">
+                 					<field name="adv_cos" string="Costo ADV"/>
+                 					<field name="active" string="Activo"/>                  					                 					
+                 					</group>  
+                 					<field name="website" widget="url" string="Web"/> 
+                 					<field name="special" string="Contribuyente"/>   
+                 					<field name="lang" string="Idioma"/>  
+                 					       				
+                 			</group> 
+                 			<newline/>
+					<separator string="Retencion IVA" colspan="2"/>
+					<separator string="Retencion ISLR" colspan="2"/>
+                            		<field name="retention" string="Retencion"/>
+                 			<group colspan="2" col="4">
+                            		<field name="person_type_id" string="Tipo Persona ISLR"/>
+                            		<field name="islr" string="Retiene ISLR"/>
+                 			</group>  
+                 			<newline/>
+					<separator string="Propiedades Contables" colspan="4"/>
+                 			<field name="property_account_receivable" string="Cta. Por Cobrar"/>
+                 			<field name="property_account_payable" string="Cta. Por Pagar"/>
+	     					<field name="property_payment_term" string="Terminos Pago"/>
+                            <field name="property_account_reserv" string="Cta. Reserva"/>
+                            <field name="property_retention_receivable" string="Cta. Cobrar Ret."/>
+                            <field name="property_retention_payable" string="Cta. Pagar Ret"/> 
+                            <field name="property_account_position" string="Impuesto Fiscal"  invisible="True"/>
+						<newline/>
+						<separator string="Lista Precios" colspan="4"/>
+						<field name="property_product_pricelist"/>
+						<field name="property_product_pricelist_purchase"/>                        		                  			 
+                            <separator colspan="4" string="Categorias"/>
+                            <field colspan="4" name="category_id" nolabel="1"/>
+                        </page>
+                        <page string="Contactos">
+						<field colspan="4" mode="form,tree" name="address" nolabel="1">
+	                                <form string="Contactos">
+	                                    <field name="name"  string="Contacto/R. Social"/>
+	                                    <field name="type" string="Tipo de Dirección" />
+	                                    <field name="street"  string="Av/Calle"/>
+	                                    <field name="street2" string="Zona/Urb."/>
+	                                    <field completion="1" name="country_id"  string="País"/>
+	                                    <field name="state_id"  string="Estado"/>
+	                                    <field name="city_id"  string="Ciudad"/>
+	                                    <field name="zip"   string="Cod. Postal"/>
+	                                    <field name="phone" string="Teléfono"/>
+	                                    <field name="fax" string="Fax"/>
+	                                    <field name="mobile"  string="Celular"/>
+	                                    <field name="email" select="2" widget="email" string="Correo"/>
+	                                </form>
+	                                <tree string="Contactos">
+	                                    <field name="name" string="Nombre"/>
+	                                    <field name="phone" string="Teléfono"/>
+	                                    <field name="email" string="Correo"/>
+	                                    <field name="type" string="Tipo de Dirección"/>
+	                                </tree>
+                            </field>
+                        </page>
+                        <page string="Eventos">
+                            <field colspan="4" name="events" nolabel="1" widget="one2many_list"/>
+                        </page>
+                        <page string="Notas">
+                            <field colspan="4" name="comment" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+	</record>
+
+	<record id="action_partner_suppliers_form" model="ir.actions.act_window">
+		<field name="name">Proveedores American</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">res.partner</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('supplier','=',1)]</field>
+	</record>
+	<record id="action_partner_suppliers_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_partner_suppliers_tree"/>
+		<field name="act_window_id" ref="action_partner_suppliers_form"/>
+	</record>
+	<record id="action_partner_suppliers_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_partner_suppliers_form"/>
+		<field name="act_window_id" ref="action_partner_suppliers_form"/>
+	</record>
+
+	<menuitem	name="Proveedores American" action="action_partner_suppliers_form" id="menu_partner_suppliers_form"	parent="custom_menu_base_partner"/>
+
+	<record id="action_all_partner_form" model="ir.actions.act_window">
+		<field name="name">Todas Las Empresas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">res.partner</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_all_partner_view1" model="ir.actions.act_window.view">
+		<field eval="16" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_partner_suppliers_tree"/>
+		<field name="act_window_id" ref="action_all_partner_form"/>
+	</record>
+	<record id="action_all_partner_view2" model="ir.actions.act_window.view">
+		<field eval="26" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_partner_suppliers_form"/>
+		<field name="act_window_id" ref="action_all_partner_form"/>
+	</record>
+
+	<menuitem	name="Todas Las Empresas" action="action_all_partner_form" id="menu_all_partner_form"	parent="custom_menu_base_partner"/>
+
+</data>
+</openerp>

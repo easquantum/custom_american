@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu 
+	=======================
+	-->
+     <menuitem  id="custom_menu_retentions_client" name="Retenciones Clientes" parent="sale.menu_sale_root" /> 
+
+
+	<!-- 
+	=====================================================
+	Retention
+	=====================================================
+	-->  
+
+
+        <record id="view_retention_client_tree" model="ir.ui.view">
+            <field name="name">account.retention.client.tree</field>
+            <field name="model">account.retention</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="10"/>
+            <field name="arch" type="xml">
+                <tree colors="blue:state=='draft'" string="Retention">
+                    <field name="partner_id" string="Empresa" select="1"/>
+                    <field name="code" string="Nro Comprobante"/>
+                    <field name="amount_base_ret" string="Base"/>                                
+                    <field name="total_tax_ret" string="Retencion"/>
+                    <field name="inicial_date" string="Fecha Inicio"/>
+                    <field name="state" string="Estatus"/>
+                    <field name="type" string="Tipo"/>
+                    <field name="name" string="Descripcion"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_retention_client_tree" model="ir.actions.act_window">
+                <field name="name">Retenciones Cliente</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.retention</field>
+                <field name="view_type">tree</field>
+                <field name="view_id" ref="view_retention_client_tree"/>
+        </record>
+
+
+        <record id="view_retention_client_form" model="ir.ui.view">
+            <field name="name">account.retention.client.form</field>
+            <field name="model">account.retention</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Retenciones Clientes">
+                    <group colspan="4" col="6">
+                        <field name="journal_id" select="2" string="Diario"/>
+                        <field name="type" readonly="1" select="2" string="Tipo"/>
+                        <field name="code"  readonly="1" select="1" string="Nro. Comprobante"/>
+                        <field name="partner_id" string="Cliente" select="1" domain="[('customer','=',1)]" on_change="partner_id_change(type)"/>
+                        <field name="currency_id" string="Moneda"/>
+                        <field name="inicial_date" string="Fecha Inicio"/>
+                        <field domain="[('type','&lt;&gt;','view'), ('company_id', '=', company_id),('journal_id','=',journal_id)]" 
+                               name="account_id" string="Cta. Retencion"/>
+                        <field name="name" select="2" string="Descripcion"/>
+						<group colspan="2" col="4">
+							<label colspan="2"/>	
+							<button name="button_compute_retention" string="Cargar Facturas" states="draft" type="object" colspan="2"/>
+						</group>	
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Retencion">
+                            <field colspan="4" name="retention_line" nolabel="1" widget="one2many_list" >
+                            <tree string="Facturas Comprobante">
+                               <field name="name" string="Factura"/>
+                               <field name="retention_rate" string="Tasa de Retencion" invisible="True"/>
+                               <field name="amount_tax_ret" string="Monto ret" invisible="True"/>
+                               <field name="base_ret" string="Base" invisible="True"/>
+                               
+                               <field name="base_amount" string="Monto Base"/>
+                               <field name="tax_amount" string="Monto IVA"/>
+                               <field name="rate_tax" string="Porc. IVA"/>
+                               <field name="retention_amount" string="Monto Retencion"/> 
+                               <field name="rate_amount" string="Porc. Retencion"/> 
+                            </tree>     
+                            <form string="Retencion line"> 
+                               <field name="invoice_id" string="Factura" 
+                               domain = "[('type', 'in',['out_invoice','out_refund']),('state', '=','open')]"  
+                               on_change="invoice_id_change(invoice_id,parent.company_id,parent.type)"/>
+                               <newline/>
+                               <field name="name" string="Descripcion"/> 
+                               <newline/>
+                               <field name="base_amount" string="Monto Base"/> 
+                               <field name="rate_tax" string="Porc. IVA"/> 
+                               <field name="tax_amount" string="IVA"/> 
+                               <field name="rate_amount" string="Tasa Retencion"/>
+                               <field name="retention_amount" string="Monto Retencion"/>
+                                                          
+                               <field name="retention_rate" string="Tasa de Retencion" invisible="True"/>
+                               <field name="amount_tax_ret" string="Monto ret" invisible="True"/>
+                               <field name="base_ret" string="Base" invisible="True"/> 
+	                       <newline/>
+	                       <separator string="Informacion Contable" colspan="4"/>
+                               <field name="move_id" string="Asiento"/>
+                               <button name="action_done_cancel_invoice" string="Cancel" type="object" icon="gtk-convert"/>
+                               <field name="tax_line" string="Impuestos" invisible="True"/>
+                            </form>    
+                            </field>
+                            <group colspan="4" col="6">
+                                <field name="state" select="2"/>
+                                <button name="retention_done" states="draft" string="Pagar" icon="gtk-execute"/>
+                                <button name="button_create_number" string="Asignar Comprobante" states="draft" type="object" />
+                                <button name="button_cancel_number" string="Cancelar Comprobante" states="draft" type="object" />
+                            </group>
+                            <newline/>
+                            <group col="4" colspan="2">
+                            <field name="amount_base_ret" /> 
+                            <label string="" colspan="2"/>
+                            <field name="total_tax_ret" />
+                            <label string="" colspan="2"/>  
+                           </group> 
+                        </page>
+                        <page string="Miscelaneos">
+                            <field name="company_id" string="Empresa"/>
+                            <field name="final_date"   string="Fecha Fin"/> 
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+        </record> 
+
+    	<record model="ir.actions.act_window" id="action_account_retention_client_all">
+	    	<field name="name">Retentionciones Cliente</field>
+	    	<field name="res_model">account.retention</field>
+	    	<field name="type">ir.actions.act_window</field>
+            <field name="domain">[('type','=','out_invoice')]</field> 
+	    	<field name="context">{'type' : 'out_invoice'}</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+    	</record>
+    	<record model="ir.actions.act_window.view" id="action_retention_client_all_view1">
+	    	<field name="sequence" eval="10"/>
+	    	<field name="view_mode">tree</field>
+	    	<field name="view_id" ref="view_retention_client_tree"/> 
+	    	<field name="act_window_id" ref="action_account_retention_client_all"/>
+	    </record>
+	    <record model="ir.actions.act_window.view" id="action_retention_client_all_view2">
+	    	<field name="sequence" eval="20"/>
+	    	<field name="view_mode">form</field>
+	    	<field name="view_id" ref="view_retention_client_form"/>
+	    	<field name="act_window_id" ref="action_account_retention_client_all"/>
+	    </record>
+        <menuitem id="menu_retention_client_all" name="Retenciones Cliente" parent="custom_menu_retentions_client" action="action_account_retention_client_all"/>
+ 
+    	<record model="ir.actions.act_window" id="action_account_retention_client_draft">
+	    	<field name="name">Retentionciones Cliente Borrador</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="res_model">account.retention</field>
+	    	<field name="domain">[('state','=','draft'), ('type','=','out_invoice')]</field> 
+	    	<field name="context">{'type' : 'out_invoice'}</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+    	</record>
+    	<record model="ir.actions.act_window.view" id="action_retention_client_draft_view1">
+	    	<field name="sequence" eval="10"/>
+	    	<field name="view_mode">tree</field>
+	    	<field name="view_id" ref="view_retention_client_tree"/> 
+	    	<field name="act_window_id" ref="action_account_retention_client_draft"/>
+	    </record>
+	    <record model="ir.actions.act_window.view" id="action_retention_client_draft_view2">
+	    	<field name="sequence" eval="20"/>
+	    	<field name="view_mode">form</field>
+	    	<field name="view_id" ref="view_retention_client_form"/>
+	    	<field name="act_window_id" ref="action_account_retention_client_draft"/>
+	    </record>
+        <menuitem id="menu_retention_client_draft" name="Retenciones Cliente Borrador" parent="custom_menu_retentions_client" action="action_account_retention_client_draft"/>
+
+    </data>
+</openerp>

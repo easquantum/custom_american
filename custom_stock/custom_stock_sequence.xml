@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+	<!--
+	All Sequences for packings 
+	-->
+
+	<record model="ir.sequence.type" id="seq_type_picking_out_def">
+		<field name="name">Packing Out</field>
+		<field name="code">stock.picking.out_def</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_out_dev">
+		<field name="name">Supplier Refund</field>
+		<field name="code">stock.picking.out_dev</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_in_def">
+		<field name="name">Packing In</field>
+		<field name="code">stock.picking.in_def</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_in_dev">
+		<field name="name">Customer Refund</field>
+		<field name="code">stock.picking.in_dev</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_internal_tras">
+		<field name="name">Traspaso</field>
+		<field name="code">stock.picking.internal_tras</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_internal_mues">
+		<field name="name">Muestreo</field>
+		<field name="code">stock.picking.internal_mues</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_internal_trans">
+		<field name="name">Transferencia</field>
+		<field name="code">stock.picking.internal_trans</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_aju_out">
+		<field name="name">Ajuste  Salida</field>
+		<field name="code">stock.picking.out_aju</field>
+	</record>
+	<record model="ir.sequence.type" id="seq_type_picking_in_aju">
+		<field name="name">Ajuste  Entrada</field>
+		<field name="code">stock.picking.in_aju</field>
+	</record>
+
+
+	<record model="ir.sequence" id="seq_picking_out_def">
+		<field name="name">Packing Out</field>
+		<field name="code">stock.picking.out_def</field>
+		<field name="prefix">NS:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_out_dev">
+		<field name="name">Supplier Refund</field>
+		<field name="code">stock.picking.out_dev</field>
+		<field name="prefix">DP:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_in_def">
+		<field name="name">Packing In</field>
+		<field name="code">stock.picking.in_def</field>
+		<field name="prefix">NE:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_in_dev">
+		<field name="name">Customer Refund</field>
+		<field name="code">stock.picking.in_dev</field>
+		<field name="prefix">DC:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_internal_tras">
+		<field name="name">Traspaso</field>
+		<field name="code">stock.picking.internal_tras</field>
+		<field name="prefix">TR:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_internal_mues">
+		<field name="name">Muestreo</field>
+		<field name="code">stock.picking.internal_mues</field>
+		<field name="prefix">MT:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_internal_trans">
+		<field name="name">Transferencia</field>
+		<field name="code">stock.picking.internal_trans</field>
+		<field name="prefix">TF:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_ajui_out">
+		<field name="name">Ajuste para Salida</field>
+		<field name="code">stock.picking.out_aju</field>
+		<field name="prefix">AS:</field>
+		<field name="padding">4</field>
+	</record>
+	<record model="ir.sequence" id="seq_picking_in_aju">
+		<field name="name">Ajuste para Entada</field>
+		<field name="code">stock.picking.in_aju</field>
+		<field name="prefix">AE:</field>
+		<field name="padding">4</field>
+	</record>
+</data>
+</openerp>
+

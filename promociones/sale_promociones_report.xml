@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		<report id="report_promocion"
+			name="sale_promocion"
+			string="Promocion"
+			model="sale.promocion"
+			rml="custom_american/promociones/report/report_promocion_ventas.rml"
+			header="False"
+			auto="False"/>	 
+
+		<report id="report_regalo"
+			name="sale_regalo"
+			string="Regalo"
+			model="sale.promocion"
+			rml="custom_american/promociones/report/report_regalo_ventas.rml"
+			header="False"
+			auto="False"/>
+<!-- 
+		<report id="report_islr_resumen"
+			name="islr_resumen"
+			string="ISLR Resumen"
+			model="account.islr.tax"
+			rml="custom_american/islr/report/report_resumen_islr.rml"
+			header="False"
+			auto="False"
+			menu="False"/>
+--> 
+
+	</data>
+</openerp>

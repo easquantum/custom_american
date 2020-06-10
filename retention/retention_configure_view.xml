@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Configure Tree
+	=======================
+	-->
+        <record id="view_retention_configure_tree" model="ir.ui.view">
+            <field name="name">retention.configure.tree</field>
+            <field name="model">account.retention.configure</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Configuracion Retencion">
+                    <field name="name" string="Descripcion" select="1"/>
+                    <field name="account_id"  string="Cuenta por defecto" select="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_retention_type_tree" model="ir.actions.act_window">
+                <field name="name">Configuracion Retencion IVA</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.retention.configure</field>
+                <field name="view_type">tree</field>
+                <field name="view_id" ref="view_retention_configure_tree"/>
+        </record>
+
+	<!--
+	=======================
+	Custom Configure Form
+	=======================
+	-->
+        <record id="view_retention_configure_form" model="ir.ui.view">
+            <field name="name">retention.configure.form</field>
+            <field name="model">account.retention.configure</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Configuracion Retencion">
+                    <separator string="Informacion" colspan="4"/>
+                    <field name="name" string="Descripcion" select="1"/>
+                    <field name="account_id" string="Cuenta por defecto"/>
+                    <field name="account_payable" string="Por Pagar"/>
+                    <field name="account_receivable" string="Por Cobrar"/>
+                </form> 
+            </field>
+        </record> 
+    	<record id="action_retention_configure_form" model="ir.actions.act_window">
+	    	<field name="name">Configuracion Retencion</field>
+	    	<field name="res_model">account.retention.configure</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+    	</record>
+    	<record id="act_retention_configure_vwtree" model="ir.actions.act_window.view"> 
+    		<field eval="10" name="sequence"/>
+    		<field name="view_mode">tree</field>
+    		<field name="view_id" ref="view_retention_configure_tree"/> 
+    		<field name="act_window_id" ref="action_retention_configure_form"/>
+    	</record>
+    	<record id="act_retention_configure_vwform" model="ir.actions.act_window.view">
+    		<field eval="20" name="sequence"/>
+    		<field name="view_mode">form</field>
+    		<field name="view_id" ref="view_retention_configure_form"/>
+    		<field name="act_window_id" ref="action_retention_configure_form"/>
+    	</record>
+	    <menuitem   id="menu_retention_configure" 
+	                name="Configuracion Retencion IVA" 
+	                parent="account.menu_finance_configuration" 
+	                action="action_retention_configure_form"/>
+
+       </data>
+</openerp>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Reports
+	=======================
+	-->
+
+		<report id="report_product_by_category"
+			name="product_by_category"
+			string="Productos Categoria"
+			model="product.product"
+			rml="custom_american/custom_product/report/product_category.rml"
+			header="False"
+			auto="False"
+			menu="False"/> 
+
+		<report id="report_product_categ_listprice"
+			name="product_categ_listprice"
+			string="Lista de Precios por Categoria"
+			model="product.product"
+			rml="custom_american/custom_product/report/product_category_listprice.rml" 
+			header="False"
+			auto="False"
+			menu="False"/>	
+
+		<report id="report_bycateg_commissions"
+			name="product_categ_commissions"
+			string="Productos por Categoria Comisiones"
+			model="product.category.salesman"
+			rml="custom_american/custom_product/report/product_category_commissions.rml"
+			header="False"
+			auto="False"
+			menu="False"/>
+</data>
+</openerp>

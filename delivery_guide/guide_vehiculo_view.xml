@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Menu Guide
+	=======================
+	-->
+	 <menuitem  id="custom_menu_guide_config" name="Vehiculos" parent="stock.menu_stock_configuration" />
+	 	
+	<!--
+	=======================
+	Custom Tipo Vehiculo Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_tipo_vehiculo_tree">
+		<field name="name">tipo.vehiculo.tree</field>
+		<field name="model">guide.tipo.vehiculo</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Tipo de Vehiculo">
+				<field name="name" string="Tipo Vehiculo" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_tipo_vehiculo_tree" model="ir.actions.act_window">
+            <field name="name">Tipo de Vehiculo</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">guide.tipo.vehiculo</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_tipo_vehiculo_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom  Tipo Vehiculo Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_tipo_vehiculo_form">
+		<field name="name">tipo.vehiculo.form</field>
+		<field name="model">guide.tipo.vehiculo</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Tipo de Vehiculo">
+				<field name="name" string="Tipo Vehiculo" select="1"/> 
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_tipo_vehiculo_form" model="ir.actions.act_window">
+		<field name="name">Tipo de Vehiculo</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">guide.tipo.vehiculo</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_tipo_vehiculo_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_tipo_vehiculo_tree"/>
+		<field name="act_window_id" ref="action_tipo_vehiculo_form"/>
+	</record>
+	<record id="action_tipo_vehiculo_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_tipo_vehiculo_form"/>
+		<field name="act_window_id" ref="action_tipo_vehiculo_form"/>
+	</record>
+	
+	<menuitem name="Tipo Vehiculo" action="action_tipo_vehiculo_form" id="menu_tipo_vehiculo" parent="custom_menu_guide_config"/>  	
+	
+	
+	
+	
+	
+	<!--
+	=======================
+	Custom Vehiculo Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_vehiculo_tree">
+		<field name="name">vehiculo.tree</field>
+		<field name="model">guide.vehiculo</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Vehiculos">
+				<field name="name" string="Vehiculo" select="1"/>
+				<field name="placa" string="Placa" select="1"/>
+				<field name="tipo_id" string="Tipo"/> 
+				<field name="carrier_company_id" string="Transportista"/>
+				<field name="driver_id" domain="[('parent_id','=',carrier_company_id)]" string="Chofer" select="1"/>
+				<field name="weight" string="Peso Bruto"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_vehiculo_tree" model="ir.actions.act_window">
+            <field name="name">Vehiculos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">guide.vehiculo</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_vehiculo_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom  Tipo Vehiculo Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_vehiculo_form">
+		<field name="name">vehiculo.form</field>
+		<field name="model">guide.vehiculo</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Vehiculos">
+				<field name="name" string="Vehiculo" select="1"/> 
+				<field name="active" string="Activo"/>				
+				<field name="placa" string="Placa" select="1"/>
+				<field name="serial_carroceria"  string="Serial Carroceria" select="2"/>												
+				<field name="serial_motor" string="Serial Motor" select="2"/>
+				<field name="marca" string="Marca"/>
+				<field name="modelo" string="Modelo"/>
+				<field name="color" string="Color"/>
+				<field name="tipo_id" string="Tipo"/>
+				<field name="weight" string="Peso Bruto"/>
+				<field name="carrier_company_id" string="Tranportista" select="1"/>
+				<field name="driver_id" domain="[('parent_id','=',carrier_company_id)]" string="Chofer" select="1"/>
+				
+				<newline/>
+				<separator string="Notas" colspan="4"/>
+				<field name="note" nolabel="1" colspan="4"/>				
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_vehiculo_form" model="ir.actions.act_window">
+		<field name="name">Vehiculos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">guide.vehiculo</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_vehiculo_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_vehiculo_tree"/>
+		<field name="act_window_id" ref="action_vehiculo_form"/>
+	</record>
+	<record id="action_vehiculo_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_vehiculo_form"/>
+		<field name="act_window_id" ref="action_vehiculo_form"/>
+	</record>
+	
+	<menuitem name="Vehiculos" action="action_vehiculo_form" id="menu_vehiculo" parent="custom_menu_guide_config"/>	
+	
+	
+	
+</data>
+</openerp>	

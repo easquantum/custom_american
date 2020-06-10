@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="List partner" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+	<frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+	<pageGraphics>
+			<setFont name="Helvetica-Bold" size="5"/>
+			<drawString x="10.0cm" y="1cm">Pag. <pageNumber/></drawString>
+	</pageGraphics>
+</pageTemplate>
+</template>
+<stylesheet> 
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau6"> 
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tabla2"> 
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/> 
+<lineStyle kind="GRID" colorName="black"/>
+<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau2"> 
+	<blockAlignment value="LEFT"/>
+	<blockValign value="TOP"/>
+	<lineStyle kind="GRID" colorName="black"/>
+	<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+	<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+	<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+	<blockAlignment value="LEFT"/>
+	<blockValign value="TOP"/>
+</blockTableStyle>
+<initialize>
+<paraStyle name="all" alignment="justify"/>
+</initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/> 
+<paraStyle name="P2" fontName="Times-Roman" fontSize="9.0" leading="11"/> 
+<paraStyle name="P3" fontName="Times-Roman" fontSize="10.0" leading="13"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="16.0" leading="20" alignment="CENTER"/> 
+<paraStyle name="P5" fontName="Times-Roman"/>
+<paraStyle name="P6" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P8" fontName="Times-BoldItalic" fontSize="6.0" leading="8" alignment="LEFT"/> 
+<paraStyle name="P9" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="CENTER"/> 
+<paraStyle name="P11" fontName="Times-Roman"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/> 
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+
+<story>
+<para style="P2"><font color="white"> </font></para>
+ 
+<para style="P4"><font face="Times-Roman">Listado Proveedores</font></para>
+<para style="P5"><font color="white"> </font></para>
+
+<blockTable colWidths="60.0,300.0,150.0" repeatRows="1" style="Tableau2">
+	<tr>
+	<td><para style="P6">Codigo</para></td>
+	<td><para style="P6">Nombre</para></td>
+	<td><para style="P6">Rif</para></td>
+	</tr>
+	<tr><para style="P8">[[ repeatIn(get_suppliers(), 'p') ]]</para>
+	<td><para style="P9">[[ p['cod'] ]]</para></td>
+	<td><para style="P9">[[ p['nombre'] ]]</para></td>
+	<td><para style="P9">[[ p['rif' ] ]]</para></td>
+	</tr>
+</blockTable>
+<para style="P11"><font color="white"> </font></para>
+</story>
+</document>

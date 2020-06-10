@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	
+	<!--
+	=======================
+	Custom Notes Sales Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_notes_sale_tree">
+		<field name="name">notes_sale.tree</field>
+		<field name="model">nota.atencion</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Notas Atencion">
+				<field name="name" string="Nota" select="1"/>
+				<field name="code" string="Codigo" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_notes_sale_tree" model="ir.actions.act_window">
+            <field name="name">Notas Atencion</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">nota.atencion</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_notes_sale_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom Notas Atencion Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_notes_sale_form">
+		<field name="name">notes_sale.form</field>
+		<field name="model">nota.atencion</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Notas Atencion">
+				<field name="name" string="Nota Atencion" select="1"/>
+				<field name="code" string="Codigo" select="1"/>
+                </form>
+            </field>
+	</record>                
+	
+
+	<record id="action_notes_sale_form" model="ir.actions.act_window">
+		<field name="name">Notas Atencion</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">nota.atencion</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_notes_sale_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_notes_sale_tree"/>
+		<field name="act_window_id" ref="action_notes_sale_form"/>
+	</record>
+	<record id="action_notes_sale_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_notes_sale_form"/>
+		<field name="act_window_id" ref="action_notes_sale_form"/>
+	</record>
+	
+	<menuitem name="Notas Atencion" action="action_notes_sale_form" id="menu_notes_sale" parent="sale.menu_shop_configuration"/>  	
+</data>
+</openerp>	

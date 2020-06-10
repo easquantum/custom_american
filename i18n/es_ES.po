@@ -1,0 +1,1106 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* custom_american
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 5.0.0\n"
+"Report-Msgid-Bugs-To: soporte@latinux.com.ve\n"
+"POT-Creation-Date: 2009-06-10 15:14:47+0000\n"
+"PO-Revision-Date: 2009-06-10 15:14:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+
+###########################################################
+# STOCK
+###########################################################
+
+#####  inventario  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_prod_almacen
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_prod_almacen
+msgid "cust_prod_prod_almacen"
+msgstr "Inventario Total"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_prod_almacen_cara
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_prod_almacen_cara
+msgid "cust_prod_prod_almacen_cara"
+msgstr "Inventario (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_prod_almacen_turm
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_prod_almacen_turm
+msgid "cust_prod_prod_almacen_turm"
+msgstr "Inventario (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_prod_almacen_mara
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_prod_almacen_mara
+msgid "cust_prod_prod_almacen_mara"
+msgstr "Inventario (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_prod_almacen_barc
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_prod_almacen_barc
+msgid "cust_prod_prod_almacen_barc"
+msgstr "Inventario (B)"
+
+#####  notas de entradas  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_all
+msgid "cust_act_win_stoc_pick_almacen_all"
+msgstr "Notas de Entradas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_cara_all
+msgid "cust_act_win_stoc_pick_almacen_cara_all"
+msgstr "NE - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_cara_asi
+msgid "cust_act_win_stoc_pick_almacen_cara_asi"
+msgstr "NE - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_cara_don
+msgid "cust_act_win_stoc_pick_almacen_cara_don"
+msgstr "NE - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_mara_all
+msgid "cust_act_win_stoc_pick_almacen_mara_all"
+msgstr "NE - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_mara_asi
+msgid "cust_act_win_stoc_pick_almacen_mara_asi"
+msgstr "NE - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_mara_don
+msgid "cust_act_win_stoc_pick_almacen_mara_don"
+msgstr "NE - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_turm_all
+msgid "cust_act_win_stoc_pick_almacen_turm_all"
+msgstr "NE - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_turm_asi
+msgid "cust_act_win_stoc_pick_almacen_turm_asi"
+msgstr "NE - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_turm_don
+msgid "cust_act_win_stoc_pick_almacen_turm_don"
+msgstr "NE - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_barc_all
+msgid "cust_act_win_stoc_pick_almacen_barc_all"
+msgstr "NE - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_barc_asi
+msgid "cust_act_win_stoc_pick_almacen_barc_asi"
+msgstr "NE - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_almacen_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_ent_barc_don
+msgid "cust_act_win_stoc_pick_almacen_barc_don"
+msgstr "NE - Recibidas (B)"
+
+#####  devoluciones clientes  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_all
+msgid "cust_act_win_stoc_pick_alma_dev_all"
+msgstr "Devoluciones Clientes"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_cara_all
+msgid "cust_act_win_stoc_pick_alma_dev_cara_all"
+msgstr "DCLI - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_cara_asi
+msgid "cust_act_win_stoc_pick_alma_dev_cara_asi"
+msgstr "DCLI - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_cara_don
+msgid "cust_act_win_stoc_pick_alma_dev_cara_don"
+msgstr "DCLI - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_mara_all
+msgid "cust_act_win_stoc_pick_alma_dev_mara_all"
+msgstr "DCLI - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_mara_asi
+msgid "cust_act_win_stoc_pick_alma_dev_mara_asi"
+msgstr "DCLI - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_mara_don
+msgid "cust_act_win_stoc_pick_alma_dev_mara_don"
+msgstr "DCLI - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_turm_all
+msgid "cust_act_win_stoc_pick_alma_dev_turm_all"
+msgstr "DCLI - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_turm_asi
+msgid "cust_act_win_stoc_pick_alma_dev_turm_asi"
+msgstr "DCLI - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_turm_don
+msgid "cust_act_win_stoc_pick_alma_dev_turm_don"
+msgstr "DCLI - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_barc_all
+msgid "cust_act_win_stoc_pick_alma_dev_barc_all"
+msgstr "DCLI - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_barc_asi
+msgid "cust_act_win_stoc_pick_alma_dev_barc_asi"
+msgstr "DCLI - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_dev_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_dev_barc_don
+msgid "cust_act_win_stoc_pick_alma_dev_barc_don"
+msgstr "DCLI - Recibidas (B)"
+
+#####  traspasos salidas  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_all
+msgid "cust_act_win_stoc_pick_alma_tp_out_all"
+msgstr "Traspasos Salidas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_cara_all
+msgid "cust_act_win_stoc_pick_alma_tp_out_cara_all"
+msgstr "TRSAL - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_cara_asi
+msgid "cust_act_win_stoc_pick_alma_tp_out_cara_asi"
+msgstr "TRSAL - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_cara_don
+msgid "cust_act_win_stoc_pick_alma_tp_out_cara_don"
+msgstr "TRSAL - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_mara_all
+msgid "cust_act_win_stoc_pick_alma_tp_out_mara_all"
+msgstr "TRSAL - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_mara_asi
+msgid "cust_act_win_stoc_pick_alma_tp_out_mara_asi"
+msgstr "TRSAL - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_mara_don
+msgid "cust_act_win_stoc_pick_alma_tp_out_mara_don"
+msgstr "TRSAL - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_turm_all
+msgid "cust_act_win_stoc_pick_alma_tp_out_turm_all"
+msgstr "TRSAL - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_turm_asi
+msgid "cust_act_win_stoc_pick_alma_tp_out_turm_asi"
+msgstr "TRSAL - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_turm_don
+msgid "cust_act_win_stoc_pick_alma_tp_out_turm_don"
+msgstr "TRSAL - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_barc_all
+msgid "cust_act_win_stoc_pick_alma_tp_out_barc_all"
+msgstr "TRSAL - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_barc_asi
+msgid "cust_act_win_stoc_pick_alma_tp_out_barc_asi"
+msgstr "TRSAL - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_out_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_out_barc_don
+msgid "cust_act_win_stoc_pick_alma_tp_out_barc_don"
+msgstr "TRSAL - Recibidas (B)"
+
+#####  traspasos entradas  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_all
+msgid "cust_act_win_stoc_pick_alma_tp_in_all"
+msgstr "Traspasos Entradas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_cara_all
+msgid "cust_act_win_stoc_pick_alma_tp_in_cara_all"
+msgstr "TRENT - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_cara_asi
+msgid "cust_act_win_stoc_pick_alma_tp_in_cara_asi"
+msgstr "TRENT - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_cara_don
+msgid "cust_act_win_stoc_pick_alma_tp_in_cara_don"
+msgstr "TRENT - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_mara_all
+msgid "cust_act_win_stoc_pick_alma_tp_in_mara_all"
+msgstr "TRENT - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_mara_asi
+msgid "cust_act_win_stoc_pick_alma_tp_in_mara_asi"
+msgstr "TRENT - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_mara_don
+msgid "cust_act_win_stoc_pick_alma_tp_in_mara_don"
+msgstr "TRENT - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_turm_all
+msgid "cust_act_win_stoc_pick_alma_tp_in_turm_all"
+msgstr "TRENT - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_turm_asi
+msgid "cust_act_win_stoc_pick_alma_tp_in_turm_asi"
+msgstr "TRENT - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_turm_don
+msgid "cust_act_win_stoc_pick_alma_tp_in_turm_don"
+msgstr "TRENT - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_barc_all
+msgid "cust_act_win_stoc_pick_alma_tp_in_barc_all"
+msgstr "TRENT - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_barc_asi
+msgid "cust_act_win_stoc_pick_alma_tp_in_barc_asi"
+msgstr "TRENT - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tp_in_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tp_in_barc_don
+msgid "cust_act_win_stoc_pick_alma_tp_in_barc_don"
+msgstr "TRENT - Recibidas (B)"
+
+#####  transferencias salidas  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_all
+msgid "cust_act_win_stoc_pick_alma_tf_out_all"
+msgstr "Transferencias Salidas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_cara_all
+msgid "cust_act_win_stoc_pick_alma_tf_out_cara_all"
+msgstr "TFSAL - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_cara_asi
+msgid "cust_act_win_stoc_pick_alma_tf_out_cara_asi"
+msgstr "TFSAL - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_cara_don
+msgid "cust_act_win_stoc_pick_alma_tf_out_cara_don"
+msgstr "TFSAL - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_mara_all
+msgid "cust_act_win_stoc_pick_alma_tf_out_mara_all"
+msgstr "TFSAL - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_mara_asi
+msgid "cust_act_win_stoc_pick_alma_tf_out_mara_asi"
+msgstr "TFSAL - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_mara_don
+msgid "cust_act_win_stoc_pick_alma_tf_out_mara_don"
+msgstr "TFSAL - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_turm_all
+msgid "cust_act_win_stoc_pick_alma_tf_out_turm_all"
+msgstr "TFSAL - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_turm_asi
+msgid "cust_act_win_stoc_pick_alma_tf_out_turm_asi"
+msgstr "TFSAL - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_turm_don
+msgid "cust_act_win_stoc_pick_alma_tf_out_turm_don"
+msgstr "TFSAL - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_barc_all
+msgid "cust_act_win_stoc_pick_alma_tf_out_barc_all"
+msgstr "TFSAL - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_barc_asi
+msgid "cust_act_win_stoc_pick_alma_tf_out_barc_asi"
+msgstr "TFSAL - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_out_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_out_barc_don
+msgid "cust_act_win_stoc_pick_alma_tf_out_barc_don"
+msgstr "TFSAL - Recibidas (B)"
+
+#####  transferencias entradas  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_all
+msgid "cust_act_win_stoc_pick_alma_tf_in_all"
+msgstr "Transferencias Entradas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_cara_all
+msgid "cust_act_win_stoc_pick_alma_tf_in_cara_all"
+msgstr "TFENT - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_cara_asi
+msgid "cust_act_win_stoc_pick_alma_tf_in_cara_asi"
+msgstr "TFENT - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_cara_don
+msgid "cust_act_win_stoc_pick_alma_tf_in_cara_don"
+msgstr "TFENT - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_mara_all
+msgid "cust_act_win_stoc_pick_alma_tf_in_mara_all"
+msgstr "TFENT - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_mara_asi
+msgid "cust_act_win_stoc_pick_alma_tf_in_mara_asi"
+msgstr "TFENT - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_mara_don
+msgid "cust_act_win_stoc_pick_alma_tf_in_mara_don"
+msgstr "TFENT - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_turm_all
+msgid "cust_act_win_stoc_pick_alma_tf_in_turm_all"
+msgstr "TFENT - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_turm_asi
+msgid "cust_act_win_stoc_pick_alma_tf_in_turm_asi"
+msgstr "TFENT - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_turm_don
+msgid "cust_act_win_stoc_pick_alma_tf_in_turm_don"
+msgstr "TFENT - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_barc_all
+msgid "cust_act_win_stoc_pick_alma_tf_in_barc_all"
+msgstr "TFENT - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_barc_asi
+msgid "cust_act_win_stoc_pick_alma_tf_in_barc_asi"
+msgstr "TFENT - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_tf_in_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_tf_in_barc_don
+msgid "cust_act_win_stoc_pick_alma_tf_in_barc_don"
+msgstr "TFENT - Recibidas (B)"
+
+#####  muestreos  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_all
+msgid "cust_act_win_stoc_pick_alma_mues_all"
+msgstr "Muestreos"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_cara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_cara_all
+msgid "cust_act_win_stoc_pick_alma_mues_cara_all"
+msgstr "MT - Todas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_cara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_cara_asi
+msgid "cust_act_win_stoc_pick_alma_mues_cara_asi"
+msgstr "MT - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_cara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_cara_don
+msgid "cust_act_win_stoc_pick_alma_mues_cara_don"
+msgstr "MT - Recibidas (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_mara_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_mara_all
+msgid "cust_act_win_stoc_pick_alma_mues_mara_all"
+msgstr "MT - Todas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_mara_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_mara_asi
+msgid "cust_act_win_stoc_pick_alma_mues_mara_asi"
+msgstr "MT - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_mara_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_mara_don
+msgid "cust_act_win_stoc_pick_alma_mues_mara_don"
+msgstr "MT - Recibidas (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_turm_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_turm_all
+msgid "cust_act_win_stoc_pick_alma_mues_turm_all"
+msgstr "MT - Todas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_turm_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_turm_asi
+msgid "cust_act_win_stoc_pick_alma_mues_turm_asi"
+msgstr "MT - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_turm_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_turm_don
+msgid "cust_act_win_stoc_pick_alma_mues_turm_don"
+msgstr "MT - Recibidas (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_barc_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_barc_all
+msgid "cust_act_win_stoc_pick_alma_mues_barc_all"
+msgstr "MT - Todas (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_barc_asi
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_barc_asi
+msgid "cust_act_win_stoc_pick_alma_mues_barc_asi"
+msgstr "MT - Pendientes (B)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_stoc_pick_alma_mues_barc_don
+#: model:ir.ui.menu,name:custom_american.cust_menu_stoc_nota_mues_barc_don
+msgid "cust_act_win_stoc_pick_alma_mues_barc_don"
+msgstr "MT - Recibidas (B)"
+
+
+
+###########################################################
+# PRODUCT
+###########################################################
+
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_prod_atcliente
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_prod_atcliente
+msgid "cust_prod_prod_atcliente"
+msgstr "Todos los Productos"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_prod_cat_atcliente
+#: model:ir.ui.menu,name:custom_american.cust_menu_prod_cat_atcliente
+msgid "cust_prod_cat_atcliente"
+msgstr "Categorías"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:product.product_pricelist_action2
+#: model:ir.ui.menu,name:product.menu_product_pricelist_action2
+#: model:ir.ui.menu,name:product.menu_product_pricelist_main
+msgid "Pricelists"
+msgstr "Lista de precios"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:product.product_pricelist_action
+#: model:ir.ui.menu,name:product.menu_product_pricelist_action
+#: field:product.pricelist,version_id:0
+msgid "Pricelist Versions"
+msgstr "Versiones de lista de precios"
+
+###########################################################
+# PURCHASE
+###########################################################
+
+#####  valorizacion traspasos  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tp_out_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tp_out_all
+msgid "cust_act_win_purch_pick_alma_tp_out_all"
+msgstr "Traspasos Salidas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tp_out_cara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tp_out_cara_con
+msgid "cust_act_win_purch_pick_alma_tp_out_cara_con"
+msgstr "TRSAL - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tp_out_mara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tp_out_mara_con
+msgid "cust_act_win_purch_pick_alma_tp_out_mara_con"
+msgstr "TRSAL - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tp_out_turm_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tp_out_turm_con
+msgid "cust_act_win_purch_pick_alma_tp_out_turm_con"
+msgstr "TRSAL - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tp_out_barc_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tp_out_barc_con
+msgid "cust_act_win_purch_pick_alma_tp_out_barc_con"
+msgstr "TRSAL - Pendientes (B)"
+
+#####  valorizacion muestreos  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_mues_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_mues_all
+msgid "cust_act_win_purch_pick_alma_mues_all"
+msgstr "Muestreos"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_mues_cara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_mues_cara_con
+msgid "cust_act_win_purch_pick_alma_mues_cara_con"
+msgstr "MT - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_mues_mara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_mues_mara_con
+msgid "cust_act_win_purch_pick_alma_mues_mara_con"
+msgstr "MT - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_mues_turm_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_mues_turm_con
+msgid "cust_act_win_purch_pick_alma_mues_turm_con"
+msgstr "MT - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_mues_barc_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_mues_barc_con
+msgid "cust_act_win_purch_pick_alma_mues_barc_con"
+msgstr "MT - Pendientes (B)"
+
+#####  valorizacion transferencias entradas #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_in_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_in_all
+msgid "cust_act_win_purch_pick_alma_tf_in_all"
+msgstr "Transferencias Entradas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_in_cara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_in_cara_con
+msgid "cust_act_win_purch_pick_alma_tf_in_cara_con"
+msgstr "TFENT - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_in_mara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_in_mara_con
+msgid "cust_act_win_purch_pick_alma_tf_in_mara_con"
+msgstr "TFENT - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_in_turm_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_in_turm_con
+msgid "cust_act_win_purch_pick_alma_tf_in_turm_con"
+msgstr "TFENT - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_in_barc_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_in_barc_con
+msgid "cust_act_win_purch_pick_alma_tf_in_barc_con"
+msgstr "TFENT - Pendientes (B)"
+
+#####  valorizacion transferencias salidas  #################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_out_all
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_out_all
+msgid "cust_act_win_purch_pick_alma_tf_out_all"
+msgstr "Transferencias Salidas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_out_cara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_out_cara_con
+msgid "cust_act_win_purch_pick_alma_tf_out_cara_con"
+msgstr "TFSAL - Pendientes (C)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_out_mara_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_out_mara_con
+msgid "cust_act_win_purch_pick_alma_tf_out_mara_con"
+msgstr "TFSAL - Pendientes (O)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_out_turm_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_out_turm_con
+msgid "cust_act_win_purch_pick_alma_tf_out_turm_con"
+msgstr "TFSAL - Pendientes (T)"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_purch_pick_alma_tf_out_barc_con
+#: model:ir.ui.menu,name:custom_american.cust_menu_purch_nota_tf_out_barc_con
+msgid "cust_act_win_purch_pick_alma_tf_out_barc_con"
+msgstr "TFSAL - Pendientes (B)"
+
+
+
+###########################################################
+# PERIOD
+###########################################################
+
+#####  años generales  #################
+
+#. module: custom_american
+#: model:ir.ui.menu,name:period.menu_action_period_generalyear
+msgid "generalyear"
+msgstr "Año General"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:period.action_period_generalyear
+msgid "General Years"
+msgstr "Año General"
+
+#. module: custom_american
+#: field:period.generalyear,name:0
+msgid "General Year"
+msgstr "Año General"
+
+#. module: custom_american
+#: field:period.generalyear,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: custom_american
+#: field:period.generalyear,date_start:0
+msgid "Start Date"
+msgstr "Fecha de Inicio"
+
+#. module: custom_american
+#: field:period.generalyear,date_stop:0
+msgid "End Date"
+msgstr "Fecha de Fin"
+
+#. module: custom_american
+#: view:period.generalyear:0
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: custom_american
+#: view:period.generalperiod:0
+msgid "Period"
+msgstr "Período"
+
+#. module: custom_american
+#: field:period.generalyear,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: custom_american
+#: field:period.generalyear,period_ids:0
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: custom_american
+#: view:period.generalyear:0
+msgid "States"
+msgstr "Estados"
+
+#. module: custom_american
+#: field:period.generalyear,state:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: custom_american
+#: selection:period.generalyear,state:0
+msgid "Draft"
+msgstr "Abierto"
+
+#. module: custom_american
+#: selection:period.generalyear,state:0
+msgid "Done"
+msgstr "Cerrado"
+
+#. module: custom_american
+#: view:period.generalyear:0
+msgid "Create Periods"
+msgstr "Crear Períodos"
+
+#. module: custom_american
+#: view:period.generalyear:0
+msgid "Set to Draft"
+msgstr "Cambiar a Abierto"
+
+#####  periodos generales  #################
+
+#. module: custom_american
+#: model:ir.ui.menu,name:period.menu_action_period_generalperiod
+msgid "generalperiod"
+msgstr "Períodos Generales"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:period.action_period_generalperiod
+msgid "General Periods"
+msgstr "Períodos Generales"
+
+#. module: custom_american
+#: field:period.generalperiod,name:0
+msgid "Period Name"
+msgstr "Nombre"
+
+#. module: custom_american
+#: field:period.generalperiod,code:0
+msgid "Code"
+msgstr "Código"
+
+#. module: custom_american
+#: field:period.generalperiod,date_start:0
+msgid "Start of Period"
+msgstr "Fecha de Inicio"
+
+#. module: custom_american
+#: field:period.generalperiod,date_stop:0
+msgid "End of Period"
+msgstr "Fecha de Fin"
+
+#. module: custom_american
+#: field:period.generalperiod,generalyear_id:0
+msgid "General Year"
+msgstr "Año General"
+
+#. module: custom_american
+#: field:period.generalperiod,type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: custom_american
+#: selection:period.generalperiod,type:0
+msgid "Pickings"
+msgstr "Notas"
+
+#. module: custom_american
+#: selection:period.generalperiod,type:0
+msgid "Purchase Orders"
+msgstr "Ordenes Compra"
+
+#. module: custom_american
+#: selection:period.generalperiod,type:0
+msgid "Sale Orders"
+msgstr "Ordenes Venta"
+
+#. module: custom_american
+#: selection:period.generalperiod,type:0
+msgid "All"
+msgstr "Todo"
+
+#. module: custom_american
+#: view:period.generalperiod:0
+msgid "States"
+msgstr "Estados"
+
+#. module: custom_american
+#: field:period.generalperiod,state:0
+msgid "Status"
+msgstr "Estado"
+
+#. module: custom_american
+#: selection:period.generalperiod,state:0
+msgid "Draft"
+msgstr "Abierto"
+
+#. module: custom_american
+#: selection:period.generalperiod,state:0
+msgid "Done"
+msgstr "Cerrado"
+
+#. module: custom_american
+#: view:period.generalperiod:0
+msgid "Set to Draft"
+msgstr "Cambiar a Abierto"
+
+
+#####  wizard  #################
+
+
+#. module: custom_american
+#: model:ir.actions.wizard,name:period.wizard.period_year
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: custom_american
+#: wizard_view:period.wizard.period_year,init:0
+msgid "Make Periods"
+msgstr "Crear Períodos"
+
+#. module: custom_american
+#: wizard_button:period.wizard.period_year,init,open:0
+msgid "Create"
+msgstr "Crear"
+
+#. module: custom_american
+#: wizard_button:period.wizard.period_year,init,end:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: custom_american
+#: wizard_field:period.wizard.period_year,init,part:0
+msgid "Periods"
+msgstr "Períodos"
+
+#. module: custom_american
+#: wizard_field:period.wizard.period_year,init,type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: custom_american
+#: selection:period.wizard.period_year,init,part:0
+msgid "Monthly"
+msgstr "Mensual"
+
+#. module: custom_american
+#: selection:period.wizard.period_year,init,part:0
+msgid "3 Monthly"
+msgstr "Trimestral"
+
+#. module: custom_american
+#: selection:period.wizard.period_year,init,type:0
+msgid "Pickings"
+msgstr "Notas"
+
+#. module: custom_american
+#: selection:period.wizard.period_year,init,type:0
+msgid "Purchase Orders"
+msgstr "Ordenes de Compra"
+
+#. module: custom_american
+#: selection:period.wizard.period_year,init,type:0
+msgid "Sale Orders"
+msgstr "Ordenes de Venta"
+
+#. module: custom_american
+#: selection:period.wizard.period_year,init,type:0
+msgid "All"
+msgstr "Todo"
+
+
+
+#. module: custom_american
+#: model:ir.actions.wizard,name:period.genperiod.close
+msgid "Close a General Periods"
+msgstr "Cerrar Período General"
+
+#. module: custom_american
+#: wizard_view:period.genperiod.close,init:0
+msgid "Close Period"
+msgstr "Cerrar Períodos"
+
+#. module: custom_american
+#: wizard_view:period.genperiod.close,init:0
+msgid "Are you sure ?"
+msgstr "¿Esta Seguro?"
+
+#. module: custom_american
+#: wizard_button:period.genperiod.close,init,close:0
+msgid "Close Period"
+msgstr "Cerrar Período"
+
+#. module: custom_american
+#: wizard_button:period.genperiod.close,init,end:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: custom_american
+#: wizard_field:period.genperiod.close,init,sure:0
+msgid "Check this box"
+msgstr "Marque la casilla"
+
+
+#. module: custom_american
+#: model:ir.actions.wizard,name:period.genyear.close
+msgid "Close a General Year"
+msgstr "Cerrar un Año General"
+
+#. module: custom_american
+#: model:ir.ui.menu,name:period.menu_wizard_gy_close
+msgid "Close a General Year"
+msgstr "Cerrar un Año General"
+
+#. module: custom_american
+#: wizard_view:period.genyear.close,init:0
+msgid "Close states of general year and periods"
+msgstr "Cerrar Año General y sus Períodos"
+
+#. module: custom_american
+#: wizard_view:period.genyear.close,init:0
+msgid "Are you sure you want to close the general year ?"
+msgstr "¿Esta seguro de querer cerrar el año general?"
+
+#. module: custom_american
+#: wizard_button:period.genyear.close,init,close:0
+msgid "Close states"
+msgstr "Cerrar Año"
+
+#. module: custom_american
+#: wizard_button:period.genyear.close,init,end:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: custom_american
+#: wizard_field:period.genyear.close,init,gy_id:0
+msgid "General Year to close"
+msgstr "Año General a Cerrar"
+
+#. module: custom_american
+#: wizard_field:period.genyear.close,init,sure:0
+msgid "Check this box"
+msgstr "Marque la casilla"
+
+
+###########################################################
+# ACCOUNT
+###########################################################
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_accou_acco_acc
+msgid "cust_act_win_accou_acco_acc"
+msgstr "Listado de Cuentas"
+
+#. module: custom_american
+#: model:ir.actions.act_window,name:custom_american.cust_act_win_accou_acco_tax
+msgid "cust_act_win_accou_acco_tax"
+msgstr "Impuestos"
+

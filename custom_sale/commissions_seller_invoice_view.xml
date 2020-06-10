@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Menu 
+	=======================
+	-->
+	 <menuitem  id="menu_commissions_invoice" name="Comisiones Despachado" parent="custom_menu_commissions" />
+
+	
+	<!--
+	=======================
+	Custom Sales Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_commissions_seller_invoice_tree">
+		<field name="name">commissions.seller.invoice.tree</field>
+		<field name="model">commissions.seller</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Comisiones Vendedor Despachado">
+			    <field name="zone_id" string="Zona" select="1"/>
+				<field name="salesman_id" string="Vendedor" select="1"/>
+				<field name="date_period" string="Fecha" select="2"/>
+				<field name="name" string="Descripcion" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="act_commissions_seller_invoice_tree" model="ir.actions.act_window">
+            <field name="name">Comisiones Vendedor Despachado</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">commissions.seller</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_commissions_seller_invoice_tree"/>
+    </record>	
+	
+
+	<!--
+	=======================================
+	Custom Commissions Seller Form
+	=======================================
+	-->
+	<record model="ir.ui.view" id="view_commissions_seller_invoice_form">
+		<field name="name">commissions.seller.invoice.form</field>
+		<field name="model">commissions.seller</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Comisiones Vendedor Despachado">
+                <group col="6" colspan="4">
+    				<field domain="[('salesman','=',True)]" name="salesman_id" select="1" string="Vendedor" readonly="1"/>
+    				<field name="date_period" string="Fecha" readonly="1"/>
+    				<field name="zone_id" select="1" string="Zona" readonly="1"/>
+    				<field name="name" string="Descripcion" attrs="{'readonly':[('state','!=','draft')]}"/>
+    				<field name="commission_period_id" string="Periodo Comisiones"/>
+    			</group>
+	            <field name="amount_cred_cancel" string="Total Canc. Credito" invisible="True"/>
+	            <field name="amount_cash_order" string="Total Pe.d Contado" invisible="True"/>
+	            <field name="amount_cash_refund" string="Total NC Contado" invisible="True"/>
+	            <field name="amount_cash_cancel" string="Total Canc. Contado" invisible="True"/>
+				<notebook colspan="4">
+                     <page string="Datos Ventas Cajas">
+                         <field colspan="4" name="group_line" nolabel="1" string="Detalle Grupos" readonly="1">
+                                <form string="Detalle Grupos">
+                                    <field name="category_id" string="Categoria"/>
+                                    <field name="name" string="Descripcion"/>
+                                    <field name="cuota_year" string="Cuota Cajas Anual"/>
+                                    <field name="quota_amount" string="Cuota Bs"/>
+                                    <field name="quota_qty" string="Cuota Cajas"/>
+                                    <field name="quantity" string="Cajas Vendidas"/>
+                                    <field name="percent_quota" string="Porcentaje Vendido"/>	
+                                    <field name="amount" string="Total"/>	
+                                </form>
+                                <tree string="Detalle Grupos">
+                                    <field name="category_id" string="Categoria"/>
+                                    <field name="name" string="Descripcion"/>
+                                    <field name="cuota_year" string="Cuota Cajas Anual"/>
+                                    <field name="quota_qty" string="Cuota Cajas Mes"/>
+                                    <field name="quota_amount" string="Cuota Bs"/>
+                                    <field name="quantity" string="Cajas Vendidas"/>
+                                    <field name="percent_quota" string="Porcentaje Vendido"/>
+                                    <field name="amount" string="Total Grupo"/>
+                                </tree>                            
+                            </field>
+                     </page>
+                     <page string="Comisiones Ventas">
+				       <group col="6" colspan="4">
+                            <separator colspan="2" string="Parametros"/>
+                            <separator colspan="2" string="Ventas Despachadas"/>
+                            <separator colspan="2" string="Porcentaje Realizado"/>
+                         
+				            <field name="cuota_year" string="Cuota Anual" readonly="1"/>
+				            <field name="amount_cred_order" string="Monto Despachado" readonly="1"/>
+				            <label colspan="2"/>
+
+                            <field name="cuota_month" string="Cuota Mes" readonly="1"/>
+                            <field name="amount_cred_refund" string="Total NC Credito" readonly="1"/>
+                            <label colspan="2"/>
+
+                            <field name="cuota_percent" string="Porcentaje Mes" readonly="1"/>
+				            <field name="sale_total" string="Total Despachado" readonly="1"/>
+				            <field name="sale_percent" string="Porc Despachado" readonly="1"/> 
+
+                            <field name="credit_total" string="Total Credito" invisible="True"/>
+                            <field name="cash_total" string="Total Contado"  invisible="True"/>
+                            <field name="cash_percent" string="Porc Contado" invisible="True"/>
+                            <field name="cash_pay" string="pagar Contado" invisible="True"/>
+                            <field name="pay_total" string="Pagar Despachado" invisible="True"/>	
+                        </group>
+
+                        <separator colspan="4" string=" "/> 
+                         <group col="4" colspan="2">
+                         <field name="amount_base" string="Total Venta Bs." readonly="1"/>
+                         <field name="amount_group" string="Total Cajas Bs." readonly="1"/>
+                         <field name="number_days" string="Domingos Y Feriado" attrs="{'readonly':[('state','!=','draft')]}"/>
+                         <field name="daily_salary" string="Bs Diario" attrs="{'readonly':[('state','!=','draft')]}"/>
+				         </group>
+				         <group col="4" colspan="2">
+				            <label colspan="2"/> 
+                            <field name="commission_base" string="Sub-Total" readonly="1"/>
+                            <button name="compute_commission_pay" string="Calcular" states="draft" type="object"/> 
+                            <label colspan="1"/>
+                            <field name="amount_holiday" string="Total Feriado" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            
+                            <label colspan="2"/>
+                            <field name="amount_adjustment" string="Monto Ajuste" attrs="{'readonly':[('state','!=','draft')]}" groups="base.group_system"/>				            
+                        </group>
+                        <separator colspan="2" string="Notas"/>
+                        <separator colspan="2" string="Totales"/>
+                        <group col="4" colspan="2">
+                             <field name="notes" nolabel="1" colspan="2"/>
+                             <newline/>
+                             <field name="state" readonly="1" string="Estatus"/>
+                             <button name="button_change_state" string="Pagado" states="draft" type="object" />                         
+				         </group>
+                        <group col="4" colspan="2"> 
+                            <label colspan="2"/>                           
+				            <field name="amount_total_asig" string="Total Asignaciones" readonly="1"/> 
+				             <label colspan="2"/>
+				             <field name="amount_total_deduct" string="Total Deducciones" readonly="1"/> 
+				             <label colspan="2"/> 
+				             <field name="commission_pay" string="Total Pagar" readonly="1"/>                       
+				         </group>
+				        </page>
+                        <page string="Deducciones" groups="base.group_system">
+                            <field colspan="4" name="deductions_line" nolabel="1" string="Deducciones" attrs="{'readonly':[('state','!=','draft')]}">
+                                <form string="Deducciones Vendedor">
+                                    <field name="deductions_id" string="deduccion"/>
+                                    <field name="name" string="Descripcion"/>
+                                    <field name="amount" string="Monto"/>                                                                 
+                                </form>
+                                <tree string="Deducciones Vendedor">
+                                    <field name="deductions_id" string="deduccion"/>
+                                    <field name="name" string="Descripcion"/>
+                                    <field name="amount" string="Monto"/>
+                                </tree>                            
+                            </field>
+                            <field  name="commission_invoice" string="Comisiones Despachado"  invisible="True"/>
+		        </page>	
+		    </notebook> 
+                </form>
+            </field>
+	</record>                
+	
+	<record id="act_commiss_seller_invoice_draft_form" model="ir.actions.act_window">
+		<field name="name">Comisiones Vendedor Despachado</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">commissions.seller</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('commission_invoice','=',1)]</field>
+	</record>
+	<record id="act_commiss_seller_invoice_draft_vtree" model="ir.actions.act_window.view">
+		<field eval="18" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_commissions_seller_invoice_tree"/>
+		<field name="act_window_id" ref="act_commiss_seller_invoice_draft_form"/>
+	</record>
+	<record id="act_commiss_seller_invoice_draft_vform" model="ir.actions.act_window.view">
+		<field eval="28" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_commissions_seller_invoice_form"/>
+		<field name="act_window_id" ref="act_commiss_seller_invoice_draft_form"/>
+	</record>
+	<menuitem name="Comisiones Vendedor Borrador" action="act_commiss_seller_invoice_draft_form" id="menu_commiss_seller_invoice_draft" parent="menu_commissions_invoice"/>  	
+
+	<record id="act_commiss_seller_invoice_paid_form" model="ir.actions.act_window">
+		<field name="name">Comisiones Vendedor Pagadas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">commissions.seller</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','paid'),('commission_invoice','=',1)]</field>
+	</record>
+	<record id="act_commiss_seller_invoice_paid_vtree" model="ir.actions.act_window.view">
+		<field eval="18" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_commissions_seller_invoice_tree"/>
+		<field name="act_window_id" ref="act_commiss_seller_invoice_paid_form"/>
+	</record>
+	<record id="act_commiss_seller_invoice_paid_vform" model="ir.actions.act_window.view">
+		<field eval="28" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_commissions_seller_invoice_form"/>
+		<field name="act_window_id" ref="act_commiss_seller_invoice_paid_form"/>
+	</record>
+	<menuitem name="Comisiones Vendedor Pagadas" action="act_commiss_seller_invoice_paid_form" id="menu_commiss_seller_invoice_paid" parent="menu_commissions_invoice"/>  	
+	
+
+</data>
+</openerp>	

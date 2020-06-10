@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <menuitem  
+		id="cust_menu_stock_root_inv" 
+		name="Inventario Total" 
+		parent="stock.menu_stock_root" />
+
+	<!--
+	=======================
+	Product
+	=======================
+	-->
+
+	<!--
+	*****************************************************
+		Custom Product Tree Almacen   
+	*****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_prod_tree_v_almacen">
+		<field name="name">cust_prod_prod_tree_v_almacen</field>
+		<field name="model">product.product</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>		
+		<field name="arch" type="xml">
+			<tree string="Productos">
+				<field name="default_code" string="Codigo"/>
+				<field name="code" string="Cod. Prov."/>
+				<field name="name" string="Nombre"/>
+				<field name="variants" string="Referencia"/>
+				<field name="virtual_available" string="Stock Virtual"/>
+				<field name="qty_dispo" string="Stock Disponible"/>
+				<field name="qty_available" string="Stock Real"/>
+				<field name="state" invisible="True"/>
+			</tree>			
+		</field>
+	</record>	
+
+	<!--
+	*****************************************************
+		Custom Product Form Almacen   
+	*****************************************************
+	-->
+	<record model="ir.ui.view" id="cust_prod_prod_form_v_almacen">
+		<field name="name">cust_prod_prod_form_v_almacen</field>
+		<field name="model">product.product</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Producto">
+				<group colspan="4" col="6">
+					<group colspan="4" col="2">
+						<separator string="Descripcion" colspan="4"/>
+						<field name="name" select="1"  string="Nombre" readonly="1"/>
+						<field groups="" name="variants" select="2" string="Referencia" readonly="1"/>
+					</group>
+					<group colspan="1" col="2">
+						<separator string="Codigos" colspan="2"/>
+						<field name="default_code" select="1" string="Codigo" readonly="1"/>
+						<field name="code" select="1" string="Cod. Prov." readonly="1"/>
+					</group>
+				</group>
+
+				<notebook colspan="4">
+					<page string="Informacion">
+						<group colspan="2" col="2">
+							<separator string="Datos Generales" colspan="2"/>
+							<field name="categ_id" select="1" string="Categoria" readonly="1"/>
+							<field name="uom_id" on_change="onchange_uom(uom_id,uom_po_id)" string="Unidad Medida" readonly="1"/>
+							<field name="weight_net" digits="(14, 3)" readonly="1"/>
+						</group>
+						<group colspan="2" col="2" groups="">
+							<separator string="Existencias" colspan="2"/>
+							<field name="virtual_available" string="Stock Virtual"/>
+							<field name="qty_dispo" string="Stock Disponible"/>
+							<field name="qty_available" string="Stock Real"/>
+						</group>
+						<field colspan="4" name="seller_ids" nolabel="1" widget="one2many_list" mode="tree">
+							<tree string="Informacion del Proveedor">
+								<field name="name" colspan="4" string="Empresa"/>
+							</tree>
+							<form string="Informacion del Proveedor">
+								<field name="name" colspan="4" string="Empresa"/>
+							</form>								
+
+						</field>
+					</page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_almacen">
+		<field name="name">cust_prod_prod_almacen</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_tree_v_almacen">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_form_v_almacen">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_almacen"
+		name="Todos"
+        parent="cust_menu_stock_root_inv"
+        action="cust_act_win_prod_prod_almacen" />
+
+
+	<!-- 
+	=====================================================
+	Productos Filtrados Caracas
+	=====================================================
+	-->  
+
+		
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_almacen_cara">
+		<field name="name">cust_prod_prod_almacen_cara</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+		<field name="context">{'location': 9}</field>
+
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_tree_v_almacen_cara">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_cara"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_form_v_almacen_cara">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_cara"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_almacen_cara"
+		name="Inventario Almacen Caracas"
+        parent="cust_menu_stock_root_inv"
+        action="cust_act_win_prod_prod_almacen_cara" />
+
+
+	<!-- 
+	=====================================================
+	Productos Filtrados Turmero
+	=====================================================
+	-->  
+
+		
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_almacen_turm">
+		<field name="name">cust_prod_prod_almacen_turm</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+		<field name="context">{'location': 12}</field>
+
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_tree_v_almacen_turm">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_turm"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_form_v_almacen_turm">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_turm"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_almacen_turm"
+		name="Inventario Almacen Turmero"
+        parent="cust_menu_stock_root_inv"
+        action="cust_act_win_prod_prod_almacen_turm" />
+
+
+	<!-- 
+	=====================================================
+	Productos Filtrados Maracaibo
+	=====================================================
+	-->  
+
+		
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_almacen_mara">
+		<field name="name">cust_prod_prod_almacen_mara</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+		<field name="context">{'location': 15}</field>
+
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_tree_v_almacen_mara">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_mara"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_form_v_almacen_mara">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_mara"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_almacen_mara"
+		name="Inventario Almacen Maracaibo"
+        parent="cust_menu_stock_root_inv"
+        action="cust_act_win_prod_prod_almacen_mara" />
+
+
+
+	<!-- 
+	=====================================================
+	Productos Filtrados Barcelona
+	=====================================================
+	-->  
+
+		
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_almacen_barc">
+		<field name="name">cust_prod_prod_almacen_barc</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+		<field name="context">{'location': 18}</field>
+
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_tree_v_almacen_barc">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_barc"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_prod_prod_form_v_almacen_barc">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_barc"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_almacen_barc"
+		name="Inventario Almacen Barcelona"
+        parent="cust_menu_stock_root_inv"
+        action="cust_act_win_prod_prod_almacen_barc" />
+
+	<!-- 
+	=====================================================
+	Productos Filtrados Puerto Ordaz
+	=====================================================
+	--> 
+	<record model="ir.actions.act_window" id="cust_act_win_prod_prod_almacen_pto">
+		<field name="name">Inventario Almacen Puerto Ordaz</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">product.product</field>
+		<field name="view_type">form</field>
+		<field name="context">{'location': 38}</field>
+
+	</record>
+	<record model="ir.actions.act_window.view" id="act_vtree_prod_prod_almacen_pto">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_prod_prod_tree_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_pto"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_vform_prod_prod_almacen_pto">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_prod_prod_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_prod_prod_almacen_pto"/>
+	</record>
+
+	<menuitem
+        id="cust_menu_prod_prod_almacen_pto"
+		name="Inventario Almacen Puerto Ordaz"
+        parent="cust_menu_stock_root_inv"
+        action="cust_act_win_prod_prod_almacen_pto" />
+</data>
+</openerp>

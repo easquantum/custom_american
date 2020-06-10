@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Wizard
+	=======================
+	-->
+
+		<wizard 
+			string="Comprobante ISLR" 
+			model="account.invoice" 
+			name="comprobante_islr"  
+			id="comprobante_islr_wizard"/>    
+
+        <wizard 
+            string="Declaracion ISLR" 
+            model="account.islr.tax" 
+            name="declaracion_islr"  
+            id="wizard_declaracion_islr"
+            menu="False"/>
+        
+        <menuitem
+            action="wizard_declaracion_islr"
+            id="menu_wizard_declaracion_islr"
+            parent="custom_menu_wizard_invoice" 
+            type="wizard"/>
+
+
+        <wizard 
+            string="ISLR-ARCV" 
+            model="account.islr.tax" 
+            name="islr_arcv"  
+            id="wizard_islr_arcv"
+            menu="False"/>
+        
+        <menuitem
+            action="wizard_islr_arcv"
+            id="menu_wizard_islr_arcv"
+            parent="custom_menu_wizard_invoice" 
+            type="wizard"/>    
+
+        <wizard 
+            string="ISLR Resumen" 
+            model="account.islr.tax" 
+            name="islr_resumen"  
+            id="wizard_islr_resumen"
+            menu="False"/>
+        
+        <menuitem
+            action="wizard_islr_resumen"
+            id="menu_wizard_islr_resumen"
+            parent="custom_menu_wizard_invoice" 
+            type="wizard"/>
+    </data>
+</openerp>

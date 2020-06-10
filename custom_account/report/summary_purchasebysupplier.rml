@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(792.0,612.0)" title="Test" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="57.0" y1="57.0" width="678" height="498"/>
+</pageTemplate>
+</template>
+<stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau1"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>
+		<blockBackground colorName="#e6e6e6" start="6,0" stop="6,0"/>
+		<blockBackground colorName="#e6e6e6" start="7,0" stop="7,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau6">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+<paraStyle name="P2" fontName="Times-Roman"  fontSize="8.0" leading="10"/>
+<paraStyle name="P3" fontName="Times-Roman"  fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="14.0" leading="13"/>
+<paraStyle name="P5" fontName="Times-Bold" fontSize="12.0" leading="13"  alignment="RIGHT"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="13" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="14.0" leading="18" alignment="CENTER"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P16" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="P22" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P23" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P24" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P27" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<para style="P10">REGISTRO DE COMPRAS  </para>
+
+
+<para style="P1"><font color="white"> </font></para>
+<blockTable colWidths="290.0,310.0,155" style="Tableau3">
+	<tr>
+	<td>
+					<para style="P1">AMERICAN DISTRIBUTION DE VENEZUELA, C.A  </para>
+					<para style="P1"> Proveedor :[[ get_partner(data['form']['supplierid']) ]]	</para>
+	</td>
+	<td>
+	<para style="P1">Fecha Inicial :  [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date1'], '%Y-%m-%d')) ]]             
+											  Fecha Final :  [[ time.strftime('%d/%m/%Y', time.strptime(data['form']['date2'], '%Y-%m-%d')) ]] </para>
+	</td>
+	<td>
+				<para style="P3"> Almacen : [[ get_warehouse(data['form']['warehouseid']) ]]</para>
+	</td>
+	</tr>
+</blockTable>
+<para style="P11"><font color="white"> </font></para>
+<para style="P11"><font color="white"> </font></para>
+<blockTable colWidths="55.0,60.0,110.0,90.0,35.0,110.0,100.0,100.0,100.0" repeatRows="1" style="Tableau7">
+	<tr>
+		<td><para style="P11"><font color="white"> </font></para>	  </td>
+		<td><para style="P11"><font color="white"> </font></para>	  </td>
+		<td><para style="P12">Compras Cta. 410 - 100 </para></td>
+		<td><para style="P12">IVA - Compras </para></td>
+		<td><para style="P11"><font color="white"> </font></para>	  </td>
+		<td><para style="P12"> Cuenta. x Pagar</para></td>
+		<td><para style="P12"> Provisiones</para></td>
+		<td><para style="P12"> Pronto Pago</para></td>
+		<td><para style="P12"> Varios</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="55.0,60.0,55.0,55.0,45.0,45.0,35.0,55.0,55.0,50.0,50.0,50.0,50.0,50.0,50.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P11">Compra</para></td>
+	<td><para style="P11">Factura</para></td>
+	<td><para style="P11">Debe</para></td>
+	<td><para style="P11">Haber</para></td>
+	<td><para style="P11">Debe</para></td>
+	<td><para style="P11">Haber</para></td>
+	<td><para style="P11">C x C</para></td>
+	<td><para style="P11">Debe </para></td>
+	<td><para style="P11">Haber </para></td>
+	<td><para style="P11">Debe </para></td>
+	<td><para style="P11">Haber </para></td>
+	<td><para style="P11">Debe</para></td>
+	<td><para style="P11">Haber </para></td>
+	<td><para style="P11">Cta. Nro. </para></td>
+	<td><para style="P11">Monto </para></td>
+	</tr>
+</blockTable>
+<section>
+<para style="P1">	[[ repeatIn(get_purchase(data['form']),'p') ]]	</para>
+<blockTable colWidths="55.0,60.0,55.0,55.0,45.0,45.0,35.0,55.0,55.0,50.0,50.0,50.0,50.0,50.0,50.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P12"> [[ p['compra'] ]]</para></td>
+	<td><para style="P12"> [[ p['factura'] ]]</para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['totalcompra'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12"> </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['totaliva'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12"> </para></td>
+	<td><para style="P12"> [[ locale.format('%.2f', p['cxc'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['totalcxp'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12"> </para></td>
+	<td><para style="P14"> [[ locale.format('%.2f', p['reserva'], grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', p['totalpp'], grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P9">  [[  p['cta'] ]]</para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', p['totalcta'], grouping=True, monetary=True) ]] </para></td>
+	</tr>
+</blockTable>
+</section>
+
+<para style="P21"><font color="white"> </font></para>
+<blockTable colWidths="55.0,60.0,55.0,55.0,45.0,45.0,35.0,55.0,55.0,50.0,50.0,50.0,50.0,50.0,50.0" repeatRows="1" style="Tableau3">
+	<tr>
+	<td><para style="P12">  </para></td>
+	<td><para style="P12">  Totales : </para></td>
+	<td><para style="P14">   [[ locale.format('%.2f', get_totalgral_compra(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', get_totalgral_iva(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  </para></td>
+	<td><para style="P12">  [[ locale.format('%.2f', get_totalgral_cxc(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">   [[ locale.format('%.2f', get_totalgral_cxp(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', get_totalgral_reserva(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">   [[ locale.format('%.2f', get_totalgral_prontop(), grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P12">  <font color="white"> </font></para></td>
+	<td><para style="P14">  [[ locale.format('%.2f', get_totalgral_cta(), grouping=True, monetary=True) ]]</para></td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white"> </font></para>
+</story>
+</document>

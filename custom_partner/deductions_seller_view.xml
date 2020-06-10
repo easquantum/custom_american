@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	
+	<!--
+	=======================
+	Custom Deductions Seller Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_deductions_seller_tree">
+		<field name="name">deductions.seller.tree</field>
+		<field name="model">deductions.seller</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Deducciones Vendedor">
+				<field name="name" string="Nombre" select="1"/>
+				<field name="code" string="Codigo" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_deductions_seller_tree" model="ir.actions.act_window">
+            <field name="name">Deducciones Vendedor</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">deductions.seller</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_deductions_seller_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom Deductions Seller Form
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_deductions_seller_form">
+		<field name="name">deductions.seller.form</field>
+		<field name="model">deductions.seller</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Deducciones Vendedor">
+				<field name="name" string="Nombre" select="1"/>
+				<field name="code" string="Codigo" select="1"/> 
+                </form>
+            </field>
+	</record>                
+	
+	<record id="action_deductions_seller_form" model="ir.actions.act_window">
+		<field name="name">Deducciones Vendedor</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">deductions.seller</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_deductions_seller_view1" model="ir.actions.act_window.view">
+		<field eval="16" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_deductions_seller_tree"/>
+		<field name="act_window_id" ref="action_deductions_seller_form"/>
+	</record>
+	<record id="action_deductions_seller_view2" model="ir.actions.act_window.view">
+		<field eval="26" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_deductions_seller_form"/>
+		<field name="act_window_id" ref="action_deductions_seller_form"/>
+	</record>
+	
+	<menuitem name="Deducciones Vendedor" action="action_deductions_seller_form" id="menu_deductions_seller" parent="base.menu_base_config"/>  	
+</data>
+</openerp>	

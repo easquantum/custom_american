@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="Liquidacion Especial" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau10">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau1"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau6">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>				
+</blockTableStyle>
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>	
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>			
+		<blockBackground colorName="#e6e6e6" start="6,0" stop="6,0"/>			
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="10.0" leading="12"/>
+<paraStyle name="P3" fontName="Times-Bold"     fontSize="10.0" leading="12" alignment="CENTER"/> 
+<paraStyle name="P4" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/> 
+<paraStyle name="P5" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P9" fontName="Times-Bold" fontSize="12.0" leading="14" alignment="CENTER"/>
+<paraStyle name="P10" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P11" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P12" fontName="Times-Bold" fontSize="8.0" leading="10"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-BoldItalic" fontSize="6.0" leading="8" alignment="LEFT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P16" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="P22" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P23" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P24" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P27" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/></stylesheet>
+<images>
+<image name="10000200000000F700000042D572FB1D.gif">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
+</image></images>
+<story>
+<illustration height="38.0" width="140.0"><image x="0" y="0" file="10000200000000F700000042D572FB1D.gif" height="38.0" width="140.0"/></illustration>
+
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P9">LIQUIDACION ESPECIAL</para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<blockTable colWidths="330.0,40.0,190.0" style="Tableau3">
+	<tr>
+	<td>
+				<blockTable colWidths="540.0" style="Tableau3">
+					<tr>
+					<td>
+					<para style="P1"><font color="white"> </font></para>
+					<para style="P4">Transporte  :   [[ o.carrier_company_id.name or '' ]] </para>
+					<para style="P4">Vehiculo :  [[ o.vehiculo_id.name or '' ]] </para>
+					<para style="P4">Chofer :   [[ o.driver_id.name or '' ]] </para>					
+					<para style="P2">   </para>
+					<para style="P4">Almacen:   [[ o.warehouse_id.name or '' ]]</para>
+					<para style="P4">Ruta:   [[ o.ruta_id.name or '' ]]</para>					
+					</td>
+					</tr>
+				</blockTable>
+	</td>
+	<td><para style="P1"><font color="white"> </font></para></td>
+	<td> 
+					<blockTable colWidths="110.0,70" style="Tableau3">
+						<tr>
+								<td><para style="P8">Flete Especial Nro. :</para></td>
+								<td><para style="P2"> [[ o.name or '' ]] </para></td>
+						</tr>	
+						<tr>
+							<td>
+								<para style="P6">Guia Nro. :</para>
+								<para style="P6">Fecha Liq.:</para>
+								<para style="P6">Fecha Guia:</para>
+							</td>								
+							<td>
+									<para style="P4"> [[ o.guide_id.name or '' ]] </para>
+									<para style="P4">  [[ time.strftime('%d/%m/%Y', time.strptime(o.date_liquidation, '%Y-%m-%d')) ]] </para>							
+									<para style="P4">  [[ time.strftime('%d/%m/%Y', time.strptime(o.guide_id.date_guide, '%Y-%m-%d')) ]] </para>
+								</td>	
+						</tr>
+					</blockTable>
+	 </td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white"> </font></para>	
+<para style="P1"><font color="white"> </font></para>
+<para style="P2">Devoluciones Reconocidas :</para>
+<blockTable colWidths="120.0,120.0,90.0,90.0,80.0" repeatRows="1" style="Tableau5">
+	<tr>	
+	<td><para style="P3">Facura Nro.</para></td>
+	<td><para style="P3">Nota Credito Nro.</para></td>
+	<td><para style="P3">Cajas </para></td>
+	<td><para style="P3">Tarifa</para></td>
+	<td><para style="P3">Total </para></td>
+	</tr>
+</blockTable>
+<section>
+	<para style="P1"> [[ repeatIn(get_notas_credito(o.id,o.ruta_id,o.vehiculo_id.tipo_id), 'line') ]]</para>
+	<blockTable colWidths="120.0,120.0,90.0,90.0,80.0" repeatRows="1" style="Tableau3">
+		<tr>
+		<td><para style="P5">[[ line['factura'] ]]</para></td>
+		<td><para style="P5">[[ line['notacred'] ]] </para></td>
+		<td><para style="P5"> [[ locale.format('%.0f', line['cajas'] , grouping=True) ]]</para></td>
+		<td><para style="P5">[[  line['tarifas'] ]] </para></td>
+		<td><para style="P6"> [[ locale.format('%.2f', line['total'] , grouping=True) ]]</para></td>
+		</tr>
+	</blockTable>
+</section>
+
+<para style="Standard"><font color="white"> </font></para>
+<para style="Standard"><font color="white"> </font></para>
+<para style="Standard"><font color="white"> </font></para>
+<para style="Standard"><font color="white"> </font></para>
+
+<blockTable colWidths="230.0,50.0,210.0" repeatRows="1" style="Tableau3">
+	<tr>	
+	<td><para style="Standard"><font color="white"> </font></para> </td>
+	<td><para style="Standard"><font color="white"> </font></para> </td>
+	<td> 
+			<blockTable colWidths="120.0,70.0" repeatRows="1" style="Tableau5">
+				<tr>
+				<td><para style="P7"> Total Pagar Bs.: </para></td>>
+				<td><para style="P6">   [[ locale.format('%.2f', o.extra_amount , grouping=True) ]] </para></td>
+				</tr>
+			</blockTable>		
+	 </td>
+	</tr>
+</blockTable>	
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<blockTable colWidths="140.0,50.0,140.0,50.0,140.0" repeatRows="1" style="Tableau3">
+	<tr>	
+	<td><para style="P10"> ________________________________</para></td>	
+	<td><para style="P10"> </para></td>
+	<td><para style="P10"> ________________________________</para></td>
+	<td><para style="P10"> </para></td>	
+	<td><para style="P10"> ________________________________</para></td>
+	</tr>
+	<tr>	
+	<td>
+			<para style="P10"> Elaborado Por:  </para>
+	</td>	
+	<td><para style="P10"> </para></td>
+	<td><para style="P10">Revisado </para></td>
+		<td><para style="P10"> </para></td>
+		<td><para style="P10"> Recibido Conforme </para></td>	
+	</tr>	
+</blockTable>	
+	
+</story>
+</document>

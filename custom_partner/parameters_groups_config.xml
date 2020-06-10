@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	====================================
+	Parametros Grupos de la Zona:
+	.- quota_amount : Cuota en Bs
+	.- min : Cuota Minima en Cajas
+	.- max : Cuota Maxima en Cajas 
+	====================================
+	-->
+        <parameter name="quota_amount" value="265"/>
+        <parameter name="min" value="50"/>
+        <parameter name="max" value="120"/>
+    
+    </data>
+</openerp>

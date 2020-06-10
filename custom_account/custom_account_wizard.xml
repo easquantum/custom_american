@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	==================================================================
+	Custom MENU: GESTION FINANCIERA 
+	==================================================================
+	-->
+	<menuitem  id="custom_menu_wizard_contab"       name="Reportes Gestion Financiera" parent="account.menu_finance" />    
+    
+	<!--
+	==================================================================
+	Custom MENU: COMPRAS 
+	==================================================================
+	-->
+	<menuitem  id="custom_menu_wizard_invoice" name="Reportes Gestion" parent="purchase.menu_purchase_root" />   
+	
+	
+	<!--
+	==================================================================
+	Custom MENU: VENTAS
+	==================================================================
+	-->	
+	<menuitem  id="custom_menu_wizard_invoice_sale" name="Reportes Gestion" parent="sale.menu_sale_root" />  	
+	
+	
+	<!--
+	==================================================================
+	Custom  Wizard: OVER WRITE WIZARD 
+	==================================================================
+	-->		
+
+	<!--
+	<wizard id="account.invoice.wizard_invoice_refund" model="account.invoice" name="account.invoice.custom.refund" string="Credit Note"/>
+	-->
+
+	<!--
+	=====================================
+	Custom Wizard:  GESTION FINANCIERA 
+	=====================================
+	-->
+	 	 
+		
+		<wizard    
+			string="Plan Contable"	
+			model="account.account"	
+			name="plan_contable" 
+			id="wizard_plan_contable"/>
+			
+		<menuitem  
+			action="wizard_plan_contable" 
+			id="menu_wizard_plan_contable" 
+			parent="custom_menu_wizard_contab" 
+			type="wizard"/>	
+
+		<wizard    
+			string="Importar archivo"	
+			model="account.move"	
+			name="move_import_file" 
+			id="wizard_move_import_file"/>
+
+		<wizard    
+			string="Balance General"	
+			model="account.move"	
+			name="balance_general" 
+			id="wizard_balance_general"
+			menu="False"/>
+			
+		<menuitem  
+			action="wizard_balance_general" 
+			id="menu_wizard_balance_general" 
+			parent="custom_menu_wizard_contab" 
+			type="wizard"/>
+
+		<wizard    
+			string="Estado Resultados"	
+			model="account.move"	
+			name="estado_resultados" 
+			id="wizard_estado_resultados"
+			menu="False"/>
+			
+		<menuitem  
+			action="wizard_estado_resultados" 
+			id="menu_wizard_estado_resultados" 
+			parent="custom_menu_wizard_contab" 
+			type="wizard"/>	
+
+		<wizard    
+			string="Balance Comprobacion"	
+			model="account.move"	
+			name="balance_comprobacion" 
+			id="wizard_balance_comprobacion"
+			menu="False"/>
+			
+		<menuitem  
+			action="wizard_balance_comprobacion" 
+			id="menu_wizard_balance_comprobacion" 
+			parent="custom_menu_wizard_contab" 
+			type="wizard"/>
+	
+	<!--
+	==================================================================
+	Custom  Wizard: COMPRAS DE GESTION
+	==================================================================
+	-->		
+		
+		<wizard 
+			string="Registro Compras" 
+			model="account.invoice" 
+			name="summary_purchase_supplier" 
+			id="wizard_summary_purchase_by_supplier"/> 
+			
+		<menuitem
+	          action="wizard_summary_purchase_by_supplier" 
+	          id="menu_wizard_summary_purchase"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+
+		<wizard 
+			string="Iva Compras Gestion" 
+			model="account.invoice" 
+			name="libro_iva_compras_gestion" 
+			id="wizard_libro_iva_compras_gestion"/> 
+			
+		<menuitem
+	          action="wizard_libro_iva_compras_gestion" 
+	          id="menu_libro_iva_compras_gestion"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+
+		<wizard 
+			string="Registro Compras Proveedor" 
+			model="account.invoice" 
+			name="summary_purchase_suppl" 
+			id="wizard_summary_purchase_supplier"/> 
+			
+		<menuitem
+	          action="wizard_summary_purchase_supplier" 
+	          id="menuwz_summary_purchase_suppl"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+
+
+	<!--
+	==============================================================
+	Custom  Wizard:	COMPRAS GASTOS ADMINISTRATIVOS
+	==============================================================
+	-->			          
+	  
+		<wizard 
+			string="Retenciones Gastos Adm" 
+			model="account.invoice" 
+			name="retenciones_gastos_adm" 
+			id="wizard_retenciones_gastos_adm"/> 
+			
+		<menuitem
+	          action="wizard_retenciones_gastos_adm" 
+	          id="menu_retenciones_gastos_adm"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+	          
+		<wizard 
+			string="Retenciones Proveedor" 
+			model="account.invoice" 
+			name="retenciones_proveedor" 
+			id="wizard_retenciones_proveedor"/> 
+			
+		<menuitem
+	          action="wizard_retenciones_proveedor" 
+	          id="menu_retenciones_proveedor"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>	          
+	          
+
+		<wizard 
+			string="Libro Compras" 
+			model="account.invoice" 
+			name="libro_compra"  
+			id="wizard_libro_compras"/> 
+			
+		<menuitem
+	          action="wizard_libro_compras" 
+	          id="menu_libro_compras"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+
+		<wizard 
+			string="Libro Compras General" 
+			model="account.invoice" 
+			name="libro_compras_gral"  
+			id="wizard_libro_compras_general"/> 
+			
+		<menuitem
+	          action="wizard_libro_compras_general" 
+	          id="menu_libro_compras_gestion"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+
+		<wizard 
+			string="Declaracion Iva Compras General" 
+			model="account.invoice" 
+			name="declaracion_ivaco_seniat"  
+			id="wizard_declaracion_iva_compras_gral"/> 
+			
+		<menuitem
+	          action="wizard_declaracion_iva_compras_gral" 
+	          id="menu_declaracion_iva_compras_gral"
+	          parent="custom_menu_wizard_invoice"   
+	          type="wizard"/>
+
+
+	          
+	<!--
+	==============================================================
+	Custom  Wizard:	VENTAS
+	==============================================================
+	-->	
+	          
+		<wizard 
+			string="Imprimir Factura" 
+			model="account.invoice" 
+			name="invoice_print" 
+			id="wizard_invoice_print"/> 
+
+		<wizard 
+			string="Imprimir Factura Esp" 
+			model="account.invoice" 
+			name="esp_invoice_print" 
+			id="wizard_esp_invoice_print"/>
+
+		<wizard 
+			string="Imprimir Nota Cred" 
+			model="account.invoice" 
+			name="refund_print" 
+			id="wizard_refund_print"/>
+
+		<wizard 
+			string="Ventas Netas Nacional" 
+			model="account.invoice" 
+			name="ventas_netas_nac" 
+			id="wizard_ventas_netas_nac"/> 
+
+		<menuitem
+	          action="wizard_ventas_netas_nac" 
+	          id="menu_ventas_netas_nac"
+	          parent="custom_menu_wizard_invoice_sale"   
+	          type="wizard"/>
+
+		<wizard 
+			string="Ventas Netas por Zona" 
+			model="account.invoice" 
+			name="ventas_netas_zona" 
+			id="wizard_ventas_netas_zona"/> 
+
+		<menuitem
+	          action="wizard_ventas_netas_zona" 
+	          id="menu_ventas_netas_zona"
+	          parent="custom_menu_wizard_invoice_sale"   
+	          type="wizard"/>
+
+	    <wizard	id="wizard_libro_ventas" 
+	        model="account.invoice" 
+	        name="libro_ventas" 
+	        string="Libro Ventas"/>  
+	    
+	    <menuitem id="menu_libro_ventas" 
+	        action="wizard_libro_ventas" 
+	        parent="custom_menu_wizard_invoice_sale" 
+	        type="wizard"/>
+
+	<wizard 
+		string="Imp. Nota Credito Interna" 
+		model="account.invoice" 
+		name="internal_invoice_refund_print" 
+		id="wizard_internal_refund_print"/>
+
+	<wizard 
+		string="Imp. Nota Credito Manual" 
+		model="account.invoice" 
+		name="manual_invoice_refund_print" 
+		id="wizard_manual_refund_print"/>
+
+
+	<!--
+	==============================================================
+	Custom  Wizard:	COMOPRAS y VENTAS
+	==============================================================
+	-->	
+
+		<wizard id="wizard_invoice_pay_ext" 
+			model="account.invoice" 
+			name="account.invoice.pay.ext" 
+			string="Pagar" />
+
+		<wizard id="wizard_invoice_recovery" 
+			model="account.invoice" 
+			name="account.invoice.recovery" 
+			string="Cobrar" />
+
+        <wizard id="wizard_reconcile_select_credit" 
+            model="account.move.line" 
+            name="reconcile.select.credit" 
+            string="Reconciliar Cuentas"
+            menu="False"/>
+  
+        <menuitem id="menu_reconcile_select_credit" 
+            action="wizard_reconcile_select_credit" 
+            parent="account.next_id_20" 
+            type="wizard"/>
+
+</data>
+</openerp>			

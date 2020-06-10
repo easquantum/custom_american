@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Customer Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_partner_customers_tree">
+		<field name="name">partner.customers.tree</field>
+		<field name="model">res.partner</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="14"/>
+		<field name="arch" type="xml">
+			<tree string="Clientes">
+				<field name="ref" string="Código" select="1"/>
+				<field name="name" string="Cliente" select="1"/>
+				<field name="vat" string="Cédula/Rif" select="1"/> 
+				<field name="code_zone_id"  string="Zona" select="1"/>
+                  	<field name="code_type_id"  string="Tipo"/>				
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_partner_customers_tree" model="ir.actions.act_window">
+            <field name="name">Clientes American</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_partner_customers_tree"/>
+    </record>
+	<!--
+	=======================
+	Custom Customers Form
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_partner_customers_form">
+		<field name="name">partner.customers.form</field>
+		<field name="model">res.partner</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Clientes">
+                    <group colspan="4" col="6">
+                        <field name="name" string="Cliente"  select="1"/>
+                  		<field name="ref"  string="Código"  select="1"/>
+					<field name="code_zone_id"  string="Zona" select="1"/>
+                  		<field name="code_type_id"  string="Tipo"/>
+                  		<field name="nit"  string="Nit"/>                  		
+					<field name="vat" string="Cédula/Rif"  select="1"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="General">
+                        		<group colspan="4" col="6">
+          					<field name="date"  string="Fecha" />
+             					<field name="active" string="Activo"  invisible="True"/>
+                 				<field name="customer" string="Cliente"/>
+                 				<field name="supplier" string="Proveedor"/>
+                 				<field name="lang" string="Idioma"/>
+                 				<field name="parent_id" select="2" string="Empresa Principal"/>
+                 				<field name="website" widget="url" string="Web" invisible="True"/>	
+                 			</group> 
+                 			<newline/>
+					<separator string="Propiedades Contables" colspan="4"/>
+                        		<group colspan="4" col="6">
+                 			 	<field name="property_account_receivable" string="Cta. Por Cobrar"/>
+ 						<field name="pay_taxes" string="Paga Impuesto" />
+ 						<field name="not_contributor" string="No Contribuyente IVA"/>
+                 			 	<field name="property_account_payable" string="Cta. Por Pagar"/>	
+                        		 	<field name="property_payment_term" string="Terminos Pago"/>
+                 			</group> 
+					<newline/>
+					<separator string="Lista Precios" colspan="4"/>
+					<field name="property_product_pricelist"/>
+					<field name="property_product_pricelist_purchase"/> 
+ 					<field name="property_account_position" string="Impuesto Fiscal" invisible="True"/>
+                            <separator colspan="4" string="Categorias"/>
+                            <field colspan="4" name="category_id" nolabel="1"/>
+                        </page>
+                        <page string="Contactos">
+						<field colspan="4" mode="form,tree" name="address" nolabel="1">
+	                                <form string="Contactos">
+	                                    <field name="name"       string="Contacto/R. Social"/>
+	                                    <field name="type"       string="Tipo de Dirección" />
+	                                    <field name="street"     string="Av/Calle"/>
+	                                    <field name="street2"    string="Zona/Urb."/>
+	                                    <field name="country_id" string="País" completion="1"/>
+	                                    <field name="state_id"   string="Estado"/>
+	                                    <field name="city_id" string="Ciudades"/>
+	                                    <field name="city" string="Ciudad"/>
+	                                    <field name="zip"     string="Cod. Postal"/>
+	                                    <field name="phone"   string="Teléfono"/>
+	                                    <field name="fax"     string="Fax"/>
+	                                    <field name="mobile"  string="Celular"/>
+	                                    <field name="email"   string="Correo" widget="email"/>
+	                                </form>
+	                                <tree string="Contactos">
+	                                    <field name="name"  string="Nombre"/>
+	                                    <field name="phone" string="Teléfono"/>
+	                                    <field name="email" string="Correo"/>
+	                                    <field name="type"  string="Tipo de Dirección"/>
+	                                </tree>
+                            </field>
+                        </page>
+                        <page string="Eventos">
+                            <field colspan="4" name="events" nolabel="1" widget="one2many_list"/>
+                        </page>
+                        <page string="Notas">
+                            <field colspan="4" name="comment" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </form>
+            </field>
+	</record>
+
+	<record id="action_partner_customers_form" model="ir.actions.act_window">
+		<field name="name">Clientes American</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">res.partner</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('customer','=',1)]</field>
+	</record>
+	<record id="action_partner_customers_view1" model="ir.actions.act_window.view">
+		<field eval="11" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_partner_customers_tree"/>
+		<field name="act_window_id" ref="action_partner_customers_form"/>
+	</record>
+	<record id="action_partner_customers_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_partner_customers_form"/>
+		<field name="act_window_id" ref="action_partner_customers_form"/>
+	</record>
+
+	<menuitem	name="Clientes American" action="action_partner_customers_form" id="menu_partner_customers_form" parent="custom_menu_base_partner"/>
+</data>
+</openerp>

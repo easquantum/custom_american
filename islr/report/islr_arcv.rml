@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="ARCV" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+    	<pageGraphics>
+		<image x="1.6cm" y="27.5cm" height="40.0" >[[company.logo]]</image>
+		<setFont name="Times-Roman" size="7"/>
+		<fill color="black"/>
+            	<stroke color="grey"/>
+	</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="CENTER"/>
+<blockBottomPadding length="0mm"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="GRID" colorName="#000000" thickness="0.5"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="-1,-1" thickness="0.3"/>
+      <lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="-1,-1" thickness="0.3"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau6">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="GRID" colorName="#e6e6e6"/>
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="14.0" leading="16" alignment="CENTER"/>
+<paraStyle name="P3" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="LEFT"/> 
+<paraStyle name="P4" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/> 
+<paraStyle name="P5" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P7" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P9" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P10" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P16" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="500.0" style="Tableau3"> 
+	<tr>
+	<td> <para style="P2"> COMPROBANTE DE RETENCIONES VARIAS DEL </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P2"> IMPUESTO SOBRE LA RENTA </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P12"> PERIODO: Desde [[ time.strftime('%d/%m/%Y', time.strptime( data['form']['date1'], '%Y-%m-%d')) ]] <font color="white"> ..</font>  Hasta [[ time.strftime('%d/%m/%Y', time.strptime( data['form']['date2'], '%Y-%m-%d')) ]]</para> </td>			
+	</tr>
+</blockTable>
+<para style="P11"><font color="white"> .</font></para>
+<para style="P1"><font color="white">. </font></para> 
+<blockTable colWidths="500.0" style="Tableau5"> 
+	<tr>
+	<td> <para style="P3"> DATOS DEL AGENTE DE RETENCION</para> </td>			
+	</tr>
+</blockTable>
+<blockTable colWidths="150.0,350.0" style="Tableau3"> 
+	<tr>
+	<td> <para style="P4"> Nombre o Razón social:</para> </td>
+	<td> <para style="P4"> [[ get_company() or ''  ]]</para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Nro. R.I.F:</para> </td>
+	<td> <para style="P4"> [[ get_rif_company() or ''  ]]</para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Tipo de Agente Retención:</para> </td>
+	<td> <para style="P4"> [[ get_tipo_company() or ''  ]] </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Dirección:</para> </td>
+	<td> <para style="P4"> [[ get_company_address() or ''  ]]  </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Teléfono:</para> </td>
+	<td> <para style="P4"> [[ get_tlf_company() or ''  ]] </para> </td>			
+	</tr>
+</blockTable>	
+<para style="P11"><font color="white"> .</font></para> 
+<blockTable colWidths="500.0" style="Tableau5"> 
+	<tr>
+	<td> <para style="P3"> DATOS DEL BENEFICIARIO</para> </td>			
+	</tr>
+</blockTable> 
+<blockTable colWidths="150.0,350.0" style="Tableau3"> 
+	<tr>
+	<td> <para style="P4"> Nombre o Razón social:</para> </td>
+	<td> <para style="P4"> [[ get_partner(data['form']['supplierid']) or ''  ]]</para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Nro. R.I.F:</para> </td>
+	<td> <para style="P4"> [[ get_rif_partner() or ''  ]]</para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Tipo Persona:</para> </td>
+	<td> <para style="P4"> [[ get_tipo_partner() or ''  ]] </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Dirección:</para> </td>
+	<td> <para style="P4"> [[ get_partner_address(data['form']['supplierid']) or ''  ]] </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P4"> Teléfono:</para> </td>
+	<td> <para style="P4"> [[ get_tlf_partner() or ''  ]]</para> </td>			
+	</tr>
+</blockTable>
+<para style="P11"><font color="white"> .</font></para>
+<para style="P11"><font color="white"> .</font></para> 
+<blockTable colWidths="60.0,90.0,90.0,40.0,80.0,90.0,80.0" repeatRows="1" style="Tableau4">
+	<tr>
+	<td><para style="P5">Mes</para></td>
+	<td><para style="P5">Total Pagado o Abonado en cuenta</para></td>
+	<td><para style="P5">Monto Objeto de Retención</para></td>
+	<td><para style="P5">Tarifa %</para></td>
+	<td><para style="P5">Impuesto Retenido</para></td>
+	<td><para style="P5">Monto Objeto de Retención Acumulada</para></td>
+	<td><para style="P5">Impuesto Retenido Acumulado</para></td>
+	</tr>
+</blockTable>
+<para style="P12"><font color="white"> [[ get_detalle(data['form']) ]]</font></para>
+<blockTable colWidths="60.0,90.0,90.0,40.0,80.0,90.0,80.0" repeatRows="1" style="Tableau6">
+	<tr><para style="P11"> [[ repeatIn(get_arcv(),'d') ]] </para>
+	<td><para style="P6">[[ d['mes']  ]]</para></td>
+	<td><para style="P8">[[ d['totalf'] ]]</para></td>
+	<td><para style="P8">[[ d['ttbase'] ]]</para></td>
+	<td><para style="P8">[[ d['porc'] ]]</para></td>
+	<td><para style="P8">[[ d['ttret'] ]]</para></td>
+	<td><para style="P8">[[ d['ttacumb'] ]]</para></td>
+	<td><para style="P8">[[ d['ttacumret'] ]]</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="60.0,90.0,90.0,40.0,80.0,90.0,80.0" repeatRows="1" style="Tableau5">
+	<tr>
+	<td><para style="P5">TOTALES</para></td>
+	<td><para style="P9"> [[ get_totalbase() ]] </para></td>
+	<td><para style="P9"> [[ get_totalbase() ]] </para></td>
+	<td><para style="P5"> </para></td>
+	<td><para style="P9"> [[ get_totalret() ]]</para></td>
+	<td><para style="P5"> </para></td>
+	<td><para style="P5"> </para></td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P10">_________________________________________________</para>
+<para style="P10"> Firma y Sello del Agente de Retencion</para>
+
+</story>
+</document>

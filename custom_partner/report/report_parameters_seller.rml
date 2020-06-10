@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="islr" author="Corvus Latinoamerica" allowSplitting="20">
+    <pageTemplate id="first">
+    <frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+    	<pageGraphics>
+    	    <image x="1.3cm" y="27.6cm" height="40.0" >[[company.logo]]</image>
+			<setFont name="Times-Roman" size="7"/>
+			<fill color="black"/>
+            <stroke color="grey"/>
+            <!-- LINE Header -->
+            <drawString x="1.3cm" y="27.4cm">Telf.: [[ company.partner_id.address and company.partner_id.address[0].phone or  '' ]]</drawString>
+            <drawString x="1.3cm" y="27.1cm">R.I.F: [[ company.partner_id.vat or  '' ]]</drawString>
+            <lines>1.3cm 26.8cm 20cm 26.8cm</lines>
+            
+            <!-- LINE bottom -->
+            <lines>1.2cm 2.90cm 19.9cm 2.90cm</lines>
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+    <blockTableStyle id="Table1">
+    <blockAlignment value="LEFT"/>
+       <blockValign value="TOP"/>
+       <lineStyle kind="LINEAFTER" colorName="#000000" start="0,0" stop="0,-1"/>
+       <lineStyle kind="LINEBEFORE" colorName="#000000" start="1,0" stop="1,-1"/>
+       <lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+       <lineStyle kind="LINEBELOW" colorName="#000000" start="1,-1" stop="1,-1"/>
+   </blockTableStyle>
+
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle> 
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<blockLeftPadding length="0mm"/>
+      <lineStyle kind="LINEBELOW" colorName="grey" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEBELOW" colorName="grey" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEBELOW" colorName="grey" start="2,0" stop="2,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau6">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<blockLeftPadding length="0mm"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="0,0" stop="0,0"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="1,0" stop="1,0"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="2,0" stop="2,0"/>
+      <lineStyle kind="LINEABOVE" colorName="black" start="3,0" stop="3,0"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P3" fontName="Times-Roman"     fontSize="10.0" leading="12" alignment="RIGHT"/> 
+<paraStyle name="P4" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="LEFT"/> 
+<paraStyle name="P5" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="LEFT"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+
+<blockTable colWidths="60.0,320.0,100.0,50.0" style="Tableau3">
+	<tr>
+	<td><para style="P2">Vendedor :</para></td>
+	<td><para style="P4">[[ o.name or '' ]]</para></td>
+	<td><para style="P3">Zona: </para></td>
+	<td><para style="P4">[[ o.code_zone_id.name or '' ]]</para></td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<blockTable colWidths="280.0,110.0,110.0" repeatRows="1" style="Tableau4">
+	<tr>	
+	<td><para style="P5"> Total Ventas</para></td>
+	<td><para style="P6"> Cupos </para></td>
+	<td><para style="P6"> Valor x Cupo </para> </td>
+	</tr>	
+</blockTable>
+<blockTable colWidths="280.0,110.0,110.0"  repeatRows="1" style="Tableau5">
+	<tr>	
+	<td><para style="P5"> Credito</para></td>
+	<td><para style="P6">   </para></td>
+	<td><para style="P6">  </para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="280.0,110.0,110.0"  repeatRows="1" style="Tableau5">
+	<tr>	
+	<td><para style="P5"> Contado</para></td>
+	<td><para style="P6"> [[ locale.format('%.0f',o.amount_cash, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.value_cash, grouping=True, monetary=True) ]] [[ set_total(o.value_cash,o.id) ]]</para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="280.0,110.0,110.0"  repeatRows="1" style="Tableau5">
+	<tr>	
+	<td><para style="P5"> Despachado</para></td>
+	<td><para style="P6"> [[ locale.format('%.0f',o.amount_total, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.value_total, grouping=True, monetary=True) ]] [[ set_total(o.value_total,o.id) ]]</para> </td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<blockTable colWidths="30.0,250.0,110.0,110.0" repeatRows="1" style="Tableau4">
+	<tr>	
+	<td><para style="P6"> Item </para></td>
+	<td><para style="P5"> Descripcion </para></td>
+	<td><para style="P6"> Cupos </para></td>
+	<td><para style="P6"> Valor x Cupo </para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="30.0,250.0,110.0,110.0" repeatRows="1" style="Tableau3">
+	<tr><para style="14">[[repeatIn(o.parameters_line,'l')]]</para>	
+	<td><para style="P8"> [[ get_item() ]] [[ set_total(l.quota_amount,o.id) ]]</para></td>
+	<td><para style="P9"> [[ l.categ_salesman_id.name ]] -  [[ l.name ]]</para></td>
+	<td><para style="P10"> [[ locale.format('%.2f',l.quota_qty, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P10"> [[ locale.format('%.2f',l.quota_amount, grouping=True, monetary=True) ]] </para> </td>
+	</tr>	
+</blockTable>
+<blockTable colWidths="30.0,250.0,110.0,110.0" repeatRows="1" style="Tableau6">
+	<tr>	
+	<td><para style="P8"> </para></td>
+	<td><para style="P12">  Total Comisiones</para></td>
+	<td><para style="P12"> Bs.</para></td>
+	<td><para style="P12"> [[ locale.format('%.2f',get_total(), grouping=True, monetary=True) ]] </para> </td>
+	</tr>	
+</blockTable>	
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+	
+</story>
+</document>

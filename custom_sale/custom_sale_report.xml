@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Reports
+	=======================
+	-->
+
+		<report id="report_pedido_ventas"
+			name="pedido_venta"
+			string="Pedidos Venta"
+			model="sale.order"
+			rml="custom_american/custom_sale/report/report_pedido_ventas.rml"
+			header="False"	
+			auto="False"/>		
+
+ 		<report id="report_commissions_sale"
+			name="commissions_sale"
+			string="Comisiones Venta"
+			model="commissions.seller"
+			rml="custom_american/custom_sale/report/report_commissions_seller.rml"
+			header="False"	
+			auto="False"/> 
+
+ 		<report id="report_commissions_sale_ter"
+			name="commissions_sale_ter"
+			string="Comisiones Territorio"
+			model="commissions.seller"
+			rml="custom_american/custom_sale/report/report_commissions_seller_ter.rml"
+			header="False"	
+			auto="False"/>
+
+                <report id="report_commissions_sale_div"
+                        name="commissions_sale_div"
+                        string="Comisiones Division"
+                        model="commissions.seller"
+                        rml="custom_american/custom_sale/report/report_commissions_seller_div.rml"
+                        header="False"  
+                        auto="False"/>
+
+ 		<report id="report_commissions_collection"
+			name="commissions_collection"
+			string="Recibo Comisiones"
+			model="commissions.collection.seller"
+			rml="custom_american/custom_sale/report/report_commissions_collection_seller.rml"
+			header="False"	
+			auto="False"/>
+
+	<!--
+	============================
+	Reports commissions Invoice
+	============================
+	-->				
+ 		<report id="report_commissions_invoice_ter"
+			name="commissions_invoice_ter"
+			string="Comisiones Desp. (Ter/Div)"
+			model="commissions.seller"
+			rml="custom_american/custom_sale/report/report_commissions_seller_invoice_ter.rml"
+			header="False"/>
+
+ 		<report id="report_commissions_invoice_zone"
+			name="commissions_invoice_zone"
+			string="Comisiones Desp. Zona"
+			model="commissions.seller"
+			rml="custom_american/custom_sale/report/report_commissions_seller_invoice_zone.rml"
+			header="False"/>
+
+	<!--
+	===============================================
+	Reports commissions collection Version 2 (2015)
+	===============================================
+	-->				
+ 		<report id="report_commissions_collection_ter"
+			name="commissions_collection_ter"
+			string="Recibo Comisiones (Ter/Div)"
+			model="commissions.collection.seller"
+			rml="custom_american/custom_sale/report/report_commissions_collection_ter.rml"
+			header="False"	
+			auto="False"/>
+</data>
+</openerp>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu Wizard Partner
+	=======================
+	-->
+	 <menuitem  id="custom_menu_wizard_partner" name="Reportes Gestion" parent="base.menu_base_partner" />   
+
+	<!--
+	=======================
+	Custom Partner Wizard
+	=======================
+	-->		
+		
+		<wizard 
+			string="Empresas Categoria" 
+			model="product.category" 
+			name="partner_by_category" 
+			id="wizard_partner_category"/>
+			
+		<menuitem
+	          action="wizard_partner_category"
+	          id="menu_wizard_partner_category"
+	          parent="custom_menu_wizard_partner"  
+	          type="wizard"/>			
+											
+</data>
+</openerp>			

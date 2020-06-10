@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu Purchase Order
+	=======================
+	-->
+	 <menuitem  id="custom_menu_purchase" name="Ordenes" parent="purchase.menu_purchase_root" />
+
+	<!--
+	=======================
+	Custom Purchase Order Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_custom_purchase_tree">
+		<field name="name">custom.purchase.tree</field>
+		<field name="model">purchase.order</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="12"/>
+		<field name="arch" type="xml">
+			<tree string="Ordenes">
+					<field name="name" string="Compra Nro." select="1"/>
+					<field name="partner_id" string="Proveedor" select="1"/>
+					<field name="date_order" string="Fecha" />
+					<field name="warehouse_id" string="Ubicacion Entrega"/>
+					<field name="state" string="Estatus" select="2"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_custom_purchase_tree" model="ir.actions.act_window">
+            <field name="name">Todas las Ordenes</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">purchase.order</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_custom_purchase_tree"/>
+    </record>
+
+	<!--
+	=======================
+	Custom Purchase Order  Form
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_custom_purchase_form">
+		<field name="name">custom.purchase.form</field>
+            <field name="model">purchase.order</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Ordenes">
+                    <group col="6" colspan="4">                    	
+                        <field name="name" string="Orden Nro." select="1" />
+                        <field name="date_order" string="Fecha" select="2"/>   
+                         <field name="warehouse_id" string="Almacen" on_change="onchange_warehouse_id(warehouse_id)"/>                     
+                        
+                        <newline/>
+                        <field colspan="4" name="partner_id" string="Proveedor" on_change="onchange_partner_id(partner_id)" select="1" domain="[('supplier','=', 'True')]"/>
+                       <field domain="[('type','=','purchase')]" name="pricelist_id" string="Lista Precios"/>
+                     </group>  
+					<notebook colspan="4">
+                        <page string="Compra">
+                        	<separator string="Datos Generales" colspan="4"/>
+                        	<newline/>
+							<group colspan="4" col="6"> 
+		                      	 <field name="invoice_method" string="Metodo Compra"/>
+		                      	 <field name="shipped" string="Procesada Almacen"  select="2"/>
+		                      	 <field name="invoiced" string="Procesada Compra"  select="2"/>
+		                    </group>
+		                    <newline/>
+		                    <field name="location_id" string="Ubicacion"/>
+		                    <field name="partner_address_id"/>
+                    		<separator string="Datos Control" colspan="4"/>
+                    		<newline/>
+                    		<field name="validator"/>
+                    		<field name="date_approve"/>
+                    		<newline/>
+                			<separator string="Notas" colspan="4"/>
+                    		<field colspan="4" name="notes" nolabel="1"/> 
+                    		<newline/> 
+							<group col="11" colspan="4">
+								<field name="state" string="Estatus"  readonly="1" select="2"/>
+								<button name="purchase_confirm" states="draft" string="Confirm Purchase Order" icon="gtk-execute"/> 
+								<button name="purchase_appbuyer" states="wait_auth" string="Approve Purchase" icon="gtk-ok"/>
+								<button name="purchase_approve" states="confirmed" string="Approved by Supplier" icon="gtk-ok"/>
+								<button name="purchase_cancel" states="draft,confirmed,wait_auth" string="Cancel Purchase Order" icon="gtk-cancel"/>
+								<button name="action_cancel" states="approved,except_picking,except_invoice" string="Cancel Purchase Order" type="object" icon="gtk-cancel"/>
+								<!-- 
+								<button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" icon="gtk-convert"/>															
+								<button name="picking_ok" states="except_picking" string="Manually Corrected" icon="gtk-convert"/>
+								<button name="invoice_ok" states="except_invoice" string="Manually Corrected" icon="gtk-convert"/>
+								--> 								
+							</group>			                           		                          				
+							<!-- Campos Ocultos -->
+								<field name="invoice_id" readonly="1" invisible="True"/>
+								<field name="origin" invisible="True"/>
+								
+								<field name="fiscal_position" groups="base.group_extended" invisible="True"/>
+								<field name="partner_ref" invisible="True"/>
+			                    <field name="dest_address_id" on_change="onchange_dest_address_id(dest_address_id)" invisible="True"/>
+			                    <field name="minimum_planned_date" invisible="True"/>
+                        </page>					
+                        <page string="Productos">
+							<field colspan="4" name="order_line" nolabel="1">
+								<tree  string="Linea Productos">
+								<field name="name" string="descripcion"/>
+								<field name="product_qty" string="Cantidad"/>
+								<field name="price_unit" string="Precio"/>
+								<field name="price_subtotal" string="Total"/>
+								<!-- Campo Precio ADV para la cuenta reserva -->
+								<field name="price_standard" string="P. ADV" invisible="True"/>
+								</tree>							
+								<form string="Linea Productos">
+                                                                    <notebook colspan="4">
+                                                                         <page string="Datos Generales">
+										<separator string="Descripcion" colspan="4"/>
+											<field colspan="4" string="Producto" context="partner_id=parent.partner_id,quantity=product_qty,pricelist=parent.pricelist_id,uom=product_uom,warehouse=parent.warehouse_id" name="product_id" on_change="product_id_change(parent.pricelist_id,product_id,product_qty,product_uom,parent.partner_id, parent.date_order, parent.fiscal_position)"/>
+											<field colspan="4" string="Descripcion" name="name"/>											
+											<field name="product_qty" string="Cantidad"/>
+											<field name="price_unit" string="Precio"/>
+											<field name="product_uom"  string="Unidad" on_change="product_uom_change(parent.pricelist_id,product_id,product_qty,product_uom,parent.partner_id, parent.date_order)"/>
+											<field name="date_planned" string="Fecha"/>
+											<!-- Campo Precio ADV para la cuenta reserva -->
+											<field name="price_standard" string="P. ADV" invisible="True"/>
+                                                                         </page>
+                                                                         <page string="Datos Impuestos">
+										<separator string="Impuestos y/o Descuentos" colspan="4"/>
+											<field colspan="4" name="taxes_id" domain="[('parent_id','=',False),('type_tax_use','&lt;&gt;','sale')]" nolabel="1"/>
+                                                                         </page>
+                                                                       </notebook>
+										
+										<field colspan="4" name="notes" nolabel="1" invisible="True"/>
+										<field name="price_subtotal" readonly="1"   invisible="True"/>
+										<field name="account_analytic_id"  			invisible="True"/>									
+								</form>							
+							</field>
+							<group col="7" colspan="4">
+								<field name="amount_untaxed" sum="Untaxed amount"/>
+								<field name="amount_tax"/>
+								<field name="amount_total" sum="Total amount"/>
+								<button name="button_dummy" states="draft" string="Compute" type="object"/>
+							</group>
+					</page>
+                  </notebook>
+                </form>
+            </field>
+        </record>
+
+	<record id="action_custom_purchase_form" model="ir.actions.act_window">
+		<field name="name">Todas las Ordenes</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">purchase.order</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_custom_purchase_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_purchase_tree"/>
+		<field name="act_window_id" ref="action_custom_purchase_form"/>
+	</record>
+	<record id="action_custom_purchase_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_purchase_form"/>
+		<field name="act_window_id" ref="action_custom_purchase_form"/>
+	</record>
+
+	<menuitem name="Todas las Ordenes"	action="action_custom_purchase_form"	id="menu_custom_purchase_form" parent="custom_menu_purchase"/>
+
+	<record id="action_custom_draft_order_form" model="ir.actions.act_window">
+		<field name="name">Ordenes Borrador</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">purchase.order</field>
+		<field name="domain">[('state','=','draft')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_custom_draft_order_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_purchase_tree"/>
+		<field name="act_window_id" ref="action_custom_draft_order_form"/>
+	</record>
+	<record id="action_custom_draft_order_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_purchase_form"/>
+		<field name="act_window_id" ref="action_custom_draft_order_form"/>
+	</record>
+
+	<menuitem name="Ordenes Borrador" action="action_custom_draft_order_form"	id="menu_custom_draft_order_form" parent="custom_menu_purchase"/>
+
+	<record id="action_custom_confirmed_order_form" model="ir.actions.act_window">
+		<field name="name">Ordenes Confirmadas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">purchase.order</field>
+		<field name="domain">[('state','=','confirmed')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_custom_confirmed_order_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_purchase_tree"/>
+		<field name="act_window_id" ref="action_custom_confirmed_order_form"/>
+	</record>
+	<record id="action_custom_confirmed_order_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_purchase_form"/>
+		<field name="act_window_id" ref="action_custom_confirmed_order_form"/>
+	</record>
+
+	<menuitem name="Ordenes Confirmadas" action="action_custom_confirmed_order_form"	id="menu_custom_confirmed_order_form" parent="custom_menu_purchase"/>
+
+	<record id="action_custom_approved_order_form" model="ir.actions.act_window">
+		<field name="name">Ordenes Aprobadas</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">purchase.order</field>
+		<field name="domain">[('state','=','approved')]</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_custom_approved_order_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_purchase_tree"/>
+		<field name="act_window_id" ref="action_custom_approved_order_form"/>
+	</record>
+	<record id="action_custom_approved_order_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_purchase_form"/>
+		<field name="act_window_id" ref="action_custom_approved_order_form"/>
+	</record>
+
+	<menuitem name="Ordenes Aprobadas" action="action_custom_approved_order_form"	id="menu_custom_approved_order_form" parent="custom_menu_purchase"/>
+
+	
+</data>
+</openerp>

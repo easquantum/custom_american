@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	========================================
+	Custom Wizard Commisions Sale For Orders
+	========================================
+	-->
+		<wizard 
+			string="Calculo Comisiones Zona" 
+			model="commissions.seller.zone" 
+			name="commissions_seller_zone"  
+			id="wizard_commissions_seller_zone"/>	
+ 
+ 		<menuitem  
+			action="wizard_commissions_seller_zone" 
+			id="menu_wzd_commissions_seller_zone" 
+			parent="custom_american.menu_commissions_order" 
+			type="wizard"/>
+
+		<wizard 
+			string="Calculo Comisiones Territorio" 
+			model="commissions.seller" 
+			name="commissions_seller_territory"  
+			id="wizard_commissions_seller_territory"/>	
+ 
+ 		<menuitem  
+			action="wizard_commissions_seller_territory" 
+			id="menu_wzd_commissions_seller_territory" 
+			parent="custom_american.menu_commissions_order" 
+			type="wizard"/>
+
+		<wizard 
+			string="Calculo Comisiones Division" 
+			model="commissions.seller" 
+			name="commissions_seller_division"  
+			id="wizard_commissions_seller_division"/>	
+ 
+ 		<menuitem  
+			action="wizard_commissions_seller_division" 
+			id="menu_wzd_commissions_seller_division" 
+			parent="custom_american.menu_commissions_order" 
+			type="wizard"/>
+	<!--
+	============================================
+	Custom Wizard Commisions Sale for Invoice
+	============================================
+	-->
+		<wizard 
+			string="Calculo Comisiones Zona" 
+			model="commissions.seller" 
+			name="commissions_invoice_zone"  
+			id="wizard_commissions_invoice_zone" 
+			menu="False"/>	
+ 
+ 		<menuitem  
+			action="wizard_commissions_invoice_zone" 
+			id="menu_wzd_commissions_invoice_zone" 
+			parent="custom_american.menu_commissions_invoice" 
+			type="wizard"/>
+
+		<wizard 
+			string="Calculo Comisiones Territorio" 
+			model="commissions.seller" 
+			name="commissions_invoice_territory"  
+			id="wizard_commissions_invoice_territory" 
+			menu="False"/>	
+ 
+ 		<menuitem  
+			action="wizard_commissions_invoice_territory" 
+			id="menu_wzd_commissions_invoice_territory" 
+			parent="custom_american.menu_commissions_invoice" 
+			type="wizard"/>
+
+		<wizard 
+			string="Calculo Comisiones Division" 
+			model="commissions.seller" 
+			name="commissions_invoice_division"  
+			id="wizard_commissions_invoice_division" 
+			menu="False"/>	
+ 
+ 		<menuitem  
+			action="wizard_commissions_invoice_division" 
+			id="menu_wzd_commissions_invoice_division" 
+			parent="custom_american.menu_commissions_invoice" 
+			type="wizard"/>
+
+	<!--
+	=========================================
+	Custom Wizard Collection Commisions Sale
+	=========================================
+	-->
+
+
+		<wizard 
+			string="Calculo Comisiones Cobranza" 
+			model="commissions.collection.seller" 
+			name="commissions_collection"  
+			id="commissions_collection_wizard"/>	
+ 
+ 		<menuitem  
+			action="commissions_collection_wizard" 
+			id="menu_wizard_commissions_collection" 
+			parent="custom_american.cust_menu_commissions_collection" 
+			type="wizard"/>
+
+
+		<wizard 
+			string="Archivo Comisiones" 
+			model="commissions.seller" 
+			name="commissions_file_bank"  
+			id="commissions_file_bank_wizard"/>	
+ 
+ 		<menuitem  
+			action="commissions_file_bank_wizard" 
+			id="menu_wizard_commissions_file" 
+			parent="custom_american.custom_menu_commissions" 
+			type="wizard"/>
+
+		<wizard 
+			string="Archivo Comisiones Cobranza" 
+			model="commissions.collection.seller" 
+			name="commissions_collection_file"  
+			id="commissions_collect_file_wizard"/>	
+ 
+ 		<menuitem  
+			action="commissions_collect_file_wizard" 
+			id="menu_wizard_commissions_collect_file" 
+			parent="custom_american.cust_menu_commissions_collection"  
+			type="wizard"/>
+
+
+	<!--
+	==============================================
+	Custom Wizard Commissions Periods
+	==============================================
+	-->
+		<wizard 
+			string="Periods"
+			model="sale.commissionsyear"
+			name="sale_commissions_period_year"
+			id="wizard_commissions_periods" 
+			menu="False"/>
+
+		<wizard 
+			string="Cierre Anual"
+			model="sale.commissionsyear"
+			name="commissions_year_close"
+			id="wizard_commissions_year_close"/>
+
+		<wizard 
+			string="Cerrar Periodo"
+			model="sale.commissionsperiod"
+			name="commissions_period_close"
+			id="wizard_commissions_period_close"/>
+
+
+	<!--
+	==============================================
+	Wizard Order Sales Lines From file
+	==============================================
+	-->
+		<wizard 
+			string="Importar Productos"
+			model="sale.order"
+			name="order_sale_line_from_file"
+			id="wizard_order_sale_line_from_file"/>
+</data>
+</openerp>

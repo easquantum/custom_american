@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu Invoices Suppliers
+	=======================
+	-->
+	 <menuitem  id="custom_menu_invoices_suppliers" name="Compras" parent="purchase.menu_purchase_root" />    
+	
+	<!--
+	=======================
+	Custom Invoice Suppliers Tree:
+	Esta Pantalla esta destinada al supervisor de Compras
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_invoices_suppliers_sup_tree">
+		<field name="name">invoices.suppliers.tree</field>
+		<field name="model">account.invoice</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="12"/>
+		<field name="arch" type="xml">
+			<tree string="Compras Proveedores">					
+					<field name="name"			string="Compra Nro." select="1"/>
+					<field name="reference"		string="Nota Entrada" select="2" />
+					<field name="number_document" string="Documento Nro."/>
+					<field name="number_control" string="Nro. Control"/>
+					<field name="partner_id" 	string="Proveedor" select="1"/>
+					<field name="number_retention"	string="Comprobante Ret." select="2"/>
+					<field name="date_received"	string="Fecha Almacen" select="2"/>
+					<field name="date_invoice"	string="Fecha Compra" select="2"/>
+					<field name="date_due" 		string="Fecha Vencimiento" select="2"/>					
+					<field name="state"			string="Estatus" select="2"/>								
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_invoices_suppliers_sup_tree" model="ir.actions.act_window">
+            <field name="name">Compras Proveedores (sup)</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.invoice</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_invoices_suppliers_sup_tree"/>  
+    </record>
+    
+	<!--
+	=======================
+	Custom Invoice Suppliers  Form
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_invoices_suppliers_sup_form">
+		<field name="name">invoices.suppliers.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Compras Proveedores (sup)">
+					<group  colspan="4" col="6">
+                         	<field name="name"       string="Compra Nro." select="1" readonly="1"/>
+                         	<field name="reference"  string="Nota Entrada" select="2" readonly="1"/> 
+                     		<field name="partner_id" string="Proveedor" 
+                     		on_change="onchange_partner_id(type,partner_id,date_invoice,payment_term, partner_bank)" 
+                     		domain="[('supplier','=', 'True')]" select="1"/> 	                         	                       
+                    </group>
+					<notebook colspan="4">
+						<page string="Datos Compra">
+							<field name="warehouse_id" string="Almacen" select="2" readonly="1"/> 
+							<field name="address_invoice_id" string="Direccion Proveedor" domain="[('partner_id','=',partner_id)]"/> 
+							<newline/>
+                        	<group  colspan="4" col="6">
+   		                     		<separator string="Fechas" colspan="4"/>
+   		                     		<separator string="Datos Factura Proveedor" colspan="2"/>
+   		                     		<newline/>
+   		                     		<field name="date_invoice"		string="Recibido Compras" select="2"/>
+   		                     		<field name="date_document"		string="Emitido Prov."/>
+   		                     		<field name="number_document"	string="Factura Nro." select="1"/>
+                        			<field name="date_received"		string="Recibido Almacen" on_change="onchange_payment_term_date_invoice(payment_term, date_invoice)"/>
+                        			<field name="date_due"			string="Vencimiento" select="2"/> 
+                        			<field name="number_control"	string="Nro. Control" select="2"/> 
+							</group>
+							<separator string="Datos Retencion" colspan="4"/>
+							<group  colspan="4" col="6">
+							<field name="p_ret" string="Porc. Retencion"/>
+							<field name="number_retention" string="Comprobante Nro." readonly="1"/>
+							<field name="retention" string="Retenida"/>
+							</group>
+                        	<separator string="Observaciones" colspan="4"/>
+                        	<field  name="comment" colspan="4" nolabel="1"/>  
+                        	<newline/>
+                        	<group  colspan="4" col="6">	
+                        		<field name="state" string="Estatus"/>
+                        			<button name="invoice_open" states="draft,proforma2" string="Validate" icon="gtk-execute"/>
+                        			<button name="invoice_cancel" states="draft,proforma2,sale,open" string="Cancel" icon="gtk-cancel"/>
+                                    		<button name="action_cancel_draft" states="cancel" string="Set to Draft" type="object" icon="gtk-convert"/>
+                                    		<button name='%(account.wizard_paid_open)d' type='action' string='Re-Open' states='paid' icon="gtk-convert"/>
+                         	</group>
+                        </page>
+                        <page string="Productos">
+							<field colspan="4" default_get="{'check_total': check_total, 'invoice_line': invoice_line, 'address_invoice_id': address_invoice_id, 'partner_id': partner_id, 'price_type': 'price_type' in dir() and price_type or False}" name="invoice_line" nolabel="1">
+								<tree string="Invoice lines">
+									<field name="name" string="Codigo  - Descripcion"/>
+									<field name="quantity_received" string="Cantidad Recibida"/>
+									<field name="quantity" string="Cantidad Facturada"/>
+									<field name="price_unit" string="Precio"/>
+									<field name="discount" string="Descuento"/>
+									<field name="price_subtotal" string="Total"/>
+									
+									<!-- Campos Invisibles -->
+                                    <field	name="account_id" 
+                                    		domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]"  
+                                    		on_change="onchange_account_id(parent.fiscal_position,account_id)"
+                                    		invisible="True"/>
+                                    <field	name="account_analytic_id"  
+                                    		domain="[('type','&lt;&gt;','view'), ('company_id', '=', parent.company_id)]" 
+                                    		invisible="True"/>
+                               		<field  name="uos_id" invisible="True"/>
+                                    
+                                    <field	name="invoice_line_tax_id" 
+                                    		context="{'type':parent.type}" 
+                                    		domain="[('parent_id','=',False)]"
+                                    		nolabel="1" colspan="4" invisible="True"/>
+			                    </tree>
+			                    <form string="Productos de la Compra">
+			                                 		<separator string="Datos Producto" colspan="4"/>
+			                                			<field colspan="4" name="product_id" string="Producto" 
+			                                					on_change="product_id_change(product_id, uos_id, quantity, name, parent.type, parent.partner_id, parent.fiscal_position)"/>
+			                                			<newline/>
+			                                			<field colspan="4" name="name" string="Descripcion" select="1"/>
+			                                			<newline/>                           						
+                            							<field name="quantity" string="Cantidad Facturada" select="1"/>
+                            							<field name="quantity_received" string="Cantidad Recibida"/>
+                            							<field name="price_unit" string="Precio" select="1"/>
+                            							<field name="price_standard" string="Precio Standard" />
+                            							<field name="discount" string="Descuento"/>
+                            							<field name="uos_id" string="Unidad"/>
+                            							<field name="price_historic" string="Precio Historico" domain="[('suppinfo_id', '=',suppinfo_id)]" on_change="price_historic_change(price_historic, parent.partner_id,product_id)"/>
+                            						<separator string="Datos Contables" colspan="4"/>                            						
+                            							<field domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]" name="account_id" on_change="onchange_account_id(parent.fiscal_position,account_id)"/>
+                            							<field name="suppinfo_id" string="suppinfo" domain="[('product_id', '=',product_id)]"/>	
+                            							<newline/>
+                            						<separator string="Impuestos y/o Descuentos" colspan="4"/>
+                            							<field nolabel="1" colspan="4" name="invoice_line_tax_id" context="{'type':parent.type}" domain="[('parent_id','=',False)]"/>
+                            						<!-- Campos ocultos -->
+                            							<field name="price_subtotal"  invisible="True" />
+                            							<field  name="origin" invisible="True"/>
+                            							<field domain="[('type','&lt;&gt;','view'), ('company_id', '=', parent.company_id)]" name="account_analytic_id" invisible="True"/>
+                                    					<field name="account_res_id"  
+domain="[('company_id', '=', parent.company_id), ('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]" invisible="True"/>
+			                                </form>
+			                            </field>
+		                        		<group col="1" colspan="2">
+		                                	<field name="tax_line" nolabel="1">
+		                                    	<tree  string="Impuestos">
+		                                        	<field string="Descripcion" name="name"/>
+		                                        	<field string="Base" name="base" on_change="base_change(base)" readonly="1"/>
+		                                        	<field string="Importe" name="amount" on_change="amount_change(amount)"/>
+		 											<!-- compos invisibles --> 
+		                                        		<field invisible="True" name="base_amount"/>
+		                                        		<field invisible="True" name="tax_amount"/>
+		                                    	</tree>
+		                                	</field>
+		                            </group>
+		                            <group col="4" colspan="2">
+		                                <label colspan="2"/>
+		                                <field name="amount_untaxed"/>
+		                                <label string="" colspan="2"/>
+		                                <field name="amount_tax"/>
+		                                <button colspan="2" name="button_compute" states="draft" string="Compute" type="object"/>
+		                                <field name="check_total" required="2"/>
+		                                <field name="amount_total" invisible="True"/>
+		                                <label string="" colspan="2"/>
+		                                <field name="residual"/>
+		                            </group>
+                        		</page>                   		
+                         	<page string="Datos Contables">
+								<separator string="Miscelaneos" colspan="4"/>
+                        			<group  colspan="4" col="6">
+                        				<field name="type" readonly="1" select="2"/>
+                        			    <field name="company_id"/> 
+                            			<field name="currency_id" on_change="onchange_currency_id(currency_id)" select="2"/>
+                        			</group>                         	
+                        		<separator string="Datos Contables" colspan="4"/>
+                            		<group colspan="4" col="6">
+                        				<field domain="[('type', '=', 'purchase')]" name="journal_id" select="2"/> 
+                        				<field domain="[('type','&lt;&gt;','view'), ('company_id', '=', company_id),('journal_id','=',journal_id)]" name="account_id"/>
+                        				<field name="reconciled"/>
+                            			<field name="move_id"/>  
+                            			<field name="period_id"/>
+                            			<label align="0.0" colspan="2" string="(keep empty to use the current period)"/>
+                            			
+                            			<field name="payment_term" on_change="onchange_payment_term_date_invoice(payment_term, date_invoice)"/>
+                            			<field domain="[('partner_id', '=', partner_id)]" name="partner_bank" on_change="onchange_partner_bank(partner_bank)" select="2"/>
+                            			<field name="fiscal_position" groups="base.group_extended"/>
+                            			<field name="reference_type" nolabel="1" size="0" invisible="True"/>                      	  
+                            		</group>                        		
+                        		</page>
+                        <page string="Pagos">
+                            <field name="payment_ids" colspan="4" nolabel="1">
+                                	<tree string="Pagos">
+                                    	<field name="date" string="Fecha"/>
+                                    	<field name="ref" string="Factura Nro."/>
+                                    	<field name="name" string="Descripcion"/>
+                                    	<field name="debit" string="Debe"/>
+                                    	<field name="credit" string="Haber"/>
+                                	</tree>
+                            </field>
+                    	</page>
+                     </notebook>                    	
+                </form>
+            </field>
+        </record>
+
+		
+	<record id="action_invoices_suppliers_sup_form" model="ir.actions.act_window">  
+		<field name="name">Compras Borrador (sup)</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.invoice</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','draft'),('type','=','in_invoice')]</field>
+           <field name="context">{'type':'in_invoice'}</field>
+	</record>
+	<record id="action_invoices_suppliers_sup_view1" model="ir.actions.act_window.view"> 
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_invoices_suppliers_sup_tree"/>  
+		<field name="act_window_id" ref="action_invoices_suppliers_sup_form"/>
+	</record>
+	<record id="action_invoices_suppliers_sup_view2" model="ir.actions.act_window.view"> 
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_invoices_suppliers_sup_form"/> 
+		<field name="act_window_id" ref="action_invoices_suppliers_sup_form"/>  
+	</record>
+
+	<menuitem name="Compras Borrador (sup)" action="action_invoices_suppliers_sup_form"	id="menu_invoices_suppliers_sup_form" parent="custom_menu_invoices_suppliers"/>
+
+	<record id="action_invoices_suppliers_sup2_form" model="ir.actions.act_window">  
+		<field name="name">Todas Compras Supervisor</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.invoice</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('type','=','in_invoice')]</field>
+        <field name="context">{'type':'in_invoice'}</field>
+	</record>
+	<record id="action_invoices_suppliers_sup2_view1" model="ir.actions.act_window.view"> 
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_invoices_suppliers_sup_tree"/>  
+		<field name="act_window_id" ref="action_invoices_suppliers_sup2_form"/>
+	</record>
+	<record id="action_invoices_suppliers_sup2_view2" model="ir.actions.act_window.view"> 
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_invoices_suppliers_sup_form"/> 
+		<field name="act_window_id" ref="action_invoices_suppliers_sup2_form"/>  
+	</record>
+
+	<menuitem name="Todas Compras Supervisor" action="action_invoices_suppliers_sup2_form"	id="menu_invoices_suppliers_sup2_form" parent="custom_menu_invoices_suppliers"/>
+			 
+</data>
+</openerp>

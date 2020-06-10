@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(792.0,612.0)" title="Retenciones por Proveedor" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="57.0" y1="57.0" width="678" height="498"/>
+	<pageGraphics>
+    	    <image x="1.0cm" y="19.5cm" height="40.0" >[[company.logo]]</image>
+	    <setFont name="Times-Roman" size="7"/>
+	    <fill color="black"/>
+            <stroke color="grey"/>
+            
+            <!-- LINE bottom -->
+            <lines>1.2cm 1.90cm 25.9cm 1.90cm</lines>
+	    <drawString x="14.0cm" y="1.30cm">Pag. <pageNumber/></drawString>
+	</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau1"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>
+		<blockBackground colorName="#e6e6e6" start="6,0" stop="6,0"/>
+		<blockBackground colorName="#e6e6e6" start="7,0" stop="7,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau6">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="14.0" leading="18" alignment="CENTER"/>
+<paraStyle name="P3" fontName="Times-Bold" fontSize="12.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P5" fontName="Times-Bold" fontSize="12.0" leading="13"  alignment="RIGHT"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="13" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="16.0" leading="20"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P13" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="LEFT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P16" fontName="Times-Bold" fontSize="14.0" leading="18" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="P22" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P23" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P24" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P27" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story>
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<blockTable colWidths="400.0,350.0" style="Tableau3"> 
+	<tr>
+	<td>
+					<para style="P1"> Ley IVA - Art 11: "Seran reponsables del pago del impuesto en calidad de agentes de retención, los compradores o adquirientes de
+					                               determinados bienes muebles y los receptores de ciertos servicios, a quienes la Administración Tributaria designe como tal" 					
+					</para>	 
+	</td>
+	<td>  
+		<blockTable colWidths="100.0,140.0,100" style="Tableau3"> 
+			<tr>
+			<td><para style="P1"><font color="white"> </font></para> </td> 
+			<td>	
+					<para style="P26"> Nro. Comprobante   </para>	 
+					<para style="P8">  [[  o.code ]] </para> 
+			</td>
+			<td>
+				<para style="P26">Fecha  </para> 
+				<para style="P8"> [[ time.strftime('%d/%m/%Y', time.strptime(o.inicial_date, '%Y-%m-%d')) ]] </para> 
+			</td>
+			</tr>
+		</blockTable>			
+	</td>			
+	</tr>
+</blockTable>
+<para style="P11"><font color="white"> </font></para>
+<blockTable colWidths="400.0,250.0,100.0" style="Tableau3">
+	<tr>
+	<td>	
+	 <para style="P1">Nombre o Razón Social Agente de Retención  </para> 
+	 <para style="P26">[[ o.company_id.name or ''  ]]</para>		
+	</td>
+	<td>
+		<para style="P1">Registro de Información Fiscal  del Agente de Retención:  </para>
+		<para style="P26">[[ o.company_id.partner_id.vat  or ''  ]]</para>
+	</td>	
+   <td>
+		<blockTable colWidths="95.0" style="Tableau3">
+			<tr>
+			<td> 
+			<para style="P1">Periodo Fiscal : </para>			
+			<para style="P9">Año:  [[  get_periodo(get_final_date(data))['a']  or '' ]] / Mes:  [[  get_periodo(get_final_date(data))['m']  or '' ]]  </para>
+			</td>
+			</tr>
+		</blockTable> 
+   </td>
+	</tr>
+</blockTable>
+
+<para style="P11"><font color="white"> </font></para>
+
+<blockTable colWidths="650.0,100.0" style="Tableau3">
+	<tr>
+	<td>
+	 <para style="P1">Dirección Fiscal del Agente de Retención </para> 
+	 <para style="P26">[[ get_address_company() ]]</para>		
+   </td>
+   <td>
+   <para style="P11"><font color="white"> </font></para>
+    </td>
+	</tr>
+</blockTable>	
+<para style="P11"><font color="white"> </font></para>
+<para style="P11"><font color="white"> </font></para>
+
+<blockTable colWidths="400.0,250.0,100.0" style="Tableau3">
+	<tr>
+	<td>	
+	 <para style="P1">Nombre o Razón Social del Sujeto Retenido  </para> 
+	 <para style="P26">  [[ get_razon_partner(o.partner_id.id) or '' ]] </para>		
+	</td>
+	<td>
+		<para style="P1">Registro de Información Fiscal  del Sujeto de Retenido  </para>
+		<para style="P26">[[ o.partner_id.vat or '' ]] </para>
+	</td>	
+   <td>
+   <para style="P11"><font color="white"> </font></para>
+   </td>
+	</tr>
+</blockTable>
+
+<para style="P1"><font color="white"> </font></para>
+<para style="P1"><font color="white"> </font></para>
+<blockTable colWidths="535.0,95.0,120.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P11"> </para></td>
+	<td><para style="P11">Compras Internas o Importaciones</para></td>
+	<td><para style="P11"> </para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="30.0,50.0,35.0,60.0,60.0,50.0,50.0,55.0,75.0,70.0,70.0,25.0,60.0,60.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P11">Nro. Oper.</para></td>
+	<td><para style="P11">Fecha</para></td>
+	<td><para style="P11">Tipo Doc.</para></td>
+	<td><para style="P11">Nro. Factura</para></td>	
+	<td><para style="P11">Nro. Control.</para></td>
+	<td><para style="P11">Nro. Nota Debito</para></td>
+	<td><para style="P11">Nro. Nota Credito</para></td>
+	<td><para style="P11">Factura Afectada.</para></td>
+	<td><para style="P11">Total compra con iva </para></td>
+	<td><para style="P11">Compra sin Derecho Credito iva </para></td>	
+	<td><para style="P11">Base Imponible </para></td>
+	<td><para style="P11">% Alic. </para></td>
+	<td><para style="P11">Impuesto I.V.A </para></td>
+	<td><para style="P11">I.V.A Retenidos</para></td>
+	</tr>
+		<tr> <para style="14"> [[ repeatIn(get_detalle(o.id), 'line') ]]</para> 
+		<td><para style="P12"> [[ line['item'] ]] </para></td>
+		<td><para style="P12"> [[ time.strftime('%d/%m/%Y', time.strptime(line['fecha'], '%Y-%m-%d'))   ]] </para></td>
+		<td><para style="P14"> [[ line['tipo'] ]] </para></td>
+		<td><para style="P12"> [[ line['nrofact'] ]] </para></td>		
+		<td><para style="P15"> [[ line['nrocont'] ]]</para></td>
+		<td><para style="P15">   </para></td>
+		<td><para style="P12"> [[ line['notac'] ]]</para></td>
+		<td><para style="P12"> [[ line['afectada'] ]]</para></td>
+		<td><para style="P15"> [[ locale.format('%.2f', line['totalconiva'], grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P15"> [[ locale.format('%.2f', line['totalsin'], grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P15"> [[ locale.format('%.2f', line['base'], grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P12"> [[ locale.format('%.2f', line['alicuota'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15"> [[ locale.format('%.2f', line['iva'], grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P15"> [[ locale.format('%.2f', line['ivaret'], grouping=True, monetary=True) ]] </para></td>
+		</tr>
+	</blockTable>
+<para style="P21"><font color="white"> </font></para>
+<blockTable colWidths="285.0,105.0,75.0,70.0,70.0,25.0,60.0,60.0" repeatRows="1" style="Tableau3">
+		<tr>
+		<td><para style="P12"> </para></td>
+		<td><para style="P15">  Totales</para></td>
+		<td><para style="P15">  [[ locale.format('%.2f', get_totalgral_con(), grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P15">  [[ locale.format('%.2f', get_totalgral_sin(), grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P15">  [[ locale.format('%.2f', get_totalgral_base(), grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P12">  </para></td>
+		<td><para style="P15">   [[ locale.format('%.2f', get_totalgral_iva(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15"> [[ locale.format('%.2f', get_totalgral_rec(), grouping=True, monetary=True) ]] </para></td>
+		</tr>
+	</blockTable>
+</story>
+</document>

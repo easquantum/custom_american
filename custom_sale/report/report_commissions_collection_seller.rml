@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="Comisiones Divisiones" author="Corvus Latinoamerica" allowSplitting="20">
+    <pageTemplate id="first">
+    <frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+    	<pageGraphics>
+			<setFont name="Times-Bold" size="10"/>
+			<fill color="black"/>
+            <stroke color="grey"/>
+            <!-- LINE Header -->
+            <drawString x="1.3cm" y="27.7cm">[[ company.partner_id.name ]]</drawString>
+            <setFont name="Times-Roman" size="9"/>
+            <drawString x="1.3cm" y="27.4cm">[[ company.partner_id.address and company.partner_id.address[0].street or  '' ]]</drawString>
+            <drawString x="1.3cm" y="27.1cm"> RIF:[[ company.partner_id.vat or  '' ]] Telf.: [[ company.partner_id.address and company.partner_id.address[0].phone or  '' ]]</drawString>
+            <lines>1.3cm 26.8cm 20cm 26.8cm</lines>
+            
+            <!-- LINE bottom -->
+            <lines>1.2cm 2.99cm 19.9cm 2.99cm</lines>
+			<drawString x="18.0cm" y="2.60cm">  pag. <pageNumber/></drawString> 
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Tableau1">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau6">
+		<blockAlignment  start="0,0" stop="-1,-1" value="LEFT"/>
+		<blockBottomPadding length="0mm"/>
+		<blockTopPadding length="0.50mm"/>
+		<blockValign start="0,0" stop="-1,-1" value="TOP"/>
+		<lineStyle  start="0,0" stop="-1,-1" kind="GRID" colorName="white"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="-1,-1"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="4,0" stop="4,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="5,0" stop="5,0"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="10.0" leading="12"/>
+<paraStyle name="P3" fontName="Times-Bold"     fontSize="10.0" leading="12" alignment="CENTER"/> 
+<paraStyle name="P4" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/> 
+<paraStyle name="P5" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="4.0" leading="5"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="16.0" leading="20"/>
+<paraStyle name="P11" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P12" fontName="Times-Bold" fontSize="14.0" leading="15" alignment="CENTER"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/></stylesheet>
+<images/><story>
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+
+<para style="P12"> COMISIONES DE COBRANZAS </para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="60.0,350.0,100.0" style="Tableau3">
+	<tr>
+	<td><para style="P1">Mes :</para></td>
+	<td><para style="P4">[[ get_mes(o.date_stop) ]] <font color="white"> .....</font> Año :  [[ o.commission_period_id.commissionsyear_id.code ]] </para></td>
+	<td><para style="P4">Fecha: [[ time.strftime('%d/%m/%Y', time.strptime(o.date_stop, '%Y-%m-%d')) ]]</para></td>
+	</tr>
+	<tr>
+	<td><para style="P1">Vendedor :</para></td>
+	<td><para style="P4">[[ o.salesman_id.name or '' ]]</para></td>
+	<td><para style="P4">Zona: [[ o.salesman_id.code_zone_id.name or '' ]]</para></td>
+	</tr>
+	
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="90.0,80.0,300.0,60.0" style="Tableau4">
+	<tr>
+	<td><para style="P3">Documento R.O</para></td>
+	<td><para style="P3">Fecha</para></td>
+	<td><para style="P3">Cliente </para></td>
+	<td><para style="P3">Monto</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="90.0,80.0,300.0,60.0" style="Tableau3">
+	<tr><para style="P14">[[repeatIn(o.collection_line,'line')]]</para>
+	<td><para style="P1">[[ line.name ]]  </para></td>
+	<td><para style="P6">[[ line.date_ro ]]</para></td>
+	<td><para style="P1">[[ get_client(line.name) ]] </para></td>
+	<td><para style="P6">[[ locale.format('%.2f', line.amount_ro, grouping=True, monetary=True) ]] </para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="250.0,50.0,120.0,100.0" repeatRows="1" style="Tableau3">
+    <tr>	
+	<td><para style="P2">  </para></td>
+	<td><para style="P2">  </para> </td>
+	<td><para style="P2">  </para> </td>
+	<td><para style="P7"> ----------------------</para> </td>
+	</tr>
+    <tr>	
+	<td><para style="P2">  </para></td>
+	<td><para style="P2">  </para> </td>
+	<td><para style="P2"> TOTAL VENDEDOR:  </para> </td>
+	<td><para style="P7"> [[ locale.format('%.2f',o.collection_total, grouping=True, monetary=True) ]]</para> </td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<para style="P3">C O B R A N Z A <font color="white"> .....</font>  D E L   <font color="white"> .....</font> M E S </para>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="200.0,150.0,70.0,100.0" repeatRows="1" style="Tableau4">
+	<tr>	
+	<td><para style="P2"> CUOTA Bs </para></td>
+	<td><para style="P7"> COBRADO </para> </td>
+	<td><para style="P7"> % </para> </td>
+	<td><para style="P7"> A PAGAR Bs.</para> </td>
+	</tr>
+    <tr>
+    <td><para style="P4">[[ locale.format('%.2f',o.quota_amount, grouping=True, monetary=True) ]]</para></td>	
+	<td><para style="P6"> [[ locale.format('%.2f',o.collection_total, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.collection_percent, grouping=True, monetary=True) ]] </para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.collection_pay, grouping=True, monetary=True) ]]</para> </td>
+	</tr>
+    <tr>
+    <td><para style="P2">Domingos y Feriados</para></td>	
+	<td><para style="P5"> [[ o.number_days ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.daily_salary, grouping=True, monetary=True) ]] </para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.amount_holiday, grouping=True, monetary=True) ]]</para> </td>
+	</tr>
+    <tr>
+    <td><para style="P2">Monto Ajuste</para></td>	
+	<td><para style="P5">   </para></td>
+	<td><para style="P6">   </para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f',o.amount_adjustment, grouping=True, monetary=True) ]]</para> </td>
+	</tr>
+</blockTable>
+
+<blockTable colWidths="250.0,100.0,70.0,100.0" repeatRows="1" style="Tableau3">
+    <tr>	
+	<td><para style="P2">  </para></td>
+	<td><para style="P2">  </para> </td>
+	<td><para style="P2"> TOTAL:  </para> </td>
+	<td><para style="P7"> [[ locale.format('%.2f', o.commission_pay, grouping=True, monetary=True)  ]]</para> </td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<para style="P4"><font color="white"> .</font></para>
+
+<blockTable colWidths="100.0,50.0,220.0,50.0,100.0" repeatRows="1" style="Tableau3">
+	<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> RECIBE CONFORME: </para></td>
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	</tr>
+	<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> ________________________________ </para></td>
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	</tr>
+	<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> NOMBRE: [[ o.salesman_id.name or '' ]]</para></td>
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> </para></td>	
+	</tr>
+		<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> C.I: [[ o.salesman_id.vat or '' ]]</para></td>
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> </para></td>	
+	</tr>	
+</blockTable>
+
+<para style="P5">(Favor devolver original de la presente firmada a la oficina)</para>
+
+</story>
+</document>

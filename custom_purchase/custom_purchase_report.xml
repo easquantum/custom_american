@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Reports
+	=======================
+	-->
+
+		<report id="report_pedido_compras"
+			name="pedido_compra"
+			string="Ordenes Compras"
+			model="purchase.order"
+			rml="custom_american/custom_purchase/report/report_pedido_compra.rml"
+			header="False"	
+			auto="False"/>		
+ 
+</data>
+</openerp>

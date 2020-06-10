@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+
+	<!-- 
+	=====================================================
+	Notas de ajutes de salidas por mercancia siniestrada
+	=====================================================
+	-->  
+	<menuitem
+		id="cust_menu_purch_nota_ajustm"
+		name="Ajustes" 		
+		parent="cust_menu_purchase_root_nota"/>
+
+	<record model="ir.ui.view" id="view_picking_purch_ajust_out_tree">
+		<field name="name">cust_purch_picking_ajust_out_tree</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Ajustes por Siniestro">
+				<field name="name"  colspan="4" string="Ajuste Salida"/>				
+				<field name="date" string="Fecha Ajuste"/>
+				<field name="origin" string="Orden Compra" invisible="True"/>
+				<field name="warehouse_id" string="Almacen" />
+				<field name="address_id" string="Proveedor"/>
+				<field name="backorder_id" readonly="1" string="Nota Devuelta" invisible="True"/>
+				<field name="state" string="Estatus Ajuste" readonly="1"/>
+				<field name="type2" invisible="True"/>
+			</tree>
+		</field>
+	</record>
+    <record id="action_purch_picking_ajust_out_tree" model="ir.actions.act_window">
+            <field name="name">Ajustes de Salida</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_picking_purch_ajust_out_tree"/> 
+    </record>
+    
+	<record model="ir.ui.view" id="view_picking_purch_ajust_out_form"> 
+		<field name="name">cust_purch_picking_ajust_out_form</field>
+		<field name="model">stock.picking</field>
+		<field name="type">form</field>
+		<field name="priority" eval="90"/>
+		<field name="arch" type="xml">
+			<form string="Ajuste de Salida">
+				<group colspan="4" col="6">
+					<field name="name" string="Ajuste Salida" attrs="{'readonly':[('state','!=','draft')]}"/>
+					<field name="date" string="Fecha Ajuste" attrs="{'readonly':[('state','!=','draft')]}"/>
+					<field name="address_id" string="Proveedor" required='True' attrs="{'readonly':[('state','!=','draft')]}"/>						
+					<field name="warehouse_id" string="Almacen"  attrs="{'readonly':[('state','!=','draft')]}"/>
+				</group>
+				<notebook colspan="4">
+					<page string="General">
+					<!-- *******   Campos Invisibles  *************************  -->
+					    <field name="origin" invisible="True"  string="Orden Compra"/>
+					    <field name="backorder_id"  invisible="True" string="Nota Devuelta"/>
+						<field name="type" invisible="True"/>
+						<field name="type2" invisible="True"/>
+						<field name="move_type" invisible="True"/> 					
+						<field name="location_id" invisible="True"/>
+						<field name="location_dest_id" invisible="True"/>
+					<!-- ******************************************************   -->
+						<field name="move_lines" widget="one2many_list" colspan="4" nolabel="1" mode="tree"  attrs="{'readonly':[('state','=','done')]}">
+							<tree string="Linea de Productos">
+								<field name="product_id" string="Producto"/>								
+								<field name="product_qty" string="Cantidad"/>
+							   	<field name="product_uom" string="U. Medida" />
+								<field name="location_id" string="Ubicacion origen" domain="[('warehouse_id','=',parent.warehouse_id)]"/>
+							  	<field name="location_dest_id" string="Ubicacion destino" domain="[('usage','=','supplier')]"/>
+							  	<field name="price_unit" string="Precio"/>
+								<field name="state" string="Estatus"/>
+							</tree>						
+							<form string="Productos">
+								<separator string="Informacion Detallada " colspan="4"/>
+								<field name="product_id" colspan="4" select="1" on_change="onchange_product_id(product_id, parent.location_id, parent.location_dest_id)" context="location=parent.location_id" string="Producto"/>
+								<field name="product_qty" string="Cantidad"/>
+								<field name="product_uom" string="U. Medida"/>
+								<field name="date_planned" string="Fecha Prevista"/>
+								<newline/>
+								<field name="location_id" string="Ubicacion origen" domain="[('warehouse_id','=',parent.warehouse_id)]"/>
+								<field name="location_dest_id" string="Ubicacion destino" domain="[('usage','=','supplier')]"/>
+								<field name="price_unit" string="Precio"/>
+								<field name="state" string="Estatus"/>
+							<!-- *******   Campos Invisibles  *************************  -->  
+								<field name="product_uos" invisible="True"/>
+								<field name="product_uos_qty" invisible="True"/>
+								<field name="name" colspan="4" invisible="True"/>
+								<field name="priority" invisible="True"/>							
+								<field name="address_id" invisible="True"/> 
+								<field name="product_packaging" invisible="True"/>
+								<field name="prodlot_id" context="product_id=product_id" invisible="True"/>
+								<field name="tracking_id" invisible="True"/>
+							<!-- ******************************************************   -->
+							</form>
+						</field>
+						<group colspan="4" col="8">
+							<field name="state" readonly="1"/>
+							<button name="force_assign" string="Valorizar" states="confirmed" type="object"/>
+							<button name="cancel_assign" string="Cancelar Asignacion" states="assigned" type="object"/>
+						</group>
+					</page>
+					<page string="Notas">
+						<field name="note" nolabel="1" colspan="4"/> 
+					</page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+
+
+	<!-- 
+	=====================================================
+	Notas de Ajustes Salida por Mercancia siniestrada
+	=====================================================
+	-->  
+
+
+
+	<record model="ir.actions.act_window" id="action_purch_picking_ajust_out_form_all"> 
+		<field name="name">Ajuste de Salida</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('type','=','out'),('type2','=','aju')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'out', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_all_vtree">
+		<field name="sequence" eval="80"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_tree"/> 
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_form_all"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_all_vform">
+		<field name="sequence" eval="90"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_form"/>
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_form_all"/> 
+	</record>
+
+	<menuitem
+		id="cust_mn_purch_pick_ajust_out_all"
+		name="Todos Ajustes" 		
+		parent="cust_menu_purch_nota_ajustm"
+		action="action_purch_picking_ajust_out_form_all"/> 
+
+
+	<!-- 
+	=====================================================
+	Notas : Caracas - Confirmadas
+	=====================================================
+	-->  
+
+	<record model="ir.actions.act_window" id="action_purch_picking_ajust_out_conf_car_f"> 
+		<field name="name">Ajustes Salida (C)</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','out'),('type2','=','aju'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'out', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_car_vt_conf">
+		<field name="sequence" eval="81"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_tree"/>  
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_car_f"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_car_vf_conf">
+		<field name="sequence" eval="91"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_form"/>
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_car_f"/> 
+	</record>
+	<menuitem
+		id="cust_mn_purch_pick_ajust_out_car_conf"
+		name="Ajustes Salida (C)" 		
+		parent="cust_menu_purch_nota_ajustm"
+		action="action_purch_picking_ajust_out_conf_car_f"/>
+
+	<!-- 
+	=====================================================
+	Notas : Turmero - Confirmadas
+	=====================================================
+	-->  
+
+	<record model="ir.actions.act_window" id="action_purch_picking_ajust_out_conf_tur_f"> 
+		<field name="name">Ajustes Salida (T)</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','out'),('type2','=','aju'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'out', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_tur_vt_conf">
+		<field name="sequence" eval="82"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_tree"/>  
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_tur_f"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_tur_vf_conf">
+		<field name="sequence" eval="92"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_form"/>
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_tur_f"/> 
+	</record>
+	<menuitem
+		id="cust_mn_purch_pick_ajust_out_tur_conf"
+		name="Ajustes Salida (T)" 		
+		parent="cust_menu_purch_nota_ajustm"
+		action="action_purch_picking_ajust_out_conf_tur_f"/>
+
+	<!-- 
+	=====================================================
+	Notas : Barcelona - Confirmadas
+	=====================================================
+	-->  
+
+	<record model="ir.actions.act_window" id="action_purch_picking_ajust_out_conf_bar_f"> 
+		<field name="name">Ajustes Salida (B)</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','out'),('type2','=','aju'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'out', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_bar_vt_conf">
+		<field name="sequence" eval="83"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_tree"/>  
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_bar_f"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_bar_vf_conf">
+		<field name="sequence" eval="93"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_form"/>
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_bar_f"/> 
+	</record>
+	<menuitem
+		id="cust_mn_purch_pick_ajust_out_bar_conf"
+		name="Ajustes Salida (B)" 		
+		parent="cust_menu_purch_nota_ajustm"
+		action="action_purch_picking_ajust_out_conf_bar_f"/>
+
+
+	<!-- 
+	=====================================================
+	Notas : Maracaibo - Confirmadas
+	=====================================================
+	-->  
+
+	<record model="ir.actions.act_window" id="action_purch_picking_ajust_out_conf_mar_f"> 
+		<field name="name">Ajustes Salida (O)</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','out'),('type2','=','aju'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'out', 'type2' : 'aju'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_mar_vt_conf">
+		<field name="sequence" eval="83"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_tree"/>  
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_mar_f"/> 
+	</record>
+	<record model="ir.actions.act_window.view" id="act_purch_pick_ajust_out_mar_vf_conf">
+		<field name="sequence" eval="93"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_picking_purch_ajust_out_form"/>
+		<field name="act_window_id" ref="action_purch_picking_ajust_out_conf_mar_f"/> 
+	</record>
+	<menuitem
+		id="cust_mn_purch_pick_ajust_out_mar_conf"
+		name="Ajustes Salida (O)" 		
+		parent="cust_menu_purch_nota_ajustm"
+		action="action_purch_picking_ajust_out_conf_mar_f"/>
+
+	<!-- 
+	=====================================================
+	Notas : Puerto Ordaz - Confirmadas
+	=====================================================
+	-->
+
+    <record  model="ir.actions.act_window" id="act_stock_valoriza_aj_out_pto_confirmed"> 
+      <field name="name">Ajustes Salida (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','out'),('type2','=','aju'),('state','=','confirmed')]</field> 
+      <field name="context"> {'contact_display': 'partner','type' : 'out', 'type2' : 'aju'}</field> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_valoriza_aj_out_pto_confirmed"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="view_picking_purch_ajust_out_tree"/> 
+    <field name="act_window_id" ref="act_stock_valoriza_aj_out_pto_confirmed"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_stock_valoriza_aj_out_pto_confirmed"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="view_picking_purch_ajust_out_form"/> 
+    <field name="act_window_id" ref="act_stock_valoriza_aj_out_pto_confirmed"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_valoriza_aj_out_pto_confirmed" 
+    	action="act_stock_valoriza_aj_out_pto_confirmed" 
+    	parent="cust_menu_purch_nota_ajustm"
+        name="Ajustes Salida (P)"/>
+
+</data>
+</openerp>

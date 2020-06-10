@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<openerp> 
+<data noupdate="1">
+
+	#
+	# Sequences for liquidation.shipping
+	#
+
+	<record model="ir.sequence.type" id="seq_type_liquidation_shipping">
+		<field name="name">Liquidation Shipping</field>
+		<field name="code">liquidation.shipping</field>
+	</record>
+	<record model="ir.sequence" id="seq_liquidation_shipping">
+		<field name="name">Liquidation Shipping</field>
+		<field name="code">liquidation.shipping</field>
+		<field name="padding">3</field>
+	</record>
+
+</data> 
+</openerp>

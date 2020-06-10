@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Promocion Wizard
+	=======================
+	-->		
+		
+		<wizard 
+			string="Promociones por periodo" 
+			model="sale.promocion" 
+			name="sale_promocion_by_periodo" 
+			id="wizard_promocion_by_periodo"
+			menu="False"/>
+			
+		<menuitem
+	          action="wizard_promocion_by_periodo"
+	          id="menu_wizard_promocion_by_periodo"
+	          parent="custom_menu_wizard_invoice_sale" 
+	          type="wizard"/>
+
+	</data>
+</openerp>

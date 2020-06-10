@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+
+		<!-- name: parametro con el cual es pasado el wizard en el py del directorio wizard --> 
+
+
+		<wizard 
+            menu="False"
+			string="Periods"
+			model="period.generalyear"
+			name="period.wizard.period_year"
+			id="wizard_generalperiod" />
+
+
+		<wizard 
+			string="Close a General Periods" 
+			model="period.generalperiod"
+			name="period.genperiod.close"
+			id="wizard_genperiod_close" />
+
+
+		<wizard
+            menu="False"
+			string="Close a General Year" 
+			model="period.generalyear"
+			name="period.genyear.close"
+			id="wizard_genyear_close" />
+
+        <menuitem
+            action="wizard_genyear_close"            
+            parent="account.menu_account_end_year_treatments"
+            type="wizard"
+            id="menu_wizard_gy_close"/>
+
+
+
+
+
+	</data>
+</openerp>

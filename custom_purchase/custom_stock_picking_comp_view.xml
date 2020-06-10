@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu picking Purchase
+	=======================
+	-->
+	 <menuitem  id="custom_menu_picking_purchase" name="Notas Entrada" parent="purchase.menu_purchase_root" />
+
+	<!--
+	=======================
+	Custom Picking Purchase Tree
+	=======================
+	-->
+	<record model="ir.ui.view" id="view_custom_picking_purchase_tree">
+		<field name="name">custom.picking.purchase.tree</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="20"/>
+		<field name="arch" type="xml">
+			<tree string="Notas de Entrada">
+					<field name="name" string="Nota Entrada" select="1"/>
+					<field name="origin" string="Orden Nro" select="1"/>
+					<field name="date" string="Fecha" />
+					<field name="address_id" string="Empresa"/>
+					<field name="invoice_state" string="Estado Factura"/>
+					<field name="warehouse_id" string="Almacen"/>
+					<field name="state" string="Estatus Almacen"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_custom_picking_purchase_tree" model="ir.actions.act_window">
+            <field name="name">Notas de Entrada</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.picking</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_custom_picking_purchase_tree"/>
+    </record>
+
+	<!--
+	=======================
+	Custom Picking Purchase  Form
+	=======================
+	-->
+
+	<record model="ir.ui.view" id="view_custom_picking_purchase_form">
+		<field name="name">custom.picking.purchase.form</field>
+            <field name="model">stock.picking</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Notas de Entrada">
+                    <group col="6" colspan="4">                    	
+                        <field name="name" string="Nota Nro." select="1" />
+                        <field name="origin" string="Orden Nro" select="1"/>
+                        <field name="date" string="Fecha" />   
+                        <field name="address_id" string="Empresa" select="2" context="{'context_display':'partner'}"/> 
+                        <field name="invoice_state" string="Estatus"/>            
+        		<field name="warehouse_id" string="Almacen"/>
+                     </group> 
+					<notebook colspan="4">
+                        <page string="General Information">
+                            <field colspan="4" name="move_lines" nolabel="1" widget="one2many_list" 
+                                   default_get="{'move_line':move_lines, 'address_out_id': address_id}" readonly="1">
+								<tree string="Productos Nota">
+									<field name="product_id" string="Codigo  - Descripcion"/>
+									<field name="product_qty" string="Cantidad"/>
+									<field name="product_uom" string="Unidad"/>
+									<field name="location_dest_id" string="Ubicacion"/>
+									<field name="state" string="Estatus"/>
+			                    </tree>                                   
+                            </field>
+                        </page>                      
+                        <page string="Notas">
+                         	<group col="6" colspan="4">
+                         		<field name="type" readonly="1"/>
+                            	<field name="move_type" readonly="1"/>
+                         		<field name="active" select="2" readonly="1"/>
+                         	</group>
+                         	<newline/>
+                         	<field colspan="4" name="note" nolabel="1"/>
+                         	<!-- compos invisibles --> 
+                            	<field name="auto_picking" invisible="True"/>                            
+                            	<field name="date_done"    invisible="True"/>
+                        </page>
+                  </notebook>
+                </form>
+            </field>
+        </record>
+
+	<record id="action_custom_picking_purchase_form" model="ir.actions.act_window">
+		<field name="name">Todas Notas de Entrada</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.picking</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','done'),('type','=','in')]</field>
+		<field name="context">{'contact_display': 'partner'}</field>
+	</record>
+	<record id="action_custom_picking_purchase_view1" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_picking_purchase_tree"/>
+		<field name="act_window_id" ref="action_custom_picking_purchase_form"/>
+	</record>
+	<record id="action_custom_picking_purchase_view2" model="ir.actions.act_window.view">
+		<field eval="30" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_picking_purchase_form"/>
+		<field name="act_window_id" ref="action_custom_picking_purchase_form"/>
+	</record>
+
+	<menuitem name="Todas Notas Entrada" action="action_custom_picking_purchase_form"	
+			  id="menu_custom_picking_purchase_form" parent="custom_menu_picking_purchase"/>
+
+	<record id="action_custom_picking_done_form" model="ir.actions.act_window">
+		<field name="name">Notas Entrada Pendiente</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">stock.picking</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('state','=','done'),('type','=','in'),('invoice_state','=','2binvoiced')]</field>
+		<field name="context">{'contact_display': 'partner'}</field>
+	</record>
+	<record id="action_custom_picking_done_view1" model="ir.actions.act_window.view">
+		<field eval="25" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_custom_picking_purchase_tree"/>
+		<field name="act_window_id" ref="action_custom_picking_done_form"/>
+	</record>
+	<record id="action_custom_picking_done_view2" model="ir.actions.act_window.view">
+		<field eval="35" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_custom_picking_purchase_form"/>
+		<field name="act_window_id" ref="action_custom_picking_done_form"/>
+	</record>
+
+	<menuitem name="Notas Entrada Pendiente" action="action_custom_picking_done_form"	
+			  id="menu_custom_picking_done_form" parent="custom_menu_picking_purchase"/>
+</data>
+</openerp>

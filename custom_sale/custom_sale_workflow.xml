@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+		#----------------------------------------------
+		# Activity
+		#----------------------------------------------
+		
+		<record model="workflow.activity" id="sale.act_validate">
+			<field name="wkf_id" ref="sale.wkf_sale"/>
+			<field name="name">validate</field>
+			<field name="kind">function</field>
+			<field name="action">wkf_validate_sale()</field> 
+		</record>
+		#----------------------------------------------
+		# Transition
+		#----------------------------------------------
+		<!-- Modified -->
+		<record model="workflow.transition" id="sale.trans_draft_router">
+			<!--<field name="act_from" ref="sale.act_draft"/>-->
+			<field name="act_from" ref="sale.act_validate"/>
+		</record>
+		
+		<!-- Added-->
+		<record model="workflow.transition" id="sale.trans_draft_validate">
+			<field name="act_from" ref="sale.act_draft"/>
+			<field name="act_to" ref="sale.act_validate"/>
+			<field name="signal">order_validated</field>
+		</record>
+		
+		<record model="workflow.transition" id="sale.trans_validated_cancel">
+			<field name="act_from" ref="sale.act_validate"/>
+			<field name="act_to" ref="sale.act_cancel"/>
+			<field name="signal">cancel</field>
+		</record>		
+</data>
+</openerp>

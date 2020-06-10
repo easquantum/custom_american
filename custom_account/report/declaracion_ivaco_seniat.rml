@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<document filename="declaracion_iva.pdf">
+<template pageSize="(792.0,612.0)" title="Declaracion IVA" author="Corvus" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="57.0" y1="40.0" width="678" height="498"/>
+		<pageGraphics>
+		    <image x="1.0cm" y="19.5cm" height="40.0" >[[company.logo]]</image>
+		    <setFont name="Times-Bold" size="12"/>
+		    <drawString x="10.0cm" y="20cm">[[ company.partner_id.name ]]</drawString>
+		    <setFont name="Times-Bold" size="10"/>
+		    <drawString x="12.8cm" y="19.7cm">R.I.F: [[ company.partner_id.vat ]]</drawString>
+		    <setFont name="Times-Bold" size="8"/>
+		    <drawString x="12.5cm" y="19.4cm"> DECLARACION DE I.V.A </drawString>
+		    <drawString x="11.7cm" y="19.1cm"> PERIODO: [[ get_periodo(data['form']['date1'])  ]] </drawString>
+			<setFont name="Helvetica-Bold" size="5"/>
+			<drawString x="14.0cm" y="1cm">Pag. <pageNumber/></drawString>
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+
+<blockTableStyle id="Tableau2">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+		<blockBackground colorName="#e6e6e6" start="1,0" stop="1,0"/>
+		<blockBackground colorName="#e6e6e6" start="2,0" stop="2,0"/>
+		<blockBackground colorName="#e6e6e6" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#e6e6e6" start="4,0" stop="4,0"/>
+		<blockBackground colorName="#e6e6e6" start="5,0" stop="5,0"/>
+		<blockBackground colorName="#e6e6e6" start="6,0" stop="6,0"/>
+		<blockBackground colorName="#e6e6e6" start="7,0" stop="7,0"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black" thickness="0.3"/>
+</blockTableStyle>
+
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="8.0" leading="10"/>
+<paraStyle name="P2" fontName="Times-Roman"  fontSize="8.0" leading="10"/>
+<paraStyle name="P3" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="P4" fontName="Times-Bold" fontSize="14.0" leading="16" alignment="CENTER"/>
+<paraStyle name="P5" fontName="Times-Bold" fontSize="12.0" leading="16" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Bold" fontSize="10.0" leading="13"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="13" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="16.0" leading="20"/>
+<paraStyle name="P11" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/> 
+<paraStyle name="P12" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P14" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="LEFT"/>
+<paraStyle name="P15" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="RIGHT"/>
+<paraStyle name="P16" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P17" fontName="Times-Roman" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P20" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P21" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="P22" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P23" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P24" fontName="Times-Bold" fontSize="9.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P25" fontName="Times-Roman" fontSize="7.0" leading="9"/>
+<paraStyle name="P26" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="P27" fontName="Times-Roman" fontSize="11.0" leading="14"/>
+<paraStyle name="Index" fontName="Times-Roman"/>
+</stylesheet>
+<images/>
+<story> 
+<blockTable colWidths="15.0,40.0,20.0,20.0,190.0,40.0,50.0,50.0,50.0,50.0,50.0,50.0,50.0,40.0,20.0,15.0" repeatRows="1" style="Tableau7">
+	<tr>
+	<td><para style="P11">Req.</para></td>
+	<td><para style="P11">Fecha Factura</para></td> 
+	<td><para style="P11">Tipo Oper.</para></td>
+	<td><para style="P11">Tipo Doc.</para></td>	
+	<td><para style="P11">Nombre de la Empresa</para></td> 
+	<td><para style="P11">RIF</para></td>
+	<td><para style="P11">Nro. Documento</para></td> 
+	<td><para style="P11">Nro. Control</para></td>
+	<td><para style="P11">Total Documento</para></td> 
+	<td><para style="P11">Base Imponible </para></td>
+	<td><para style="P11">Monto I.V.A </para></td>
+	<td><para style="P11">Nro. Doc. Afectado</para></td>	 
+	<td><para style="P11">Nro. Comprobante </para></td>
+	<td><para style="P11">Monto excento de iva </para></td>
+	<td><para style="P11">% Alic. </para></td>	 
+	<td><para style="P11">Nro. Exp. </para></td>	
+	</tr>
+		<tr><para style="P1">  [[ repeatIn(get_iva_seniat(data['form']),'d') ]]</para>
+		<td><para style="P14">[[ d['cont'] ]] </para></td> 
+		<td><para style="P14">[[ d['fecha'] ]]</para></td>
+		<td><para style="P14">[[ d['tipo_op'] ]]</para></td>
+		<td><para style="P14">[[ d['tipo_doc'] ]]</para></td>	
+		<td><para style="P14">[[ d['proveedor'] ]]</para></td> 
+		<td><para style="P14">[[ d['rif'] ]]</para></td>
+		<td><para style="P12">[[ d['nrofac'] ]]</para></td>
+		<td><para style="P12">[[ d['nrocont'] ]]</para></td> 
+		<td><para style="P15">[[ locale.format('%.2f', d['total'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15">[[ locale.format('%.2f', d['base'], grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15">[[ locale.format('%.2f', d['iva'], grouping=True, monetary=True) ]]  </para></td>
+		<td><para style="P11">[[ d['afect'] ]] </para></td>	 
+		<td><para style="P11">[[ d['nrocomprobante'] ]] </para></td> 
+		<td><para style="P15">[[ locale.format('%.2f', d['exento'], grouping=True, monetary=True) ]]</para></td>
+		<td><para style="P11">[[ d['alicuota'] ]] </para></td>	
+		<td><para style="P11"> 0</para></td>	
+		</tr>
+	</blockTable> 
+
+	<blockTable colWidths="425.0,50.0,50.0,50.0,50.0,50.0,40.0,20.0,15.0" repeatRows="1" style="Tableau7">
+		<tr>
+		<td><para style="P15"> Totales : </para></td> 
+		<td><para style="P15">[[ locale.format('%.2f', get_totalgral_compra(), grouping=True, monetary=True) ]]</para></td> 
+		<td><para style="P15">[[ locale.format('%.2f', get_totalgral_base(), grouping=True, monetary=True) ]] </para></td>
+		<td><para style="P15">[[ locale.format('%.2f', get_totalgral_ivaretenido(), grouping=True, monetary=True) ]]  </para></td>
+		<td><para style="P11"> </para></td>	 
+		<td><para style="P11"></para></td>
+		<td><para style="P15">[[ locale.format('%.2f', get_totalgral_exento(), grouping=True, monetary=True) ]] </para></td> 
+		<td><para style="P11"> </para></td>	
+		<td><para style="P11"> </para></td>	
+		</tr>
+	</blockTable>
+</story>
+</document>

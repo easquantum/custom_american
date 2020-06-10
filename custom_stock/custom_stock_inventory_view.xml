@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+    <menuitem    id="cust_menu_stock_inventory" name="Inventario American" parent="stock.menu_stock_root"/>
+    <menuitem    id="cust_menu_inventory_close" name="Cierres Inventario" parent="cust_menu_stock_inventory"/>
+    
+    <!--
+    ===============================
+    Custom Stock Inventory Tree
+    ===============================
+    -->
+    <record model="ir.ui.view" id="view_stock_inventory_tree">
+            <field name="name">custom.stock.inventory.tree</field>
+            <field name="model">stock.inventory</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Inventario">
+                    <field name="name" string="Descripcion"/>
+                    <field name="date" string="Fecha"/>
+                    <field name="warehouse_id" string="Almacen" />
+                    <field name="period_id" string="Periodo" />
+                    <field name="confirmed" string="Confrimado" />
+                    <field name="state" string="Estatus"/>
+                </tree>
+            </field>
+    </record>
+
+    <record id="act_stock_inventory_tree" model="ir.actions.act_window">
+            <field name="name">Inventario</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.inventory</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_stock_inventory_tree"/>
+    </record>
+
+
+    <!--
+    =======================
+    Custom Notas Atencion Form
+    =======================
+    -->
+    <record model="ir.ui.view" id="view_stock_inventory_form">
+        <field name="name">custom.stock.inventory.form</field>
+        <field name="model">stock.inventory</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+                <form string="Inventario">
+                    <field name="name" string="Descripcion" attrs="{'readonly':[('confirmed','=',1)]}"/>
+                    <field name="date" string="Fecha" attrs="{'readonly':[('confirmed','=',1)]}"/>
+                    <field name="warehouse_id" string="Almacen" attrs="{'readonly':[('confirmed','=',1)]}"/>
+                    <field name="period_id" string="Periodo" attrs="{'readonly':[('confirmed','=',1)]}"/>
+                    <field name="inventory_start" string="Apertura" invisible="True"/>
+                    <notebook colspan="4">
+                    <page string="Informacion General">
+                        <field colspan="4" name="inventory_line_id" nolabel="1" widget="one2many_list" attrs="{'readonly':[('confirmed','=',1)]}">
+                            <tree string="Productos" editable="bottom">
+                                <field name="location_id" string="Ubicacion"/>
+                                <field name="product_id" string="Producto"/>
+                                <field name="product_qty" string="Fisico"/>
+                                <field name="cost_standard" string="Costo" groups="base.group_extended"/>
+                                <field name="purchase_done_qty" string="Comp. Realizadas" groups="base.group_extended"/>
+                                <field name="purchase_done_past_qty" string="Comp. Realizadas Ant." groups="base.group_extended"/>
+                                <field name="purchase_assig_qty" string="Comp. Pendientes" groups="base.group_extended"/>
+                                <field name="purchase_cancel_past_qty" string="Comp. Canceladas Ant." groups="base.group_extended"/>
+                                <field name="purchase_cancel_qty" string="Comp. Canceladas" groups="base.group_extended"/>
+                                <field name="sale_done_qty" string="Vtas Realizadas" groups="base.group_extended"/>
+                                <field name="sale_done_past_qty" string="Vtas Realizadas Ant." groups="base.group_extended"/>
+                                <field name="sale_assig_qty" string="Vtas Pendientes" groups="base.group_extended"/>
+                                <field name="sale_cancel_past_qty" string="Vtas Canceladas Ant." groups="base.group_extended"/>
+                                <field name="sale_cancel_qty" string="Vtas Canceladas" groups="base.group_extended"/>
+                                <field name="tars_in_qty" string="Traspasos E." groups="base.group_extended"/>
+                                <field name="tars_out_qty" string="Traspasos S." groups="base.group_extended"/>
+                                <field name="trans_in_qty" string="Transferencias E." groups="base.group_extended"/>
+                                <field name="trans_out_qty" string="Transferencias S." groups="base.group_extended"/>
+                                <field name="adjust_in_qty" string="Ajustes E." groups="base.group_extended"/>
+                                <field name="adjust_out_qty" string="Ajustes S." groups="base.group_extended"/>
+                                <field name="muest_qty" string="Muestreos" groups="base.group_extended"/>
+                                <field name="refund_qty" string="Notas Credito" groups="base.group_extended"/>
+                                <field name="total_qty" string="Total." groups="base.group_extended"/>
+                                <field name="total_past_qty" string="Past Total." groups="base.group_extended"/>
+                                <field name="notas_sale_qty" string="Pedidos Venta." groups="base.group_extended"/>
+                                <field name="notas_purchase_qty" string="Pedidos Compra." groups="base.group_extended"/>
+                                <field name="total_real_qty" string="Total Real" groups="base.group_extended"/>
+                                <field name="total_real_past_qty" string="Total Real Past" groups="base.group_extended"/>
+                            </tree>                        
+                        </field>
+                    </page>
+                    <page string="Inventorio Realizado">
+                        <field colspan="4" name="move_ids" nolabel="1"/>
+                    </page>
+                    </notebook>
+                    <group col="4" colspan="6">
+                        <field name="state" select="1"/>
+                        <!-- 
+                        <button name="action_done" states="draft" string="Confirm Inventory" type="object"/> 
+                        <button name="action_cancel" states="done" string="Cancel Inventory" type="object"/>
+                        -->
+                        <button name="button_set_products" string="Cargar Productos" states="draft" type="object" />
+                    </group>
+                </form>
+            </field>
+    </record>                
+    
+
+    <record id="act_stock_inventory_form" model="ir.actions.act_window">
+        <field name="name">Cierre Inventario (C)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('warehouse_id','ilike','Caracas'),('inventory_start','=',0)]</field>
+        <field name="context">{'warehouse':1,'inventory_start':0}</field>
+    </record>
+    <record id="act_stock_inventory_view1" model="ir.actions.act_window.view">
+        <field eval="10" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_stock_inventory_tree"/>
+        <field name="act_window_id" ref="act_stock_inventory_form"/>
+    </record>
+    <record id="act_stock_inventory_view2" model="ir.actions.act_window.view">
+        <field eval="20" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stock_inventory_form"/>
+        <field name="act_window_id" ref="act_stock_inventory_form"/>
+    </record>
+    <menuitem name="Cierre Inventario (C)" action="act_stock_inventory_form" id="menu_stock_inventory" parent="cust_menu_inventory_close"/>      
+
+    <record id="act_stock_inventory_tur_form" model="ir.actions.act_window">
+        <field name="name">Cierre Inventario (T)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('warehouse_id','ilike','Turmero'),('inventory_start','=',0)]</field>
+        <field name="context">{'warehouse':2,'inventory_start':0}</field>
+    </record>
+    <record id="act_stock_inventory_tur_vwtree" model="ir.actions.act_window.view">
+        <field eval="10" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_stock_inventory_tree"/>
+        <field name="act_window_id" ref="act_stock_inventory_tur_form"/>
+    </record>
+    <record id="act_stock_inventory_tur_vwform" model="ir.actions.act_window.view">
+        <field eval="20" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stock_inventory_form"/>
+        <field name="act_window_id" ref="act_stock_inventory_tur_form"/>
+    </record>    
+    <menuitem name="Cierre Inventario (T)" action="act_stock_inventory_tur_form" id="menu_stock_inventory_tur" parent="cust_menu_inventory_close"/>
+
+    <record id="act_stock_inventory_mar_form" model="ir.actions.act_window">
+        <field name="name">Cierre Inventario (O)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('warehouse_id','ilike','Maracaibo'),('inventory_start','=',0)]</field>
+        <field name="context">{'warehouse':3,'inventory_start':0}</field>
+    </record>
+    <record id="act_stock_inventory_mar_vwtree" model="ir.actions.act_window.view">
+        <field eval="10" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_stock_inventory_tree"/>
+        <field name="act_window_id" ref="act_stock_inventory_mar_form"/>
+    </record>
+    <record id="act_stock_inventory_mar_vwform" model="ir.actions.act_window.view">
+        <field eval="20" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stock_inventory_form"/>
+        <field name="act_window_id" ref="act_stock_inventory_mar_form"/>
+    </record>
+    <menuitem name="Cierre Inventario (O)" action="act_stock_inventory_mar_form" id="menu_stock_inventory_mar" parent="cust_menu_inventory_close"/>
+
+    <record id="act_stock_inventory_bar_form" model="ir.actions.act_window">
+        <field name="name">Cierre Inventario (B)</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.inventory</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('warehouse_id','ilike','Barcelona'),('inventory_start','=',0)]</field>
+        <field name="context">{'warehouse':4,'inventory_start':0}</field>
+    </record>
+    <record id="act_stock_inventory_bar_vwtree" model="ir.actions.act_window.view">
+        <field eval="10" name="sequence"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_stock_inventory_tree"/>
+        <field name="act_window_id" ref="act_stock_inventory_bar_form"/>
+    </record>
+    <record id="act_stock_inventory_bar_vwform" model="ir.actions.act_window.view">
+        <field eval="20" name="sequence"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_stock_inventory_form"/>
+        <field name="act_window_id" ref="act_stock_inventory_bar_form"/>
+    </record>
+    <menuitem name="Cierre Inventario (B)" action="act_stock_inventory_bar_form" id="menu_stock_inventory_bar" parent="cust_menu_inventory_close"/>
+
+    <record id="act_stock_inventory_close_pto_all" model="ir.actions.act_window"> 
+       <field name="name">Cierre Inventario (P)</field> 
+       <field name="type">ir.actions.act_window</field> 
+       <field name="res_model">stock.inventory</field> 
+       <field name="view_type">form</field> 
+       <field name="domain">[('warehouse_id','ilike','Puerto Ordaz'), ('inventory_start','=',0)]</field> 
+       <field name="context">{'inventory_start':0}</field> 
+    </record> 
+    <record id="act_vtree_stock_inventory_close_pto_all"  model="ir.actions.act_window.view"> 
+      <field eval="10" name="sequence"/> 
+      <field name="view_mode">tree</field> 
+      <field name="view_id" ref="view_stock_inventory_tree"/> 
+      <field name="act_window_id" ref="act_stock_inventory_close_pto_all"/> 
+    </record> 
+    <record id="act_vfrom_stock_inventory_car_all" model="ir.actions.act_window.view"> 
+      <field eval="20" name="sequence"/> 
+      <field name="view_mode">form</field> 
+      <field name="view_id" ref="view_stock_inventory_form"/> 
+      <field name="act_window_id" ref="act_stock_inventory_close_pto_all"/> 
+    </record> 
+    <menuitem name="Cierre Inventario (P)" action="act_stock_inventory_close_pto_all"  id="menu_stock_inventory_close_pto_all" parent="cust_menu_inventory_close"/>
+
+</data>
+</openerp>    

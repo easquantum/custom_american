@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="List partner" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first"> 
+    <frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+        <pageGraphics>
+			<setFont name="Times-Bold" size="10"/>
+			<fill color="black"/>
+            <stroke color="grey"/>
+            <!-- LINE bottom -->
+            <lines>1.2cm 1.99cm 19.9cm 1.99cm</lines>
+			<drawString x="18.0cm" y="1.60cm">  pag. <pageNumber/></drawString>
+		</pageGraphics>
+</pageTemplate> 
+</template><stylesheet>
+<blockTableStyle id="Standard_Outline">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/> 
+</blockTableStyle>
+<blockTableStyle id="Tabletop">
+<blockAlignment value="LEFT"/>
+	<blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau2">
+<blockAlignment value="LEFT"/>
+	<blockValign value="TOP"/>
+        <lineStyle kind="GRID" colorName="black"/>
+</blockTableStyle> 
+<blockTableStyle id="Tableau0">
+<blockAlignment value="LEFT"/>
+        <blockValign value="TOP"/>
+</blockTableStyle>
+
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/> 
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="LINEABOVE" colorName="grey" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEABOVE" colorName="grey" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEABOVE" colorName="grey" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEABOVE" colorName="grey" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEBELOW" colorName="grey" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEBELOW" colorName="grey" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEBELOW" colorName="grey" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEBELOW" colorName="grey" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5"><blockAlignment value="LEFT"/><blockValign value="TOP"/></blockTableStyle>
+<blockTableStyle id="Tableau6">
+    <blockAlignment value="LEFT"/>
+    <blockValign value="TOP"/>
+    <blockLeftPadding length="0mm"/>
+    <lineStyle kind="LINEABOVE" colorName="grey" start="0,0" stop="0,0"/>
+    <lineStyle kind="LINEABOVE" colorName="grey" start="1,0" stop="1,0"/>
+    <lineStyle kind="LINEABOVE" colorName="grey" start="2,0" stop="2,0"/>
+    <lineStyle kind="LINEABOVE" colorName="grey" start="3,0" stop="3,0"/>
+    <lineStyle kind="LINEBELOW" colorName="#ffffff" start="0,0" stop="0,0"/>
+    <lineStyle kind="LINEBELOW" colorName="grey" start="1,0" stop="1,0"/>
+    <lineStyle kind="LINEBELOW" colorName="grey" start="2,0" stop="2,0"/>
+    <lineStyle kind="LINEBELOW" colorName="grey" start="3,0" stop="3,0"/>
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="Po" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="Pt" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="PP" fontName="Times-Roman" fontSize="10.0" leading="13"/>
+<paraStyle name="PH" fontName="Times-Roman" alignment="LEFT" fontSize="14.0" leading="16"/>
+<paraStyle name="PC" fontName="Times-Roman" alignment="CENTER" fontSize="10.0" leading="20"/>
+<paraStyle name="PL" fontName="Times-Roman" alignment="LEFT" fontSize="8.0" leading="10"/>
+<paraStyle name="PR" fontName="Times-Roman" alignment="RIGHT" fontSize="10.0" leading="13"/>
+<paraStyle name="PT" fontName="Times-Bold" fontSize="8.0" leading="10"/>
+<paraStyle name="PTC" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="PM" fontName="Times-Bold" fontSize="6.0" leading="8"/>
+<paraStyle name="PV1" fontName="Times-Roman" fontSize="7.0" leading="11" alignment="LEFT"/>
+<paraStyle name="PV2" fontName="Times-Roman" fontSize="7.0" leading="11" alignment="CENTER"/>
+<paraStyle name="PV3" fontName="Times-Roman" fontSize="7.0" leading="11" alignment="RIGHT"/>
+<paraStyle name="P18" fontName="Times-BoldItalic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="P19" fontName="Times-Italic" fontSize="9.0" leading="11" alignment="LEFT"/>
+<paraStyle name="PS" fontName="Times-Bold" fontSize="9.0" leading="11"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="CENTER"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/></stylesheet>
+<images/><story>
+<para style="Po">[[ repeatIn(objects,'o') ]]</para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+<para style="Po"><font color="white"> .</font></para>
+
+<para style="PH"> American Distribution</para>
+<blockTable colWidths="175.0,180.0,175.0" repeatRows="1" style="Tableau3">
+        <tr>
+        <td><para style="PP">Comprobante Nro.: [[ get_compro(o.id) ]]  </para></td>
+        <td><para style="PP"> Fecha: [[ time.strftime('%d/%m/%Y', time.strptime(o.date, '%Y-%m-%d')) ]]  </para></td>
+        <td><para style="PP">Ref. Nro.: [[ o.name or  '' ]]  </para></td>
+        </tr>
+</blockTable>
+<blockTable colWidths="530.0" repeatRows="1" style="Tableau3">
+        <tr>
+        <td><para style="PL">[[ o.ref ]]  </para></td>
+        </tr>
+</blockTable>
+
+<blockTable colWidths="200.0,200.0,60.0,60.0" repeatRows="1" style="Tableau4">
+	<tr>
+	<td><para style="PT"> Cuentas </para></td>
+	<td><para style="PT">    </para></td>	
+	<td><para style="PTC">Debe</para></td>
+	<td><para style="PTC">Haber</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="200.0,200.0,60.0,60.0" repeatRows="1" style="Tableau0">
+        <tr><para style="PT">[[repeatIn(o.line_id,'l')]]</para>
+        <td><para style="PV1">[[ l.account_id.code ]] [[ l.account_id.name ]] [[ set_total(l.debit,l.credit) ]]</para></td>
+        <td><para style="PV1">[[ l.name ]] </para></td>
+        <td><para style="PV3">[[ locale.format('%.2f',l.debit, grouping=True, monetary=True) ]] </para></td>
+        <td><para style="PV3">[[ locale.format('%.2f',l.credit, grouping=True, monetary=True) ]] </para></td>
+        </tr>
+</blockTable>
+
+
+<blockTable colWidths="350.0,50.0,60.0,60.0" repeatRows="1" style="Tableau6">
+	<tr>
+	<td><para style="PV3">  </para></td>
+	<td><para style="PV3"> TOTALES : </para></td>
+	<td><para style="PV3"> [[ locale.format('%.2f',get_debe(), grouping=True, monetary=True) ]] </para></td>
+	<td><para style="PV3"> [[ locale.format('%.2f',get_haber(), grouping=True, monetary=True) ]] </para></td>	
+	</tr>
+</blockTable>
+<para style="P21"><font color="white"> .</font></para>
+<para style="P21"><font color="white"> .</font></para>
+<para style="P21"><font color="white"> .</font></para>
+<para style="P21"><font color="white"> .</font></para>
+
+<blockTable colWidths="100.0,70.0,100.0,70.0,100.0" repeatRows="1" style="Tableau3">
+	<tr>
+	<td><para style="P16">_____________________ </para></td>
+	<td><para style="P16">   </para></td>
+	<td><para style="P16">_____________________ </para></td>
+	<td><para style="P16">   </para></td>
+	<td><para style="P16">_____________________ </para></td>		
+	</tr>
+	<tr>
+	<td><para style="P16">Realizado Por </para></td>
+	<td><para style="P16">                         </para></td>
+	<td><para style="P16">Revisado Por    </para></td>
+	<td><para style="P6">                           </para></td>
+	<td><para style="P16">Aprobado Por     </para></td>		
+	</tr>	
+</blockTable>
+</story>
+</document>

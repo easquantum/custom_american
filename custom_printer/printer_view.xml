@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Menu Printer
+	=======================
+	-->
+	 <menuitem  id="custom_menu_printers" name="Impresoras" parent="base.menu_config" />
+	 
+
+	<!--
+	=======================
+	Custom Printer Tree
+	=======================
+	-->
+		 
+	<record model="ir.ui.view" id="view_printers_tree">
+		<field name="name">printers.tree</field>
+		<field name="model">ir.printers</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Configuracion Impresoras">
+				<field name="name" string="Descripcion Impresora" select="1"/>
+				<field name="printer" string="Nombre Impresora" select="1"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_printers_tree" model="ir.actions.act_window">
+            <field name="name">Configuracion Impresoras</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ir.printers</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_printers_tree"/>
+    </record>
+
+
+	<!--
+	=======================
+	Custom Printer Form
+	=======================
+	-->
+		
+	<record model="ir.ui.view" id="view_printers_form">
+		<field name="name">printers.form</field> 
+		<field name="model">ir.printers</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+			<form string="Configuracion Impresoras">
+				<field name="name" string="Descripcion" select="1"/>
+				<field name="printer" string="Nombre Impresa" select="1"/>	
+				<field name="department_id" string="Departamento"/>				
+			</form>
+		</field>
+	</record>
+	
+
+	<record id="action_printers_form" model="ir.actions.act_window">
+		<field name="name">Configuracion Impresoras</field> 
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">ir.printers</field>
+		<field name="view_type">form</field>
+	</record>
+	<record id="action_printers_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field> 
+		<field name="view_id" ref="view_printers_tree"/>
+		<field name="act_window_id" ref="action_printers_form"/>
+	</record>
+	<record id="action_printers_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field> 
+		<field name="view_id" ref="view_printers_form"/>
+		<field name="act_window_id" ref="action_printers_form"/>
+	</record>
+	
+
+	<menuitem name="Configuracion Impresoras" action="action_printers_form" id="menu_printers" parent="custom_menu_printers"/> 
+
+</data>
+</openerp>

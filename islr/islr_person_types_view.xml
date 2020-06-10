@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	================================
+	Custom Person Types ISLR Tree
+	================================
+	-->
+        <record id="view_islr_person_type_tree" model="ir.ui.view">
+            <field name="name">account.islr.person.type.tree</field>
+            <field name="model">account.islr.person.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tipos Persona ISLR">
+                    <field name="name" string="Descripcion" select="1"/>
+                    <field name="code" string="Codigo" select="1"/>
+                    <field name="type" string="Tipo" select="1"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_islr_person_type_tree" model="ir.actions.act_window">
+                <field name="name">Tipos Perona ISLR</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.islr.person.type</field>
+                <field name="view_type">tree</field>
+                <field name="view_id" ref="view_islr_person_type_tree"/>
+        </record>
+
+	<!--
+	==================================
+	Custom Person Types ISLR Form
+	==================================
+	-->
+        <record id="view_islr_person_type_form" model="ir.ui.view">
+            <field name="name">account.islr.person.type.form</field>
+            <field name="model">account.islr.person.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Tipos Perona ISLR">
+                    <separator string="Informacion" colspan="4"/>
+                    <field name="name" string="Descripcion" select="1"/>
+                    <field name="code" string="Codigo" select="1"/>
+                    <field name="type" string="Tipo" select="1"/>
+                </form> 
+            </field>
+        </record> 
+    	<record id="action_islr_person_type_form" model="ir.actions.act_window">
+	    	<field name="name">Tipos Persona Islr</field>
+	    	<field name="res_model">account.islr.person.type</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+    	</record>
+    	<record id="action_islr_person_type_vwtree" model="ir.actions.act_window.view"> 
+    		<field eval="10" name="sequence"/>
+    		<field name="view_mode">tree</field>
+    		<field name="view_id" ref="view_islr_person_type_tree"/> 
+    		<field name="act_window_id" ref="action_islr_person_type_form"/>
+    	</record>
+    	<record id="action_islr_person_type_vwform" model="ir.actions.act_window.view">
+    		<field eval="20" name="sequence"/>
+    		<field name="view_mode">form</field>
+    		<field name="view_id" ref="view_islr_person_type_form"/>
+    		<field name="act_window_id" ref="action_islr_person_type_form"/>
+    	</record>
+	    <menuitem   id="menu_action_islr_person_type" 
+	                name="Tipos Persona Islr" 
+	                parent="account.menu_finance_configuration" 
+	                action="action_islr_person_type_form"/>
+
+       </data>
+</openerp>

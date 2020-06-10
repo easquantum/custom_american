@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+	<!-- 
+	=====================================================
+	Notas Internas Transferencia
+	=====================================================
+	-->  
+
+	<menuitem
+		id="cust_menu_purch_nota_tf_out"
+		name="Salida" 		
+		parent="cust_menu_purch_nota_tran"/>
+
+
+	<record model="ir.ui.view" id="cust_purch_pick_in_tree_v_alma_tf_out">
+		<field name="name">cust_purch_pick_in_tree_v_alma_tf_out</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Trasferencia">
+				<field name="name"  colspan="4" string="Transferencia"/>				
+				<field name="date" string="Fecha Transferencia"/>
+				<field name="address_id" string="Empresa"/>
+				<field name="warehouse_id" string="Almacen"/>
+				<field name="location_id" string="Ubicacion Origen" invisible="True"/>
+				<field name="location_dest_id" string="Ubicacion Destino" invisible="True"/>
+				<field name="state" string="Estatus Transferencia" readonly="1"/>
+				<field name="type2" invisible="True"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="cust_purch_pick_in_form_v_alma_tf_out">
+		<field name="name">cust_purch_pick_in_form_v_alma_tf_out</field>
+		<field name="model">stock.picking</field>
+		<field name="type">form</field>
+		<field name="priority" eval="20"/>
+		<field name="arch" type="xml">
+			<form string="Transferencia">
+				<group colspan="4" col="6">
+					<field name="name" string="Transferencia"/>
+					<field name="date" string="Fecha Transferencia"/>
+					<field name="address_id" string="Empresa"/>				
+					<field name="warehouse_id" string="Almacen" on_change="onchange_warehouse_id(warehouse_id,type,type2)"/>
+					<field name="location_id" string="Ubicacion Origen" domain="[('warehouse_id','=',warehouse_id)]"/>
+					<field name="location_dest_id" string="Ubicacion Destino" domain="[('usage','=','production')]"/>
+
+				</group>
+				<notebook colspan="4">
+					<page string="General">
+					<!-- *******   Campos Invisibles  *************************  -->
+						<field name="type" invisible="True"/>
+						<field name="type2" invisible="True"/>
+						<field name="move_type" invisible="True"/>
+ 						<newline/>
+					<!-- ******************************************************   -->				
+						<field name="move_lines" widget="one2many_list" colspan="4" nolabel="1" mode="tree">
+							<tree string="Linea de Productos">
+								<field name="product_id" string="Producto"/>								
+								<field name="product_qty" string="Cantidad"/>
+							   	<field name="product_uom" string="U. Medida" />
+								<field name="location_id" string="Ubicacion Origen" domain="[('warehouse_id','=',parent.warehouse_id)]"/>
+							  	<field name="location_dest_id" string="Ubicacion Destino" domain="[('usage','=','production')]"/>
+								<field name="price_unit" string="Precio"/>
+								<field name="state" string="Estatus"/>
+							</tree>						
+							<form string="Productos">
+								<separator string="Informacion Detallada " colspan="4"/>
+								<field name="product_id" colspan="4" select="1" on_change="onchange_product_id(product_id, parent.location_id, parent.location_dest_id)" context="location=parent.location_id" string="Producto"/>
+								<field name="product_qty" string="Cantidad"/>
+								<field name="product_uom" string="U. Medida"/>
+								<field name="date_planned" string="Fecha Prevista"/>
+								<newline/>
+								<field name="location_id" string="Ubicacion Origen" domain="[('warehouse_id','=',parent.warehouse_id)]"/>
+								<field name="location_dest_id" string="Ubicacion Destino" domain="[('usage','=','production')]" />
+								<field name="price_unit" string="Precio"/>
+								<field name="state" string="Estatus"/>
+							<!-- *******   Campos Invisibles  *************************  -->  
+								<field name="product_uos" invisible="True"/>
+								<field name="product_uos_qty" invisible="True"/>
+								<field name="name" colspan="4" invisible="True"/>
+								<field name="priority" invisible="True"/>							
+								<field name="address_id" invisible="True"/> 
+								<field name="product_packaging" invisible="True"/>
+								<field name="prodlot_id" context="product_id=product_id" invisible="True"/>
+								<field name="tracking_id" invisible="True"/>
+							<!-- ******************************************************   -->
+							</form>
+						</field>
+						<group colspan="4" col="8">
+							<field name="state" readonly="1"/>
+							<button name="force_assign" string="Forzar Asignacion" states="confirmed" type="object"/>
+							<button name="cancel_assign" string="Cancelar Asignacion" states="assigned" type="object"/>
+						</group>
+					</page>
+					<page string="Notas">
+						<field name="note" nolabel="1" colspan="4"/>
+					</page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+
+
+	<!-- 
+	=====================================================
+	Notas Internas Filtradas
+	=====================================================
+	-->  
+
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_purch_pick_alma_tf_out_all">
+		<field name="name">cust_act_win_purch_pick_alma_tf_out_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','!=','None'),('type','=','internal'),('type2','=','trans'),('state','!=','draft')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'internal', 'type2' : 'trans'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_tree_v_alma_tf_out_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_purch_pick_in_tree_v_alma_tf_out"/> 
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_form_v_alma_tf_out_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_purch_pick_in_form_v_alma_tf_out"/>
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_purch_nota_tf_out_all"
+		name="Todos" 		
+		parent="cust_menu_purch_nota_tf_out"
+		action="cust_act_win_purch_pick_alma_tf_out_all"/>
+
+
+
+	<!-- 
+	=====================================================
+	Notas Internas Filtradas: Caracas - Confirmadas
+	=====================================================
+	-->  
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_purch_pick_alma_tf_out_cara_con">
+		<field name="name">cust_act_win_purch_pick_alma_tf_out_cara_con</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','internal'),('type2','=','trans'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'internal', 'type2' : 'trans'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_tree_v_alma_tf_out_cara_con">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_purch_pick_in_tree_v_alma_tf_out"/> 
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_cara_con"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_form_v_alma_tf_out_cara_con">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_purch_pick_in_form_v_alma_tf_out"/>
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_cara_con"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_purch_nota_tf_out_cara_con"
+		name="Transferencias Pendiente (C)" 		
+		parent="cust_menu_purch_nota_tf_out"
+		action="cust_act_win_purch_pick_alma_tf_out_cara_con"/>
+
+
+	<!-- 
+	=====================================================
+	Notas Internas Filtradas: Maracaibo - Confirmadas
+	=====================================================
+	-->  
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_purch_pick_alma_tf_out_mara_con">
+		<field name="name">cust_act_win_purch_pick_alma_tf_out_mara_con</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','internal'),('type2','=','trans'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'internal', 'type2' : 'trans'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_tree_v_alma_tf_out_mara_con">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_purch_pick_in_tree_v_alma_tf_out"/> 
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_mara_con"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_form_v_alma_tf_out_mara_con">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_purch_pick_in_form_v_alma_tf_out"/>
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_mara_con"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_purch_nota_tf_out_mara_con"
+		name="Transferencias Pendiente (O)"
+		parent="cust_menu_purch_nota_tf_out"
+		action="cust_act_win_purch_pick_alma_tf_out_mara_con"/>
+
+
+	<!-- 
+	=====================================================
+	Notas Internas Filtradas: Turmero - Confirmadas
+	=====================================================
+	-->  
+
+	<record model="ir.actions.act_window" id="cust_act_win_purch_pick_alma_tf_out_turm_con">
+		<field name="name">cust_act_win_purch_pick_alma_tf_out_turm_con</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','internal'),('type2','=','trans'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'internal', 'type2' : 'trans'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_tree_v_alma_tf_out_turm_con">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_purch_pick_in_tree_v_alma_tf_out"/> 
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_turm_con"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_form_v_alma_tf_out_turm_con">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_purch_pick_in_form_v_alma_tf_out"/>
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_turm_con"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_purch_nota_tf_out_turm_con"
+		name="Transferencias Pendiente (T)"
+		parent="cust_menu_purch_nota_tf_out"
+		action="cust_act_win_purch_pick_alma_tf_out_turm_con"/>
+
+
+	<!-- 
+	=====================================================
+	Notas Internas Filtradas: Barcelona - Confirmadas
+	=====================================================
+	-->  
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_purch_pick_alma_tf_out_barc_con">
+		<field name="name">cust_act_win_purch_pick_alma_tf_out_barc_con</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','internal'),('type2','=','trans'),('state','=','confirmed')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'internal', 'type2' : 'trans'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_tree_v_alma_tf_out_barc_con">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_purch_pick_in_tree_v_alma_tf_out"/> 
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_barc_con"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_purch_pick_form_v_alma_tf_out_barc_con">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_purch_pick_in_form_v_alma_tf_out"/>
+		<field name="act_window_id" ref="cust_act_win_purch_pick_alma_tf_out_barc_con"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_purch_nota_tf_out_barc_con"
+		name="Transferencias Pendiente (B)"
+		parent="cust_menu_purch_nota_tf_out"
+		action="cust_act_win_purch_pick_alma_tf_out_barc_con"/>
+
+
+	<!-- 
+	=====================================================
+	Notas Internas Filtradas: Puerto Ordaz - Confirmadas
+	=====================================================
+	-->  
+    <record  model="ir.actions.act_window" id="act_stock_valoriza_tf_out_pto_confirmed"> 
+      <field name="name">Transferencias Pendiente (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','internal'),('type2','=','trans'),('state','=','confirmed')]</field> 
+      <field name="context"> {'contact_display': 'partner','type' : 'internal', 'type2' : 'trans'}</field>
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_valoriza_tf_out_pto_confirmed">
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="cust_purch_pick_in_tree_v_alma_tf_out"/> 
+    <field name="act_window_id" ref="act_stock_valoriza_tf_out_pto_confirmed"/> 
+    </record> 
+
+    <record model="ir.actions.act_window.view" id="act_vform_stock_valoriza_tf_out_pto_confirmed"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="cust_purch_pick_in_form_v_alma_tf_out"/> 
+    <field name="act_window_id" ref="act_stock_valoriza_tf_out_pto_confirmed"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_valoriza_tf_out_pto_confirmed" 
+    	action="act_stock_valoriza_tf_out_pto_confirmed" 
+    	parent="cust_menu_purch_nota_tf_out"
+        name="Transferencias Pendiente (P)"/>
+	
+</data>
+</openerp>

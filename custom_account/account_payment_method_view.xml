@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Menu Payment
+	=======================
+	-->
+	 <menuitem  id="cust_menu_payment_suppliers" name="Pagos" parent="purchase.menu_purchase_root" /> 
+
+	 <menuitem  id="cust_menu_payment_customer" name="Cobros" parent="sale.menu_sale_root" /> 
+	<!--
+	===============================
+	account payment method Tree
+	===============================
+	-->
+	<record model="ir.ui.view" id="view_account_payment_method_tree">
+		<field name="name">account.payment.method.tree</field>
+		<field name="model">account.payment.method</field>
+		<field name="type">tree</field>
+		<field name="priority" eval="10"/>
+		<field name="arch" type="xml">
+			<tree string="Listado de Pagos">
+			    <field name="date_payment" string="Fecha" select="2" attrs="{'readonly':[('uid','!=',1)]}"/>
+			    <field name="control_number" string="Recibo Oficial" select="1" />
+                            <field name="partner_id" string="Empresa" select="2" readonly="1"/>
+			    <field name="invoice_id" string="Factura" select="1" readonly="1"/>
+			    <field name="payment_type" string="Tipo Documento" select="2" readonly="1"/>
+			    <field name="payment_number" string="Nro Documento" select="1" />
+			    <field name="amount" sum="Monto" readonly="1"/>
+			    <field name="account_id"  readonly="1" string="Cuenta"/>
+			    <field name="ro" string="R.O"/>
+                            <field name="bank_id" string="Banco" select="2"/>
+                            <field name="document_number" string="Nro Pago" select="1"/>
+			    <field name="type" string="Tipo" select="2"/>
+			</tree>
+		</field>
+	</record>
+
+    <record id="action_account_payment_method_tree" model="ir.actions.act_window">
+            <field name="name">Listado de Pagos</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment.method</field>
+            <field name="view_type">tree</field>
+            <field name="view_id" ref="view_account_payment_method_tree"/>
+    </record>
+
+
+	<!--
+	===================================
+	account payment method Form
+	===================================
+	-->
+	<record model="ir.ui.view" id="view_account_payment_method_form">
+		<field name="name">account.payment.method.form</field>
+		<field name="model">account.payment.method</field>
+		<field name="type">form</field>
+		<field name="arch" type="xml">
+                <form string="Listado de Pagos">
+				<field name="payment_number" string="Nro Documento" select="1"/>
+				<field name="control_number" string="Recibo Oficial" select="1"/>
+				<field name="payment_type" string="Tipo Documento" select="2"/>
+                                <field name="partner_id" string="Empresa" select="2"/>
+				<field name="date_payment" string="Fecha" select="2"/>
+				<field name="invoice_id" string="Factura" select="1"/>
+				<field name="account_id" string="Cuenta"/>
+				<field name="amount" string="Monto"/>
+				<field name="ro" string="R.O" attrs="{'readonly':[('type','in',['in_invoice','in_invoice_ad','in_refund'])]}"/>
+                                <field name="bank_id" string="Banco" select="2"/>
+                                <field name="document_number" string="Nro Pago" select="1"/>
+                </form>
+            </field>
+	</record>
+
+	<record id="action_account_payment_method_form" model="ir.actions.act_window">
+		<field name="name">Listado de Pagos</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.payment.method</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('type','=','in_invoice')]</field>
+	</record>
+	<record id="action_payment_method_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_account_payment_method_tree"/>
+		<field name="act_window_id" ref="action_account_payment_method_form"/>
+	</record>
+	<record id="action_payment_method_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_account_payment_method_form"/>
+		<field name="act_window_id" ref="action_account_payment_method_form"/>
+	</record>	
+	<menuitem name="Listado de Pagos" action="action_account_payment_method_form" id="menu_account_payment_method" parent="cust_menu_payment_suppliers"/> 
+	  
+	<record id="action_account_recovery_method_form" model="ir.actions.act_window">
+		<field name="name">Listado de Cobros</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">account.payment.method</field>
+		<field name="view_type">form</field>
+		<field name="domain">[('type','=','out_invoice')]</field>
+	</record>
+	<record id="action_recovery_method_view1" model="ir.actions.act_window.view">
+		<field eval="10" name="sequence"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="view_account_payment_method_tree"/>
+		<field name="act_window_id" ref="action_account_recovery_method_form"/>
+	</record>
+	<record id="action_recovery_method_view2" model="ir.actions.act_window.view">
+		<field eval="20" name="sequence"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="view_account_payment_method_form"/>
+		<field name="act_window_id" ref="action_account_recovery_method_form"/>
+	</record>	
+	<menuitem name="Listado de Cobros" action="action_account_recovery_method_form" id="menu_account_recovery_method" parent="cust_menu_payment_customer"/>
+	
+</data>
+</openerp>

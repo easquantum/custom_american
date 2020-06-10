@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+	<!-- 
+	=====================================================
+	Custom Menu Notas
+	=====================================================
+	--> 
+    <menuitem  
+		id="cust_menu_stock_root_nota" 
+		name="Notas" 
+		parent="stock.menu_stock_root" />
+
+
+	<!-- 
+	=====================================================
+	Notas de entradas
+	=====================================================
+	-->  
+	<menuitem
+		id="cust_menu_stoc_nota_ent"
+		name="Notas de Entrada" 		
+		parent="cust_menu_stock_root_nota"/>
+
+
+	<record model="ir.ui.view" id="cust_stoc_pick_in_tree_v_almacen">
+		<field name="name">cust_stoc_pick_in_tree_v_almacen</field>
+		<field name="model">stock.picking</field>
+		<field name="type">tree</field>
+		<field name="arch" type="xml">
+			<tree string="Nota de Entrada">
+				<field name="name"  colspan="4" string="Nota de Entrada" select="1"/>	
+				<field name="date" string="Fecha" select="1"/>
+				<field name="origin" string="Orden Compra" select="1"/>
+				<field name="warehouse_id" string="Almacen" />
+				<field name="address_id" string="Proveedor" select="2"/>
+				<field name="backorder_id" readonly="1" string="Nota Pendiente"/>
+				<field name="state" string="Estatus Nota" readonly="1"/>
+				<field name="type2" invisible="True"/>
+			</tree>
+		</field>
+	</record>
+	
+	<record model="ir.ui.view" id="cust_stoc_pick_in_form_v_almacen">
+		<field name="name">cust_stoc_pick_in_form_v_almacen</field>
+		<field name="model">stock.picking</field>
+		<field name="type">form</field>
+		<field name="priority" eval="20"/>
+		<field name="arch" type="xml">
+			<form string="Nota de Entrada">
+				<group colspan="4" col="6">
+					<field name="name" string="Nota de Entrada" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="date" string="Fecha Nota" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="origin" string="Orden Compra" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="address_id" string="Proveedor" attrs="{'readonly':[('state','=','done')]}"/>						
+					<field name="warehouse_id" string="Almacen" attrs="{'readonly':[('state','=','done')]}"/>
+					<field name="backorder_id" string="Nota Pendiente" attrs="{'readonly':[('state','=','done')]}"/>
+				</group>
+				<notebook colspan="4">
+					<page string="General">
+					<!-- *******   Campos Invisibles  *************************  -->
+						<field name="type" invisible="True"/>
+						<field name="type2" invisible="True"/>
+						<field name="move_type" invisible="True"/> 					
+ 						<newline/>
+						<field name="location_id" invisible="True"/>
+						<field name="location_dest_id" invisible="True"/>
+					<!-- ******************************************************   -->
+						<field name="move_lines" widget="one2many_list" colspan="4" nolabel="1" mode="tree" attrs="{'readonly':[('state','=','done')]}">
+							<tree string="Linea de Productos">
+								<field name="product_id" string="Producto"/>								
+								<field name="product_qty" string="Cantidad"/>
+							   	<field name="product_uom" string="U. Medida" />
+								<field name="location_id" string="Ubicacion origen" domain="[('usage','=','supplier')]"/>
+							  	<field name="location_dest_id" string="Ubicacion destino" domain="[('warehouse_id','=',parent.warehouse_id)]"/>
+								<field name="state" string="Estatus"/>
+							</tree>						
+							<form string="Productos">
+								<separator string="Informacion Detallada " colspan="4"/>
+								<field name="product_id" colspan="4" select="1" on_change="onchange_product_id(product_id, parent.location_id, parent.location_dest_id)" context="location=parent.location_id" string="Producto"/>
+								<field name="product_qty" string="Cantidad"/>
+								<field name="product_uom" string="U. Medida"/>
+								<field name="date_planned" string="Fecha Prevista"/>
+								<newline/>
+								<field name="location_id" string="Ubicacion origen" domain="[('usage','=','supplier')]"/>
+								<field name="location_dest_id" string="Ubicacion destino" domain="[('warehouse_id','=',parent.warehouse_id)]" />
+								<field name="state" string="Estatus"/>
+							<!-- *******   Campos Invisibles  *************************  -->  
+								<field name="product_uos" invisible="True"/>
+								<field name="product_uos_qty" invisible="True"/>
+								<field name="name" colspan="4" invisible="True"/>
+								<field name="priority" invisible="True"/>							
+								<field name="address_id" invisible="True"/> 
+								<field name="product_packaging" invisible="True"/>
+								<field name="prodlot_id" context="product_id=product_id" invisible="True"/>
+								<field name="tracking_id" invisible="True"/>
+							<!-- ******************************************************   -->
+							</form>
+						</field>
+						<group colspan="4" col="8">
+							<field name="state" readonly="1"/>
+							<button name="button_confirm" string="Confirmar" states="draft"/>
+							<button name="action_assign" string="Asignar" states="confirmed" type="object"/>
+							<button name="force_assign" string="Forzar Asignacion" states="confirmed" type="object"/>
+							<button name="cancel_assign" string="Cancelar Asignacion" states="assigned" type="object"/>
+							<button type="action" name="%(wizard_empaquetado)d" string="Validar" states="assigned"/>
+							<button name="button_cancel" string="Anular" states="assigned,confirmed,draft"/>
+						</group>
+					</page>
+					<page string="Notas">
+						<field name="note" nolabel="1" colspan="4"/>
+					</page>
+				</notebook>
+			</form>
+		</field>
+	</record>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas 
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_all">
+		<field name="name">cust_act_win_stoc_pick_almacen_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('type','=','in'),('type2','=','def')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_all"
+		name="Todas" 		
+		parent="cust_menu_stoc_nota_ent"
+		action="cust_act_win_stoc_pick_almacen_all"/>
+
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Caracas Todas
+	=====================================================
+	--> 
+	<menuitem
+		id="cust_menu_stoc_nota_ent_cara"
+		name="Caracas" 		
+		parent="cust_menu_stoc_nota_ent"/>
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_cara_all">
+		<field name="name">cust_act_win_stoc_pick_almacen_cara_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','in'),('type2','=','def')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_cara_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_cara_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_cara_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_cara_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_cara_all"
+		name="Todas (C)" 		
+		parent="cust_menu_stoc_nota_ent_cara"
+		action="cust_act_win_stoc_pick_almacen_cara_all"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Caracas - Asignadas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_cara_asi">
+		<field name="name">cust_act_win_stoc_pick_almacen_cara_asi</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','in'),('type2','=','def'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_cara_asi">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_cara_asi"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_cara_asi">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_cara_asi"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_cara_asi"
+		name="Notas Entrada Pendiente (C)" 		
+		parent="cust_menu_stoc_nota_ent_cara"
+		action="cust_act_win_stoc_pick_almacen_cara_asi"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Caracas - Recibidas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_cara_don">
+		<field name="name">cust_act_win_stoc_pick_almacen_cara_don</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Caracas'),('type','=','in'),('type2','=','def'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_cara_don">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_cara_don"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_cara_don">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_cara_don"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_cara_don"
+		name="Notas Entrada Recibida (C)" 		
+		parent="cust_menu_stoc_nota_ent_cara"
+		action="cust_act_win_stoc_pick_almacen_cara_don"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Maracaibo Todas
+	=====================================================
+	--> 
+	<menuitem
+		id="cust_menu_stoc_nota_ent_mara"
+		name="Maracaibo" 		
+		parent="cust_menu_stoc_nota_ent"/>
+
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_mara_all">
+		<field name="name">cust_act_win_stoc_pick_almacen_mara_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','in'),('type2','=','def')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_mara_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_mara_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_mara_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_mara_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_mara_all"
+		name="Todas (O)" 		
+		parent="cust_menu_stoc_nota_ent_mara"
+		action="cust_act_win_stoc_pick_almacen_mara_all"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Maracaibo - Asignadas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_mara_asi">
+		<field name="name">cust_act_win_stoc_pick_almacen_mara_asi</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','in'),('type2','=','def'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_mara_asi">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_mara_asi"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_mara_asi">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_mara_asi"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_mara_asi"
+		name="Notas Entrada Pendiente (O)"
+		parent="cust_menu_stoc_nota_ent_mara"
+		action="cust_act_win_stoc_pick_almacen_mara_asi"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Maracaibo - Recibidas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_mara_don">
+		<field name="name">cust_act_win_stoc_pick_almacen_mara_don</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Maracaibo'),('type','=','in'),('type2','=','def'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_mara_don">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_mara_don"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_mara_don">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_mara_don"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_mara_don"
+		name="Notas Entrada Recibida (O)" 		
+		parent="cust_menu_stoc_nota_ent_mara"
+		action="cust_act_win_stoc_pick_almacen_mara_don"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Turmero Todas
+	=====================================================
+	-->  
+	<menuitem
+		id="cust_menu_stoc_nota_ent_turm"
+		name="Turmero" 		
+		parent="cust_menu_stoc_nota_ent"/>
+
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_turm_all">
+		<field name="name">cust_act_win_stoc_pick_almacen_turm_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','in'),('type2','=','def')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_turm_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_turm_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_turm_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_turm_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_turm_all"
+		name="Todas (T)" 		
+		parent="cust_menu_stoc_nota_ent_turm"
+		action="cust_act_win_stoc_pick_almacen_turm_all"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Turmero - Asignadas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_turm_asi">
+		<field name="name">cust_act_win_stoc_pick_almacen_turm_asi</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','in'),('type2','=','def'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_turm_asi">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_turm_asi"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_turm_asi">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_turm_asi"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_turm_asi"
+		name="Notas Entrada Pendiente (T)"
+		parent="cust_menu_stoc_nota_ent_turm"
+		action="cust_act_win_stoc_pick_almacen_turm_asi"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Turmero - Recibidas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_turm_don">
+		<field name="name">cust_act_win_stoc_pick_almacen_turm_don</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Turmero'),('type','=','in'),('type2','=','def'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_turm_don">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_turm_don"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_turm_don">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_turm_don"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_turm_don"
+		name="Notas Entrada Recibida (T)" 		
+		parent="cust_menu_stoc_nota_ent_turm"
+		action="cust_act_win_stoc_pick_almacen_turm_don"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Barcelona Todas
+	=====================================================
+	--> 
+	<menuitem
+		id="cust_menu_stoc_nota_ent_barc"
+		name="Barcelona" 		
+		parent="cust_menu_stoc_nota_ent"/>
+
+
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_barc_all">
+		<field name="name">cust_act_win_stoc_pick_almacen_barc_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','in'),('type2','=','def')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_barc_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_barc_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_barc_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_barc_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_barc_all"
+		name="Todas (B)" 		
+		parent="cust_menu_stoc_nota_ent_barc"
+		action="cust_act_win_stoc_pick_almacen_barc_all"/>
+
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Barcelona - Asignadas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_barc_asi">
+		<field name="name">cust_act_win_stoc_pick_almacen_barc_asi</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','in'),('type2','=','def'),('state','=','assigned')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_barc_asi">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_barc_asi"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_barc_asi">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_barc_asi"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_barc_asi"
+		name="Notas Entrada Pendiente (B)"
+		parent="cust_menu_stoc_nota_ent_barc"
+		action="cust_act_win_stoc_pick_almacen_barc_asi"/>
+
+
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Barcelona - Recibidas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_barc_don">
+		<field name="name">cust_act_win_stoc_pick_almacen_barc_don</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('warehouse_id','ilike','Barcelona'),('type','=','in'),('type2','=','def'),('state','=','done')]</field>
+		<field name="context">{'contact_display': 'partner', 'type' : 'in', 'type2' : 'def'}</field>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_barc_don">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_barc_don"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_barc_don">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_barc_don"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_barc_don"
+		name="Notas Entrada Recibida (B)" 		
+		parent="cust_menu_stoc_nota_ent_barc"
+		action="cust_act_win_stoc_pick_almacen_barc_don"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Pendientes: Back Orders Todas
+	=====================================================
+	-->  
+	<record model="ir.actions.act_window" id="cust_act_win_stoc_pick_almacen_back_all">
+		<field name="name">cust_act_win_stoc_pick_almacen_back_all</field>
+		<field name="res_model">stock.picking</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="domain">[('state','&lt;&gt;','done'),('type','=','in'),('type2','=','def'),('backorder','=',True)]</field>
+
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_tree_v_almacen_back_all">
+		<field name="sequence" eval="10"/>
+		<field name="view_mode">tree</field>
+		<field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_back_all"/>
+	</record>
+	<record model="ir.actions.act_window.view" id="cust_act_wv_stoc_pick_form_v_almacen_back_all">
+		<field name="sequence" eval="20"/>
+		<field name="view_mode">form</field>
+		<field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/>
+		<field name="act_window_id" ref="cust_act_win_stoc_pick_almacen_back_all"/>
+	</record>
+
+	<menuitem
+		id="cust_menu_stoc_nota_ent_back_all"
+		name="Back Orders" 		
+		parent="cust_menu_stoc_nota_ent"
+		action="cust_act_win_stoc_pick_almacen_back_all"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Puerto Ordaz
+	=====================================================
+	-->  
+	<menuitem 
+    id="menu_stock_nota_entr_pto" 
+    name="Puerto Ordaz"
+    parent="cust_menu_stoc_nota_ent"/>
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Puerto Ordaz Todas (P)
+	=====================================================
+	-->
+    <record  model="ir.actions.act_window" id="act_stock_nota_entr_pto_all">  
+      <field name="name">Todas (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'), ('type','=','in'), ('type2','=','def') ]</field> 
+      <field name="context"> { 'contact_display': 'partner', 'type' : 'in','type2' : 'def'}</field> 
+    </record>
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_nota_entr_pto_all"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+    <field name="act_window_id" ref="act_stock_nota_entr_pto_all"/>  
+    </record> 
+    <record model="ir.actions.act_window.view" id="act_vform_stock_nota_entr_pto_all"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field>  
+    <field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/> 
+    <field name="act_window_id" ref="act_stock_nota_entr_pto_all"/> 
+    </record> 
+   
+    <menuitem 
+    	id="menu_stock_nota_entr_pto_all" 
+    	action="act_stock_nota_entr_pto_all" 
+    	parent="menu_stock_nota_entr_pto"
+       name="Todas (P)"/>
+   
+
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Puerto Ordaz Notas Entrada Pendiente (P)
+	=====================================================
+	-->
+    <record  model="ir.actions.act_window"  id="act_stock_nota_entr_pto_assigned"> 
+      <field name="name">Notas Entrada Pendiente (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','in'),('type2','=','def'),('state','=','assigned')]</field> 
+      <field name="context"> {'contact_display': 'partner','type' : 'in', 'type2' : 'def'}</field> 
+    </record> 
+    <record model="ir.actions.act_window.view"  id="act_vtree_stock_nota_entr_pto_assigned"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+    <field name="act_window_id" ref="act_stock_nota_entr_pto_assigned"/> 
+    </record> 
+    <record model="ir.actions.act_window.view" id="act_vform_stock_nota_entr_pto_assigned"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/> 
+    <field name="act_window_id" ref="act_stock_nota_entr_pto_assigned"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_nota_entr_pto_assigned" 
+    	action="act_stock_nota_entr_pto_assigned" 
+    	parent="menu_stock_nota_entr_pto"
+       name="Notas Entrada Pendiente (P)"/>
+	<!-- 
+	=====================================================
+	Notas de entradas Filtradas: Notas Entrada Recibidas (P)
+	=====================================================
+	-->
+    <record  model="ir.actions.act_window" id="act_stock_nota_entr_pto_done"> 
+      <field name="name">Notas Entrada Recibidas (P) </field> 
+      <field name="res_model">stock.picking</field> 
+      <field name="type">ir.actions.act_window</field> 
+      <field name="view_type">form</field> 
+      <field name="view_mode">tree,form</field> 
+      <field name="domain"> [('warehouse_id','ilike','Puerto Ordaz'),('type','=','in'),('type2','=','def'),('state','=','done')]</field> 
+      <field name="context"> { 'contact_display': 'partner', 'type' : 'in','type2' : 'def'}</field> 
+    </record> 
+    <record model="ir.actions.act_window.view" id="act_vtree_stock_nota_entr_pto_done"> 
+    <field name="sequence" eval="10"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="cust_stoc_pick_in_tree_v_almacen"/> 
+    <field name="act_window_id" ref="act_stock_nota_entr_pto_done"/> 
+    </record> 
+    <record model="ir.actions.act_window.view" id="act_vform_stock_nota_entr_pto_done"> 
+    <field name="sequence" eval="20"/> 
+    <field name="view_mode">form</field> 
+    <field name="view_id" ref="cust_stoc_pick_in_form_v_almacen"/> 
+    <field name="act_window_id" ref="act_stock_nota_entr_pto_done"/> 
+    </record> 
+
+    <menuitem 
+    	id="menu_stock_nota_entr_pto_done" 
+    	action="act_stock_nota_entr_pto_done" 
+    	parent="menu_stock_nota_entr_pto"
+       name="Notas Entrada Recibidas (P)"/>	
+	
+	
+	
+	
+	
+	
+</data>
+</openerp>

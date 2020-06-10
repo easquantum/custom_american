@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=================================================================================
+	
+	Custom Reports: GESTION FINANCIERA
+	
+	=================================================================================
+	-->
+    	<report 
+        	id="custom_plan_contable"
+	        model="account.account"
+		rml="custom_american/custom_account/report/plan_contable.rml"
+        	name="plan_contable"
+	        string="Plan Contable" 
+        	header="False"
+		auto="False"/> 
+
+    	<report 
+        	id="report_comprobante_contable"
+	        model="account.move"
+		rml="custom_american/custom_account/report/report_comprobante_contable.rml"
+        	name="comprobante_contable"
+	        string="Comprobante Contable" 
+        	header="False"
+	    	auto="False"/>
+
+	<!--
+	=================================================================================
+	
+	Custom Reports: COMPRAS DE GESTION
+	
+	=================================================================================
+	-->
+
+		<report id="report_comprobante_compra"
+			name="comprobante_compra"
+			string="Comprobante Compra"
+			model="account.invoice"
+			rml="custom_american/custom_account/report/report_comprobante_compra.rml"	
+			header="False"	
+			auto="False"/>
+
+		<report id="report_comprobante_compra_precios"
+			name="comprobante_compra_precios"
+			string="Comprobante Precios"
+			model="account.invoice"
+			rml="custom_american/custom_account/report/report_comprobante_compra_precios.rml"	
+			header="False"	
+			auto="False"/>	
+
+		<report id="report_nota_debito"
+			name="nota_debito"
+			string="Nota Debito"
+			model="account.invoice"
+			rml="custom_american/custom_account/report/report_nota_debito.rml"	
+			header="False"
+			auto="False"/>					
+
+		<report id="report_summary_purchase_by_supplier" 
+			name="summary_purchasebysupplier"
+			string="Registro Compras"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/summary_purchasebysupplier.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>  
+
+  		<report id="report_libro_iva_compras_gestion" 
+			name="libro_iva_compras_gestion"
+			string="Iva Compras Gestion"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/libro_iva_compras_gestion.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>
+
+	<!--
+	=================================================================================
+	
+	Custom Reports: COMPRAS GASTOS ADMINISTRATIVOS
+	
+	=================================================================================
+	-->
+
+  		<report id="report_retenciones_gastos_admin" 
+			name="retenciones_gastos_admin"
+			string="Retenciones Gastos Adm"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/retenciones_gastos_admin.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>	
+
+  		<report id="report_retenciones_proveedor" 
+			name="retenciones_por_proveedor"
+			string="Retenciones Proveedor"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/retenciones_por_proveedor.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>	  
+
+  		<report id="report_declaracion_iva_compras_gral" 
+			name="declaracion_ivaco_seniat" 
+			string="Declaracion Iva Compras General"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/declaracion_ivaco_seniat.rml" 
+			menu="False"
+			header="False"	 
+			auto="False"/>
+
+  		<report id="report_libro_compras_general" 
+			name="libro_compras_gral"
+			string="Libro Compras General"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/libro_compras_general.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>
+
+  		<report id="report_libro_compra" 
+			name="libro_compra"
+			string="Libro Compras"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/libro_compras.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>
+
+	<!--
+	=================================================================================
+	
+	Custom Reports: VENTAS
+	
+	=================================================================================
+	-->		
+
+  		<report id="report_factura_ventas" 
+			name="factura_ventas"
+			string="Factura"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/report_factura_ventas.rml"
+			header="False"	 
+			auto="False"/>	
+
+  		<report id="report_notas_credito" 
+			name="nota_credito"
+			string="Nota Credito"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/report_nota_credito.rml"
+			header="False"	 
+			auto="False"/>	
+
+
+  		<report id="ventas_netas_nac" 
+			name="ventas_netas_nacional"
+			string="Ventas Netas Nacional"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/ventas_netas_nacional.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>	  
+
+  		<report id="ventas_netas_por_zona" 
+			name="ventas_netas_zona"
+			string="Ventas Netas por Zona"
+			model="account.invoice" 
+			rml="custom_american/custom_account/report/ventas_netas_zona.rml"
+			menu="False"
+			header="False"	 
+			auto="False"/>
+
+	    <report id="report_libro_ventas"   
+			name="libro_ventas"
+			string="Libro Ventas" 
+			model="account.invoice"
+			rml="custom_american/custom_account/report/libro_ventas.rml" 
+			menu="False" 
+			header="False"
+			auto="False"/>
+</data>
+</openerp>

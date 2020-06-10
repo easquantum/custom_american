@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Reports
+	=======================
+	-->
+
+
+		<!-- asignando un grupo para no ver el reporte -->
+        <report id="stock.report_picking_list" 
+			model="stock.picking" 
+			name="stock.picking.list" 
+			string="Packing list" 
+			rml="stock/report/picking.rml"
+			groups="base.group_system"/>
+
+<!--
+	    <report id="custom_real_product_bylocation_print"
+	         string="Inventario por Almacen"
+	         model="product.supplierinfo"
+	         name="rep_nom_inv_prodxloc"
+	         rml="custom_american/custom_stock/report/real_products_bylocation.rml"
+	         auto="False" 		
+	         menu="False"/>	
+-->
+		<report id="report_nota_almacen"
+			name="nota_almacen"
+			string="Notas"
+			model="stock.picking"
+			rml="custom_american/custom_stock/report/report_nota_alma.rml"
+			header="False"
+			auto="False"/>		
+
+
+		<report id="report_nota_almacen1"
+			name="nota_almacen_fmt"
+			string="Notas Formato"
+			model="stock.picking"
+			rml="custom_american/custom_stock/report/report_nota_alma_fmt.rml"
+			auto="False"/>		
+
+
+		<report id="report_nota_almacen_val"
+			name="nota_almacen_val"
+			string="Valorizacion"
+			model="stock.picking"
+			rml="custom_american/custom_stock/report/report_nota_alma_val.rml"
+			auto="False"/>		
+
+		<report id="report_nota_almacen_salida"
+			name="nota_salida_almacen"
+			string="Notas Salida"
+			model="stock.picking"
+			rml="custom_american/custom_stock/report/report_nota_alma_salida.rml"
+			header="False"
+			auto="False"/>
+
+
+		<report id="report_devolucion_prov_almacen"
+			name="devolucion_prov_almacen"
+			string="Devolucion Prov."
+			model="stock.picking"
+			rml="custom_american/custom_stock/report/report_devolucion_prov.rml"
+			header="False"
+			auto="False"/>
+ 
+</data>
+</openerp>

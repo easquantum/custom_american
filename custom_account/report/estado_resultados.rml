@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="Balance" author="Corvus Latinoamerica" allowSplitting="20">
+<pageTemplate id="first">
+<frame id="first" x1="42.0" y1="42.0" width="511" height="720"/>
+    	<pageGraphics>
+    	    <image x="1.2cm" y="26.8cm" height="40.0" >[[company.logo]]</image>
+		    <setFont name="Times-Bold" size="12"/>
+		    <drawString x="9.8cm" y="27.8cm">ESTADO DE RESULTADOS</drawString>
+		    <setFont name="Times-Bold" size="9"/>
+		    <drawString x="9.3cm" y="27.4cm">PERIODO: Desde [[ time.strftime('%d/%m/%Y', time.strptime( data['form']['date1'], '%Y-%m-%d')) ]] <font color="white"> ..</font>  Hasta [[ time.strftime('%d/%m/%Y', time.strptime( data['form']['date2'], '%Y-%m-%d')) ]]</drawString>
+			<fill color="black"/>
+            <stroke color="grey"/>
+            
+            <!-- LINE bottom -->
+            <!--<lines>1.1cm 2.1cm 18.70cm 2.1cm</lines>-->
+            <setFont name="Times-Roman" size="7"/>
+            <drawString x="18.5cm" y="1.50cm">Pag.  <pageNumber/></drawString>
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+
+<blockTableStyle id="Tableau1">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<blockBottomPadding length="0.3mm"/>
+      <lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="-1,-1" thickness="0.2"/>
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="14.0" leading="16" alignment="CENTER"/>
+<paraStyle name="P3" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="LEFT"/> 
+<paraStyle name="P4" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="RIGHT"/> 
+<paraStyle name="P5" fontName="Times-Roman" fontSize="7.0" leading="8" alignment="LEFT"/>
+<paraStyle name="P6" fontName="Times-Roman" fontSize="7.0" leading="8" alignment="RIGHT"/>
+<paraStyle name="P7" fontName="Times-Roman" fontSize="6.0" leading="8" alignment="CENTER"/>
+<paraStyle name="P8" fontName="Times-Roman" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P9" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="RIGHT"/>
+<paraStyle name="P10" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P11" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+<paraStyle name="P12" fontName="Times-Bold" fontSize="8.0" leading="10" alignment="CENTER"/>
+</stylesheet>
+<images/>
+<story>
+
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="140.0,160.0,80.0,80.0,80.0" style="Tableau1"> 
+	<tr>
+	<td> <para style="P3"> Codigo</para> </td>
+	<td> <para style="P3"> Cuenta</para> </td>
+	<td> <para style="P4"> Anterior </para> </td>
+	<td> <para style="P4"> Actual </para> </td>
+	<td> <para style="P4"> Saldo </para> </td>			
+	</tr>
+	<tr><para style="P1">[[repeatIn(get_move_lines(data['form']),'l')]]</para>
+	<td> <para style="P5"><font color="white"> [[ l['space'] ]] </font> [[ l['code'] ]]   </para> </td>
+	<td> <para style="P5"> [[ l['descrip'] ]]</para> </td>
+	<td> <para style="P6"> [[ locale.format('%.2f', l['anterior'], grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P6"> [[ locale.format('%.2f', l['actual'], grouping=True, monetary=True) ]] </para> </td>			
+	<td> <para style="P6"> [[ locale.format('%.2f', l['saldo'], grouping=True, monetary=True) ]] </para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="300.0,80.0,80.0,80.0" style="Tableau1"> 
+	<tr>
+	<td> <para style="P3"> Total Ingresos</para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts48_ant(), grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts48_act(), grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts48_ant()+get_cts48_act(), grouping=True, monetary=True) ]] </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P3"> Total Egresos</para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts56_ant(), grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts56_act(), grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts56_ant() + get_cts56_act(), grouping=True, monetary=True) ]] </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P3"> Superavit del Ejercicio</para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts48_ant()+get_cts56_ant(), grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', get_cts48_act()+get_cts56_act(), grouping=True, monetary=True) ]] </para> </td>
+	<td> <para style="P4"> [[ locale.format('%.2f', (get_cts48_ant()+get_cts48_act()) + (get_cts56_ant() + get_cts56_act()), grouping=True, monetary=True) ]] </para> </td>			
+	</tr>
+	<tr>
+	<td> <para style="P3"><font color="white">. </font></para> </td>
+	<td> <para style="P4">   </para> </td>
+	<td> <para style="P4">   </para> </td>
+	<td> <para style="P4">   </para> </td>			
+	</tr>
+</blockTable>
+</story>
+</document>

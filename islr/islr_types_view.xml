@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+	<!--
+	=======================
+	Custom Types ISLR Tree
+	=======================
+	-->
+        <record id="view_islr_tax_type_tree" model="ir.ui.view">
+            <field name="name">account.islr.tax.type.tree</field>
+            <field name="model">account.islr.tax.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Tipos ISLR">
+                    <field name="name" string="Descripcion" select="1"/>
+                    <field name="code" string="Codigo Concepto" select="1"/>
+                    <field name="unit_tributaria"  string="Unidad Tributaria"/> 
+                    <field name="porcentaje" string="Porcentaje"/>
+                    <field name="date_islr"  string="Fecha" select="2"/>
+                    <field name="active"  string="Activo" select="2"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_islr_tax_type_tree" model="ir.actions.act_window">
+                <field name="name">Tipos ISLR</field>
+                <field name="type">ir.actions.act_window</field>
+                <field name="res_model">account.islr.tax.type</field>
+                <field name="view_type">tree</field>
+                <field name="view_id" ref="view_islr_tax_type_tree"/>
+        </record>
+
+	<!--
+	=======================
+	Custom Types ISLR Form
+	=======================
+	-->
+        <record id="view_islr_tax_type_form" model="ir.ui.view">
+            <field name="name">account.islr.tax.type.form</field>
+            <field name="model">account.islr.tax.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Tipos ISLR">
+                    <separator string="Informacion" colspan="4"/>
+                    <field name="name" string="Descripcion" select="1"/>
+                    <group col="4" colspan="2">
+                    <field name="code" string="Codigo Concepto" select="1"/>
+                    <field name="date_islr"  string="Fecha" select="2"/>
+                    </group>
+                    <field name="unit_tributaria"  string="Unidad Tributaria"/>
+                    <group col="4" colspan="2">
+                    <field name="factor"  string="Factor"/>
+                    <button name="compute_parameters" string="Calcular" type="object" colspan="2"/>
+                    </group>
+                    <field name="person_type_id" string="Tipo Persona" select="2"/>
+                    <field name="active"  string="Activo" select="2"/>
+                    
+                    <newline/>
+                    <separator string="Parametros" colspan="2"/>
+                    <separator string="Datos Contables" colspan="2"/>
+                    <field name="porcentaje" string="Porc."/>
+                    <field name="account_id" string="Cuenta Por Defecto"/>
+                    <newline/>
+                    <field name="sustraendo" />
+                    <newline/>
+                    <field name="monto_maximo" />
+                    <newline/>
+                    <separator string="Datos Estructura Vieja" colspan="4"/>
+                    <newline/>
+                    <field name="porcentaje_j" />
+                    <field name="porcentaje_n" />
+                    <newline/>
+                    <field name="descuento_j" />
+                    <field name="descuento_n" />
+                    <newline/>                   
+                    <field name="monto_maximo_j" />
+                    <field name="monto_maximo_n" />
+                </form> 
+            </field>
+        </record> 
+    	<record id="action_islr_tax_type_form" model="ir.actions.act_window">
+	    	<field name="name">Tipos Islr</field>
+	    	<field name="res_model">account.islr.tax.type</field>
+	    	<field name="type">ir.actions.act_window</field>
+	    	<field name="view_type">form</field>
+	    	<field name="view_mode">tree,form</field>
+    	</record>
+    	<record id="action_islr_tax_type_vwtree" model="ir.actions.act_window.view"> 
+    		<field eval="10" name="sequence"/>
+    		<field name="view_mode">tree</field>
+    		<field name="view_id" ref="view_islr_tax_type_tree"/> 
+    		<field name="act_window_id" ref="action_islr_tax_type_form"/>
+    	</record>
+    	<record id="action_islr_tax_type_vwform" model="ir.actions.act_window.view">
+    		<field eval="20" name="sequence"/>
+    		<field name="view_mode">form</field>
+    		<field name="view_id" ref="view_islr_tax_type_form"/>
+    		<field name="act_window_id" ref="action_islr_tax_type_form"/>
+    	</record>
+	    <menuitem   id="menu_action_account_islr_type" 
+	                name="Tipos Islr" 
+	                parent="account.menu_finance_configuration" 
+	                action="action_islr_tax_type_form"/>
+
+       </data>
+</openerp>

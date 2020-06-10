@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document filename="test.pdf">
+<template pageSize="(595.0,842.0)" title="Pedido Ventas" author="Corvus Latinoamerica" allowSplitting="20">
+    <pageTemplate id="first">
+    <frame id="first" x1="42.0" y1="42.0" width="511" height="758"/>
+    	<pageGraphics>
+			<setFont name="Times-Bold" size="10"/>
+			<fill color="black"/>
+            <stroke color="grey"/>
+            <!-- LINE Header -->
+            <drawString x="1.3cm" y="27.7cm">[[ company.partner_id.name ]]</drawString>
+            <setFont name="Times-Roman" size="9"/>
+            <drawString x="1.3cm" y="27.4cm">[[ company.partner_id.address and company.partner_id.address[0].street or  '' ]]</drawString>
+            <drawString x="1.3cm" y="27.1cm">Telf.: [[ company.partner_id.address and company.partner_id.address[0].phone or  '' ]]</drawString>
+            <lines>1.3cm 26.8cm 20cm 26.8cm</lines>
+            
+            <!-- LINE bottom 
+            <lines>1.2cm 2.99cm 19.9cm 2.99cm</lines>
+			<drawString x="18.0cm" y="2.60cm">  pag. <pageNumber/></drawString> -->
+		</pageGraphics>
+</pageTemplate>
+</template><stylesheet>
+<blockTableStyle id="Tableau1">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau3">
+<blockAlignment value="LEFT"/>
+<blockValign value="TOP"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau4">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="3,0" stop="3,0"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau5">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="TOP"/>
+		<lineStyle kind="GRID" colorName="black"/>
+		<blockBackground colorName="#e6e6e6" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau6">
+		<blockAlignment  start="0,0" stop="-1,-1" value="LEFT"/>
+		<blockBottomPadding length="0mm"/>
+		<blockTopPadding length="0.50mm"/>
+		<blockValign start="0,0" stop="-1,-1" value="TOP"/>
+		<lineStyle  start="0,0" stop="-1,-1" kind="GRID" colorName="white"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="-1,-1"/>
+</blockTableStyle>
+<blockTableStyle id="Tableau7">
+		<blockAlignment value="LEFT"/>
+		<blockValign value="CENTER"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="4,0" stop="4,0"/>
+		<lineStyle kind="LINEABOVE" colorName="#000000" start="5,0" stop="5,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="0,0" stop="0,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="1,0" stop="1,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="2,0" stop="2,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="3,0" stop="3,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="4,0" stop="4,0"/>
+		<lineStyle kind="LINEBELOW" colorName="#000000" start="5,0" stop="5,0"/>
+		<blockBackground colorName="#ffffff" start="0,0" stop="0,0"/>
+</blockTableStyle>
+<initialize><paraStyle name="all" alignment="justify"/></initialize>
+<paraStyle name="P1" fontName="Times-Roman" fontSize="9.0" leading="11"/>
+<paraStyle name="P2" fontName="Times-Bold" fontSize="10.0" leading="12"/>
+<paraStyle name="P3" fontName="Times-Bold"     fontSize="10.0" leading="12" alignment="CENTER"/> 
+<paraStyle name="P4" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="LEFT"/> 
+<paraStyle name="P5" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="CENTER"/>
+<paraStyle name="P6" fontName="Times-Roman" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P7" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P8" fontName="Times-Bold" fontSize="10.0" leading="12" alignment="RIGHT"/>
+<paraStyle name="P9" fontName="Times-Roman" fontSize="4.0" leading="5"/>
+<paraStyle name="P10" fontName="Times-Roman" fontSize="16.0" leading="20"/>
+<paraStyle name="P11" fontName="Times-Roman" fontSize="10.0" leading="12"/>
+<paraStyle name="Standard" fontName="Times-Roman"/>
+<paraStyle name="Text body" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Heading" fontName="Helvetica" fontSize="14.0" leading="17" spaceBefore="12.0" spaceAfter="6.0"/>
+<paraStyle name="List" fontName="Times-Roman" spaceBefore="0.0" spaceAfter="6.0"/>
+<paraStyle name="Table Contents" fontName="Times-Roman"/>
+<paraStyle name="Table Heading" fontName="Times-Roman" alignment="LEFT"/>
+<paraStyle name="Caption" fontName="Times-Roman" fontSize="12.0" leading="15" spaceBefore="6.0" spaceAfter="6.0"/>
+<paraStyle name="Index" fontName="Times-Roman"/></stylesheet>
+<images/><story>
+<para style="P1">[[ repeatIn(objects,'o') ]]</para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="60.0,350.0,100.0" style="Tableau3">
+	<tr>
+	<td><para style="P1">Mes :</para></td>
+	<td><para style="P4"> [[ get_mes(o.commission_period_id.code) ]] <font color="white"> .....</font> Año :[[ get_year(o.commission_period_id.date_start) ]] </para></td>
+	<td><para style="P4"></para></td>
+	</tr>
+	<tr>
+	<td><para style="P1">Gerente :</para></td>
+	<td><para style="P4">[[ o.salesman_id.name or '' ]]</para></td>
+	<td><para style="P4">Territorio: [[ o.salesman_id.code_zone_id.name or '' ]]</para></td>
+	</tr>
+	<tr>
+	<td><para style="P1"><font color="white"> </font></para></td>
+	<td><para style="P8">  </para></td>
+	<td><para style="P4">Fecha: [[ time.strftime('%d/%m/%Y', time.strptime(o.date_period, '%Y-%m-%d')) ]]  </para></td>
+	</tr>	
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<para style="P3">V E N T A S <font color="white"> .....</font>  D E L   <font color="white"> .....</font> M E S </para>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="250.0,100.0,70.0,100.0" repeatRows="1" style="Tableau4">
+	<tr>	
+	<td><para style="P2"> Vendedor </para></td>
+	<td><para style="P3"> Zona </para> </td>
+	<td><para style="P2"> </para> </td>
+	<td><para style="P3"> Venta Bs.</para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="250.0,100.0,70.0,100.0" repeatRows="1" style="Tableau3">
+    <tr><para style="P14">[[ repeatIn(get_total_por_vendedor(o.zone_id.id,o.commission_period_id.id), 'line') ]]</para>	
+	<td><para style="P4"> [[ line['vendedor'] ]] </para></td>
+	<td><para style="P5"> [[ line['zona'] ]] </para> </td>
+	<td><para style="P6"> </para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f', line['monto'], grouping=True, monetary=True) ]]</para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="250.0,100.0,70.0,100.0" repeatRows="1" style="Tableau3">
+
+    <tr><para style="P14"> </para>	
+	<td><para style="P2">  </para></td>
+	<td><para style="P2">  </para> </td>
+	<td><para style="P2"> TOTAL:  </para> </td>
+	<td><para style="P7"> [[ locale.format('%.2f', get_total(), grouping=True, monetary=True) ]]</para> </td>
+	</tr>
+</blockTable>
+<para style="P1"><font color="white">. </font></para>
+<para style="P1"><font color="white">. </font></para>
+<blockTable colWidths="100.0,80.0,80.0,80.0,80.0,80.0" style="Tableau7">
+	<tr>
+	<td><para style="P1">TOTAL VENTAS : </para></td>
+	<td><para style="P6">CUPOS</para></td>
+	<td><para style="P6">VALOR x CUPO</para></td>
+	<td><para style="P6">VENTA </para></td>
+	<td><para style="P6">% REALIZADO </para></td>
+	<td><para style="P6">Bs. A PAGAR </para></td>
+	</tr>
+</blockTable>	
+<blockTable colWidths="100.0,80.0,80.0,80.0,80.0,80.0" style="Tableau3">
+	<tr>
+	<td><para style="P1">BOLIVARES </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.salesman_id.amount_total, grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.salesman_id.value_total, grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.sale_total, grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.sale_percent, grouping=True, monetary=True) ]]</para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.pay_total, grouping=True, monetary=True) ]]</para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="100.0,80.0,80.0,80.0,80.0,80.0" style="Tableau3">
+	<tr>[[repeatIn(o.group_line,'l')]]	
+	<td><para style="P4"> [[ l.category_id.name ]]  - [[ l.name ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', l.quota_qty, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', l.quota_amount, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.0f', l.quantity, grouping=True, monetary=True) ]] [[ set_total_cajas(l.quantity) ]]</para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f', l.percent_quota, grouping=True, monetary=True) ]] </para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f', l.amount, grouping=True, monetary=True) ]] </para> </td>
+	</tr>
+</blockTable>
+<blockTable colWidths="100.0,80.0,80.0,80.0,80.0,80.0" style="Tableau3">
+	<tr> 	
+	<td><para style="P4"> </para></td>
+	<td><para style="P6"> </para></td>
+	<td><para style="P6"> </para></td>
+	<td><para style="P6"> </para> </td>
+	<td><para style="P6"> </para> </td>
+	<td><para style="P6"> --------------------- </para> </td>
+	</tr>
+	<tr><para style="14"></para>
+	<td><para style="P1"> </para></td>
+	<td><para style="P4"> </para></td>
+	<td><para style="P4"> </para></td>
+	<td><para style="P4"> </para></td>
+	<td><para style="P6"> TOTAL  </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.amount_base + o.amount_group, grouping=True, monetary=True) ]]</para></td>
+	</tr>
+		<tr> 	
+	<td><para style="P4">  </para></td>
+	<td><para style="P6">   </para></td>
+	<td><para style="P6">   </para></td>
+	<td><para style="P6"> </para> </td>
+	<td><para style="P6"> VAN ...</para> </td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.amount_base + o.amount_group, grouping=True, monetary=True) ]] </para> </td>
+	</tr>
+</blockTable>
+
+<condPageBreak height="758"/>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+<para style="P1"><font color="white"> .</font></para>
+
+<blockTable colWidths="60.0,350.0,100.0" style="Tableau3">
+	<tr>
+	<td><para style="P1">Mes :</para></td>
+	<td><para style="P4"> [[ get_mes(o.commission_period_id.code) ]] <font color="white"> .....</font> Año :[[ get_year(o.commission_period_id.date_start) ]] </para></td>
+	<td><para style="P4"></para></td>
+	</tr>
+	<tr>
+	<td><para style="P1">Gerente :</para></td>
+	<td><para style="P4">[[ o.salesman_id.name or '' ]]</para></td>
+	<td><para style="P4">Territorio: [[ o.salesman_id.code_zone_id.name or '' ]]</para></td>
+	</tr>
+	<tr>
+	<td><para style="P1"><font color="white"> </font></para></td>
+	<td><para style="P8">  </para></td>
+	<td><para style="P4">Fecha: [[ time.strftime('%d/%m/%Y', time.strptime(o.date_period, '%Y-%m-%d')) ]]  </para></td>
+	</tr>	
+</blockTable>
+<para style="P1"><font color="white"> .</font></para>
+
+<blockTable colWidths="400.0,100.0" style="Tableau3">
+	<tr>
+	<td><para style="P4">VIENEN  </para></td>
+	<td><para style="P6">[[ locale.format('%.2f', o.amount_base + o.amount_group, grouping=True, monetary=True) ]] </para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">AJUSTE Bs.: </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.amount_adjustment, grouping=True, monetary=True) ]]</para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">TOTAL DOMINGOS Y FERIADOS :   [[ o.number_days ]]   x  Bs./Diarios [[ locale.format('%.2f', o.daily_salary, grouping=True, monetary=True) ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.amount_holiday, grouping=True, monetary=True) ]]</para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">TOTAL ASIGNACIONES : </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.amount_total_asig , grouping=True, monetary=True) ]] </para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">DEDUCCIONES : </para></td>
+	<td><para style="P6"> </para></td>
+	</tr>
+	<tr><para style="P4">[[repeatIn(o.deductions_line,'d')]]  </para>
+	<td><para style="P4">[[ d.name ]] </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', d.amount , grouping=True, monetary=True) ]] </para></td>
+	</tr>
+</blockTable>
+<blockTable colWidths="400.0,100.0" style="Tableau3">
+	<tr>
+	<td><para style="P4">TOTAL DEDUCCIONES : </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.amount_total_deduct , grouping=True, monetary=True) ]] </para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">NETO A PAGAR : </para></td>
+	<td><para style="P6"> [[ locale.format('%.2f', o.commission_pay , grouping=True, monetary=True) ]] </para></td>
+	</tr>
+</blockTable>
+
+<para style="P1"><font color="white"> .</font></para>
+<blockTable colWidths="20.0,480.0" style="Tableau3">
+	<tr>
+	<td><para style="P4">1.-</para></td>
+	<td><para style="P4">Las comisiones por ventas son calculadas sobre ventas netas despachadas y recibidas por los clientes </para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">2.-</para></td>
+	<td><para style="P4">La compañia se reserva el derecho de ajustar zonas, modificar las comisiones, decidir los territorios, efectuar
+	transferencias de territorios, segun lo crea necesario, previo aviso de 30 dias. </para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">3.-</para></td>
+	<td><para style="P4">Queda entendido de mutuo acuerdo, que en la liquidacion de comisiones incluye el pago de domingos   
+	y dias feriados correspondientes al mes que se esta liquidando. </para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">4.-</para></td>
+	<td><para style="P4">Por mutuo acuerdo, las comisiones seran liquidadas a partir del cumplimiento del 50% de cada cupo 
+	asignado, cobrado desde el 50% hasta un maximo del 130% segun el valor asignado al 100% del cupo.</para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">5.-</para></td>
+	<td><para style="P4"> Autorizo a la compañia para modificar mis cupos asignados, asi como incluir 
+	en cualquier cupo, nuevos productos a distribuir por la empresa sin tener que hacer cambios en el valor a pagar 	
+	en dichos cupos.</para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">6.-</para></td>
+	<td><para style="P4"> En caso de retiro, la compañia se reserva el derecho de retener mis comisiones hasta 
+	la total entrega de la zona.</para></td>
+	</tr>
+	<tr>
+	<td><para style="P4">7.-</para></td>
+	<td><para style="P4"> Condiciones Bono: Pago bono "MAS y ALICIA", sera cancelado al efectuar el 110% sobre su cuota. 
+	Pago bono "CLORO MAS". Sera cancelado a partir del 70% hasta 100% de su cuota.</para></td>
+	</tr>
+</blockTable>
+<para style="P4"><font color="white"> .</font></para>
+
+<blockTable colWidths="100.0,50.0,220.0,50.0,100.0" repeatRows="1" style="Tableau3">
+	<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> RECIBE CONFORME: </para></td>
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	</tr>
+	<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> ________________________________ </para></td>
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	</tr>
+	<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> NOMBRE: [[ o.salesman_id.name or '' ]]</para></td>
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> </para></td>	
+	</tr>
+		<tr>	
+	<td><para style="P11"> </para></td>	
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> C.I: [[ o.salesman_id.vat or '' ]]</para></td>
+	<td><para style="P11"> </para></td>
+	<td><para style="P11"> </para></td>	
+	</tr>	
+</blockTable>
+
+<para style="P5">(Favor devolver original de la presente firmada a la oficina)</para>
+
+</story>
+</document>

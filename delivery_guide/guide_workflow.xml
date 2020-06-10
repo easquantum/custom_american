@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+	<record model="workflow" id="delivery_guide"> 
+		<field name="name">Delivery Guide Basic Workflow</field>
+		<field name="osv">delivery.guide</field>
+		<field name="on_create">True</field>
+	</record>
+	
+		<!--
+		=======================
+		Activity Guide
+		=======================
+		-->
+		<record id="act_guide_draft" model="workflow.activity">
+			<field name="wkf_id" ref="delivery_guide"/>
+			<field name="flow_start">True</field>
+			<field name="name">draft</field>
+		</record>	
+
+		<record id="act_guide_done" model="workflow.activity">
+			<field name="wkf_id" ref="delivery_guide"/>
+			<field name="name">done</field>
+			<field name="kind">function</field>
+			<field name="flow_stop">True</field>
+			<field name="action">write({'state':'done'})</field>
+		</record>		
+		
+        <record id="act_guide_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="delivery_guide"/>
+            <field name="name">cancel</field>
+            <field name="kind">function</field>
+            <field name="flow_stop">True</field>
+            <field name="action">write({'state':'cancel'})</field>
+        </record>
+        		
+		<record id="act_delivery_guide_end" model="workflow.activity">
+			<field name="wkf_id" ref="delivery_guide"/>
+			<field name="name">delivery_guide_end</field>
+			<field name="kind">dummy</field>
+		</record>
+				
+						
+
+		<!--
+		=======================
+		Transistion Guide
+		=======================
+		-->
+		<record id="trans_guide_draft_done" model="workflow.transition"> 
+			<field name="act_from" ref="act_guide_draft"/>
+			<field name="act_to" ref="act_guide_done"/>
+			<field name="signal">guide_done</field>
+		</record>	
+		
+        <record id="trans_guide_draft_cancel" model="workflow.transition">
+            <field name="act_from" ref="act_guide_draft"/>
+            <field name="act_to" ref="act_guide_cancel"/>
+            <field name="signal">guide_cancel</field>
+        </record>
+        
+</data>
+</openerp>

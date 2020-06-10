@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+	<!--
+	=======================
+	Custom Reports
+	=======================
+	--> 
+	    
+		<report id="report_delivery_guide"
+			name="delivery_guide"
+			string="Guia Despacho"
+			model="delivery.guide"
+			rml="custom_american/delivery_guide/report/report_guide.rml"
+			header="False" 
+			auto="False"/>
+
+		<report id="report_delivery_guide_traspaso"
+			name="delivery_guide_traspaso"
+			string="Guia Traspaso"
+			model="delivery.guide"
+			rml="custom_american/delivery_guide/report/report_guide_traspaso.rml"
+			header="False" 
+			auto="False"/>
+						
+		<report id="report_ruta_tarifas"
+			name="ruta_tarifas"
+			string="Rutas y Tarifas"
+			model="guide.ruta"
+			rml="custom_american/delivery_guide/report/tarifas_almacen.rml"
+			header="False" 
+			menu="False"
+			auto="False"/>			
+			
+	</data>
+</openerp>
